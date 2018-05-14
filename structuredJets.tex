@@ -1,0 +1,145 @@
+\documentclass[modern]{aastex62}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+\newcommand{\eps}{\ensuremath{\epsilon}}
+\newcommand{\gam}{\ensuremath{\gamma}}
+\newcommand{\Gam}{\ensuremath{\Gamma}}
+\newcommand{\Del}{\ensuremath{\Delta}}
+
+\newcommand{\Mej}{\ensuremath{M_{\mathrm{ej}}}}
+\newcommand{\tobs}{\ensuremath{t_{\mathrm{obs}}}}
+\newcommand{\nuobs}{\ensuremath{\nu_{\mathrm{obs}}}}
+\newcommand{\thobs}{\ensuremath{\theta_{\mathrm{obs}}}}
+
+
+\begin{document}
+
+\title{GRB Afterglows In The Multi-Messenger Era}
+\correspondingauthor{Geoffrey Ryan}
+\email{gsryan@umd.edu}
+
+\author[0000-0001-9068-7157]{Geoffrey Ryan}
+\affil{Joint Space-Science Institute, University of Maryland, College Park, MD 20742, USA}
+
+\author{Hendrik van Eerten}
+
+
+\begin{abstract}
+Abstract abstract abstract.
+\end{abstract}
+
+\section{Introduction} \label{sec:intro}
+
+
+\appendix
+\section{Derivation of the Structured Jet equations}\label{sec:derive}
+
+  The \emph{structured jet} model is a generalization of the simple top hat jet where the energy and Lorentz factor vary with the polar angle.  The light curves of structured jets display more complex behavior than top hats, which we can understand through some simple analytic relationships.
+  
+  Firstly, the complex behavior of a structured jet is due to relativistic beaming enhancing the jet emission at different angles as a function of time.  Once the jet becomes non-relativistic this effect is suppressed and the entire jet comes into view.  As such we will focus on the emission when the jet remains relativistic, the late-time behavior is the same as any Newtonian jet of comparable total energy.  Numerical simulations and analytic considerations have demonstrated that jet spreading does not begin in earnest until the blast wave approaches sub relativistic velocity so we will also neglect the effects of spreading and assume each sector of the jet evolves independently.  Lastly, we will assume when each sector of the blast wave is visible it is in the deceleration regime.  In this phase of evolution the blast wave Lorentz factor evolves according to:\begin{equation}
+	\gamma(t; \theta) \propto \sqrt{\frac{E(\theta)}{n_0}}\ t^{-3/2}\ .
+\end{equation}
+  In the above $\gamma$ is the Lorentz factor of the shocked fluid at an angle $\theta$ from the jet axis at lab time (in the burster frame) $t$.  The blast wave expands into a medium of constant density $n_0$ and has an angularly dependent isotropic-equivalent energy $E(\theta)$.  The forward shock is at a position $R(t; \theta)$, and moves at a speed $\beta_s = (1-\gamma_s^{-2})^{1/2}$, where $\gamma_s^2 = 2 \gamma^2$ is the Lorentz factor of the shock.  Assuming $\gamma \gg 1$ gives:
+\begin{equation}
+	R(t; \theta) = ct\left(1-\frac{1}{16 \gamma^2(t; \theta)}\right)\ .
+\end{equation}
+We denote the angle between the viewer and a particular jet sector as $\psi$ and its cosine and $\mu = \cos \psi$.  Photons emitted at time from a sector of the blast wave at time $t$ will be seen by the observer at $\tobs$:
+\begin{equation}
+	\tobs = t - \frac{\mu}{c} R(t,\theta) = (1-\mu)t + \frac{\mu}{16}\frac{t}{ \gamma^2(t,\theta)}
+\end{equation}
+
+The observed flux depends on the luminosity distance $d_L$, viewing angle $\thobs$, and rest-frame emissivity $\varepsilon'_{\nu'}$.  The Doppler factor is $\delta = \gamma^{-1} (1-\beta\mu)^{-1}$, where $\beta=(1-\gamma^{-2})^{1/2}$ is the fluid three velocity.  The observed flux can then be expressed as a volume integral, where the integrand is evaluated at the time $t$ corresponding to $\tobs$ and position ${\bf r}$.
+\begin{equation}
+	F_\nu(\tobs, \nuobs) = \frac{1}{4\pi d_L^2} \int d^3{\bf r} \ \delta^2 \varepsilon'_{\nu'}\ .
+\end{equation}  
+The blast wave emits from a region of width $\Delta R \propto \delta_s \gamma_s \gamma^{-2} R $ where $\delta_s$ is the Doppler factor associated with the shock Lorentz factor $\gamma_s$. At a given observer time, the emission will be dominated by a region of (rest-frame) angular size $\Delta \Omega$.  The flux can then be approximated as:
+\begin{equation}
+	F_\nu(\tobs, \nuobs) \propto R^2 \Delta R \Delta \Omega \delta^2 \varepsilon'_{\nu'} \propto \Delta \Omega\ t^3 \gamma^{-2} \gamma_s \delta_s \delta^2 \varepsilon'_{\nu'}
+\end{equation}.
+The emissivity $\varepsilon'_{\nu'}$ depends on the fluid Lorentz factor, the frequency $\nuobs$, and numerous (constant) microphysical parameters.  We parameterize the dynamic dependence as $\varepsilon'_{\nu'} \propto \gamma^{\alpha'} t^{\alpha''} {\nu'}^\beta = t^{\alpha''} \gamma^{\alpha'}\delta^{-\beta} \nuobs^\beta$. The values of $\alpha'$, $\alpha''$, and $\beta$ in synchrotron regimes are given in Table \ref{tab:specSlopes}.  This leads to a flux of:
+\begin{equation}
+	F_\nu \propto \Delta \Omega\ t^{3+\alpha''} \gamma^{-1+\alpha'} \delta_s \delta^{2-\beta} \nuobs^\beta\ .
+\end{equation}
+
+\begin{deluxetable}{CCCC}
+	\tablecaption{Dependence of $\varepsilon'_{\nu'} \propto \gamma^{\alpha'} t^{\alpha''} \nu'^{\beta}$ in various spectral regimes. \label{tab:specSlopes}}
+	\tablehead{\colhead{Regime}& \colhead{$\alpha'$} & \colhead{$\alpha''$} & \colhead{$\beta$}}
+	\startdata
+	\nu'<\nu'_m<\nu'_c     & 1 & 0 & 1/3 \\
+	\nu'_m<\nu'<\nu'_c     & (3p+1)/2 & 0 & (1-p)/2 \\
+	\nu'_m<\nu'_c<\nu'     & 3p/2 & -1 & -p/2 \\ 
+	\hline 
+	\nu' < \nu'_c < \nu'_m & 7/3 & 2/3 & 1/3 \\
+	\nu'_c < \nu' < \nu'_m & 3/2 & -1 & -1/2 \\
+	\nu'_c < \nu'_m < \nu' & 3p/2 & -1 & -p/2 \\ 
+	\enddata
+\end{deluxetable}
+The Doppler factor depends on whether the material is on-axis. Assuming $\gamma \gg 1$ one can write:
+\begin{equation}
+	\delta = \left \{ \begin{matrix}
+				\frac{1}{2} \gamma^{-1} \sin^{-2}\psi/2,  & \text{if }2\sin{\psi/2} \gg \gamma^{-1} \ \ \text{(off-axis)} \\
+				2 \gamma, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis)} \end{matrix} \right . \ .
+\end{equation}
+The observer time can be similarly simplified in both limits:
+\begin{equation}
+	\tobs = \left \{ \begin{matrix}
+				\frac{1}{2} \psi^2 t,  & \text{if }2\sin{\psi/2} \gg \gamma^{-1}\ \ \text{(off-axis)} \\
+				\frac{1}{16} \gamma^{-2} t, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis)} \end{matrix} \right . \ .
+\end{equation}
+As can the flux:
+\begin{equation}
+	F_\nu \propto \left \{ \begin{matrix}
+				\Delta \Omega t^{3+\alpha''} \gamma^{-4+\alpha'+\beta} \psi^{-6+2\beta}\nuobs^\beta,  & \text{if }2\sin{\psi/2} \gg \gamma^{-1} \ \ \text{(off-axis)} \\
+				\Delta \Omega t^{3+\alpha''} \gamma^{2+\alpha'-\beta} \nuobs^\beta, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis)} \end{matrix} \right . \ .
+\end{equation}
+The behavior of the Doppler factor informs the scaling of $\Delta \Omega$.  If any part of the jet is on-axis, its emission is enhanced by $\sim \gamma^2$ over the off-axis material and will dominate.  An observer for whom the entire jet is off-axis must be situated at some large $\thobs$, outside the outermost jet material.  At early times the entire jet will be beamed off-axis, with emission from the near edge (with the smallest $\psi$ and presumably $\gamma$) contributing most to the emission.  The absence of any particular angular scale in this regime indicates $\Delta \Omega$ will be roughly constant.  For an on-axis observer $\Delta \Omega \sim \sin^2 \psi_{\rm{max}} \propto \gamma^{-2}$ until the entire jet is on-axis, at which point $\Delta \Omega$ is again constant.  Hence:
+\begin{equation}
+	F_\nu \propto \left \{ \begin{matrix}
+				t^{3+\alpha''} \gamma^{-4+\alpha'+\beta} \psi^{-6+2\beta}\nuobs^\beta,  & \text{if }2\sin{\psi/2} \gg \gamma^{-1} \ \ \text{(off-axis)} \\
+				t^{3+\alpha''} \gamma^{\alpha'-\beta} \nuobs^\beta, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis, pre jet break)} \\
+				t^{3+\alpha''} \gamma^{2+\alpha'-\beta} \nuobs^\beta, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis, post jet break)} \end{matrix} \right . \ .
+\end{equation}
+Finally, for off-axis emission $t \propto \tobs$ and hence $\gamma \propto \tobs^{-3/2}$.  For on-axis observers $\tobs \propto \gamma{-2} t \propto t^4$, hence $t\propto \tobs^{1/4}$ and $\gamma \propto \tobs^{-3/8}$. Giving finally:
+\begin{equation}
+	F_\nu \propto \left \{ \begin{matrix}
+				\tobs^{9+\alpha'' -3(\alpha'+\beta)/2} \psi^{-6+2\beta}\nuobs^\beta,  & \text{if }2\sin{\psi/2} \gg \gamma^{-1} \ \ \text{(off-axis)} \\
+				\tobs^{(3+\alpha'')/4+3(-\alpha'+\beta)/8} \nuobs^\beta, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis, pre jet break)} \\
+				\tobs^{\alpha''/4 + 3(-\alpha'+\beta)/4} \nuobs^\beta, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis, post jet break)} \end{matrix} \right . \ .
+\end{equation}
+These formulae capture the standard behavior of top-hat jets, as well as any jet that is \emph{fully} on-axis or off-axis.  What they fail to (easily) demonstrate is the behavior of a structured jet which transitions continuously from one state to the other over the course of observation.
+
+
+
+
+  
+
+\subsection{The Jet Angular Profile}
+\label{sec:jet_angular_shape}
+
+The angular structure of a jet, before deceleration, can be described by angular profiles of energy $\epsilon(\theta, \phi)$ and Lorentz factor $\Gamma(\theta, \phi)$. This structure is acquired by the jet at its initial formation at the central engine and then sculpted by its propagation through the merger ejecta.  Due to the complications of direct numerical simulation much theoretical work has focused on simple analytic prescriptions of jet structure, typically axisymmetric uniform top-hat, Gaussian, or power law (CITE Granot+02, G+K03, K+G03, Rossi+04).
+
+We consider the latter two models, a Gaussian profile
+\begin{equation}
+	E = E_0 \exp\left( \frac{\theta^2 }{2 \theta_c^2}\right)\ , \label{eq:Gaussian}
+\end{equation}
+and a $\theta^{-2}$ power law
+\begin{equation}
+	E = \frac{E_0}{1 + \theta^2/\theta_c^2}\ . \label{eq:powerlaw}
+\end{equation}
+Both models are truncated at an angle $\theta_w$. It is assumed all observed emission occurs after the jet has entered the deceleration phase, so the Lorentz factor profile is simply $\Gamma \propto E^{1/2}$.
+
+With recent progress in hydrodynamical codes and computer resources, numerical simulation of jet propagation from the central engine to the circumburst medium has become possible.  Figure \ref{fig:jetStructure} shows energy and Lorentz factor distributions from hydrodynamic simulations collected from the recent literature, with representative examples of the Gaussian and power law models. The Lorentz factor distributions show large variation, in part due to differing times of extraction from the numerical simulations.  We focus comparison on the energy profile, as this is largely fixed while the jet remains relativistic. 
+
+\begin{figure}
+	\plotone{figs/jetStructure.pdf}
+   	\figcaption{Energy and Lorentz factor profiles of jet models.  Profiles of numerical simulations are reported in Morsony+2007 (green), Mizuta+2009 (brown), Duffell+2015 (orange), Lazzati+2017 (pink), Kathirgamaraju+2017 (red), and Margutti+2018 (purple). The analytic boosted fireball model (Duffell+2015) is shown in blue.  Energy profiles for Morsony07, Mizuta09, and Duffell15 have been scaled to $dE/d\Omega(\theta=0) = 10^{52}$ erg/sr.  For comparison we also show representative power law ( Eq. \eqref{eq:powerlaw}, $\theta_c=1^\circ$, $\theta_w=60^\circ$, thick grey) and Gaussian (\eqref{eq:Gaussian}, $\theta_c=5.7^\circ$, $\theta_w=23^\circ$, thick black) profiles.  \label{fig:jetStructure}}
+\end{figure}
+
+There is agreement between the models that the jet energy is concentrated in a core of half-width $\lesssim 10^\circ$ with wings extending to larger angles.  Some models truncate at $\mathcal{O}(10)$ degrees, while others have large tails extending to near the equator.  The Gaussian and power-law models respectively emulate this behavior, providing a simple parameterized representation of the landscape of numerical models.  Of particular note are the Lazzati 2017 and Margutti 2018 models, both of which were calculated specifically for GW170817. The core of the Margutti model is has a profile very near Gaussian, while the Lazzati model has a strong resemblance to a power law.  
+
+
+
+\end{document}
