@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
+\usepackage{graphicx}
 
 \newcommand{\eps}{\ensuremath{\epsilon}}
 \newcommand{\gam}{\ensuremath{\gamma}}
@@ -77,47 +78,44 @@ The emissivity $\varepsilon'_{\nu'}$ depends on the fluid Lorentz factor, the fr
 	\nu'_c < \nu'_m < \nu' & 3p/2 & -1 & -p/2 \\ 
 	\enddata
 \end{deluxetable}
-The Doppler factor depends on whether the material is on-axis. Assuming $\gamma \gg 1$ one can write:
+The Doppler factor depends on the fluid Lorentz factor and whether the material is on-axis. The on/off axis boundary occurs at $\gamma^{-1} \approx \sin \psi$ (ie. $\beta \approx \mu$).  One can write:
 \begin{equation}
 	\delta = \left \{ \begin{matrix}
-				\frac{1}{2} \gamma^{-1} \sin^{-2}\psi/2,  & \text{if }2\sin{\psi/2} \gg \gamma^{-1} \ \ \text{(off-axis)} \\
-				2 \gamma, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis)} \end{matrix} \right . \ .
+				\frac{1}{2} \gamma^{-1} \sin^{-2}\psi/2,  & \text{if } \gamma \gg 1 \text{ and } \sin{\psi} \gg \gamma^{-1} \ \ \text{(off-axis)} \\
+				2 \gamma, & \text{if } \gamma \gg 1 \text{ and } \sin{\psi} \ll \gamma^{-1} \ \  \text{(on-axis)} \\
+				1  & \text{if } \beta \ll 1\ \  \text{(non-relativistic)} \\ \end{matrix} \right . \ .
 \end{equation}
 The observer time can be similarly simplified in both limits:
 \begin{equation}
 	\tobs = \left \{ \begin{matrix}
-				\frac{1}{2} \psi^2 t,  & \text{if }2\sin{\psi/2} \gg \gamma^{-1}\ \ \text{(off-axis)} \\
-				\frac{1}{16} \gamma^{-2} t, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis)} \end{matrix} \right . \ .
+				\frac{1}{2} \psi^2 t,  & \text{if }\sin{\psi} \gg \gamma^{-1}\ \ \text{(off-axis)} \\
+				\frac{1}{16} \gamma^{-2} t, & \text{if } \sin{\psi} \ll \gamma^{-1} \ \  \text{(on-axis)} \end{matrix} \right . \ .
 \end{equation}
 As can the flux:
 \begin{equation}
 	F_\nu \propto \left \{ \begin{matrix}
-				\Delta \Omega t^{3+\alpha''} \gamma^{-4+\alpha'+\beta} \psi^{-6+2\beta}\nuobs^\beta,  & \text{if }2\sin{\psi/2} \gg \gamma^{-1} \ \ \text{(off-axis)} \\
-				\Delta \Omega t^{3+\alpha''} \gamma^{2+\alpha'-\beta} \nuobs^\beta, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis)} \end{matrix} \right . \ .
+				\Delta \Omega t^{3+\alpha''} \gamma^{-4+\alpha'+\beta} \psi^{-6+2\beta}\nuobs^\beta,  & \text{(off-axis)} \\
+				\Delta \Omega t^{3+\alpha''} \gamma^{2+\alpha'-\beta} \nuobs^\beta, & \text{(on-axis)} \end{matrix} \right . \ .
 \end{equation}
 The behavior of the Doppler factor informs the scaling of $\Delta \Omega$.  If any part of the jet is on-axis, its emission is enhanced by $\sim \gamma^2$ over the off-axis material and will dominate.  An observer for whom the entire jet is off-axis must be situated at some large $\thobs$, outside the outermost jet material.  At early times the entire jet will be beamed off-axis, with emission from the near edge (with the smallest $\psi$ and presumably $\gamma$) contributing most to the emission.  The absence of any particular angular scale in this regime indicates $\Delta \Omega$ will be roughly constant.  For an on-axis observer $\Delta \Omega \sim \sin^2 \psi_{\rm{max}} \propto \gamma^{-2}$ until the entire jet is on-axis, at which point $\Delta \Omega$ is again constant.  Hence:
 \begin{equation}
 	F_\nu \propto \left \{ \begin{matrix}
-				t^{3+\alpha''} \gamma^{-4+\alpha'+\beta} \psi^{-6+2\beta}\nuobs^\beta,  & \text{if }2\sin{\psi/2} \gg \gamma^{-1} \ \ \text{(off-axis)} \\
-				t^{3+\alpha''} \gamma^{\alpha'-\beta} \nuobs^\beta, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis, pre jet break)} \\
-				t^{3+\alpha''} \gamma^{2+\alpha'-\beta} \nuobs^\beta, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis, post jet break)} \end{matrix} \right . \ .
+				t^{3+\alpha''} \gamma^{-4+\alpha'+\beta} \psi^{-6+2\beta}\nuobs^\beta,  & \text{(off-axis)} \\
+				t^{3+\alpha''} \gamma^{\alpha'-\beta} \nuobs^\beta, &  \text{(on-axis, pre jet break)} \\
+				t^{3+\alpha''} \gamma^{2+\alpha'-\beta} \nuobs^\beta, & \text{(on-axis, post jet break)} \end{matrix} \right . \ .
 \end{equation}
 Finally, for off-axis emission $t \propto \tobs$ and hence $\gamma \propto \tobs^{-3/2}$.  For on-axis observers $\tobs \propto \gamma{-2} t \propto t^4$, hence $t\propto \tobs^{1/4}$ and $\gamma \propto \tobs^{-3/8}$. Giving finally:
 \begin{equation}
 	F_\nu \propto \left \{ \begin{matrix}
-				\tobs^{9+\alpha'' -3(\alpha'+\beta)/2} \psi^{-6+2\beta}\nuobs^\beta,  & \text{if }2\sin{\psi/2} \gg \gamma^{-1} \ \ \text{(off-axis)} \\
-				\tobs^{(3+\alpha'')/4+3(-\alpha'+\beta)/8} \nuobs^\beta, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis, pre jet break)} \\
-				\tobs^{\alpha''/4 + 3(-\alpha'+\beta)/4} \nuobs^\beta, & \text{if } 2\sin{\psi/2} \ll \gamma^{-1} \ \  \text{(on-axis, post jet break)} \end{matrix} \right . \ .
+				\tobs^{9+\alpha'' -3(\alpha'+\beta)/2} \psi^{-6+2\beta}\nuobs^\beta,  & \text{(off-axis)} \\
+				\tobs^{(3+\alpha'')/4+3(-\alpha'+\beta)/8} \nuobs^\beta, &\text{(on-axis, pre jet break)} \\
+				\tobs^{\alpha''/4 + 3(-\alpha'+\beta)/4} \nuobs^\beta, & \text{(on-axis, post jet break)} \end{matrix} \right . \ .
 \end{equation}
 These formulae capture the standard behavior of top-hat jets, as well as any jet that is \emph{fully} on-axis or off-axis.  What they fail to (easily) demonstrate is the behavior of a structured jet which transitions continuously from one state to the other over the course of observation.
 
 
-
-
-  
-
-\subsection{The Jet Angular Profile}
-\label{sec:jet_angular_shape}
+\section{The Jet Angular Profile}
+\label{sec:jetAngularShape}
 
 The angular structure of a jet, before deceleration, can be described by angular profiles of energy $\epsilon(\theta, \phi)$ and Lorentz factor $\Gamma(\theta, \phi)$. This structure is acquired by the jet at its initial formation at the central engine and then sculpted by its propagation through the merger ejecta.  Due to the complications of direct numerical simulation much theoretical work has focused on simple analytic prescriptions of jet structure, typically axisymmetric uniform top-hat, Gaussian, or power law (CITE Granot+02, G+K03, K+G03, Rossi+04).
 
