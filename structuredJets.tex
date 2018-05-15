@@ -14,6 +14,14 @@
 \newcommand{\tobs}{\ensuremath{t_{\mathrm{obs}}}}
 \newcommand{\nuobs}{\ensuremath{\nu_{\mathrm{obs}}}}
 \newcommand{\thobs}{\ensuremath{\theta_{\mathrm{obs}}}}
+\newcommand{\epse}{\ensuremath{\varepsilon_{\mathrm{e}}}}
+\newcommand{\epseb}{\ensuremath{\bar{\varepsilon}_{\mathrm{e}}}}
+\newcommand{\epsB}{\ensuremath{\varepsilon_{\mathrm{B}}}}
+\newcommand{\sigT}{\ensuremath{\sigma_{\mathrm{T}}}}
+\newcommand{\qe}{\ensuremath{q_{\mathrm{e}}}}
+\newcommand{\Mp}{\ensuremath{m_{\mathrm{p}}}}
+\newcommand{\Me}{\ensuremath{m_{\mathrm{e}}}}
+
 
 
 \begin{document}
@@ -36,7 +44,7 @@ Abstract abstract abstract.
 
 
 \appendix
-\section{Derivation of the Structured Jet equations}\label{sec:derive}
+\section{Derivation of the Off-Axis Jet equations}\label{sec:derive1}
 
   The \emph{structured jet} model is a generalization of the simple top hat jet where the energy and Lorentz factor vary with the polar angle.  The light curves of structured jets display more complex behavior than top hats, which we can understand through some simple analytic relationships.
   
@@ -60,14 +68,14 @@ The blast wave emits from a region of width $\Delta R \propto \delta_s \gamma_s 
 \begin{equation}
 	F_\nu(\tobs, \nuobs) \propto R^2 \Delta R \Delta \Omega \delta^2 \varepsilon'_{\nu'} \propto \Delta \Omega\ t^3 \gamma^{-2} \gamma_s \delta_s \delta^2 \varepsilon'_{\nu'}
 \end{equation}.
-The emissivity $\varepsilon'_{\nu'}$ depends on the fluid Lorentz factor, the frequency $\nuobs$, and numerous (constant) microphysical parameters.  We parameterize the dynamic dependence as $\varepsilon'_{\nu'} \propto \gamma^{\alpha'} t^{\alpha''} {\nu'}^\beta = t^{\alpha''} \gamma^{\alpha'}\delta^{-\beta} \nuobs^\beta$. The values of $\alpha'$, $\alpha''$, and $\beta$ in synchrotron regimes are given in Table \ref{tab:specSlopes}.  This leads to a flux of:
+The emissivity $\varepsilon'_{\nu'}$ depends on the fluid Lorentz factor, the frequency $\nuobs$, and numerous (constant) microphysical parameters.  We parameterize the dynamic dependence as $\varepsilon'_{\nu'} \propto \gamma^{s_1} t^{s_2} {\nu'}^\beta = t^{s_2} \gamma^{s_1}\delta^{-\beta} \nuobs^\beta$. The values of $s_1$, $s_2$, and $\beta$ in synchrotron regimes are given in Table \ref{tab:specSlopes}.  This leads to a flux of:
 \begin{equation}
-	F_\nu \propto \Delta \Omega\ t^{3+\alpha''} \gamma^{-1+\alpha'} \delta_s \delta^{2-\beta} \nuobs^\beta\ .
+	F_\nu \propto \Delta \Omega\ t^{3+s_2} \gamma^{-1+s_1} \delta_s \delta^{2-\beta} \nuobs^\beta\ .
 \end{equation}
 
 \begin{deluxetable}{CCCC}
-	\tablecaption{Dependence of $\varepsilon'_{\nu'} \propto \gamma^{\alpha'} t^{\alpha''} \nu'^{\beta}$ in various spectral regimes. \label{tab:specSlopes}}
-	\tablehead{\colhead{Regime}& \colhead{$\alpha'$} & \colhead{$\alpha''$} & \colhead{$\beta$}}
+	\tablecaption{Dependence of $\varepsilon'_{\nu'} \propto \gamma^{s_1} t^{s_2} \nu'^{\beta}$ in various spectral regimes. \label{tab:specSlopes}}
+	\tablehead{\colhead{Regime}& \colhead{$s_1$} & \colhead{$s_2$} & \colhead{$\beta$}}
 	\startdata
 	\nu'<\nu'_m<\nu'_c     & 1 & 0 & 1/3 \\
 	\nu'_m<\nu'<\nu'_c     & (3p+1)/2 & 0 & (1-p)/2 \\
@@ -94,25 +102,65 @@ The observer time can be similarly simplified in both limits:
 As can the flux:
 \begin{equation}
 	F_\nu \propto \left \{ \begin{matrix}
-				\Delta \Omega t^{3+\alpha''} \gamma^{-4+\alpha'+\beta} \psi^{-6+2\beta}\nuobs^\beta,  & \text{(off-axis)} \\
-				\Delta \Omega t^{3+\alpha''} \gamma^{2+\alpha'-\beta} \nuobs^\beta, & \text{(on-axis)} \end{matrix} \right . \ .
+				\Delta \Omega t^{3+s_2} \gamma^{-4+s_1+\beta} \psi^{-6+2\beta}\nuobs^\beta,  & \text{(off-axis)} \\
+				\Delta \Omega t^{3+s_2} \gamma^{2+s_1-\beta} \nuobs^\beta, & \text{(on-axis)} \end{matrix} \right . \ .
 \end{equation}
 The behavior of the Doppler factor informs the scaling of $\Delta \Omega$.  If any part of the jet is on-axis, its emission is enhanced by $\sim \gamma^2$ over the off-axis material and will dominate.  An observer for whom the entire jet is off-axis must be situated at some large $\thobs$, outside the outermost jet material.  At early times the entire jet will be beamed off-axis, with emission from the near edge (with the smallest $\psi$ and presumably $\gamma$) contributing most to the emission.  The absence of any particular angular scale in this regime indicates $\Delta \Omega$ will be roughly constant.  For an on-axis observer $\Delta \Omega \sim \sin^2 \psi_{\rm{max}} \propto \gamma^{-2}$ until the entire jet is on-axis, at which point $\Delta \Omega$ is again constant.  Hence:
 \begin{equation}
 	F_\nu \propto \left \{ \begin{matrix}
-				t^{3+\alpha''} \gamma^{-4+\alpha'+\beta} \psi^{-6+2\beta}\nuobs^\beta,  & \text{(off-axis)} \\
-				t^{3+\alpha''} \gamma^{\alpha'-\beta} \nuobs^\beta, &  \text{(on-axis, pre jet break)} \\
-				t^{3+\alpha''} \gamma^{2+\alpha'-\beta} \nuobs^\beta, & \text{(on-axis, post jet break)} \end{matrix} \right . \ .
+				t^{3+s_2} \gamma^{-4+s_1+\beta} \psi^{-6+2\beta}\nuobs^\beta,  & \text{(off-axis)} \\
+				t^{3+s_2} \gamma^{s_1-\beta} \nuobs^\beta, &  \text{(on-axis, pre jet break)} \\
+				t^{3+s_2} \gamma^{2+s_1-\beta} \nuobs^\beta, & \text{(on-axis, post jet break)} \end{matrix} \right . \ .
 \end{equation}
 Finally, for off-axis emission $t \propto \tobs$ and hence $\gamma \propto \tobs^{-3/2}$.  For on-axis observers $\tobs \propto \gamma{-2} t \propto t^4$, hence $t\propto \tobs^{1/4}$ and $\gamma \propto \tobs^{-3/8}$. Giving finally:
 \begin{equation}
 	F_\nu \propto \left \{ \begin{matrix}
-				\tobs^{9+\alpha'' -3(\alpha'+\beta)/2} \psi^{-6+2\beta}\nuobs^\beta,  & \text{(off-axis)} \\
-				\tobs^{(3+\alpha'')/4+3(-\alpha'+\beta)/8} \nuobs^\beta, &\text{(on-axis, pre jet break)} \\
-				\tobs^{\alpha''/4 + 3(-\alpha'+\beta)/4} \nuobs^\beta, & \text{(on-axis, post jet break)} \end{matrix} \right . \ .
+				\tobs^{9+s_2 -3(s_1+\beta)/2} \psi^{-6+2\beta}\nuobs^\beta,  & \text{(off-axis)} \\
+				\tobs^{(3+s_2)/4+3(-s_1+\beta)/8} \nuobs^\beta, &\text{(on-axis, pre jet break)} \\
+				\tobs^{s_2/4 + 3(-s_1+\beta)/4} \nuobs^\beta, & \text{(on-axis, post jet break)} \end{matrix} \right . \ .
 \end{equation}
 These formulae capture the standard behavior of top-hat jets, as well as any jet that is \emph{fully} on-axis or off-axis.  What they fail to (easily) demonstrate is the behavior of a structured jet which transitions continuously from one state to the other over the course of observation.
 
+\section{Derivation of the Structured Jet equations}\label{sec:derive2}
+
+A jet with a non-trivial angular distribution of energy can exhibit qualitatively different behaviour than a simple top hat, particularly when observed at a significant viewing angle.  While the initial off-axis and final on-axis post jet-break evolutions are identical, these are separated by a transition phase where the sector dominating the emission scans over the jet surface.  This transition phase begins at the end of the off-axis phase: when a sector of the jet first decelerates to include the observer in its beaming cone.  This will necessarily be from the wings/edge of the jet, the material with the lowest Lorentz factor and smallest angle $\psi$ to the observer.  As the blastwave decelerates more energetic material from nearer the core will come into view and the high latitude emission will dim.  Finally the core of the jet ($\theta = 0$ or $\psi = \thobs$) decelerates and becomes visible to the observer.  At this point the entire jet is on-axis and evolution continues as in the post jet-break phase.
+
+At each moment during the structure phase the emission is dominated by material that just came on-axis, where $\gamma^{-1} = \sin \psi$.
+
+\section{Shock Jump Conditions and Synchrotron Parameters}
+\label{sec:shockJump}
+
+Table \ref{tab:shockSync} lists the necessary quantities for calculating synchrotron emission from a forward shock.  Asymptotic expressions are given in the ultra-relativistic and non-relativistic limits.  The synchrotron emissivity in the fluid rest frame is:
+\begin{equation}
+	\varepsilon'_{\nu'} = \varepsilon_P \times \left \{ \begin{matrix}
+											\left(\nu' / \nu_m\right)^{1/3} & \text{if } \nu' < \nu_m < \nu_c \\
+											\left(\nu' / \nu_m\right)^{(1-p)/2} & \text{if } \nu_m < \nu'  < \nu_c \\
+											\left(\nu_c/\nu_m\right)^{(1-p)/2}\left(\nu' / \nu_c\right)^{-p/2} & \text{if }\nu_m < \nu_c < \nu'\\
+											\left(\nu' / \nu_c\right)^{1/3} & \text{if } \nu' < \nu_c < \nu_m \\
+											\left(\nu' / \nu_c\right)^{-1/2} & \text{if } \nu_c <\nu' <  \nu_m \\
+											\left(\nu_m / \nu_c\right)^{-1/2}\left(\nu' / \nu_m\right)^{-p/2} & \text{if } \nu_c < \nu_m < \nu'
+											\end{matrix} \right .
+\end{equation}
+
+
+\begin{deluxetable}{CC|CCC}
+\tablehead{ & \colhead{Expression} & \colhead{Coefficient} & \colhead{$ u \gg 1$} & \colhead{$ u \ll 1$}}
+\tablecaption{Emission parameters at forward shock. \label{tab:shockSync}}
+\startdata
+n & 4 \gamma n_0 & 4 n_0 & \gamma & 1 \\
+e & (\gamma-1)n \Mp c^2 & 4 \Mp c^2 n_0 &  \gamma^2 & \frac{1}{2} \beta^2 \\
+B & \sqrt{8\pi e \epsB} & 4(2 \pi)^{1/2}(\Mp c^2)^{1/2} n_0^{1/2} \epsB^{1/2} & \gamma & 2^{-1/2} \beta \\ 
+\hline
+\gamma_m &  \frac{\epseb e}{n \Me c^2} & \frac{\Mp}{\Me} \epseb &  \gamma & \frac{1}{2} \beta^2 \\
+\gamma_c & \frac{3 \Me c \gamma}{4 \sigT \epsB e t} & \frac{3}{16} \frac{\Me}{\Mp\sigT c}n_0 ^{-1} \epsB^{-1} & \gamma^{-1} t^{-1} & 2 \beta^{-2} t^{-1} \\
+\varepsilon_P & \frac{\sqrt{3}}{2}\frac{\qe^3}{\Me c^2}(p-1)n B & 8 (6\pi)^{1/2} \frac{\Mp^{1/2} \qe^3}{\Me c} (p-1) n_0^{3/2} \epsB^{1/2} & \gamma^2 & 2^{-1/2} \beta \\ 
+\nu_m & \frac{3}{4\pi}\frac{\qe}{\Me c} \gamma_m^2 B & 6 (2\pi)^{-1/2} \frac{\Mp^{5/2} \qe}{\Me^3} n_0^{1/2} \epseb^2 \epsB^{1/2} & \gamma^3 & 2^{-5/2} \beta^5 \\
+\nu_c & \frac{3}{4\pi}\frac{\qe}{\Me c} \gamma_c^2 B & \frac{27}{128} (2\pi)^{-1/2} \frac{\Me \qe}{\Mp^{3/2}\sigT^2 c^2} n_0^{-3/2}  \epsB^{-3/2} & \gamma^{-1}t^{-2} & 2^{3/2}\beta^{-3}t^{-2} \\
+\hline
+E & \frac{4\pi}{9} \rho_0 c^2 R^3(4u^2+3)\beta^2 & \frac{16\pi}{9}\rho_0 c^2 & R^3 \gamma^2 & \frac{3}{4} R^3 \beta^2 \\
+\beta_s & \frac{4 u \gamma}{4u^2+3} & 1 & 1 & \frac{4}{3}\beta 
+\enddata
+\end{deluxetable}
 
 \section{The Jet Angular Profile}
 \label{sec:jetAngularShape}
