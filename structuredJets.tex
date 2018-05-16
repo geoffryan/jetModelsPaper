@@ -14,6 +14,7 @@
 \newcommand{\tobs}{\ensuremath{t_{\mathrm{obs}}}}
 \newcommand{\nuobs}{\ensuremath{\nu_{\mathrm{obs}}}}
 \newcommand{\thobs}{\ensuremath{\theta_{\mathrm{obs}}}}
+\newcommand{\thW}{\ensuremath{\theta_{\mathrm{w}}}}
 \newcommand{\epse}{\ensuremath{\varepsilon_{\mathrm{e}}}}
 \newcommand{\epseb}{\ensuremath{\bar{\varepsilon}_{\mathrm{e}}}}
 \newcommand{\epsB}{\ensuremath{\varepsilon_{\mathrm{B}}}}
@@ -48,8 +49,9 @@ Abstract abstract abstract.
 
   The \emph{structured jet} model is a generalization of the simple top hat jet where the energy and Lorentz factor vary with the polar angle.  The light curves of structured jets display more complex behavior than top hats, which we can understand through some simple analytic relationships.
   
-  Firstly, the complex behavior of a structured jet is due to relativistic beaming enhancing the jet emission at different angles as a function of time.  Once the jet becomes non-relativistic this effect is suppressed and the entire jet comes into view.  As such we will focus on the emission when the jet remains relativistic, the late-time behavior is the same as any Newtonian jet of comparable total energy.  Numerical simulations and analytic considerations have demonstrated that jet spreading does not begin in earnest until the blast wave approaches sub relativistic velocity so we will also neglect the effects of spreading and assume each sector of the jet evolves independently.  Lastly, we will assume when each sector of the blast wave is visible it is in the deceleration regime.  In this phase of evolution the blast wave Lorentz factor evolves according to:\begin{equation}
-	\gamma(t; \theta) \propto \sqrt{\frac{E(\theta)}{n_0}}\ t^{-3/2}\ .
+  Firstly, the complex behavior of a structured jet is due to relativistic beaming enhancing the jet emission at different angles as a function of time.  Once the jet becomes non-relativistic this effect is suppressed and the entire jet comes into view.  As such we will focus on the emission when the jet remains relativistic, the late-time behavior is the same as any Newtonian jet of comparable total energy.  Numerical simulations and analytic considerations have demonstrated that jet spreading does not begin in earnest until the blast wave approaches sub relativistic velocity so we will also neglect the effects of spreading and assume each sector of the jet evolves independently.  Lastly, we will assume when each sector of the blast wave is visible it is in the deceleration regime.  In this phase of evolution the blast wave Lorentz factor evolves according to:
+  \begin{equation}
+	\gamma(t; \theta) \propto \sqrt{\frac{E(\theta)}{n_0}}\ t^{-3/2}\ . \label{eq:lorentzEvolution}
 \end{equation}
   In the above $\gamma$ is the Lorentz factor of the shocked fluid at an angle $\theta$ from the jet axis at lab time (in the burster frame) $t$.  The blast wave expands into a medium of constant density $n_0$ and has an angularly dependent isotropic-equivalent energy $E(\theta)$.  The forward shock is at a position $R(t; \theta)$, and moves at a speed $\beta_s = (1-\gamma_s^{-2})^{1/2}$, where $\gamma_s^2 = 2 \gamma^2$ is the Lorentz factor of the shock.  Assuming $\gamma \gg 1$ gives:
 \begin{equation}
@@ -57,7 +59,7 @@ Abstract abstract abstract.
 \end{equation}
 We denote the angle between the viewer and a particular jet sector as $\psi$ and its cosine and $\mu = \cos \psi$.  Photons emitted at time from a sector of the blast wave at time $t$ will be seen by the observer at $\tobs$:
 \begin{equation}
-	\tobs = t - \frac{\mu}{c} R(t,\theta) = (1-\mu)t + \frac{\mu}{16}\frac{t}{ \gamma^2(t,\theta)}
+	\tobs = t - \frac{\mu}{c} R(t,\theta) = (1-\mu)t + \frac{\mu}{16}\frac{t}{ \gamma^2(t,\theta)} \label{eq:tobs}
 \end{equation}
 
 The observed flux depends on the luminosity distance $d_L$, viewing angle $\thobs$, and rest-frame emissivity $\varepsilon'_{\nu'}$.  The Doppler factor is $\delta = \gamma^{-1} (1-\beta\mu)^{-1}$, where $\beta=(1-\gamma^{-2})^{1/2}$ is the fluid three velocity.  The observed flux can then be expressed as a volume integral, where the integrand is evaluated at the time $t$ corresponding to $\tobs$ and position ${\bf r}$.
@@ -70,7 +72,7 @@ The blast wave emits from a region of width $\Delta R \propto \delta_s \gamma_s 
 \end{equation}.
 The emissivity $\varepsilon'_{\nu'}$ depends on the fluid Lorentz factor, the frequency $\nuobs$, and numerous (constant) microphysical parameters.  We parameterize the dynamic dependence as $\varepsilon'_{\nu'} \propto \gamma^{s_1} t^{s_2} {\nu'}^\beta = t^{s_2} \gamma^{s_1}\delta^{-\beta} \nuobs^\beta$. The values of $s_1$, $s_2$, and $\beta$ in synchrotron regimes are given in Table \ref{tab:specSlopes}.  This leads to a flux of:
 \begin{equation}
-	F_\nu \propto \Delta \Omega\ t^{3+s_2} \gamma^{-1+s_1} \delta_s \delta^{2-\beta} \nuobs^\beta\ .
+	F_\nu \propto \Delta \Omega\ t^{3+s_2} \gamma^{-1+s_1} \delta_s \delta^{2-\beta} \nuobs^\beta\ . \label{eq:fluxApprox}
 \end{equation}
 
 \begin{deluxetable}{CCCC}
@@ -125,7 +127,33 @@ These formulae capture the standard behavior of top-hat jets, as well as any jet
 
 A jet with a non-trivial angular distribution of energy can exhibit qualitatively different behaviour than a simple top hat, particularly when observed at a significant viewing angle.  While the initial off-axis and final on-axis post jet-break evolutions are identical, these are separated by a transition phase where the sector dominating the emission scans over the jet surface.  This transition phase begins at the end of the off-axis phase: when a sector of the jet first decelerates to include the observer in its beaming cone.  This will necessarily be from the wings/edge of the jet, the material with the lowest Lorentz factor and smallest angle $\psi$ to the observer.  As the blastwave decelerates more energetic material from nearer the core will come into view and the high latitude emission will dim.  Finally the core of the jet ($\theta = 0$ or $\psi = \thobs$) decelerates and becomes visible to the observer.  At this point the entire jet is on-axis and evolution continues as in the post jet-break phase.
 
-At each moment during the structure phase the emission is dominated by material that just came on-axis, where $\gamma^{-1} = \sin \psi$.
+At each moment during the structure phase the emission is dominated by material that just came on-axis, where $\gamma^{-1} = \sin \psi$.  To find the overall behaviour we first determine $\tobs(\psi)$ and $F_\nu(\psi)$ for material whose emission is peaking (coming on-axis).  Since the structure phase occurs when motion is still relativistic, we can assume $\gamma \gg 1$ and hence $\sin \psi \ll 1$.  In this approximation:
+\begin{eqnarray}
+	\mu \approx 1 - \frac{1}{2}\sin^2\psi \ , \label{eq:muPsi}\\
+	\delta_s \approx \delta \approx \gamma = \csc \psi\ . \label{eq:deltaPsi}
+\end{eqnarray}
+The material dominating the emission is in the plane between the observer and the jet axis, denoted by $\phi = 0$. Along this line we have $\psi = \thobs - \theta$, and can use $\psi$ or $\theta$ interchangeably to denote latitude.  From Equation \eqref{eq:lorentzEvolution} we have $t\propto E(\theta)^{1/3} \gamma^{-2/3}$.  Using Equation \eqref{eq:tobs} and \eqref{eq:muPsi} we find that material at $\psi$ will come on-axis at observer time:
+\begin{equation}
+	\tobs(\psi) = \frac{9}{16} t \sin^2\psi  \propto E(\theta)^{1/3} \sin^{8/3} \psi\ . \label{eq:tobsPsi}
+\end{equation}
+The peak flux from material at $\psi$ can be determined from Equation \eqref{eq:fluxApprox}.  Using Equation \eqref{eq:deltaPsi} and taking $\Delta \Omega \propto \gamma^{-s_3}$ gives an observed flux:
+\begin{equation}
+	F_\nu(\psi) \propto t^{3+s_2} \gamma^{2+s_1-s_3-\beta} \nuobs^\beta \propto E(\theta)^{1+s_2/3} (\sin \psi)^{-s_1 + 2 s_2/3 +s_3+\beta} \nuobs^\beta  \ . \label{eq:FnuPsi}
+\end{equation}
+	Equations \eqref{eq:tobsPsi} and \eqref{eq:FnuPsi} describe the evolution of the flux in the structure phase in terms of the parameter $\psi$, which varies from $\mathrm{min} (0, \thobs-\thW)$ to $\thobs$.  In principle one would like to invert Equation \eqref{eq:tobsPsi} and substitute into Equation \eqref{eq:FnuPsi} to obtain $F_\nu(\tobs)$ itself.  Unfortunately, in general this is impossible to do in closed form because $E(\theta)$ is non-trivial. 
+	
+	We can obtain the temporal power law slope of the light curve by differentiating both Equations \eqref{eq:tobsPsi} and \eqref{eq:FnuPsi} with respect to $\psi$.  Noting that $dE/d\psi = -dE/d\theta$ we obtain for the individual derivatives:
+\begin{eqnarray}
+	\frac{d \log \tobs}{d \psi} = \frac{8}{3} \cot \psi - \frac{1}{3} \frac{d \log E}{d \theta}\ , \\
+	\frac{d \log F_\nu}{d \psi} = \left(-s_1 + \frac{2}{3} s_2 +s_3+\beta\right)\cot \psi - \left(1+\frac{1}{3}s_3\right) \frac{d \log E}{d \theta}\ .
+\end{eqnarray}
+Taking the ratio and simplifying gives:
+\begin{eqnarray}
+	\frac{d \log F_\nu}{d \log \tobs}(\psi) = \frac{3 \beta - 3s_1 + 2s_2+3s_3 + g(\psi)}{ 8+g(\psi)} \\
+	g(\psi) \equiv -\tan \psi \frac{d \log E}{d \theta}\ .
+\end{eqnarray}
+The parameter $g$ is directly measurable from the light curve, given the spectral information which fixes $\beta$, $s_1$, and $s_2$.
+
 
 \section{Shock Jump Conditions and Synchrotron Parameters}
 \label{sec:shockJump}
