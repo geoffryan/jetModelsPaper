@@ -2,3 +2,5 @@ structuredJets.pdf
 *.log
 *.synctex.gz
 *.aux
+code/*.pdf
+code/*.png
