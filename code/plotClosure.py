@@ -307,7 +307,20 @@ def plot_lc_jet(t, thV, thC, thW, E0, n0, p, jetType=0, seg='G'):
     #F0 = FnuSA[ip]
     #FnuSA /= F0
 
-    Fnu = pl_lc_jet(t, thV, thC, thW, E0, n0, p, jetType, seg)
+    if seg is not None:
+        Fnu = pl_lc_jet(t, thV, thC, thW, E0, n0, p, jetType, seg)
+    else:
+        FnuSAb = grb.fluxDensity(t, nu*2, jetType, 0, *Y)
+        FnuSAa = grb.fluxDensity(t, nu*0.5, jetType, 0, *Y)
+        beta = np.log(FnuSAb/FnuSAa) / np.log(2/0.5)
+        bD = 1.0/3.0
+        bE = 1.0/3.0
+        bF = -0.5
+        bG = 0.5*(1-p)
+        bH = -0.5*p
+        HHH = beta < 0.25-0.5*p
+        FFF = (beta >= 0.25-0.5*p)
+
     
     ir = np.searchsorted(t, 0.1*tp)
     F0 = FnuSA[ir]/Fnu[ir]
@@ -589,7 +602,7 @@ if __name__ == "__main__":
     n0 = 1.0e-2
     p = 2.3
     jetType = 0
-    seg = 'G'
+    seg = 'D'
 
     umax = 10.0
     umin = 3.0

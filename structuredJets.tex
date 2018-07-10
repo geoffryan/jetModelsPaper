@@ -1,4 +1,4 @@
-\documentclass[modern]{aastex62}
+\documentclass[twocolumn]{aastex62}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -11,19 +11,33 @@
 \newcommand{\Del}{\ensuremath{\Delta}}
 
 \newcommand{\gwbns}{GW170817}
+\newcommand{\afterglowpy}{{\tt afterglowpy}}
+\newcommand{\python}{\tt{Python}}
 
+\newcommand{\dd}{\ensuremath{\mathrm{d}}}
 \newcommand{\Mej}{\ensuremath{M_{\mathrm{ej}}}}
 \newcommand{\tobs}{\ensuremath{t_{\mathrm{obs}}}}
+\newcommand{\tW}{\ensuremath{t_{\mathrm{w}}}}
+\newcommand{\tb}{\ensuremath{t_{\mathrm{b}}}}
+\newcommand{\tdec}{\ensuremath{t_{\mathrm{dec}}}}
+\newcommand{\tumin}{\ensuremath{t_{\mathrm{min}}}}
 \newcommand{\nuobs}{\ensuremath{\nu_{\mathrm{obs}}}}
 \newcommand{\thobs}{\ensuremath{\theta_{\mathrm{obs}}}}
 \newcommand{\thW}{\ensuremath{\theta_{\mathrm{w}}}}
+\newcommand{\thC}{\ensuremath{\theta_{\mathrm{c}}}}
 \newcommand{\epse}{\ensuremath{\varepsilon_{\mathrm{e}}}}
 \newcommand{\epseb}{\ensuremath{\bar{\varepsilon}_{\mathrm{e}}}}
 \newcommand{\epsB}{\ensuremath{\varepsilon_{\mathrm{B}}}}
 \newcommand{\sigT}{\ensuremath{\sigma_{\mathrm{T}}}}
+\newcommand{\dL}{\ensuremath{d_{\mathrm{L}}}}
 \newcommand{\qe}{\ensuremath{q_{\mathrm{e}}}}
 \newcommand{\Mp}{\ensuremath{m_{\mathrm{p}}}}
 \newcommand{\Me}{\ensuremath{m_{\mathrm{e}}}}
+\newcommand{\Eiso}{\ensuremath{E_{\mathrm{iso}}}}
+\newcommand{\geff}{\ensuremath{g_{\mathrm{eff}}}}
+\newcommand{\umin}{\ensuremath{u_{\mathrm{min}}}}
+\newcommand{\umax}{\ensuremath{u_{\mathrm{max}}}}
+
 
 
 
@@ -43,27 +57,181 @@
 	Abstract abstract abstract
 \end{abstract}
 
-\section{Introduction} \label{sec:intro}
-	The binary neutron star (BNS) merger \gwbns\ displayed many of the predicted electromagnetic counterparts.  Prompt gamma-ray emission in the form of a short gamma-ray burst (sGRB) in the first seconds after merger, an optical and infrared kilonova visible for hours and days, and a broadband synchrotron afterglow first observed 9 days after merger which may remain visible for a year or more.  
-	
-	While this event qualitatively matched the community's expectations, the details of the emission from each counterpart were very unexpected.  The sGRB was delayed by $1.7$s after the GW chirp and was the lowest luminosity sGRB ever observed, the kilonova contained a rapidly varying blue component in tension with numerical models, and the afterglow demonstrated a long power-law \emph{rise} for roughly 150 days, a feature never before seen in GRB afterglows.
-	
-	In this paper we discuss this new \emph{structured} phase of GRB afterglow evolution and its interpretation in terms of dynamics of a relativistic blast wave.  We provide analytic formula for the start and end times of this phase and for the approximate power-law slope of the light curve.  The approximate analytic formula are validated by a numerical model which we have made publicly available.
-	
-\section{The Single Shell Framework}
+\section{outline}
 
-	GRB afterglows are synchrotron radiation emitted from a relativistic blast wave propagating through the GRB circumburst medium, which we take to be a uniform ISM.  Models of this process have two components: the hydrodynamics of the blast wave and the radiative transfer of the synchrotron radiation.  
-	
-	We describe both components with a trans-relativistic single shell model (CITE Hendrik's review).  In such a model the blast wave is approximated as a homogenous slab of hot plasma comprising both the forward shock and contact discontinuity.  The Rankine-Huginot (CITE RH) shock jump conditions can be used to write all other fluid variables in terms of external quantities and the fluid four-velocity $u$. 
-	
-	The blast wave is comprised of two components, prompt ejecta with mass \Mej and shocked ISM with energy density $\tau$, radial width $\Delta r$, and angular width $\Delta \Omega$. Both components share a four-velocity $u$ and expand into a medium of constant density $\rho_0$.  
-	
+\begin{itemize}
+	\item Need to consider the \emph{structure} of GRB explosions (esp. binary neutron stars).  Structure may be radial (velocity stratification, $E(u)$) or angular ($E(\theta)$).  Both modes affect the afterglow.
+	\item Analytic description: \begin{itemize}
+		\item Velocity stratification / refreshed shock / cocoon leads to simple power-law behaviour depending on $k$ ($E_{>u} \propto u^{-k}$).  Breaks occur at deceleration time and when $E_{>u}$ shuts off.
+		\item Angular structure / structured jet leads to not-quite power-law behaviour, depending on $g \approx (\thobs - \theta)d \log E / d\theta$.  Breaks occur when $\thobs - \thW \approx 1/\gamma(\thW)$ and $\thobs \approx 1/\gamma(0)$.  $g = g(\theta)$, but $g\approx g_{eff}$ where $g_{eff} = g(\thobs/2)$.
+		\end{itemize}
+	\item Numerical description: \begin{itemize}
+		\item Single-shell ODE for shock evolution
+		\item Integrate over equal-$\tobs$ surfaces
+		\item Structured components independent.
+		\item public and open: install with \tt{pip}.
+		\end{itemize}
+	\item GW170817A - Both models are similar, fit GW170817A well!
+	\item Future observations: Rate of observed counter-parts will depend on degree of collimation of afterglow (jets have lower observed rates than cocoons).  Radial structure may have $k$ vary from object to object.  Angular structure WILL have $g$ vary from object to object.
+	\item Can we determine structure from the afterglow???
+\end{itemize}
+
+\section{Introduction}
+
+GRB afterglows are commonly modeled as top hat blast waves with no internal structure pointed directly at the observer.  This has been largely sufficient given the data.  (Although: viewing angle effects can be measured (Ryan+ 2015)).  New observational capabilities have witnessed new phases of afterglow evolution, such as the discovery of plateaus with Swift.  Real jets (of course) have internal structure, but the top hat assumption has been a sufficiently spherical cow. 
+
+GW170817 changes the picture: new object with a strange afterglow.  Steep/late rise, LONG slow rise, turnover at 160d.  The slow rise is impossible to reproduce with standard afterglow evolution: first observation of a \emph{structured} phase of evolution. 
+
+The dominant contribution may be an angular distribution of energy within the blast wave (``structured jet'') combined with off-axis viewing (CITE Rossi04).  For 170817 this corresponds to the ``successful jet'' picture.  Alternately, radial stratification of velocity (``refreshed shock'') can cause a similar phase, most simply with a quasi-spherical (or at least top-hat) angular structure.  This situation is produced by the ``choked jet''  or ``cocoon'' picture of 170817. Understanding the effects of both structures on afterglows, and their dependence on the parameters of the burst, are vital to understanding GW counterparts.
+
+To this end, we have calculated the power-law temporal slope of the structured phase in both angular and radial structure dominated cases, along with the corresponding observed break times.  We have developed a semi-analytic numerical model of structured GRB afterglows for detailed comparison to data, which is now publicly available.
+
+Summary: In section 2 we discuss structured jets, in section 3 refreshed shocks, in section 4 our numerical model, section 5 application to GW170817, and section 6 future applications and discussion.
+
+\section{Structured Jets}\label{sec:structuredJets}
+
+The \emph{structured jet} is a model where the isotropic-equivalent energy of a blast wave is a function of the angle from the jet axis: $\Eiso = E(\theta)$. The specific structure of a jet is determined by the intrinsic structure of the jet launching mechanism as well as the sculpting that occurs as the jet burrows out of the encasing ejecta debris (as in a binary neutron star merger) or stellar envelope (as in a collapsar).  
+
+Numerical simulations have revealed a variety of jet angular energy distributions, often containing an energetic core with power-law tails.  Figure \ref{fig:jetStruct} shows a collection of jet energy distributions from the literature (CITE curves in plots).  Lacking a well-established physical model of the true $E(\theta)$, in particular its dependence on the parameters of the system, we consider two simple parameterized models: a Gaussian jet and a power-law.  
+
+\begin{align}
+	E(\theta) &= E_0 \exp\left(-\frac{\theta^2}{2\thC^2}\right)  && \text{Gaussian} \label{eq:gauss}\\
+	E(\theta) &= \frac{E_0}{1 + (\theta/ \thC)^2}  && \text{power-law} \label{eq:pl}
+\end{align}
+
+\begin{figure}
+	\plotone{figs/jetStruct.pdf}
+	\caption{Jet Structure.  Temporary version.  Remove $\Gamma$ subplot.  Add Aloy. \label{fig:jetStruct}}
+\end{figure}
+
+Each model is parameterized by a normalization $E_0$, a width $\thC$, and a truncation angle $\thW$.  Outside $\thW$ the energy is initially zero.  Figure \ref{fig:jetStruct} shows an example of each model fit to recent simulation results.  The Gaussian model emulates jets with sharp edges, while the power-law emulates jets with narrow cores and large wings (AWK. jargon?). 
+
+To observers, an energy gradient along the blast wave surface presents itself as a slow, rising or decaying, evolution of the flux.  The usual (pre-jet break) decay is compensated for by regions of higher energy continuously coming into view.  These new contributions to the emission slow the decay and can even cause the observed flux to increase with time.  
+
+We call this the \emph{structured} phase of emission.  It begins at observer time $\tW$, once the blast wave is decelerating and the observer is within the beaming cone of any part of the emitting surface.  It ends at observer time $\tb$, when the jet core has become fully visible.  These times are:
+\begin{align}
+	\tW &= \left(\frac{9}{16\pi} \frac{E(\thW)}{n_0 \Mp c^5}\right)^{1/3} \left( 2 \sin \left(\frac{\thobs-\thW}{2}\right)\right)^{8/3} \ ,\label{eq:tw} \\
+	\tb &= \left(\frac{9}{16\pi} \frac{E_0}{n_0 \Mp c^5}\right)^{1/3} \left( 2 \sin \left(\frac{\thobs}{2}\right)\right)^{8/3} \ .\label{eq:tb}
+\end{align}
+
+\begin{figure}
+	\plotone{figs/jetDecomp.pdf}
+	\caption{A structured jet, decomposed into emission from different latitudes $\theta$.  The structured phase is the result of the brightest point of the blast-wave tracking from the wings to the jet core. \label{fig:decomp}}
+\end{figure}
+Figure \ref{fig:decomp} shows the light curve of a structured jet along with the emissions from different latitudes.  The part of the blast wave dominating the emission tracks from the high latitude wings $\theta \approx \thW$ to the core $\theta \approx 0$.
+
+During the structured phase, the afterglow has a temporal spectral slope which depends on the parameter $g(\theta)$:
+\begin{equation}
+	g(\theta) \equiv -2 \tan\left(\frac{\thobs - \theta}{2}\right)\frac{d \log E}{d \theta}\ . \label{eq:gdef}
+\end{equation}
+
+The temporal and spectral slopes for various regimes are given in Table \ref{tab:slopes}.  The derivation of the slopes, $\tW$, and $\tb$ are given in Appendix \ref{sec:derive1}.
+
+\begin{deluxetable*}{CCCCCC}
+	\tablecaption{Structured jet temporal and spectral slopes: $F_\nu \propto \tobs^\alpha \nu^\beta$. See Equations \eqref{eq:gdef} and \eqref{eq:geff} for the definition and effective values of $g$.  For a refreshed-shock model replace $g$ with $k$, defined in Equation \eqref{eq:Eu}. \label{tab:slopes}}
+	\tablehead{\colhead{Regime}& \colhead{Label} & \colhead{$\alpha_{\mathrm{off-axis}}$}& \colhead{$\alpha_{\mathrm{struct}}$}& \colhead{$\alpha_{\mathrm{struct,max}}$} & \colhead{$\beta$}}
+	\startdata
+	\nu<\nu_m<\nu_c     & D & 7 			& \frac{-2+3s_3 + 3g}{8+g} 		& 3		& 1/3 \\
+	\nu_m<\nu<\nu_c     & G & 15/2 - 3p/2 	& \frac{- 6p + 3s_3 + 3g}{8+g} 		& 3		& (1-p)/2 \\
+	\nu < \nu_c < \nu_m & E & 17/3 		& \frac{-14/3 + 3s_3 + 11g/3}{8+g} 	& 11/3	& 1/3 \\
+	\nu_c < \nu < \nu_m & F & 13/2 		& \frac{-8+3s_3 + 2g}{8+g} 		& 2		& -1/2 \\
+	\nu_c < \nu_m < \nu & H & 8 - 3p/2 		& \frac{-6p - 2 + 3s_3 + 2g}{8+g} 	& 2		& -p/2 \\ 
+	\enddata
+\end{deluxetable*}
+
+The $g$ parameter evolves with time as the brightest sector of the jet sweeps from the edge to the core.  This produces deviations in the light curve from a pure power-law.  However, we find ultimately these deviations are not too large and the average slope is well approximated by $\geff  = g(\thobs/2)$.  For the power-law and Gaussian jet models this gives:
+\begin{align}
+	\geff &= \frac{\thobs^2}{4\thC^2} && \text{Gaussian}\ , \\
+	\geff &= \frac{2 \thobs^2}{4 \thC^2+\thobs^2} && \text{power-law}\ . \label{eq:geff}
+\end{align}
+These values may be used in Table \ref{tab:slopes} for an approximate power-law model of a structured jet with an appropriate viewing angle dependent temporal evolution.  These analytic results are in agreement with previous work on structured jets (CITE ROSSI) and the trans-relativistic numerical model described in Section \ref{sec:numerical}.
+
+In the structured phase, the temporal slope depends directly on the ratio $\thobs/\thC$.  Therefore any measurement of the effective power law slope of an afterglow light curve can be used to measure this parameter.
+
+\section{Refreshed Shocks}\label{sec:refreshedShocks}
+
+An alternative mechanism to produce slow decays or rises in afterglow light curves is the \emph{refreshed shock}, where velocity stratification of the ejecta causes a prolonged period of energy injection. Slow material initially coasting behind the shock is gradually incorporated into the blast wave as it decelerates, ``refreshing'' the shock.  This mechanism was first proposed as an energy injection scenario (CITE), and recently has been proposed as the mechanism behind GW170817 in the choked-jet scenario. (CITE Mooley, Hotokezaka, etc).
+
+In the simplest case the visible part of the blast wave is assumed to be quasi-spherical.  The distribution of material behind the blast wave is specified by $E_{>}(u)$, the energy of all material in the ejecta with four-velocity greater than $u$.  This is typically taken to be a power-law in $u$ within the finite domain $[\umin, \umax]$:
+\begin{equation}
+	E_>(u) = E_r u^{-k}\ , \label{eq:Eu}
+\end{equation}
+where $u \in (\umin, \umax)$ is the dimensionless four-velocity, $k>0$ is the power law index, and $E_r$ is a normalization factor.  
+
+A blast wave will have an initial coasting period before sweeping up enough mass in the ambient medium to begin deceleration and be subject to refreshed shocks.  The shock refreshment ends when the blast wave decelerates past $\umin$.  These times are given by:
+\begin{align}
+	\tdec &= ... \ ,\label{eq:tdec} \\
+	\tumin &= \left(\frac{9}{16\pi} \frac{E_r}{n_0 \Mp c^5}\right)^{1/3} \umin^{-8/3} \ .\label{eq:tumin}
+\end{align}
+The temporal and spectral slopes in this mechanism are identical to the structured jet, but with the replacement $k \leftrightarrow g$.  For a derivation see Appendix \ref{sec:derive3}.
+
+\section{Numerical Model: The \afterglowpy{} Package}\label{sec:numerical}
+
+To examine the detailed behavior of structured afterglows we constructed a numerical model, publicly available as the \afterglowpy{} Python package.
+
+The numerical model employs a trans-relativistic equation of state to evolve a blast wave in the single-shell approximation from the initial coasting phase through deceleration and spreading into the non-relativistic Sedov phase.  The observed flux density $F_\nu$ is calculated by numerically integrating the synchrotron emissivity over equal-observer-time surfaces.  
+
+The flux calculation follows the semi-analytic method of (CITE Hendrik 2010) using the shock evolution prescription outlined in (CITE Hendrik Review) modified to include refreshed shocks, energy injection, and jet spreading.  For a structured jet, the surface is divided into $N_\theta$ annular regions each of which is allocated an energy according to $E(\theta)$.  Each segment evolves independently and is otherwise treated as a section of a top-hat jet.
+
+\subsection{Numerical Algorithm}\label{subsec:algo}
+
+To compute the light curve of a top-hat jet we first must calculate the time evolution of the blast wave.  We utilize the single-shell approximation, treating the ejecta mass, contact discontinuity, and forward shock as a single unit propagating through a cold ambient medium with constant rest-mass density $\rho_0 = \Mp n_0$.  For a detailed derivation see Appendix \ref{sec:deriveNum} and (CITE Hendrik 2010 + Hendrik Review).  The forward shock is a radius $R$ from the explosion and moves at a velocity $\beta_s$.  In terms of the fluid four-velocity behind the shock $u$ and its Lorentz factor $\gamma$ this may be written as:
+\begin{equation}
+	\dot{R} = \frac{4 u \gamma}{4 u^2 +3}c\ . \label{eq:Rdot}
+\end{equation}
+Here the time derivative $\dot{R}$ is taken with respect to elapsed time in the bursters' frame $t$.  
+
+ The evolution of the four velocity is determined through conservation of energy.  The total energy in the trans-relativistic single shell approximation is:
+\begin{equation}
+	E = (\gamma - 1)\Mej c^2 + \frac{4\pi}{9} \rho_0 c^2 R^3 (4 u^2 + 3) \beta^2 \Omega\ . \label{eq:E}
+\end{equation}
+In Equation \eqref{eq:E} the first term is the kinetic energy of the ejected mass $\Mej$, assumed to have already accelerated and adiabatically cooled to its coasting velocity. The second term is the kinetic and thermal energy of the shocked ISM with three-velocity $\beta = u / \gamma$. The shocked ISM is confined to a cone of solid angle $\Omega = 2 \sin^2 (\theta_0/2)$ where $\theta_0$ is the half-opening angle of the jet. While the blast wave is relativistic $\theta_0$ is constant, but once the jet becomes non-relativistic it begins to spread due to its own internal pressure until the blast wave is spherical.  The spreading occurs at sound speed $c_s$ in the fluid rest-frame (CITE Hendrik 2010, Duffell+Laskar 2017):
+\begin{equation}
+	\dot{\theta_0} = \frac{c_s}{\gamma R}\ , \qquad \text{if } u < 1\text{ and } \theta_0 > \pi/2\ . \label{eq:thetadot}
+\end{equation}
+Given a (possibly constant) expression for $E$ Equation \eqref{eq:E} may be differentiated with respect to $t$ and solved for $\dot{u}$.  In a refreshed shock scenario $E = E_{>}(u)$, whereas for a standard energy injection model one may take $E \propto t^{-q}$.  In either case, Equation \eqref{eq:E} produces an equation for $\dot{u}$.  This defines a three dimensional system of ordinary differential equations in the variables $(R, u, \theta_0)$.  We solve this system using RK4 on a sequence of geometrically spaced values of $t$, typically $10^3$ points per decade.  This produces a numerical table of $R(t)$, $u(t)$, and $\theta_0(t)$ in terms of the burster time $t$.  The beginning and end points of the solution are chosen to encompass all required values of $\tobs$.
+
+Once the shock evolution is known, the flux is given by the integral:
+\begin{equation}
+	F_\nu(\tobs, \nuobs) = \frac{1}{4\pi \dL^2} \int \! \dd \Omega\ R^2\ \Delta R\  \delta^2\ \epsilon'_{\nu'} \ , \label{eq:flux}
+\end{equation}
+where $\tobs$ is the time in the observer's frame, $\nuobs$ the observational frequency, $\dL$ the luminosity distance, $\Delta R$ the shock width, $\delta$ the Doppler factor of the fluid, and $\epsilon'_{\nu'}$ the synchrotron emissivity in the fluid rest frame.  The integral is taken in spherical polar coordinates $(\theta, \phi$) where $\theta = 0$ aligns with the jet axis and $\phi=0$ is directed towards the observer.  The observer is at an angle $\thobs$ with the jet axis. The integrand is evaluated at a constant observer time $\tobs$, related to $t$ by:
+\begin{equation}
+	\tobs = t - \mu(\theta, \phi) R(t)/c\ , \label{eq:tobs}
+\end{equation}
+where 
+\begin{equation}
+	\mu = \cos \theta \cos \thobs + \sin \theta \sin \thobs \cos \phi\ . \label{eq:mu}
+\end{equation}
+The integral \eqref{eq:flux} is evaluated numerically using an adaptive Romberg integrator in each dimension, with a typical relative tolerances of $10^{-6}$.  Each evaluation of the integrand requires a binary search to determine the burster time $t$ at which to evaluate $R$, $u$, and $\theta_0$.  Fluid quantities are then calculated using the shock-jump conditions and the synchrotron emissivity is evaluated using the standard external shock formulae (CITE Hendrik, Granot+Sari).
+
+The numerical accuracy of a top-hat light curve is typically better than $10^{-4}$.  The structured jet calculation splits the integration domain into $N_\theta$ disjoint annuli, each evaluated as an independent top-hat and summed.  By default $N_\theta$ is chosen such that there will be 5 zones per $\thC$-sized interval, giving final light curves with a numerical accuracy of $10^{-2}$.
+
+\subsection{\afterglowpy{}}
+
+We have constructed the \afterglowpy{} Python package to implement this algorithm and provide it to the community.  The integration routine itself is written in C, wrapped as an extension for Python, and has been optimized to be used in intensive data analysis routines such as Markov Chain Monte-carlo which can require many thousands of evaluations.  
+
+\afterglowpy{} is available on PyPI and may be installed with {\tt pip}.  The source code is open and available at https://github.com/geoffryan/afterglowpy.
+
+\section{Application: GW170817A}
+
+\section{Discussion}
+
+
+\newpage
+
 \section{Structured Phase}
 
 \begin{figure}
 	\plottwo{figs/slopesJet.png}{figs/slopesCocoon.png}
 	\caption{Temporal slopes for the jet (left) and cocoon (right).}
 \end{figure}
+
+
+
+
+
+
 
 
 \appendix
