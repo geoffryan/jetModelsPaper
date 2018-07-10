@@ -346,21 +346,21 @@ The parameter $g$ is directly measurable from the light curve, given the spectra
 
 The full flux scaling equations also require an updated energy and circumburst density scaling. For energy, it follows that (below $\nu_c$)
 \begin{equation}
-\frac{d \log F}{d \log E} = \frac{d \log F}{d \Psi} \frac{d \Psi}{d \log E} = - \frac{d \log F}{d \Psi} \frac{d \theta}{d \log E} = \left(s_1 - \frac{2}{3} s_2 - s_3 -\beta\right) h(\Psi) + 1 + \frac{1}{3} s_2,
+	\frac{d \log F}{d \log E} = \frac{d \log F}{d \Psi} \frac{d \Psi}{d \log E} = - \frac{d \log F}{d \Psi} \frac{d \theta}{d \log E} = \left(s_1 - \frac{2}{3} s_2 - s_3 -\beta\right) h(\Psi) + 1 + \frac{1}{3} s_2,
 \end{equation}
 where
 \begin{equation}
-h(\Psi) \equiv \cot \Psi \frac{d \log E}{d \theta}.
+	h(\Psi) \equiv \cot \Psi \frac{d \log E}{d \theta}.
 \end{equation}
 For the density $n_0$ we have (below $\nu_c$)
 \begin{equation}
-\frac{d \log F}{d \log n_0} = \frac{2+s_3}{8}
+	\frac{d \log F}{d \log n_0} = \frac{2+s_3}{8}
 \end{equation}
 
 Altogether, we obtain
 \begin{eqnarray}
 F_D & \propto & \epsilon_e^{-2/3} \epsilon_B^{1/3} n_0^{(2+s_3)/8} E^{\left(2/3 - s_3\right) h(\Psi) + 1} t_{obs}^{[-2+3s_3+3g(\Psi)]/[8+g(\Psi)]} \nu^{1/3} \nonumber \\
-F_E & \propto & \epsilon_B^{1} n_0^{}
+F_E & \propto & \epsilon_B^{1} n_0^{} \nonumber \\
 F_G & \propto & \epsilon_e^{p-1} \epsilon_B^{(1+p)/4} n_0^{(2+s_3)/8} E^{2ph(\Psi)+1} t_{obs}^{3[-2p+s_3+g(\Psi)]/[8+g(\Psi)]} \nu^{(1-p)/2} \nonumber \\
 F_H & \propto & \epsilon_e^{p-1} \epsilon_B^{(p-2)/4} n_0^{(-2+s_3)/8} E^{(2p + 2/3 - s_3)h(\Psi) + 2/3} t_{obs}^{[-6p-2+3s_3+2g(\Psi)]/[8+g(\Psi)]} \nu^{-p/2}
 \end{eqnarray}
