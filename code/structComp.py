@@ -352,8 +352,47 @@ if __name__ == "__main__":
     ax[1].set_yscale('log')
     fig.tight_layout()
 
-    print("Saving structComp.pdf")
-    fig.savefig("structComp.pdf")
+    print("Saving structCompE.pdf")
+    fig.savefig("structCompE.pdf")
+
+    print("Plotting")
+    figE, axE = plt.subplots(1,1, figsize=(12,9))
+
+    clr = ["k", "grey", "tab:blue", "tab:orange", "tab:green", "tab:red",
+                "tab:purple", "tab:brown", "tab:pink", "tab:olive", "tab:cyan"]
+    ls = ['-', '--', ':', '-.']
+
+    axE.plot(theta*deg, EG, label="Gaussian", lw=4.0,
+                                    color=clr[0], ls=ls[0])
+    axE.plot(theta*deg, EPL, label="Power law", lw=4.0,
+                                    color=clr[1], ls=ls[0])
+    axE.plot(theta*deg, EBF1003, label="Boosted Fireball $\gamma_B=10$ $\eta_0=3$", 
+                                    color=clr[2], ls=ls[0])
+    axE.plot(theta*deg, ED15o, label="Duffell 2015 Oblate",
+                                    color=clr[3], ls=ls[0])
+    axE.plot(theta*deg, EM07r5, label="Morsony 2007 realg5",
+                                    color=clr[4], ls=ls[0])
+    axE.plot(theta*deg, EM07p2, label="Morsony 2007 powg2",
+                                    color=clr[4], ls=ls[1])
+    axE.plot(theta*deg, EK17, label="Kathirgamaraju 2017",
+                                    color=clr[5], ls=ls[0])
+    axE.plot(theta*deg, EM18, label="Margutti 2018",
+                                    color=clr[6], ls=ls[0])
+    axE.plot(theta*deg, EM09, label="Mizuta 2009",
+                                    color=clr[7], ls=ls[0])
+    axE.plot(theta*deg, EL17, label="Lazzati 2017",
+                                    color=clr[8], ls=ls[0])
+
+    axE.legend(loc='upper right', fontsize=12)
+
+    axE.set_xlabel(r'$\theta$ $({}^\circ)$', fontsize=16)
+    axE.set_ylabel(r'$dE/d\Omega$ (erg/sr)', fontsize=16)
+    axE.set_yscale('log')
+    axE.set_ylim(3.0e48, 1.0e53)
+    figE.tight_layout()
+
+    print("Saving structCompE.pdf")
+    figE.savefig("structCompE.pdf")
 
     print("Showing")
     plt.show()
