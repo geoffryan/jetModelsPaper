@@ -21,6 +21,7 @@
 \newcommand{\tb}{\ensuremath{t_{\mathrm{b}}}}
 \newcommand{\tbm}{\ensuremath{t_{\mathrm{b-}}}}
 \newcommand{\tbp}{\ensuremath{t_{\mathrm{b+}}}}
+\newcommand{\tbpm}{\ensuremath{t_{\mathrm{b\pm}}}}
 \newcommand{\tdec}{\ensuremath{t_{\mathrm{dec}}}}
 \newcommand{\tumin}{\ensuremath{t_{\mathrm{min}}}}
 \newcommand{\nuobs}{\ensuremath{\nu_{\mathrm{obs}}}}
@@ -40,6 +41,10 @@
 \newcommand{\geff}{\ensuremath{g_{\mathrm{eff}}}}
 \newcommand{\umin}{\ensuremath{u_{\mathrm{min}}}}
 \newcommand{\umax}{\ensuremath{u_{\mathrm{max}}}}
+\newcommand{\gmin}{\ensuremath{\gamma_{\mathrm{min}}}}
+\newcommand{\gmax}{\ensuremath{\gamma_{\mathrm{max}}}}
+\newcommand{\bmin}{\ensuremath{\beta_{\mathrm{min}}}}
+\newcommand{\bmax}{\ensuremath{\beta_{\mathrm{max}}}}
 
 
 
@@ -112,13 +117,13 @@ Each model is parameterized by a normalization $E_0$, a width $\thC$, and a trun
 
 A generic energy profile $E(\theta)$ may have several more parameters, but one can still associate an on-axis energy $E_0 = E(0)$ and an effective core width $\thC \sim |E''(0)/E_0|^{-1/2}$ which should fully specify the leading order near on-axis behaviour.  
 
-The afterglow light curve of a structured jet follows one of two qualitatively different regimes depending on the orientation of the viewer with respect to $\thC$.  We refer to the regimes as ``on-axis'' when $\thobs < \thC$, and ``off-axis'' when $\thobs > \thC$.  
+The afterglow light curve of a structured jet follows one of two qualitatively different regimes depending on the orientation of the viewer with respect to $\thC$.  We refer to the regimes as ``aligned'' when $\thobs < \thC$, and ``misaligned'' when $\thobs > \thC$.  
 
 In the ensuing discussion we often refer to sections of the blast wave surface by their angular coordinates $(\theta, \phi)$.  These are the standard angles associated with a spherical polar coordinate system whose $z$-axis is oriented along the jet axis.  The observer is located in a direction $\hat{\bf n}$ which makes an angle $\thobs$ with the $z$-axis, $\hat{\bf n} \cdot \hat{\bf z} = \cos \thobs$, and is oriented along the $x$-axis, $\phobs = 0$.  A particular point on the blast wave $\hat{\bf r} = (\theta, \phi)$ makes an angle $\psi$ with the viewer, $\cos \psi = \hat{\bf n} \cdot \hat{\bf r}$.  We denote the cosine of this angle as $\mu$, $\cos \psi = \mu$.
 
-\subsection{On-Axis Evolution: $\thobs \lesssim \thC$}
+\subsection{Aligned Evolution: $\thobs \lesssim \thC$}
 
-The on-axis light curve of a structured jet is essentially identical to that of a standard top-hat viewed within the jet cone.  The relativistic afterglow is comprised of three phases, \emph{pre-jet break}, \emph{transition}, and \emph{post-jet break}.  These are well described in the literature and are briefly reviewed here.
+The aligned light curve of a structured jet is essentially identical to that of a standard top-hat viewed within the jet cone.  The relativistic afterglow is comprised of three phases, \emph{pre-jet break}, \emph{transition}, and \emph{post-jet break}.  These are well described in the literature and are briefly reviewed here.
 
 \emph{Pre-jet break} ---  At early times the flux is dominated by the small patch of material whose emission is beamed towards the observer of angular width $\psi = |\theta-\thobs| \sim \gamma^{-1}$.  This patch is within the $\theta < \thC$ region where $E(\theta) \approx E_0$ and the structure plays a sub-dominant role.  The angular size of the visible patch grows as $\gamma^{-2}$.  Closure relations and scalings of the standard on-axis top-hat apply. (CITE Granot and Sari)
 
@@ -128,20 +133,19 @@ The on-axis light curve of a structured jet is essentially identical to that of 
 
 The onset of the transition phase (ie. the start of the jet-break), occurs at $\tbm$ and completes at $\tbp$, given by:
 \begin{align}
-	\tbm &= \left(\frac{9}{16\pi} \frac{E_0}{n_0 \Mp c^5}\right)^{1/3} \left( 2 \sin \left(\frac{\thC-\thobs}{2}\right)\right)^{8/3} ,\label{eq:tbm} \\
-	\tbp &= \left(\frac{9}{16\pi} \frac{E_0}{n_0 \Mp c^5}\right)^{1/3} \left( 2 \sin \left(\frac{\thC+\thobs}{2}\right)\right)^{8/3} .\label{eq:tbp}
+	\tbpm &= \left(\frac{9}{16\pi} \frac{E_0}{n_0 \Mp c^5}\right)^{1/3} \left( 2 \sin \left(\frac{\thC\pm\thobs}{2}\right)\right)^{8/3} ,\label{eq:tbpm}
 \end{align}
 
 \begin{figure}
 	\plotone{figs/lc_on.pdf}
-	\caption{On-axis ($\thobs = \thC/2$) afterglow light curves for top-hat (blue), Gaussian (orange), and power-law (green) jets. When viewed on-axis, jets containing angular structure are very difficult to distinguish from top-hats.  The transition phase marking the onset of the jet break begins at $\tbm\sim3$ days with a shallow break and ends sharply at $\tbp \sim 100$ days.  These particular light curves use $\thC = 0.1$ rad, $\thW = 0.4$ rad, $E_0 = 10^{52}$erg, $n_0=10^{-2}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, $\epsB = 10^{-3}$, and $d_L=40$Mpc. \label{fig:onaxis}}
+	\caption{Aligned ($\thobs = \thC/2$) afterglow light curves for top-hat (blue), Gaussian (orange), and power-law (green) jets. When viewed on-axis, jets containing angular structure are very difficult to distinguish from top-hats.  The transition phase marking the onset of the jet break begins at $\tbm\sim3$ days with a shallow break and ends sharply at $\tbp \sim 100$ days.  These particular light curves use $\thC = 0.1$ rad, $\thW = 0.4$ rad, $E_0 = 10^{52}$erg, $n_0=10^{-2}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, $\epsB = 10^{-3}$, and $d_L=40$Mpc. \label{fig:onaxis}}
 \end{figure}
 
-Figure \ref{fig:onaxis} shows representative top-hat, Gaussian, and power-law jet light curves in the on-axis regime.  The light curves nearly overlap, demonstrating the similar evolution of all structured jet afterglows when viewed on-axis.  Although we expect all afterglow blast waves to contain angular structure, the simple top-hat jet model is sufficient for on-axis viewing.
+Figure \ref{fig:onaxis} shows representative top-hat, Gaussian, and power-law jet light curves in the aligned regime.  The light curves nearly overlap, demonstrating the similar evolution of all structured jet afterglows when viewed within the jet core.  Although we expect all afterglow blast waves to contain angular structure, the simple top-hat jet model is sufficient for aligned viewing.
 
 The relativistic stages of evolution are followed by a Newtonian phase when the decelerating blast wave becomes non-relativistic, spreads sonically, and approaches a Sedov-Taylor solution.  We do not address the Newtonian phase of evolution in this work.
 
-\subsection{Off-Axis Evolution: $\thobs \gtrsim \thC$}
+\subsection{Misaligned Evolution: $\thobs \gtrsim \thC$}
 
 When viewed at angles larger than $\thC$ the gradient $E'(\theta)$ over the visible patch becomes non-negligible.  To observers this energy gradient presents itself as a slowly rising or decaying afterglow light curve. The relativistic afterglow is comprised of two or three phases depending on whether the observer lies within the truncation angle, \emph{off-axis}, \emph{structured},  and \emph{post-jet break}.
 
@@ -168,17 +172,30 @@ During the structured phase, the afterglow has a temporal spectral slope which d
 
 The temporal and spectral slopes for various regimes are given in Table \ref{tab:slopes}.  The derivation of the slopes, $\tW$, and $\tb$ are given in Appendix \ref{sec:derive1}.
 
-\begin{deluxetable*}{CCCCCC}
-	\tablecaption{Structured jet temporal and spectral slopes: $F_\nu \propto \tobs^\alpha \nu^\beta$. See Equations \eqref{eq:gdef} and \eqref{eq:geff} for the definition and effective values of $g$.  For a refreshed-shock model replace $g$ with $k$, defined in Equation \eqref{eq:Eu}. \label{tab:slopes}}
-	\tablehead{\colhead{Regime}& \colhead{Label} & \colhead{$\alpha_{\mathrm{off-axis}}$}& \colhead{$\alpha_{\mathrm{struct}}$}& \colhead{$\alpha_{\mathrm{struct,max}}$} & \colhead{$\beta$}}
+\begin{deluxetable*}{CCCCCCC}
+	\tablecaption{Structured jet temporal and spectral slopes: $F_\nu \propto \tobs^{-\alpha} \nu^{-\beta}$. See Equations \eqref{eq:gdef} and \eqref{eq:geff} for the definition and effective values of $g$. \label{tab:slopes}}
+	\tablehead{\colhead{Regime}& \colhead{Label} & \colhead{$\alpha_{\mathrm{off-axis}}$}& \colhead{$\alpha_{\mathrm{struct}}$}& \colhead{$\alpha_{\mathrm{struct,max}}$}& \colhead{$\alpha_{\mathrm{post, analytic}}$} & \colhead{$\beta$}}
 	\startdata
-	\nu<\nu_m<\nu_c     & D & 7 			& \frac{-2+3s_3 + 3g}{8+g} 		& 3		& 1/3 \\
-	\nu_m<\nu<\nu_c     & G & 15/2 - 3p/2 	& \frac{- 6p + 3s_3 + 3g}{8+g} 		& 3		& (1-p)/2 \\
-	\nu < \nu_c < \nu_m & E & 17/3 		& \frac{-14/3 + 3s_3 + 11g/3}{8+g} 	& 11/3	& 1/3 \\
-	\nu_c < \nu < \nu_m & F & 13/2 		& \frac{-8+3s_3 + 2g}{8+g} 		& 2		& -1/2 \\
-	\nu_c < \nu_m < \nu & H & 8 - 3p/2 		& \frac{-6p - 2 + 3s_3 + 2g}{8+g} 	& 2		& -p/2 \\ 
+	\nu<\nu_m<\nu_c     & D & -7 			& -\frac{5/2 + 3g}{8+g} 		& -3		& 1/4			& -1/3 \\
+	\nu_m<\nu<\nu_c     & G & -15/2 + 3p/2 	& \frac{-9/2 + 6p - 3g}{8+g} 	& -3		& 3p/4		& (p-1)/2 \\
+	\nu < \nu_c < \nu_m & E & -17/3 		& \frac{1/6 - 11g/3}{8+g} 		& -11/3	& 7/12		& -1/3 \\
+	\nu_c < \nu < \nu_m & F & -13/2 		& \frac{7/2 - 2g}{8+g} 		& -2		& 1			& 1/2 \\
+	\nu_c < \nu_m < \nu & H & -8 + 3p/2 		& \frac{-5/2 +6p  -2g}{8+g} 	& -2		& (3p+1)/4	& p/2 \\ 
 	\enddata
 \end{deluxetable*}
+
+
+%\begin{deluxetable*}{CCCCCC}
+%	\tablecaption{Structured jet temporal and spectral slopes: $F_\nu \propto \tobs^{-\alpha} \nu^{-\beta}$. See Equations \eqref{eq:gdef} and \eqref{eq:geff} for the definition and effective values of $g$.  For a refreshed-shock model replace $g$ with $k$, defined in Equation \eqref{eq:Eu}. \label{tab:generalSlopes}}
+%	\tablehead{\colhead{Regime}& \colhead{Label} & \colhead{$\alpha_{\mathrm{off-axis}}$}& \colhead{$\alpha_{\mathrm{struct}}$}& \colhead{$\alpha_{\mathrm{struct,max}}$} & \colhead{$\beta$}}
+%	\startdata
+%	\nu<\nu_m<\nu_c     & D & -7 			& -\frac{-2+3s_3 + 3g}{8+g} 		& -3		& -1/3 \\
+%	\nu_m<\nu<\nu_c     & G & -15/2 + 3p/2 	& -\frac{- 6p + 3s_3 + 3g}{8+g} 		& -3		& (p-1)/2 \\
+%	\nu < \nu_c < \nu_m & E & -17/3 		& -\frac{-14/3 + 3s_3 + 11g/3}{8+g} 	& -11/3	& -1/3 \\
+%	\nu_c < \nu < \nu_m & F & -13/2 		& -\frac{-8+3s_3 + 2g}{8+g} 		& -2		& 1/2 \\
+%	\nu_c < \nu_m < \nu & H & -8 + 3p/2 		& -\frac{-6p - 2 + 3s_3 + 2g}{8+g} 	& -2		& p/2 \\ 
+%	\enddata
+%\end{deluxetable*}
 
 The $g$ parameter evolves with time as $\theta^*$ sweeps from the jet edge to the core.  This produces deviations in the light curve from a pure power-law.  However, we find ultimately these deviations are not too large and the average slope is well approximated by $\geff  = g(\thobs/2)$.  For the power-law and Gaussian jet models this gives:
 \begin{align}
@@ -189,7 +206,7 @@ These values may be used in Table \ref{tab:slopes} for an approximate power-law 
 
 In the structured phase, the temporal slope depends directly on the ratio $\thobs/\thC$.  Therefore any measurement of the effective power law slope of an afterglow light curve in the structured phase can be used to measure this parameter.
 
-\emph{Post-jet break} --- Once the entire jet is visible (ie. the observer is within the beaming cone of the entire jet) the visible patch no longer grows and emission is dominated by the decelerating core.  This phase follows exactly the post-jet break scalings of the on-axis case, except with a much delayed break time $\tb$.
+\emph{Post-jet break} --- Once the entire jet is visible (ie. the observer is within the beaming cone of the entire jet) the visible patch no longer grows and emission is dominated by the decelerating core.  This phase follows exactly the post-jet break scalings of the aligned case, except with a much delayed break time $\tb$.
 
 \begin{figure}
 	\plotone{figs/lc_off1.pdf}
@@ -200,7 +217,7 @@ In the structured phase, the temporal slope depends directly on the ratio $\thob
 	\caption{As Figure \ref{fig:onaxis} but $\thobs = 6\thC$. All three models exhibit off-axis, structured, and post-jet break phases of evolution.  At larger opening angles the difference between structured models is more evident.  \label{fig:offaxis2}}
 \end{figure}
 
-Figures \ref{fig:offaxis1} and \ref{fig:offaxis2} display afterglows from the fiducial models in the off-axis regime at $\thobs = 2\thC$ and $\thobs=6\thC$ respectively.  At the moderate $2\thC$ viewing angle both structured models exhibit similar decaying light curves with slopes somewhat shallower than the on-axis case. In this case $\thobs < \thW$ so neither model exhibits an off-axis phase.  The similar temporal evolution is easy to understand as at this angle both models have $\geff = 1$ and hence approximately equal power-law slopes in the structured phase.  At late times as more of the jet comes in to view the difference between all three models becomes negligible. 
+Figures \ref{fig:offaxis1} and \ref{fig:offaxis2} display afterglows from the fiducial models in the misaligned regime at $\thobs = 2\thC$ and $\thobs=6\thC$ respectively.  At the moderate $2\thC$ viewing angle both structured models exhibit similar decaying light curves with slopes somewhat shallower than the aligned case. In this case $\thobs < \thW$ so neither model exhibits an off-axis phase.  The similar temporal evolution is easy to understand as at this angle both models have $\geff = 1$ and hence approximately equal power-law slopes in the structured phase.  At late times as more of the jet comes in to view the difference between all three models becomes negligible. 
 
 At the larger $6\thC$ viewing angle all three models exhibit off-axis, structured, and post-jet break phases of the afterglow.  The different $\tW$ between the Gaussian and power-law models is due to the different $E(\thW)$ of the two models. In the structured phase the Gaussian shows a rising light curve with slope $~1$ due to the large $\geff = 9$.  The power-law meanwhile has a smaller $\geff$ of $9/5$, giving rise to a very shallow decay. As at the other viewing angles, once the entire jet is visible at $\tb$ all models follow similar post-jet break evolutions.
 
@@ -211,32 +228,63 @@ At the larger $6\thC$ viewing angle all three models exhibit off-axis, structure
 
 Figure \ref{fig:slopesG} shows the structured phase power-law temporal slope as a function of $g$ for spectral regimes $D$--$H$. In the $G$ and $H$ regimes the spectral slope is a function of $p$, this dependence carries over into the temporal slope as well. The temporal slope is an increasing function of $g$ in all regimes.  At sufficiently large $g$ all regimes exhibit rising light curves, the specific $g$ at which the light curve begins to rise is regime dependent.
 
-\section{Refreshed Shocks}\label{sec:refreshedShocks}
+\section{Refreshed Shocks --- Fast Tails and Spherical Cocoons}\label{sec:refreshedShocks}
 
-An alternative mechanism to produce slow decays or rises in afterglow light curves is the \emph{refreshed shock}, where velocity stratification of the ejecta causes a prolonged period of energy injection. Slow material initially coasting behind the shock is gradually incorporated into the blast wave as it decelerates, ``refreshing'' the shock.  This mechanism was first proposed as an energy injection scenario (CITE), and recently has been proposed as the mechanism behind GW170817 in the choked-jet scenario. (CITE Mooley, Hotokezaka, etc).
+An alternative mechanism to produce slow decays or rises in afterglow light curves is the \emph{refreshed shock}, where velocity stratification of the ejecta causes a prolonged period of energy injection in the afterglow.  This material may be a tail of fast outflowing ejecta or ejecta material accelerated through interaction with a possibly choked jet (e.g. a cocoon). (CITE Mooley, Hotokezaka, Nakar\&Piran, etc).  In either case, slow material initially coasting behind the shock is gradually incorporated into the blast wave as it decelerates, ``refreshing'' the shock.  This mechanism was first proposed as an energy injection scenario (CITE), and was proposed as the mechanism behind the GW170817 afterglow in the choked-jet scenario. (CITE Mooley, Hotokezaka, etc).
 
 In the simplest case the visible part of the blast wave is assumed to be quasi-spherical.  The distribution of material behind the blast wave is specified by $E_{>}(u)$, the energy of all material in the ejecta with four-velocity greater than $u$.  This is typically taken to be a power-law in $u$ within the finite domain $[\umin, \umax]$:
 \begin{equation}
 	E_>(u) = E_r u^{-k}\ , \label{eq:Eu}
 \end{equation}
-where $u \in (\umin, \umax)$ is the dimensionless four-velocity, $k>0$ is the power law index, and $E_r$ is a normalization factor.  
+where $u \in (\umin, \umax)$ is the dimensionless four-velocity, $k>0$ is the power law index, and $E_r$ is a normalization factor.  The mass ejected with velocity $\umax$ is $\Mej$.
 
-A blast wave will have an initial coasting period before sweeping up enough mass in the ambient medium to begin deceleration and be subject to refreshed shocks.  The shock refreshment ends when the blast wave decelerates past $\umin$.  These times are given by:
+A blast wave will have an initial coasting period before sweeping up enough mass in the ambient medium to begin deceleration and be subject to refreshed shocks.  The shock refreshment ends when the blast wave decelerates past $\umin$.  In the single shell model with trans-relativistic equation of state used here, these times are:
 \begin{align}
-	\tdec &= ... \ ,\label{eq:tdec} \\
+	\tdec &= \left(\frac{9}{4\pi} \frac{\Mej}{n_0 \Mp c^3} \frac{\gmax^2}{\bmax^3(\gmax+1)(4\umax^2+3)} \right)^{1/3}  \ ,\label{eq:tdec} \\
 	\tumin &= \left(\frac{9}{16\pi} \frac{E_r}{n_0 \Mp c^5}\right)^{1/3} \umin^{-8/3} \ .\label{eq:tumin}
 \end{align}
-The temporal and spectral slopes in this mechanism are identical to the structured jet, but with the replacement $k \leftrightarrow g$.  For a derivation see Appendix \ref{sec:derive3}.
+Equation \eqref{eq:tumin} assumes $E_r \gg \Mej c^2$.   The temporal and spectral slopes in this mechanism depend on the energy distribution index $k$ and are given in Table \ref{tab:refreshSlopes}.  Figure \ref{fig:slopesK} shows the temporal slopes in each spectral regime as a function of $k$.  As in Figure \ref{fig:slopesG} the width of the $G$ and $H$ regimes reflects varying the value of $p$ between two and three.  For a derivation see Appendix \ref{sec:derive3}.  
 
 \begin{figure}
 	\plotone{figs/slopesCocoon.png}
-	\caption{Temporal slopes for the cocoon.}
+	\caption{The temporal power-law slope of the spherical refreshed-shock afterglow light curve as a function of $k$.  Otherwise as Figure \ref{fig:slopesG}.  The temporal power-law slope of a structured jet afterglow increases with $k$ in all spectral regimes. \label{fig:slopesK}}
 \end{figure}
 
+\begin{deluxetable*}{CCCCCCC}
+	\tablecaption{Refreshed shock temporal and spectral slopes: $F_\nu \propto \tobs^{-\alpha} \nu^{-\beta}$. See Equation \eqref{eq:Eu} for the definition of $k$.  \label{tab:refreshSlopes}}
+	\tablehead{\colhead{Regime}& \colhead{Label} & \colhead{$\alpha_{\mathrm{coast}}$}& \colhead{$\alpha_{\mathrm{refresh}}$}& \colhead{$\alpha_{\mathrm{refresh,max}}$}& \colhead{$\alpha_{\mathrm{post}}$}  & \colhead{$\beta$}}
+	\startdata
+	\nu<\nu_m<\nu_c     & D & 3 	& -\frac{4 + 3k}{8+k} 		& -3		& -1/2	& -1/3 \\
+	\nu_m<\nu<\nu_c     & G & 3 	& \frac{-6 + 6p - 3k}{8+k} 	& -3		& 3(p-1)/4	& (p-1)/2 \\
+	\nu < \nu_c < \nu_m & E & 3 	& -\frac{4/3 + 11k/3}{8+k} 	& -11/3	& -1/6	& -1/3 \\
+	\nu_c < \nu < \nu_m & F & 3 	& \frac{2 - 2k}{8+k} 		& -2		& 1/4		& 1/2 \\
+	\nu_c < \nu_m < \nu & H & 3 	& \frac{- 4 +6p - 2k}{8+k}	& -2		& (3p-2)/4	& p/2 \\ 
+	\enddata
+\end{deluxetable*}
 
-\subsection{Relation to Energy Injection Models}
 
-The refreshed shock model as constructed here is equivalent to the similar energy injection models in (CITE Zhang09).  That work specifies the index $s$ of the mass distribution $M_{>u} \propto u^{-s}$, which is related simply to the index $k$ by $k = s-1$. Under this mapping the closure relations in Table \ref{tab:slopes} are equivalent to those in (CITE Zhang 09).  The numerical model described in Section \ref{sec:numerical} improves on these analytic approximations by ...
+\section{Relation to Energy Injection Models}
+
+The light curves of both the angularly structured jet and refreshed shock models can be understood in terms of general energy injection mechanisms, which are typically parameterized as an additional power $L$ delivered to the blast wave.  This power is typically taken to decay in time as a power law, $L \propto t^{-q}$, with $q \in [0,1]$.
+
+The mapping between energy injection and refreshed shocks was done in (CITE Zhang06).  That work specifies the index $s$ of the mass distribution $M_{>u} \propto u^{-s}$, which is related simply to the index $k$ by $k = s-1$. Under this mapping the closure relations in Table \ref{tab:slopes} are equivalent to those in (CITE Zhang06) and the model can be seen as equivalent to an energy injection model with $q = (8-2k) / (8+k)$.
+
+The mapping between structured jet and refreshed shock (and hence energy injection) models is a two step process.  Firstly, a visual comparison between $\alpha_{\text{struct}}$ in Table \ref{tab:slopes} and $\alpha_{\text{refresh}}$ in Table \ref{tab:refreshSlopes} indicate the identical roles played by $g$ and $k$. Indeed, a stru
+
+
+  The numerical model described in Section \ref{sec:numerical} improves on these analytic approximations by ...
+
+\begin{deluxetable*}{CCCCCC}
+	\tablecaption{Generic structured phase temporal and spectral slopes: $F_\nu \propto \tobs^{-\alpha} \nu^{-\beta}$.  The visible patch of the jet has a solid angle which scales as $\gamma^{-s_3}$. See Equations \eqref{eq:gdef} and \eqref{eq:geff} for the definition and effective values of $g$.  A uniform relativistic blast wave pre-jet break has $s_3=2$, a relativistic blast wave with angular structure pre-jet break has $s_3 \approx 1.5$, and a relativistic blast wave post jet-break has $s_3 = 0$. For a refreshed-shock model replace $g$ with $k$, defined in Equation \eqref{eq:Eu}. \label{tab:generalSlopes}}
+	\tablehead{\colhead{Regime}& \colhead{Label} & \colhead{$\alpha_{\mathrm{struct}}$} & \colhead{$\beta$}}
+	\startdata
+	\nu<\nu_m<\nu_c     & D & \frac{2-3s_3 - 3g}{8+g} 		& -1/3 \\
+	\nu_m<\nu<\nu_c     & G & \frac{6p - 3s_3 - 3g}{8+g} 	& (p-1)/2 \\
+	\nu < \nu_c < \nu_m & E & \frac{14/3 - 3s_3 -11g/3}{8+g} 	& -1/3 \\
+	\nu_c < \nu < \nu_m & F & \frac{8-3s_3 -2g}{8+g} 		& 1/2 \\
+	\nu_c < \nu_m < \nu & H & \frac{6p - 2 - 3s_3 - 2g}{8+g} 	& p/2 \\ 
+	\enddata
+\end{deluxetable*}
 
 The structured jet $g(\theta)$ parameter can similarly...
 

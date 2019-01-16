@@ -324,7 +324,106 @@ def makeCentralPlots(modelPlots=True):
     plt.close(fig)
 
 
+def makeConvergencePlots():
+
+    lrs = [1, 3, 5, 10, 20, 40]
+    trs = [250, 500, 1000, 2000, 4000, 8000]
+    lrRef = 80
+    trRef = 16000
+
+    # lss = ['-', '--', '-.', ':', '-']
+    # cols = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red', 'tab:purple']
+
+    E0 = 1.0e52
+    thC = 0.05
+    thV = 0.3
+    thW = 0.5
+    n0 = 1.0
+    p = 2.2
+    epse = 0.1
+    epsB = 0.01
+    xiN = 1.0
+    dL = 1.23e26
+
+    Y = np.array([thV, E0, thC, thW, 0.0, 0.0, 0.0, n0, p, epse, epsB, xiN,
+                  dL])
+    jetType = 0
+
+    t = np.geomspace(1.0e3, 1.0e8, 100)
+    nu = np.empty(t.shape)
+    nu[:] = 1.0e18
+
+    FnuRef = grb.fluxDensity(t, nu, jetType, 0, *Y, latRes=lrRef, tRes=trRef)
+    fig, ax = plt.subplots(1, 1, figsize=(4, 3))
+    ax.plot(t, FnuRef)
+
+    ax.set_xlabel(r'$t$ (s)')
+    ax.set_ylabel('')
+    ax.set_xscale('log')
+    ax.set_yscale('log')
+    fig.tight_layout()
+    print("Saving conv_ref.pdf")
+    fig.savefig("conv_ref.pdf")
+    plt.close(fig)
+
+    fig, ax = plt.subplots(1, 1, figsize=(4, 3))
+    fig2, ax2 = plt.subplots(1, 1, figsize=(4, 3))
+
+    for i, lr in enumerate(lrs):
+        Fnu = grb.fluxDensity(t, nu, jetType, 0, *Y, latRes=lr, tRes=trRef)
+        err = np.fabs(Fnu-FnuRef)/FnuRef
+        ax.plot(t, err)
+        ax2.plot(t, Fnu)
+    ax2.plot(t, FnuRef, lw=0.5, color='k')
+
+    ax.set_xlabel(r'$t$ (s)')
+    ax.set_ylabel('Error')
+    ax.set_xscale('log')
+    ax.set_yscale('log')
+    fig.tight_layout()
+    print("Saving conv_latRes.pdf")
+    fig.savefig("conv_latRes.pdf")
+    plt.close(fig)
+
+    ax2.set_xlabel(r'$t$ (s)')
+    ax2.set_ylabel('Flux')
+    ax2.set_xscale('log')
+    ax2.set_yscale('log')
+    fig2.tight_layout()
+    print("Saving conv_flux_latRes.pdf")
+    fig2.savefig("conv_flux_latRes.pdf")
+    plt.close(fig2)
+
+    fig, ax = plt.subplots(1, 1, figsize=(4, 3))
+    fig2, ax2 = plt.subplots(1, 1, figsize=(4, 3))
+
+    for i, tr in enumerate(trs):
+        Fnu = grb.fluxDensity(t, nu, jetType, 0, *Y, latRes=lrRef, tRes=tr)
+        err = np.fabs(Fnu-FnuRef)/FnuRef
+        ax.plot(t, err)
+        ax2.plot(t, Fnu)
+
+    ax.set_xlabel(r'$t$ (s)')
+    ax.set_ylabel('Error')
+    ax.set_xscale('log')
+    ax.set_yscale('log')
+    fig.tight_layout()
+    print("Saving conv_tRes.pdf")
+    fig.savefig("conv_tRes.pdf")
+    plt.close(fig)
+
+    ax2.set_xlabel(r'$t$ (s)')
+    ax2.set_ylabel('Flux')
+    ax2.set_xscale('log')
+    ax2.set_yscale('log')
+    fig2.tight_layout()
+    print("Saving conv_flux_tRes.pdf")
+    fig2.savefig("conv_flux_tRes.pdf")
+    plt.close(fig2)
+
+
 if __name__ == "__main__":
 
     # makeThVPlots()
-    makeCentralPlots(modelPlots=True)
+    # makeCentralPlots(modelPlots=True)
+    makeConvergencePlots()
