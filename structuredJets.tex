@@ -108,6 +108,10 @@ Numerical simulations have revealed a variety of jet angular energy distribution
 	E(\theta) &= \frac{E_0}{1 + (\theta/ \thC)^2}  && \text{power-law} \label{eq:pl}
 \end{align}
 
+%
+% Update jet Structure models paper.
+%
+
 \begin{figure}
 	\plotone{figs/jetStruct.pdf}
 	\caption{Jet Structure.  Temporary version.  Remove $\Gamma$ subplot.  Add Aloy. \label{fig:jetStruct}}
@@ -221,6 +225,10 @@ Figures \ref{fig:offaxis1} and \ref{fig:offaxis2} display afterglows from the fi
 
 At the larger $6\thC$ viewing angle all three models exhibit off-axis, structured, and post-jet break phases of the afterglow.  The different $\tW$ between the Gaussian and power-law models is due to the different $E(\thW)$ of the two models. In the structured phase the Gaussian shows a rising light curve with slope $~1$ due to the large $\geff = 9$.  The power-law meanwhile has a smaller $\geff$ of $9/5$, giving rise to a very shallow decay. As at the other viewing angles, once the entire jet is visible at $\tb$ all models follow similar post-jet break evolutions.
 
+%
+% Comment: Add dashed line at 0 to slopes plot.
+%
+
 \begin{figure}
 	\plotone{figs/slopesJet.png}
 	\caption{Temporal slopes for the off-axis structured jet as a function of the structure parameter $g$ for the synchrotron spectral regimes D (blue, narrow), E (orange, narrow),  F (green, narrow), G (red, wide), and H (purple, wide).  The width of the G and H bands shows the dependency on $p$, the upper curves for $p=2$ and the lower for $p=3$.  The temporal power-law slope of a structured jet afterglow increases with $g$ in all spectral regimes. \label{fig:slopesG}}
@@ -238,12 +246,22 @@ In the simplest case the visible part of the blast wave is assumed to be quasi-s
 \end{equation}
 where $u \in (\umin, \umax)$ is the dimensionless four-velocity, $k>0$ is the power law index, and $E_r$ is a normalization factor.  The mass ejected with velocity $\umax$ is $\Mej$.
 
+%
+% Comment: define tdec, tmin IN THE TEXT.   Add (brief) discussion of light curve phases.
+%
+
 A blast wave will have an initial coasting period before sweeping up enough mass in the ambient medium to begin deceleration and be subject to refreshed shocks.  The shock refreshment ends when the blast wave decelerates past $\umin$.  In the single shell model with trans-relativistic equation of state used here, these times are:
 \begin{align}
 	\tdec &= \left(\frac{9}{4\pi} \frac{\Mej}{n_0 \Mp c^3} \frac{\gmax^2}{\bmax^3(\gmax+1)(4\umax^2+3)} \right)^{1/3}  \ ,\label{eq:tdec} \\
 	\tumin &= \left(\frac{9}{16\pi} \frac{E_r}{n_0 \Mp c^5}\right)^{1/3} \umin^{-8/3} \ .\label{eq:tumin}
 \end{align}
 Equation \eqref{eq:tumin} assumes $E_r \gg \Mej c^2$.   The temporal and spectral slopes in this mechanism depend on the energy distribution index $k$ and are given in Table \ref{tab:refreshSlopes}.  Figure \ref{fig:slopesK} shows the temporal slopes in each spectral regime as a function of $k$.  As in Figure \ref{fig:slopesG} the width of the $G$ and $H$ regimes reflects varying the value of $p$ between two and three.  For a derivation see Appendix \ref{sec:derive3}.  
+
+
+%
+% Comment: Add dashed line at 0 to slopes plot.
+%
+
 
 \begin{figure}
 	\plotone{figs/slopesCocoon.png}
@@ -269,10 +287,26 @@ The light curves of both the angularly structured jet and refreshed shock models
 
 The mapping between energy injection and refreshed shocks was done in (CITE Zhang06).  That work specifies the index $s$ of the mass distribution $M_{>u} \propto u^{-s}$, which is related simply to the index $k$ by $k = s-1$. Under this mapping the closure relations in Table \ref{tab:slopes} are equivalent to those in (CITE Zhang06) and the model can be seen as equivalent to an energy injection model with $q = (8-2k) / (8+k)$.
 
-The mapping between structured jet and refreshed shock (and hence energy injection) models is a two step process.  Firstly, a visual comparison between $\alpha_{\text{struct}}$ in Table \ref{tab:slopes} and $\alpha_{\text{refresh}}$ in Table \ref{tab:refreshSlopes} indicate the identical roles played by $g$ and $k$. Indeed, a stru
+There is no single mapping between the structured jet and energy injection or refreshed shock models.  However, a visual comparison between $\alpha_{\text{struct}}$ in Table \ref{tab:slopes} and $\alpha_{\text{refresh}}$ in Table \ref{tab:refreshSlopes} indicate the identical roles played by $g$ and $k$.  Indeed, a simple swap $g \leftrightarrow k$ produces almost identical closure relations.  However, as seen in Tables \ref{tab:slopes} and \ref{tab:refreshSlopes} or 
+
+The mapping between structured jet and refreshed shock (and hence energy injection) models is a two step process.   Indeed, a stru
+
+%
+% Comment: replace s_3 with s_Omega, s_{1,2} with s_gamma, s_t.
+%
+% "It is insightful..."
+%
+
+The numerical model described in Section \ref{sec:numerical} improves on these analytic approximations by ...
 
 
-  The numerical model described in Section \ref{sec:numerical} improves on these analytic approximations by ...
+%
+% Comment: Emphasize this is in "misaligned" case for structured case, but also applies to refreshed shock.  Just use "alpha".
+%
+
+%
+% Comment: THE JET BREAK *IS* WHEN THE VISIBLE PATCH STOPS GROWING
+%
 
 \begin{deluxetable*}{CCCCCC}
 	\tablecaption{Generic structured phase temporal and spectral slopes: $F_\nu \propto \tobs^{-\alpha} \nu^{-\beta}$.  The visible patch of the jet has a solid angle which scales as $\gamma^{-s_3}$. See Equations \eqref{eq:gdef} and \eqref{eq:geff} for the definition and effective values of $g$.  A uniform relativistic blast wave pre-jet break has $s_3=2$, a relativistic blast wave with angular structure pre-jet break has $s_3 \approx 1.5$, and a relativistic blast wave post jet-break has $s_3 = 0$. For a refreshed-shock model replace $g$ with $k$, defined in Equation \eqref{eq:Eu}. \label{tab:generalSlopes}}
@@ -344,6 +378,23 @@ It should be noted all errors quoted here are numerical errors associated with t
 
 \section{Application: GW170817A}
 
+We use the electromagnetic afterglow of GW170817A (GRB170817A?) as an example application of both the analytic and numerical structured jet afterglow models.  
+
+Figure \ref{fig:170817Alc} shows the observations in radio, optical, and x-ray bands of the GW170817A afterglow.  No afterglow emission was detected until an x-ray detection by the Chandra observatory nine days after the GW trigger (CITE TrojaNature).  Further radio, optical, and x-ray observations showed a steady rising light curve with constant power-law slope until a peak near day 160.  At this point the light curve turned over and began a steep decay that continues to the present (CITE YearInTheLife).
+
+Interpreting the afterglow as arising from a structured jet allows one to quickly draw the following conclusions:
+\begin{enumerate}
+	\item The spectral slope $\beta = 0.585$ (CITE, +uncertainties) throughout the entire evolution, identifying the relevant spectral regime as G: $\nu_m < \nuobs < \nu_c$, and $p = 2.17$.
+	\item The initial rising ($\alpha < 0$) light curve with declining spectrum ($\beta > 0$) identify this as a \emph{misaligned} evolution ($\thobs > \thC$).  Aligned jets may only have a rising light curve when viewed at frequencies below the peak frequency, that is when $\beta < 0$.
+	\item The rising light curve maintains $\alpha  = 0.90 \pm 0.06$ (CITE YITL).  Using the closure relations from Table \ref{tab:slopes} we can identify this as the \emph{structured} phase and determine $\geff = 7.5 \pm 0.4$.  If the light curve underwent an \emph{off-axis} phase, it concluded before the afterglow was detected: $\tW < 9$d.  The peak can be identified as the jet-break: $\tb = 164 \pm 12$ d.
+	\item In the context of a Gaussian jet, the measurement of $\geff$ leads immediately to $\thobs / \thC = 5.5 \pm 0.2$.
+	\item Using the Fong 2015 (CITE Fong 2015) fiducial values of $E_0 \sim 2\times 10^{51}$erg and $n_0 \sim 10^{-2}$cm$^{-3}$ we can use the jet break $\tb$ measurement to determine $\thobs \approx 0.5 \pm 0.2$ rad ($29^\circ \pm 12^\circ$), assuming 1 dex uncertainties on $E_0$ and $n_0$.    This is in agreement with the LIGO measurement $\thobs \approx 28^\circ \pm 15^\circ$ (assuming the SHoES $H_0$).
+	\item The combined measurements of $\thobs$ and $\thobs/\thC$ then imply $\thC \approx 0.09 \pm 0.04$ rad ($5^\circ  \pm 2^\circ$).
+	
+\end{enumerate}
+
+
+
 \section{Discussion}
 
 
@@ -353,6 +404,11 @@ It should be noted all errors quoted here are numerical errors associated with t
 
 
 
+(-9/2+6p-3g) / (8+g) = a
+-9/2+6p-3g = a(8+g)
+-9/2+6p-8a = ag + 3g
+-9/2+6p-8a = (a + 3)g
+g = (-9/2+6p-8a) / (a+3)
 
 
 
