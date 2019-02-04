@@ -6,49 +6,53 @@ c = 2.99792458e10
 me = 9.1093897e-28
 mp = 1.6726231e-24
 
+
 def gaussian(theta, thC=0.1, thW=0.4, E0=1.0e53, n0=1.0, t0=1.0e7):
     atheta = np.atleast_1d(theta)
     onaxis = theta < thW
     offaxis = theta >= thW
     th = atheta[onaxis]
-    
+
     E = np.empty(atheta.shape)
     g = np.empty(atheta.shape)
 
     E[onaxis] = E0/(4*np.pi) * np.exp(-0.5*(th*th)/(thC*thC))
-    g[onaxis] = np.sqrt(17*E[onaxis] / (2*n0*mp*c*c*c*c*c)) * math.pow(t0,-1.5)
+    g[onaxis] = np.sqrt(17*E[onaxis]/(2*n0*mp*c*c*c*c*c)) * math.pow(t0, -1.5)
 
     if offaxis.any():
         E[offaxis] = 0.0
         g[offaxis] = 1.0
 
-    E[g<1.0] = 0.0
-    g[g<1.0] = 1.0
+    E[g < 1.0] = 0.0
+    g[g < 1.0] = 1.0
 
     return g, E
 
-def powerlaw(theta, thC=0.1, thW=0.4, E0=1.0e53, n0=1.0, t0=1.0e7):
+
+def powerlaw(theta, thC=0.1, thW=0.4, E0=3.0e53, n0=1.0, t0=1.0e7, b=3):
 
     atheta = np.atleast_1d(theta)
     onaxis = theta < thW
     offaxis = theta >= thW
     th = atheta[onaxis]
-    
+
     E = np.empty(atheta.shape)
     g = np.empty(atheta.shape)
 
-    E[onaxis] = E0/(4*np.pi) / (1.0 + (th*th)/(thC*thC))
-    g[onaxis] = np.sqrt(17*E[onaxis] / (2*n0*mp*c*c*c*c*c)) * math.pow(t0,-1.5)
+    Th = np.sqrt(1.0 + th*th/(thC*thC))
+
+    E[onaxis] = E0/(4*np.pi) * np.power(Th, -b)
+    g[onaxis] = np.sqrt(17*E[onaxis]/(2*n0*mp*c*c*c*c*c)) * math.pow(t0, -1.5)
 
     if offaxis.any():
         E[offaxis] = 0.0
         g[offaxis] = 1.0
 
-    E[g<1.0] = 0.0
-    g[g<1.0] = 1.0
+    E[g < 1.0] = 0.0
+    g[g < 1.0] = 1.0
 
     return g, E
-    
+
 
 def boostedFireball(theta, gb=3.0, eta0=3.0, E0=1.0e53):
 
@@ -68,14 +72,14 @@ def boostedFireball(theta, gb=3.0, eta0=3.0, E0=1.0e53):
 
     onaxis = atheta < thMax
     offaxis = atheta >= thMax
-    
+
     th = atheta[onaxis]
     ct = np.cos(th)
     st = np.sin(th)
 
     g = np.empty(atheta.shape)
     g[onaxis] = gb * (eta0 + vb*ct*np.sqrt(u0*u0-ub*ub*st*st)
-                                ) / (1 + ub*ub*st*st)
+                      ) / (1 + ub*ub*st*st)
     if offaxis.any():
         g[offaxis] = 1.0
     gM0 = gb*eta0*(1+vb*v0)
@@ -85,6 +89,7 @@ def boostedFireball(theta, gb=3.0, eta0=3.0, E0=1.0e53):
         E[offaxis] = 0.0
 
     return g, E
+
 
 def loadTxt(filename, cols, skiprows, delimiter=None):
 
@@ -101,47 +106,45 @@ def loadTxt(filename, cols, skiprows, delimiter=None):
             words = line.split()
         try:
             x = [float(words[j]) for j in cols]
-        except:
+        except ValueError:
             break
         dat.append(x)
     f.close()
 
     dat = np.array(dat)
 
-    datT = tuple([dat[:,i].copy() for i in range(n)])
+    datT = tuple([dat[:, i].copy() for i in range(n)])
 
     return datT
+
 
 def duffell2015Oblate(theta, Etot=1.0e49):
 
     filename = "StructureData/duffell2015_data.csv"
 
-    thg = []
-    gp = []
-    f = open(filename, "r")
-    thg
-
-    thg, gp = loadTxt(filename, cols=[6,7], skiprows=2, delimiter=',')
-    thE, Ep = loadTxt(filename, cols=[4,5], skiprows=2, delimiter=',')
+    thg, gp = loadTxt(filename, cols=[6, 7], skiprows=2, delimiter=',')
+    thE, Ep = loadTxt(filename, cols=[4, 5], skiprows=2, delimiter=',')
     Ep *= Etot/0.024
-    
+
     g = np.interp(theta, thg, gp, right=1.0)
     E = np.interp(theta, thE, Ep, right=0.0)
 
     return g, E
+
 
 def duffell2015Spherical(theta, Etot=1.0e49):
 
     filename = "StructureData/duffell2015_data.csv"
 
-    thg, gp = loadTxt(filename, cols=[2,3], skiprows=2, delimiter=',')
-    thE, Ep = loadTxt(filename, cols=[0,1], skiprows=2, delimiter=',')
+    thg, gp = loadTxt(filename, cols=[2, 3], skiprows=2, delimiter=',')
+    thE, Ep = loadTxt(filename, cols=[0, 1], skiprows=2, delimiter=',')
     Ep *= Etot/0.024
 
     g = np.interp(theta, thg, gp, right=1.0)
     E = np.interp(theta, thE, Ep, right=0.0)
 
     return g, E
+
 
 def morsony2007realg5(theta, Etot=3.0e51):
 
@@ -156,6 +159,7 @@ def morsony2007realg5(theta, Etot=3.0e51):
 
     return g, E
 
+
 def morsony2007realg2(theta, Etot=3.0e51):
 
     filename = "StructureData/morsony2007realg2E.csv"
@@ -168,6 +172,7 @@ def morsony2007realg2(theta, Etot=3.0e51):
     g = np.zeros(E.shape)
 
     return g, E
+
 
 def morsony2007powg5(theta, Etot=3.0e51):
 
@@ -182,6 +187,7 @@ def morsony2007powg5(theta, Etot=3.0e51):
 
     return g, E
 
+
 def morsony2007powg2(theta, Etot=3.0e53):
 
     filename = "StructureData/morsony2007powg2E.csv"
@@ -195,6 +201,7 @@ def morsony2007powg2(theta, Etot=3.0e53):
 
     return g, E
 
+
 def kathirgamaraju2017(theta):
 
     filename = "StructureData/kathirgamaraju2017g.csv"
@@ -206,6 +213,7 @@ def kathirgamaraju2017(theta):
     E = np.zeros(g.shape)
 
     return g, E
+
 
 def margutti2018(theta):
 
@@ -222,6 +230,7 @@ def margutti2018(theta):
 
     return g, E
 
+
 def mizuta2009(theta, E0=1.0e52):
 
     filename = "StructureData/mizuta2009E.csv"
@@ -235,6 +244,7 @@ def mizuta2009(theta, E0=1.0e52):
     g = np.zeros(E.shape)
 
     return g, E
+
 
 def lazzati2017(theta):
 
@@ -251,6 +261,7 @@ def lazzati2017(theta):
 
     return g, E
 
+
 if __name__ == "__main__":
 
     print("begin")
@@ -260,7 +271,7 @@ if __name__ == "__main__":
     rad = np.pi/180.0
 
     gG, EG = gaussian(theta, thW=17*rad)
-    gPL, EPL = powerlaw(theta, thW=1.0, thC=0.02)
+    gPL, EPL = powerlaw(theta, thW=1.0, thC=0.06, b=4.0)
     gBF0303, EBF0303 = boostedFireball(theta)
     gBF1003, EBF1003 = boostedFireball(theta, gb=10)
     gBF0310, EBF0310 = boostedFireball(theta, eta0=10)
@@ -275,72 +286,80 @@ if __name__ == "__main__":
     gM18, EM18 = margutti2018(theta)
     gM09, EM09 = mizuta2009(theta)
     gL17, EL17 = lazzati2017(theta)
-    
+
     print("Plotting")
-    fig, ax = plt.subplots(2,1, figsize=(8,8))
+    fig, ax = plt.subplots(2, 1, figsize=(8, 8))
 
     clr = ["k", "grey", "tab:blue", "tab:orange", "tab:green", "tab:red",
                 "tab:purple", "tab:brown", "tab:pink", "tab:olive", "tab:cyan"]
     ls = ['-', '--', ':', '-.']
 
-    ax[0].plot(theta*deg, gG, label="Gaussian", lw=4.0, 
+    ax[0].plot(theta*deg, gG, label="Gaussian", lw=4.0,
                                     color=clr[0], ls=ls[0])
     ax[0].plot(theta*deg, gPL, label="Power law", lw=4.0,
-                                    color=clr[1], ls=ls[0])
-    #ax[0].plot(theta*deg, gBF0303, label="Boosted Fireball $\gamma_B=3$ $\eta_0=3$", 
+               color=clr[1], ls=ls[0])
+    # ax[0].plot(theta*deg, gBF0303,
+    #            label="Boosted Fireball $\gamma_B=3$ $\eta_0=3$",
     #                                color=clr[2], ls=ls[0])
-    #ax[0].plot(theta*deg, gBF0310, label="Boosted Fireball $\gamma_B=3$ $\eta_0=10$", 
+    # ax[0].plot(theta*deg, gBF0310,
+    #            label="Boosted Fireball $\gamma_B=3$ $\eta_0=10$",
     #                                color=clr[2], ls=ls[1])
-    ax[0].plot(theta*deg, gBF1003, label="Boosted Fireball $\gamma_B=10$ $\eta_0=3$", 
-                                    color=clr[2], ls=ls[0])
-    #ax[0].plot(theta*deg, gBF1010, label="Boosted Fireball $\gamma_B=10$ $\eta_0=10$", 
+    ax[0].plot(theta*deg, gBF1003,
+               label="Boosted Fireball $\gamma_B=10$ $\eta_0=3$",
+               color=clr[2], ls=ls[0])
+    # ax[0].plot(theta*deg, gBF1010,
+    #            label="Boosted Fireball $\gamma_B=10$ $\eta_0=10$",
     #                                color=clr[2], ls=ls[3])
-    #ax[0].plot(theta*deg, gD15s, label="Duffell 2015 Spherical")
+    # ax[0].plot(theta*deg, gD15s, label="Duffell 2015 Spherical")
     ax[0].plot(theta*deg, gD15o, label="Duffell 2015 Oblate",
-                                    color=clr[3], ls=ls[0])
+               color=clr[3], ls=ls[0])
     ax[0].plot(theta*deg, gM07r5, label="Morsony 2007 realg5",
-                                    color=clr[4], ls=ls[0])
-    #ax[0].plot(theta*deg, gM07r2, label="Morsony 2007 realg2")
-    #ax[0].plot(theta*deg, gM07p5, label="Morsony 2007 powg5")
+               color=clr[4], ls=ls[0])
+    # ax[0].plot(theta*deg, gM07r2, label="Morsony 2007 realg2")
+    # ax[0].plot(theta*deg, gM07p5, label="Morsony 2007 powg5")
     ax[0].plot(theta*deg, gM07p2, label="Morsony 2007 powg2",
-                                    color=clr[4], ls=ls[1])
+               color=clr[4], ls=ls[1])
     ax[0].plot(theta*deg, gK17, label="Kathirgamaraju 2017",
-                                    color=clr[5], ls=ls[0])
+               color=clr[5], ls=ls[0])
     ax[0].plot(theta*deg, gM18, label="Margutti 2018",
-                                    color=clr[6], ls=ls[0])
+               color=clr[6], ls=ls[0])
     ax[0].plot(theta*deg, gM09, label="Mizuta 2009",
-                                    color=clr[7], ls=ls[0])
+               color=clr[7], ls=ls[0])
     ax[0].plot(theta*deg, gL17, label="Lazzati 2017",
-                                    color=clr[8], ls=ls[0])
+               color=clr[8], ls=ls[0])
     ax[1].plot(theta*deg, EG, label="Gaussian", lw=4.0,
-                                    color=clr[0], ls=ls[0])
+               color=clr[0], ls=ls[0])
     ax[1].plot(theta*deg, EPL, label="Power law", lw=4.0,
-                                    color=clr[1], ls=ls[0])
-    #ax[1].plot(theta*deg, EBF0303, label="Boosted Fireball $\gamma_B=3$ $\eta_0=3$", 
+               color=clr[1], ls=ls[0])
+    # ax[1].plot(theta*deg, EBF0303,
+    #           label="Boosted Fireball $\gamma_B=3$ $\eta_0=3$",
     #                                color=clr[2], ls=ls[0])
-    #ax[1].plot(theta*deg, EBF0310, label="Boosted Fireball $\gamma_B=3$ $\eta_0=10$", 
+    # ax[1].plot(theta*deg, EBF0310,
+    #            label="Boosted Fireball $\gamma_B=3$ $\eta_0=10$",
     #                                color=clr[2], ls=ls[1])
-    ax[1].plot(theta*deg, EBF1003, label="Boosted Fireball $\gamma_B=10$ $\eta_0=3$", 
-                                    color=clr[2], ls=ls[0])
-    #ax[1].plot(theta*deg, EBF1010, label="Boosted Fireball $\gamma_B=10$ $\eta_0=10$", 
+    ax[1].plot(theta*deg, EBF1003,
+               label="Boosted Fireball $\gamma_B=10$ $\eta_0=3$",
+               color=clr[2], ls=ls[0])
+    # ax[1].plot(theta*deg, EBF1010,
+    #            label="Boosted Fireball $\gamma_B=10$ $\eta_0=10$",
     #                                color=clr[2], ls=ls[3])
-    #ax[1].plot(theta*deg, ED15s, label="Duffell 2015 Spherical")
+    # ax[1].plot(theta*deg, ED15s, label="Duffell 2015 Spherical")
     ax[1].plot(theta*deg, ED15o, label="Duffell 2015 Oblate",
-                                    color=clr[3], ls=ls[0])
+               color=clr[3], ls=ls[0])
     ax[1].plot(theta*deg, EM07r5, label="Morsony 2007 realg5",
-                                    color=clr[4], ls=ls[0])
-    #ax[1].plot(theta*deg, EM07r2, label="Morsony 2007 realg2")
-    #ax[1].plot(theta*deg, EM07p5, label="Morsony 2007 powg5")
+               color=clr[4], ls=ls[0])
+    # ax[1].plot(theta*deg, EM07r2, label="Morsony 2007 realg2")
+    # ax[1].plot(theta*deg, EM07p5, label="Morsony 2007 powg5")
     ax[1].plot(theta*deg, EM07p2, label="Morsony 2007 powg2",
-                                    color=clr[4], ls=ls[1])
+               color=clr[4], ls=ls[1])
     ax[1].plot(theta*deg, EK17, label="Kathirgamaraju 2017",
-                                    color=clr[5], ls=ls[0])
+               color=clr[5], ls=ls[0])
     ax[1].plot(theta*deg, EM18, label="Margutti 2018",
-                                    color=clr[6], ls=ls[0])
+               color=clr[6], ls=ls[0])
     ax[1].plot(theta*deg, EM09, label="Mizuta 2009",
-                                    color=clr[7], ls=ls[0])
+               color=clr[7], ls=ls[0])
     ax[1].plot(theta*deg, EL17, label="Lazzati 2017",
-                                    color=clr[8], ls=ls[0])
+               color=clr[8], ls=ls[0])
 
     ax[0].legend()
 
@@ -356,32 +375,33 @@ if __name__ == "__main__":
     fig.savefig("structCompE.pdf")
 
     print("Plotting")
-    figE, axE = plt.subplots(1,1, figsize=(12,9))
+    figE, axE = plt.subplots(1, 1, figsize=(12, 9))
 
     clr = ["k", "grey", "tab:blue", "tab:orange", "tab:green", "tab:red",
                 "tab:purple", "tab:brown", "tab:pink", "tab:olive", "tab:cyan"]
     ls = ['-', '--', ':', '-.']
 
     axE.plot(theta*deg, EG, label="Gaussian", lw=4.0,
-                                    color=clr[0], ls=ls[0])
+             color=clr[0], ls=ls[0])
     axE.plot(theta*deg, EPL, label="Power law", lw=4.0,
-                                    color=clr[1], ls=ls[0])
-    axE.plot(theta*deg, EBF1003, label="Boosted Fireball $\gamma_B=10$ $\eta_0=3$", 
-                                    color=clr[2], ls=ls[0])
+             color=clr[1], ls=ls[0])
+    axE.plot(theta*deg, EBF1003,
+             label="Boosted Fireball $\gamma_B=10$ $\eta_0=3$",
+             color=clr[2], ls=ls[0])
     axE.plot(theta*deg, ED15o, label="Duffell 2015 Oblate",
-                                    color=clr[3], ls=ls[0])
+             color=clr[3], ls=ls[0])
     axE.plot(theta*deg, EM07r5, label="Morsony 2007 realg5",
-                                    color=clr[4], ls=ls[0])
+             color=clr[4], ls=ls[0])
     axE.plot(theta*deg, EM07p2, label="Morsony 2007 powg2",
-                                    color=clr[4], ls=ls[1])
+             color=clr[4], ls=ls[1])
     axE.plot(theta*deg, EK17, label="Kathirgamaraju 2017",
-                                    color=clr[5], ls=ls[0])
+             color=clr[5], ls=ls[0])
     axE.plot(theta*deg, EM18, label="Margutti 2018",
-                                    color=clr[6], ls=ls[0])
+             color=clr[6], ls=ls[0])
     axE.plot(theta*deg, EM09, label="Mizuta 2009",
-                                    color=clr[7], ls=ls[0])
+             color=clr[7], ls=ls[0])
     axE.plot(theta*deg, EL17, label="Lazzati 2017",
-                                    color=clr[8], ls=ls[0])
+             color=clr[8], ls=ls[0])
 
     axE.legend(loc='upper right', fontsize=12)
 
@@ -396,4 +416,3 @@ if __name__ == "__main__":
 
     print("Showing")
     plt.show()
-

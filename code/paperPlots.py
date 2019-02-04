@@ -5,6 +5,7 @@ import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.collections as collections
+import h5py as h5
 import grbpy as grb
 
 sec2year = grb.sec2day / 365.25
@@ -21,6 +22,7 @@ def makeThVPlots():
     thC = 0.05
     thV = 0.6
     thW = 0.5*np.pi
+    b = 2
     n0 = 1.0e-3
     p = 2.2
     epse = 0.1
@@ -28,8 +30,8 @@ def makeThVPlots():
     xiN = 1.0
     dL = 1.23e26
 
-    Y = np.array([thV, E0, thC, thW, 0.0, 0.0, 0.0, n0, p, epse, epsB, xiN,
-                  dL])
+    Y = np.array([thV, E0, thC, thW, b, 0.0, 0.0, 0.0, n0, p, epse, epsB,
+                  xiN, dL])
 
     parstr = r"$n_0$={0:.01f}x$10^{{-3}}cm^{{-3}}$".format(n0/1.0e-3)
     parstr += r"  $p$={0:.01f}".format(p)
@@ -71,8 +73,7 @@ def makeThVPlots():
     ax.set_yscale('log')
     ax.set_title(parstr)
 
-    print("Saving GaussianThV.pdf")
-    fig.savefig('GaussianThV.pdf')
+    save(fig, 'GaussianThV.pdf')
     plt.close(fig)
 
     thC = 0.05
@@ -112,8 +113,7 @@ def makeThVPlots():
     ax.set_ylim(*ylim)
     ax.set_title(parstr)
 
-    print('Saving PowerlawThV.pdf')
-    fig.savefig('PowerlawThV.pdf')
+    save(fig, 'PowerlawThV.pdf')
     plt.close(fig)
 
 
@@ -121,6 +121,7 @@ def makeCentralPlots(modelPlots=True):
 
     thC = 0.1
     thW = 0.4
+    b = 2
     E0 = 1.0e52
     n0 = 1.0e-2
     p = 2.2
@@ -129,7 +130,7 @@ def makeCentralPlots(modelPlots=True):
     xiN = 1.0
     dL = 1.23e26
 
-    Y = np.array([0.0, E0, thC, thW, 0.0, 0.0, 0.0, n0, p, epse, epsB, xiN,
+    Y = np.array([0.0, E0, thC, thW, b, 0.0, 0.0, 0.0, n0, p, epse, epsB, xiN,
                   dL])
     latResTH = 10
     latResG = 10
@@ -161,8 +162,7 @@ def makeCentralPlots(modelPlots=True):
         ax.legend(fontsize=legendsize)
         fig.tight_layout()
         figname = "lc_on.pdf"
-        print("Saving " + figname)
-        fig.savefig(figname)
+        save(fig, figname)
         plt.close(fig)
 
         thV = 2*thC
@@ -184,8 +184,7 @@ def makeCentralPlots(modelPlots=True):
         ax.legend(fontsize=legendsize, loc='lower left')
         fig.tight_layout()
         figname = "lc_off1.pdf"
-        print("Saving " + figname)
-        fig.savefig(figname)
+        save(fig, figname)
         plt.close(fig)
 
         thV = 6*thC
@@ -207,8 +206,7 @@ def makeCentralPlots(modelPlots=True):
         ax.legend(fontsize=legendsize)
         fig.tight_layout()
         figname = "lc_off2.pdf"
-        print("Saving " + figname)
-        fig.savefig(figname)
+        save(fig, figname)
         plt.close(fig)
 
     fig = plt.figure(figsize=(4, 4))
@@ -255,8 +253,7 @@ def makeCentralPlots(modelPlots=True):
     ax.set_ylim(0, 1)
     ax.set_aspect('equal')
     figname = "jet.pdf"
-    print("Saving " + figname)
-    fig.savefig(figname, transparent=True)
+    save(fig, figname)
     plt.close(fig)
 
     fig = plt.figure(figsize=(4, 3))
@@ -322,8 +319,7 @@ def makeCentralPlots(modelPlots=True):
     ax2.tick_params(labelsize=ticksize)
     # fig.tight_layout()
     figname = "lc_decomp.pdf"
-    print("Saving " + figname)
-    fig.savefig(figname)
+    save(fig, figname)
     plt.close(fig)
 
 
@@ -341,6 +337,7 @@ def makeConvergencePlots():
     thC = 0.05
     thV = 0.3
     thW = 0.5
+    b = 2
     n0 = 1.0
     p = 2.2
     epse = 0.1
@@ -348,7 +345,7 @@ def makeConvergencePlots():
     xiN = 1.0
     dL = 1.23e26
 
-    Y = np.array([thV, E0, thC, thW, 0.0, 0.0, 0.0, n0, p, epse, epsB, xiN,
+    Y = np.array([thV, E0, thC, thW, b, 0.0, 0.0, 0.0, n0, p, epse, epsB, xiN,
                   dL])
     jetType = 0
 
@@ -365,8 +362,7 @@ def makeConvergencePlots():
     ax.set_xscale('log')
     ax.set_yscale('log')
     fig.tight_layout()
-    print("Saving conv_ref.pdf")
-    fig.savefig("conv_ref.pdf")
+    save(fig, "conv_ref.pdf")
     plt.close(fig)
 
     fig, ax = plt.subplots(1, 1, figsize=(4, 3))
@@ -384,8 +380,7 @@ def makeConvergencePlots():
     ax.set_xscale('log')
     ax.set_yscale('log')
     fig.tight_layout()
-    print("Saving conv_latRes.pdf")
-    fig.savefig("conv_latRes.pdf")
+    save(fig, "conv_latRes.pdf")
     plt.close(fig)
 
     ax2.set_xlabel(r'$t$ (s)')
@@ -393,8 +388,7 @@ def makeConvergencePlots():
     ax2.set_xscale('log')
     ax2.set_yscale('log')
     fig2.tight_layout()
-    print("Saving conv_flux_latRes.pdf")
-    fig2.savefig("conv_flux_latRes.pdf")
+    save(fig2, "conv_flux_latRes.pdf")
     plt.close(fig2)
 
     fig, ax = plt.subplots(1, 1, figsize=(4, 3))
@@ -411,8 +405,7 @@ def makeConvergencePlots():
     ax.set_xscale('log')
     ax.set_yscale('log')
     fig.tight_layout()
-    print("Saving conv_tRes.pdf")
-    fig.savefig("conv_tRes.pdf")
+    save(fig, "conv_tRes.pdf")
     plt.close(fig)
 
     ax2.set_xlabel(r'$t$ (s)')
@@ -420,8 +413,7 @@ def makeConvergencePlots():
     ax2.set_xscale('log')
     ax2.set_yscale('log')
     fig2.tight_layout()
-    print("Saving conv_flux_tRes.pdf")
-    fig2.savefig("conv_flux_tRes.pdf")
+    save(fig2, "conv_flux_tRes.pdf")
     plt.close(fig2)
 
 
@@ -480,16 +472,16 @@ def f_gaussian(th, thC, thW):
     return f
 
 
-def f_powerlaw(th, thC, thW):
+def f_powerlaw(th, thC, thW, b=2):
     ath = np.atleast_1d(th)
     f = np.empty(ath.shape)
     valid = ath <= thW
-    f[valid] = 1.0 / (1.0 + (ath*ath)[valid] / (thC*thC))
+    f[valid] = 1.0 / np.power(np.sqrt(1.0 + (ath[valid] / thC)**2), b)
     f[~valid] = 0.0
     return f
 
 
-def get_f(jetModel, thC, thW):
+def get_f(jetModel, thC, thW, b=2):
     if jetModel == -2:
         return lambda th: f_cone(th, thC, thW)
     elif jetModel == -1:
@@ -497,14 +489,27 @@ def get_f(jetModel, thC, thW):
     elif jetModel == 0:
         return lambda th: f_gaussian(th, thC, thW)
     elif jetModel == 4:
-        return lambda th: f_powerlaw(th, thC, thW)
+        return lambda th: f_powerlaw(th, thC, thW, b)
     else:
         return None
 
 
+def calc_g(th, thV, f):
+
+    dth = 1.0e-4
+
+    fR = f(th+dth)
+    fL = f(th-dth)
+    dlfdth = np.log(fR/fL) / (2*dth)
+
+    g = -2*np.tan(0.5*np.fabs(thV-th)) * dlfdth
+
+    return g
+
+
 def calc_tp(th, tN0, thV, f, regime, p):
 
-    chim = 2*np.sin(0.5*(thV-th))
+    chim = 2*np.sin(0.5*np.fabs(thV-th))
     chip = 2*np.sin(0.5*(thV+th))
     beta, al1, D, s1, s2, p = get_powers(regime, p)
 
@@ -524,15 +529,15 @@ def calc_dOm(th, tN0, thV, f, regime='G', n0=1.0e-3, p=2.2, epse=0.1,
     chi = 2*np.sin(0.5*(thV-th))
     beta, al1, D, s1, s2, p = get_powers(regime, p)
 
-    dth = 1.0e-4
-    thp = th+dth
-    thm = th-dth
-    fc = f(th)
-    fp = f(thp)
-    fm = f(thm)
-    d2lfdth2 = np.log(fp*fm/(fc*fc)) / (dth*dth)
-    thCn = 1.0/np.sqrt(np.fabs(d2lfdth2))
-    dOmth = thCn
+    # dth = 1.0e-4
+    # thp = th+dth
+    # thm = th-dth
+    # fc = f(th)
+    # fp = f(thp)
+    # fm = f(thm)
+    # d2lfdth2 = np.log(fp*fm/(fc*fc)) / (dth*dth)
+    # thCn = 1.0/np.sqrt(np.fabs(d2lfdth2))
+    # dOmth = thCn
     dOmth = 0.1
 
     return chi * dOmth
@@ -573,37 +578,50 @@ def calc_Ip(th, tN0, thV, f, nu, regime='G', n0=1.0e-3, p=2.2, epse=0.1,
     return I0 * Ip * grb.cgs2mJy
 
 
-def makeNumAnaCompPlots():
+def calc_g_from_al_som(al, som, regime, p):
 
-    n0 = 1.0
-    tN0 = 400 * 24 * 3600.
-    E0 = 16*np.pi/9.0 * n0 * grb.mp * grb.c**5 * tN0**3
+    beta, al1, D, s1, s2, p = get_powers(regime, p)
+    al2 = 3+s2
 
-    thC = 0.1
-    thW = 0.4
-    thV = 0.5
+    return (-3*al1 - 8*al + 3*som) / (al - al2)
 
-    p = 2.2
-    epse = 0.1
-    epsB = 1.0e-3
-    dL = 1.23e26
+
+def calc_som_from_al_g(al, g, regime, p):
+
+    beta, al1, D, s1, s2, p = get_powers(regime, p)
+    al2 = 3+s2
+
+    return (8*al + (al-al2)*g + 3*al1) / 3.0
+
+
+def makeNumAnaCompPlots(regime='G', jetModel=0):
+
+    fig, ax = plt.subplots(5, 2, figsize=(10, 15))
+
     N = 100
 
-    Y = np.array([thV, E0, thC, thW, 0.0, 0.0, 0.0, n0, p, epse, epsB, 1.0,
-                  dL])
-    fig, ax = plt.subplots(3, 2, figsize=(12, 13))
+    NU, tN0, Y, beta = getRegimePars(regime)
 
     nu = np.empty(N)
-    nu[:] = 1.0e14
-
-    jetModel = 4
-    regime = 'G'
+    nu[:] = NU
     # thVs = [0.1, 0.3, 0.5, 0.7, 0.1, 0.3, 0.5, 0.7, 0.1, 0.3, 0.5, 0.7]
     # thCs = [0.1, 0.1, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.2, 0.2, 0.2, 0.2]
     # thWs = [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
     thVs = [0.2, 0.5, 0.8]
-    thCs = [0.1, 0.1, 0.1]
+    thCs = [0.05, 0.05, 0.05]
     thWs = [0.4, 0.4, 0.4]
+
+    b = Y[4]
+    n0 = Y[8]
+    p = Y[9]
+    epse = Y[10]
+    epsB = Y[11]
+    dL = Y[13]
+
+    nufac = 1.1
+
+    ax[2, 0].axhline(beta, lw=2, color='grey', alpha=0.5)
+    ax[2, 1].axhline(beta, lw=2, color='grey', alpha=0.5)
 
     for thV, thC, thW in zip(thVs, thCs, thWs):
 
@@ -612,7 +630,7 @@ def makeNumAnaCompPlots():
                            N)
         th = thV - 2*np.arcsin(0.5*chi)
 
-        f = get_f(jetModel, thC, thW)
+        f = get_f(jetModel, thC, thW, b)
         tp = calc_tp(th, tN0, thV, f, regime, p)
         Ip = calc_Ip(th, tN0, thV, f, nu, regime, n0, p, epse, epsB, dL)
         dOm = calc_dOm(th, tN0, thV, f, regime, p)
@@ -621,12 +639,23 @@ def makeNumAnaCompPlots():
         Y[2] = thC
         Y[3] = thW
         Fnu = grb.fluxDensity(tp, nu, jetModel, 0, *Y, latRes=10)
+        FnuR = grb.fluxDensity(tp, nu*nufac, jetModel, 0, *Y, latRes=10)
+        FnuL = grb.fluxDensity(tp, nu/nufac, jetModel, 0, *Y, latRes=10)
         FnuA = Ip*dOm
 
         alA = np.log(FnuA[1:]/FnuA[:-1]) / np.log(tp[1:]/tp[:-1])
         al = np.log(Fnu[1:]/Fnu[:-1]) / np.log(tp[1:]/tp[:-1])
 
+        betaN = np.log(FnuR/FnuL) / np.log(nufac*nufac)
+
         chiC = np.sqrt(chi[1:]*chi[:-1])
+        thCC = thV - 2*np.arcsin(0.5*chiC)
+
+        gA = calc_g(thCC, thV, f)
+        somA = 1.0 * np.ones(thCC.shape)
+        gN = calc_g_from_al_som(al, somA, regime, p)
+        somN = calc_som_from_al_g(al, gA, regime, p)
+
         tpC = np.sqrt(tp[1:]*tp[:-1])
         label = r'$\theta_V =$ {0:.1f}'.format(thV)
         label += r', $\theta_C = $ {0:.1f}'.format(thC)
@@ -635,66 +664,79 @@ def makeNumAnaCompPlots():
         ax[0, 0].plot(chi, FnuA)
         ax[1, 0].plot(chiC, al)
         ax[1, 0].plot(chiC, alA)
-        ax[2, 0].plot(chiC, tpC)
+        ax[2, 0].plot(chi, betaN)
+        ax[3, 0].plot(chiC, gN)
+        ax[3, 0].plot(chiC, gA)
+        ax[4, 0].plot(chiC, somN)
+        ax[4, 0].plot(chiC, somA)
         ax[0, 1].plot(tp, Fnu)
         ax[0, 1].plot(tp, FnuA)
         ax[1, 1].plot(tpC, al)
         ax[1, 1].plot(tpC, alA)
-        ax[2, 1].plot(tpC, chiC)
+        ax[2, 1].plot(tp, betaN)
+        ax[3, 1].plot(tpC, gN)
+        ax[3, 1].plot(tpC, gA)
+        ax[4, 1].plot(tpC, somN)
+        ax[4, 1].plot(tpC, somA)
 
     ax[0, 0].legend()
     ax[0, 0].set_xscale('log')
     ax[0, 0].set_yscale('log')
     ax[1, 0].set_xscale('log')
-    ax[1, 0].set_ylim(-2.0, 2.0)
+    ax[1, 0].set_ylim(-3.0, 3.0)
     ax[2, 0].set_xscale('log')
-    ax[2, 0].set_yscale('log')
+    ax[3, 0].set_xscale('log')
+    ax[3, 0].set_yscale('log')
+    ax[4, 0].set_xscale('log')
     ax[0, 1].set_xscale('log')
     ax[0, 1].set_yscale('log')
     ax[1, 1].set_xscale('log')
-    ax[1, 1].set_ylim(-2.0, 2.0)
+    ax[1, 1].set_ylim(-3.0, 3.0)
     ax[2, 1].set_xscale('log')
-    ax[2, 1].set_yscale('log')
+    ax[3, 1].set_xscale('log')
+    ax[3, 1].set_yscale('log')
+    ax[4, 1].set_xscale('log')
+    ax[0, 0].set_ylabel(r'$F_\nu$')
+    ax[1, 0].set_ylabel(r'$\alpha$')
+    ax[2, 0].set_ylabel(r'$\beta$')
+    ax[3, 0].set_ylabel(r'$g$')
+    ax[4, 0].set_ylabel(r'$s_{{\Omega}}$')
+    ax[4, 0].set_xlabel(r'$\chi$')
+    ax[4, 1].set_xlabel(r'$t_{{obs}}$')
     fig.tight_layout()
 
     plotname = 'numanacomp.pdf'
-    print('Saving ' + plotname)
-    fig.savefig(plotname)
+    save(fig, plotname)
     plt.close(fig)
 
 
-def makeNormalizationPlots():
+def makeNormalizationPlots(regime='G', jetModel=0):
 
-    n0 = 1.0
-    tN0 = 400 * 24 * 3600.
-    E0 = 16*np.pi/9.0 * n0 * grb.mp * grb.c**5 * tN0**3
+    fig, ax = plt.subplots(4, 2, figsize=(12, 15))
 
-    thC = 0.1
-    thW = 0.4
-    thV = 0.5
-
-    p = 2.2
-    epse = 0.1
-    epsB = 1.0e-3
-    dL = 1.23e26
-
+    NU, tN0, Y, beta = getRegimePars(regime)
     N = 100
 
     nu = np.empty(N)
-    nu[:] = 1.0e14
-
-    Y = np.array([thV, E0, thC, thW, 0.0, 0.0, 0.0, n0, p, epse, epsB, 1.0,
-                  dL])
-    fig, ax = plt.subplots(3, 2, figsize=(12, 13))
-
-    jetModel = 4
-    regime = 'G'
+    nu[:] = NU
     # thVs = [0.1, 0.3, 0.5, 0.7, 0.1, 0.3, 0.5, 0.7, 0.1, 0.3, 0.5, 0.7]
     # thCs = [0.1, 0.1, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.2, 0.2, 0.2, 0.2]
     # thWs = [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
     thVs = [0.1, 0.3, 0.5, 0.7, 0.1, 0.3, 0.5, 0.7]
     thCs = [0.05, 0.05, 0.05, 0.05, 0.2, 0.2, 0.2, 0.2]
     thWs = [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+
+    b = Y[4]
+    n0 = Y[8]
+    p = Y[9]
+    epse = Y[10]
+    epsB = Y[11]
+    dL = Y[13]
+
+    nufac = 1.1
+
+    ax[3, 0].axhline(beta, lw=2, color='grey', alpha=0.5)
+    ax[3, 1].axhline(beta, lw=2, color='grey', alpha=0.5)
 
     for thV, thC, thW in zip(thVs, thCs, thWs):
 
@@ -703,24 +745,27 @@ def makeNormalizationPlots():
                            N)
         th = thV - 2*np.arcsin(0.5*chi)
 
-        f = get_f(jetModel, thC, thW)
+        f = get_f(jetModel, thC, thW, b)
         tp = calc_tp(th, tN0, thV, f, regime, p)
         Ip = calc_Ip(th, tN0, thV, f, nu, regime, n0, p, epse, epsB, dL)
-        dth = 1.0e-4
-        fl = f(th-dth)
-        fc = f(th)
-        fr = f(th+dth)
+        # dth = 1.0e-4
+        # fl = f(th-dth)
+        # fc = f(th)
+        # fr = f(th+dth)
 
-        dlfdth = np.log(fr/fl)/(2*dth)
-        d2lfdth2 = np.log(fr*fl/(fc*fc))/(dth*dth)
-        dth1 = np.power(np.fabs(dlfdth), -1.0)
-        dth2 = np.power(np.fabs(d2lfdth2), -0.5)
-        dth2 = 0.1
+        # dlfdth = np.log(fr/fl)/(2*dth)
+        # d2lfdth2 = np.log(fr*fl/(fc*fc))/(dth*dth)
+        # dth1 = np.power(np.fabs(dlfdth), -1.0)
+        # dth2 = np.power(np.fabs(d2lfdth2), -0.5)
+        dth2 = thC  # 0.1
 
         Y[0] = thV
         Y[2] = thC
         Y[3] = thW
         Fnu = grb.fluxDensity(tp, nu, jetModel, 0, *Y, latRes=20)
+        FnuR = grb.fluxDensity(tp, nu*nufac, jetModel, 0, *Y, latRes=10)
+        FnuL = grb.fluxDensity(tp, nu/nufac, jetModel, 0, *Y, latRes=10)
+        betaN = np.log(FnuR/FnuL) / np.log(nufac*nufac)
 
         norm = Fnu/Ip
         som = np.log(norm[1:]/norm[:-1]) / np.log(chi[1:]/chi[:-1])
@@ -731,12 +776,14 @@ def makeNormalizationPlots():
         label += r', $\theta_W = $ {0:.1f}'.format(thW)
         linelist = ax[0, 0].plot(chi, Fnu, label=label)
         ax[1, 0].plot(chi, norm)
-        ax[1, 0].plot(chi, chi*dth1, color=linelist[0].get_color(), ls='--')
+        # ax[1, 0].plot(chi, chi*dth1, color=linelist[0].get_color(), ls='--')
         ax[1, 0].plot(chi, chi*dth2, color=linelist[0].get_color(), ls=':')
         ax[2, 0].plot(chiC, som)
+        ax[3, 0].plot(chi, betaN)
         ax[0, 1].plot(tp, Fnu)
         ax[1, 1].plot(tp, norm)
         ax[2, 1].plot(tpC, som)
+        ax[3, 1].plot(tp, betaN)
 
     ax[0, 0].legend()
     ax[0, 0].set_xscale('log')
@@ -746,17 +793,24 @@ def makeNormalizationPlots():
     ax[1, 0].set_ylim(1.0e-6, 1.0)
     ax[2, 0].set_xscale('log')
     ax[2, 0].set_ylim(-2.0, 6.0)
+    ax[3, 0].set_xscale('log')
     ax[0, 1].set_xscale('log')
     ax[0, 1].set_yscale('log')
     ax[1, 1].set_xscale('log')
     ax[1, 1].set_yscale('log')
     ax[2, 1].set_xscale('log')
     ax[2, 1].set_ylim(-2.0, 6.0)
+    ax[3, 1].set_xscale('log')
+    ax[0, 0].set_ylabel(r'$F_\nu$')
+    ax[1, 0].set_ylabel(r'$\Delta \Omega = F_\nu / I_\nu^*$')
+    ax[2, 0].set_ylabel(r'$s_\Omega$')
+    ax[3, 0].set_ylabel(r'$\beta$')
+    ax[2, 0].set_xlabel(r'$\chi$')
+    ax[2, 1].set_xlabel(r'$t_{{obs}}$')
     fig.tight_layout()
 
     plotname = 'som.pdf'
-    print('Saving ' + plotname)
-    fig.savefig(plotname)
+    save(fig, plotname)
     plt.close(fig)
 
 
@@ -771,6 +825,7 @@ def getRegimePars(regime='D'):
     thC = 0.1
     thW = 0.4
     thV = 0.0
+    b = 4.0
 
     p = 2.2
     epse_slow = 0.1
@@ -779,43 +834,49 @@ def getRegimePars(regime='D'):
     epsB_fast = 0.3
     dL = 1.23e26
 
-    Yslow = np.array([thV, E0_slow, thC, thW, 0.0, 0.0, 0.0, n0_slow, p,
+    Yslow = np.array([thV, E0_slow, thC, thW, b, 0.0, 0.0, 0.0, n0_slow, p,
                       epse_slow, epsB_slow, 1.0, dL])
-    Yfast = np.array([thV, E0_fast, thC, thW, 0.0, 0.0, 0.0, n0_fast, p,
+    Yfast = np.array([thV, E0_fast, thC, thW, b, 0.0, 0.0, 0.0, n0_fast, p,
                       epse_fast, epsB_fast, 1.0, dL])
 
-    nuD = 1.0e2
-    nuE = 1.0
+    betaD = 1.0/3.0
+    betaE = 1.0/3.0
+    betaF = -0.5
+    betaG = 0.5*(1-p)
+    betaH = -0.5*p
+
+    nuD = 1.0e-6
+    nuE = 1.0e-6
     nuF = 1.0e7
     nuG = 3.0e15
-    nuH = 1.0e20
+    nuH = 1.0e30
 
     if regime is 'D':
-        return nuD, tN0, Yslow
+        return nuD, tN0, Yslow, betaD
     elif regime is 'E':
-        return nuE, tN0, Yfast
+        return nuE, tN0, Yfast, betaE
     elif regime is 'F':
-        return nuF, tN0, Yfast
+        return nuF, tN0, Yfast, betaF
     elif regime is 'G':
-        return nuG, tN0, Yslow
+        return nuG, tN0, Yslow, betaG
     elif regime is 'H':
-        return nuH, tN0, Yslow
+        return nuH, tN0, Yslow, betaH
 
     return None
 
 
 def makeRegimePlots():
 
-    nuD, tND, YD = getRegimePars('D')
-    nuE, tNE, YE = getRegimePars('E')
-    nuF, tNF, YF = getRegimePars('F')
-    nuG, tNG, YG = getRegimePars('G')
-    nuH, tNH, YH = getRegimePars('H')
+    nuD, tND, YD, betaD = getRegimePars('D')
+    nuE, tNE, YE, betaE = getRegimePars('E')
+    nuF, tNF, YF, betaF = getRegimePars('F')
+    nuG, tNG, YG, betaG = getRegimePars('G')
+    nuH, tNH, YH, betaH = getRegimePars('H')
 
     N = 100
     tN0 = tNG
 
-    jetModel = 0
+    jetModel = 4
     nu = np.geomspace(1.0e0, 1.0e20, N)
     t = np.empty(N)
     Ts = np.logspace(-5, 0, base=10.0, num=6) * tN0
@@ -844,12 +905,12 @@ def makeRegimePlots():
     axS.set_yscale('log')
 
     plotname = 'specFast.pdf'
-    print('Saving ' + plotname)
-    figF.savefig(plotname)
+    save(figF, plotname)
+    plt.close(figF)
 
     plotname = 'specSlow.pdf'
-    print('Saving ' + plotname)
-    figS.savefig(plotname)
+    save(figS, plotname)
+    plt.close(figS)
 
     t = np.geomspace(1.0e-6*tN0, 1.0*tN0, N)
     nu = np.empty(N)
@@ -875,8 +936,538 @@ def makeRegimePlots():
     ax.set_yscale('log')
 
     plotname = 'lc_regimes.pdf'
-    print('Saving ' + plotname)
-    fig.savefig(plotname)
+    save(fig, plotname)
+    plt.close(fig)
+
+
+def makeCharEvolPlots():
+
+    nuD, tND, YD, betaD = getRegimePars('D')
+    nuE, tNE, YE, betaE = getRegimePars('E')
+    nuF, tNF, YF, betaF = getRegimePars('F')
+    nuG, tNG, YG, betaG = getRegimePars('G')
+    nuH, tNH, YH, betaH = getRegimePars('H')
+
+    N = 100
+    tN0 = tNG
+
+    t = np.geomspace(1.0e-5 * tN0, tN0, N)
+    nu = np.empty(N)
+
+    jetModel = 0
+
+    pD = betaD
+    pE = betaE
+    pF = betaF
+    pG = betaG
+    pHs = betaH
+    pHf = betaH
+
+    figs, axs = plt.subplots(2, 2)
+    figf, axf = plt.subplots(2, 2)
+
+    thVs = [0.0, 0.25, 0.5]
+
+    for thV in thVs:
+        YD[0] = thV
+        YE[0] = thV
+        YF[0] = thV
+        YG[0] = thV
+        YH[0] = thV
+
+        nu[:] = nuD
+        FD = grb.fluxDensity(t, nu, jetModel, 0, *YD)
+        nu[:] = nuE
+        FE = grb.fluxDensity(t, nu, jetModel, 0, *YE)
+        nu[:] = nuF
+        FF = grb.fluxDensity(t, nu, jetModel, 0, *YF)
+        nu[:] = nuG
+        FG = grb.fluxDensity(t, nu, jetModel, 0, *YG)
+        nu[:] = nuH
+        FHs = grb.fluxDensity(t, nu, jetModel, 0, *YH)
+        FHf = grb.fluxDensity(t, nu, jetModel, 0, *YF)
+
+        # Slow Cooling
+
+        nums = np.power(FG/FD * np.power(nuD, pD) * np.power(nuG, -pG),
+                        1.0/(pD-pG))
+        nucs = np.power(FHs/FG * np.power(nuG, pG) * np.power(nuH, -pHs),
+                        1.0/(pG-pHs))
+        Fms = np.power(np.power(FD, pG) * np.power(FG, -pD)
+                       * np.power(nuG/nuD, pD*pG), 1.0/(pG-pD))
+        Fcs = np.power(np.power(FG, pHs) * np.power(FHs, -pG)
+                       * np.power(nuH/nuG, pG*pHs), 1.0/(pHs-pG))
+
+        # Fast Cooling
+
+        nucf = np.power(FF/FE * np.power(nuE, pE) * np.power(nuF, -pF),
+                        1.0/(pE-pF))
+        numf = np.power(FHf/FF * np.power(nuF, pF) * np.power(nuH, -pHf),
+                        1.0/(pF-pHf))
+        Fcf = np.power(np.power(FE, pF) * np.power(FF, -pE)
+                       * np.power(nuF/nuE, pE*pF), 1.0/(pF-pE))
+        Fmf = np.power(np.power(FF, pHf) * np.power(FHf, -pF)
+                       * np.power(nuH/nuF, pF*pHf), 1.0/(pHf-pF))
+
+        axs[0, 0].plot(t/tN0, Fms,
+                       label=r'$\theta_V = {0:.2}$ rad'.format(thV))
+        axs[0, 1].plot(t/tN0, Fcs)
+        axs[1, 0].plot(t/tN0, nums)
+        axs[1, 1].plot(t/tN0, nucs)
+        axf[0, 0].plot(t/tN0, Fmf,
+                       label=r'$\theta_V = {0:.2}$ rad'.format(thV))
+        axf[0, 1].plot(t/tN0, Fcf)
+        axf[1, 0].plot(t/tN0, numf)
+        axf[1, 1].plot(t/tN0, nucf)
+
+    axs[0, 0].legend()
+    axs[0, 0].set_xscale('log')
+    axs[0, 0].set_yscale('log')
+    axs[0, 0].set_ylabel(r'$F_m$')
+    axs[0, 1].set_xscale('log')
+    axs[0, 1].set_yscale('log')
+    axs[0, 1].set_ylabel(r'$F_c$')
+    axs[1, 0].set_xscale('log')
+    axs[1, 0].set_yscale('log')
+    axs[1, 0].set_ylabel(r'$\nu_m$')
+    axs[1, 1].set_xscale('log')
+    axs[1, 1].set_yscale('log')
+    axs[1, 1].set_ylabel(r'$\nu_c$')
+    axs[1, 0].set_xlabel(r'$\tau$')
+    axs[1, 1].set_xlabel(r'$\tau$')
+    figs.tight_layout()
+
+    axf[0, 0].legend()
+    axf[0, 0].set_xscale('log')
+    axf[0, 0].set_yscale('log')
+    axf[0, 0].set_ylabel(r'$F_m$')
+    axf[0, 1].set_xscale('log')
+    axf[0, 1].set_yscale('log')
+    axf[0, 1].set_ylabel(r'$F_c$')
+    axf[1, 0].set_xscale('log')
+    axf[1, 0].set_yscale('log')
+    axf[1, 0].set_ylabel(r'$\nu_m$')
+    axf[1, 1].set_xscale('log')
+    axf[1, 1].set_yscale('log')
+    axf[1, 1].set_ylabel(r'$\nu_c$')
+    axf[1, 0].set_xlabel(r't')
+    axf[1, 1].set_xlabel(r't')
+    figf.tight_layout()
+
+    plotname = "charEvolSlow.pdf"
+    save(figs, plotname)
+    plt.close(figs)
+
+    plotname = "charEvolFast.pdf"
+    save(figf, plotname)
+    plt.close(figf)
+
+
+def calcTN0(Y, aE0=1.0, an0=1.0):
+
+    if Y is not None:
+        E0 = Y[1]
+        n0 = Y[8]
+    else:
+        E0 = aE0
+        n0 = an0
+    tN0 = np.power(9.0 * E0 / (16*np.pi * n0 * grb.mp * grb.c**5), 1.0/3.0)
+
+    return tN0
+
+
+def calcTW(jetModel, Y, regime):
+
+    thV = Y[0]
+    thC = Y[2]
+    thW = Y[3]
+    b = Y[4]
+    p = Y[9]
+
+    if thW >= thV:
+        return 0.0
+
+    f = get_f(jetModel, thC, thW, b)
+    tN0 = calcTN0(Y)
+
+    tW = np.asscalar(calc_tp(thW, tN0, thV, f, regime, p))
+
+    return tW
+
+
+def calcTB(jetModel, Y, regime):
+
+    thV = Y[0]
+    thC = Y[2]
+    thW = Y[3]
+    b = Y[4]
+    p = Y[9]
+
+    f = get_f(jetModel, thC, thW, b)
+    tN0 = calcTN0(Y)
+
+    tB = np.asscalar(calc_tp(0.0, tN0, thV, f, regime, p))
+
+    return tB
+
+
+def calcTBpm(jetModel, Y, regime):
+
+    thV = Y[0]
+    thC = Y[2]
+    thW = Y[3]
+    b = Y[4]
+    p = Y[9]
+
+    f = get_f(jetModel, thC, thW, b)
+    tN0 = calcTN0(Y)
+
+    tBpm = calc_tp(thC, tN0, thV, f, regime, p)
+
+    return tBpm
+
+
+def calcSlopeOffaxis(jetModel, Y, regime):
+
+    p = Y[9]
+
+    if regime is 'D':
+        alpha = 7.0
+    elif regime is 'E':
+        alpha = 17.0/3.0
+    elif regime is 'F':
+        alpha = 13.0/2.0
+    elif regime is 'G':
+        alpha = 15.0/2.0 - 3*p/2.0
+    elif regime is 'H':
+        alpha = 8.0 - 3*p/2.0
+
+    return alpha
+
+
+def calcSlopeStruct(jetModel, Y, regime, g=None, som=None):
+
+    thV = Y[0]
+    thC = Y[2]
+    thW = Y[3]
+    b = Y[4]
+    p = Y[9]
+
+    beta, al1, D, s1, s2, p = get_powers(regime, p)
+    al2 = 3+s2
+
+    f = get_f(jetModel, thC, thW, b)
+
+    thS = min(0.5*thV, 0.5*thW)
+    psiS = thV-thS
+
+    dth = max(0.1*thC, 1.0e-6)
+    fR = f(thS+dth)
+    fL = f(thS-dth)
+
+    dlfdth = math.log(fR/fL) / (2*dth)
+
+    if g is None:
+        g = -psiS * dlfdth
+    if som is None:
+        som = 1.0
+
+    alpha = (-3*al1 + 3*som + al2*g) / (8.0 + g)
+
+    return alpha
+
+
+def calcSlopePre(jetModel, Y, regime):
+
+    p = Y[9]
+
+    if regime is 'D':
+        alpha = 0.5
+    elif regime is 'E':
+        alpha = 1.0/6.0
+    elif regime is 'F':
+        alpha = -0.25
+    elif regime is 'G':
+        alpha = 3*(1.0-p)/4.0
+    elif regime is 'H':
+        alpha = 0.25*(2-3*p)
+
+    return alpha
+
+
+def calcSlopePost(jetModel, Y, regime):
+
+    p = Y[9]
+
+    if regime is 'D':
+        alpha = -0.25
+    elif regime is 'E':
+        alpha = -7.0/12.0
+    elif regime is 'F':
+        alpha = -1.0
+    elif regime is 'G':
+        alpha = -3*p/4.0
+    elif regime is 'H':
+        alpha = -0.25*(3*p+1)
+
+    return alpha
+
+
+def makeAnalyticTestPlots():
+
+    regimes = ['D', 'E', 'F', 'G', 'H']
+    # regimes = ['D']
+    jetModel = 4
+    spread = False
+
+    thWs = [0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95]
+    # thCs = [0.02, 0.04, 0.08, 0.12, 0.24, 0.48]
+    if jetModel is 4:
+        thCs = [0.02, 0.04, 0.08, 0.16]
+    else:
+        thCs = [0.08, 0.16, 0.24, 0.32]
+    # thVs = [0.15, 0.3, 0.45, 0.6, 0.75, 0.9]
+    thVs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
+    NC = len(thCs)
+    NV = len(thVs)
+    NW = len(thWs)
+
+    N = 100
+    nufac = 1.2
+    tfac = 1.2
+
+    t = np.empty(N)
+    nu = np.empty(N)
+
+    alOffN = np.empty((NW, NV, NC))
+    # alPreN = np.empty((NW, NV, NC))
+    alStructN = np.empty((NW, NV, NC))
+    alStructNAveLin = np.empty((NW, NV, NC))
+    alStructNAveLog = np.empty((NW, NV, NC))
+    alPostN = np.empty((NW, NV, NC))
+    FbN = np.empty((NW, NV, NC))
+
+    for regime in regimes:
+        NU, tN, Y, betaE = getRegimePars(regime)
+        # ax.set_ylim(0, 10)
+
+        minTW = np.inf
+        maxTB = -np.inf
+        nu[:] = NU
+
+        for k, thW in enumerate(thWs):
+
+            for j, thC in enumerate(thCs):
+                for i, thV in enumerate(thVs):
+
+                    Y[0] = thV
+                    Y[2] = thC
+                    Y[3] = thW
+
+                    tW = calcTW(jetModel, Y, regime)
+                    tb = calcTB(jetModel, Y, regime)
+                    if tW > 0.0 and tW < minTW:
+                        minTW = tW
+                    if tb > maxTB:
+                        maxTB = tb
+
+            t[:] = np.geomspace(0.03*minTW, 10*maxTB, num=N)
+
+        for k, thW in enumerate(thWs):
+
+            # fig, ax = plt.subplots(3*NV, NC, figsize=(2*NC, 6*NV))
+            panelWidth = 6.0
+            panelHeight = 6.0
+            fig = plt.figure(figsize=(panelWidth*NV, panelHeight*NC))
+            gs0 = fig.add_gridspec(NC, NV)
+
+            for i, thC in enumerate(thCs):
+                for j, thV in enumerate(thVs):
+
+                    print(i+1, j+1)
+
+                    Y[0] = thV
+                    Y[2] = thC
+                    Y[3] = thW
+
+                    tW = calcTW(jetModel, Y, regime)
+                    tb = calcTB(jetModel, Y, regime)
+                    # tbpm = calcTBpm(jetModel, Y, regime)
+
+                    Fnu = grb.fluxDensity(t, nu, jetModel, 0, *Y,
+                                          spread=spread)
+                    Fnutr = grb.fluxDensity(t*tfac, nu, jetModel, 0, *Y,
+                                            spread=spread)
+                    Fnutl = grb.fluxDensity(t/tfac, nu, jetModel, 0, *Y,
+                                            spread=spread)
+                    Fnunr = grb.fluxDensity(t, nu*nufac, jetModel, 0, *Y,
+                                            spread=spread)
+                    Fnunl = grb.fluxDensity(t, nu/nufac, jetModel, 0, *Y,
+                                            spread=spread)
+
+                    al = np.log(Fnutr/Fnutl) / np.log(tfac*tfac)
+                    beta = np.log(Fnunr/Fnunl) / np.log(nufac*nufac)
+
+                    if tW > 0.0:
+                        t1 = tW
+                        tStruct = math.sqrt(tW*tb)
+                    else:
+                        tStruct = max(0.01*tb, math.sqrt(minTW*tb))
+                        t1 = tStruct
+                    t2 = tb
+                    tPost = np.power(tb*tb*tb*tN, 1.0/4.0)
+                    tOff = 0.1*tW
+
+                    nStruct = np.searchsorted(t, tStruct)
+                    alStructN[k, j, i] = al[nStruct]
+
+                    nPost = np.searchsorted(t, tPost)
+                    alPostN[k, j, i] = al[nPost]
+                    if tOff > 0.0:
+                        nOff = np.searchsorted(t, tOff)
+                        alOffN[k, j, i] = al[nOff]
+                    else:
+                        alOffN[k, j, i] = np.inf
+                    nb = np.searchsorted(t, tb)
+                    FbN[k, j, i] = Fnu[nb]
+
+                    indS = (t > t1) & (t < t2)
+                    alNlog = al[indS].mean()
+                    dtS = t[indS][1:] - t[indS][:-1]
+                    TS = t[indS][-1] - t[indS][0]
+
+                    alNlin = (0.5*(al[indS][1:]+al[indS][:-1]) * dtS / TS
+                              ).sum()
+                    alStructNAveLin[k, j, i] = alNlin
+                    alStructNAveLog[k, j, i] = alNlog
+
+                    gs = gs0[i, j].subgridspec(4, 1, hspace=0.0)
+                    axF = fig.add_subplot(gs[0:-2, 0])
+                    axa = fig.add_subplot(gs[-2, 0])
+                    axb = fig.add_subplot(gs[-1, 0])
+
+                    if tW > 0.0:
+                        axF.axvline(tW, ls='--', color='grey')
+                        axa.axvline(tW, ls='--', color='grey')
+                        axb.axvline(tW, ls='--', color='grey')
+                    if tb > 0.0:
+                        axF.axvline(tb, ls='-', color='grey')
+                        axa.axvline(tb, ls='-', color='grey')
+                        axb.axvline(tb, ls='-', color='grey')
+                    # if tbpm > 0.0:
+                    #    axF.axvline(tbpm, ls=':', color='grey')
+                    #    axa.axvline(tbpm, ls=':', color='grey')
+                    #    axb.axvline(tbpm, ls=':', color='grey')
+                    axF.axvline(tN, ls='-', lw=4, color='lightgrey')
+                    axa.axvline(tN, ls='-', lw=4, color='lightgrey')
+                    axb.axvline(tN, ls='-', lw=4, color='lightgrey')
+                    axF.axvline(tStruct, ls=':', lw=4, color='lightgrey')
+                    axa.axvline(tStruct, ls=':', lw=4, color='lightgrey')
+                    axb.axvline(tStruct, ls=':', lw=4, color='lightgrey')
+                    axF.axvline(tPost, ls=':', lw=4, color='lightgrey')
+                    axa.axvline(tPost, ls=':', lw=4, color='lightgrey')
+                    axb.axvline(tPost, ls=':', lw=4, color='lightgrey')
+                    axF.axvline(tOff, ls=':', lw=4, color='lightgrey')
+                    axa.axvline(tOff, ls=':', lw=4, color='lightgrey')
+                    axb.axvline(tOff, ls=':', lw=4, color='lightgrey')
+
+                    alOff = calcSlopeOffaxis(jetModel, Y, regime)
+                    alStruct = calcSlopeStruct(jetModel, Y, regime)
+                    alPre = calcSlopePre(jetModel, Y, regime)
+                    alPost = calcSlopePost(jetModel, Y, regime)
+
+                    axa.axhline(alOff, color='grey', ls='--')
+                    axa.axhline(alStruct, color='grey', ls='-')
+                    axa.axhline(alPre, color='grey', ls='-.')
+                    axa.axhline(alNlin, color='orange', ls='-')
+                    axa.axhline(alNlog, color='orange', ls='--')
+                    axa.axhline(alPost, color='grey', ls=':')
+                    axb.axhline(betaE, color='grey')
+
+                    axF.plot(t, Fnu)
+                    axa.plot(t, al)
+                    axb.plot(t, beta)
+
+                    axF.set_xscale('log')
+                    axF.set_yscale('log')
+                    axa.set_xscale('log')
+                    axb.set_xscale('log')
+
+                    lim = axF.get_ylim()
+                    if lim[0] < 1.0e-12*lim[1]:
+
+                        F0 = FbN[k, j, i]
+                        if F0/lim[0] < lim[1]/F0 and F0/lim[0] < 1.0e12:
+                            axF.set_ylim(lim[0], 1.0e12*lim[0])
+                        elif F0/lim[0] >= lim[1]/F0 and lim[1]/F0 < 1.0e12:
+                            axF.set_ylim(1.0e-12*lim[1], lim[1])
+                        else:
+                            axF.set_ylim(1.0e-6*F0, 1.0e6*F0)
+
+                    if j == 0:
+                        axF.set_ylabel(r'$F_\nu$')
+                        axa.set_ylabel(r'$\alpha$')
+                        axb.set_ylabel(r'$\beta$')
+                    if i == NV-1:
+                        axb.set_xlabel(r'$t$')
+
+            fig.tight_layout()
+            plotname = "lcGrid_{0:s}_thW_{1:d}.png".format(regime, k)
+            save(fig, plotname)
+            plt.close(fig)
+
+        filename = 'slopes_{0:s}.h5'.format(regime)
+        print("Creating archive " + filename)
+        fi = h5.File(filename, "w")
+        fi.create_dataset("alOffN", data=alOffN)
+        fi.create_dataset("alStructN", data=alStructN)
+        fi.create_dataset("alStructNAveLin", data=alStructNAveLin)
+        fi.create_dataset("alStructNAveLog", data=alStructNAveLog)
+        fi.create_dataset("alPostN", data=alPostN)
+        fi.create_dataset("FbN", data=np.array(FbN))
+        fi.create_dataset("thW", data=np.array(thWs))
+        fi.create_dataset("thV", data=np.array(thVs))
+        fi.create_dataset("thC", data=np.array(thCs))
+        fi.create_dataset("Y", data=Y)
+        fi.close()
+
+        color = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red',
+                 'tab:purple', 'tab:brown', 'tab:pink', 'tab:grey',
+                 'tab:olive', 'tab:cyan']
+        ls = ['-', '--', '-.', ':']
+
+        fig, ax = plt.subplots(1, 1)
+        for k, thW in enumerate(thWs):
+            for i, thC in enumerate(thCs):
+                ax.plot(thVs, alOffN[k, :, i], color=color[k], ls=ls[i])
+        plotname = "alOff_{0:s}_thW.png".format(regime)
+        save(fig, plotname)
+        plt.close(fig)
+
+        fig, ax = plt.subplots(1, 1)
+        for k, thW in enumerate(thWs):
+            for i, thC in enumerate(thCs):
+                ax.plot(thVs, alStructN[k, :, i], color=color[k], ls=ls[i])
+        plotname = "alStruct_{0:s}_thW.png".format(regime)
+        save(fig, plotname)
+        plt.close(fig)
+
+        fig, ax = plt.subplots(1, 1)
+        for k, thW in enumerate(thWs):
+            for i, thC in enumerate(thCs):
+                ax.plot(thVs, alPostN[k, :, i], color=color[k], ls=ls[i])
+        plotname = "alPost_{0:s}_thW.png".format(regime)
+        save(fig, plotname)
+        plt.close(fig)
+
+    return 0
+
+
+def save(fig, name):
+
+    print("Saving " + name)
+    fig.savefig(name)
 
 
 if __name__ == "__main__":
@@ -884,6 +1475,8 @@ if __name__ == "__main__":
     # makeThVPlots()
     # makeCentralPlots(modelPlots=True)
     # makeConvergencePlots()
-    makeRegimePlots()
-    # makeNormalizationPlots()
-    # makeNumAnaCompPlots()
+    # makeRegimePlots()
+    # makeNormalizationPlots('E', 4)
+    # makeNumAnaCompPlots('E', 4)
+    # makeCharEvolPlots()
+    makeAnalyticTestPlots()
