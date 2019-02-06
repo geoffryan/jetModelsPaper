@@ -113,11 +113,13 @@ Numerical simulations have revealed a variety of jet angular energy distribution
 %
 
 \begin{figure}
-	\plotone{figs/jetStruct.pdf}
-	\caption{Jet Structure.  Temporary version.  Remove $\Gamma$ subplot.  Add Aloy. \label{fig:jetStruct}}
+	\plotone{figs/jetStructureComparison.pdf}
+	\caption{Lateral profiles of isotropic equivalent energy $\Eiso$ as a function of angle from the jet axis $\theta$, individually rescaled to group similar profile shapes.  The thick grey lines show fiducial profiles with simple analytic expressions (Equations \eqref{eq:gauss} and \eqref{eq:pl}) while the thin colored lines show results from numerical simulations and analytic models chosen from the literature.  The blue line is the B1 numerical simulation of \cite{Aloy:2005aa}, orange the HE16N numerical simulation of \cite{Mizuta:2009aa}, green an analytic ``boosted fireball'' model with $\gamma_{\rm{B}}=10$ and $\eta_0=3$ from \cite{Duffell:2013aa}, red the numerical simulation from \cite{Lazzati:2017aa} (L17), and purple the numerical simulation from \cite{Margutti:2018aa} (M18).  The thick solid grey line is a Gaussian profile (Equation \eqref{eq:gauss}) with $E_0 = 3\times 10^{52}$ erg, $\thC = 6^\circ$, and $\thW=12^\circ$ and the thick dashed grey line is a smoothed power law profile (Equation \eqref{eq:pl}) with $E_0 = 10^{52}$ erg, $\thC = 4^\circ$, $\thW=20^\circ$, and $b=4.5$.  The Gaussian and power law profiles can emulate the basic properties of the energy profiles found in the literature. \label{fig:jetStruct}}
 \end{figure}
 
-Each fiducial model is parameterized by a normalization $E_0$, a width $\thC$, and a truncation angle $\thW$.  The power-law model also retains a power-law index $b$.  Outside $\thW$ the energy is initially zero, this acts as an outer truncation angle for the jet.   Figure \ref{fig:jetStruct} shows an example of each model fit to recent simulation results.  The Gaussian model emulates jets with a flat core and sharp edges (e.g. CITE Margutti), while the power-law emulates jets with narrow cores and large wings (AWK. jargon? CITE Lazzati, Mizuta).  
+Each fiducial model is parameterized by a normalization $E_0$, a width $\thC$, and a truncation angle $\thW$.  The power-law model also retains a power-law index $b$.  Outside $\thW$ the energy is initially zero, this acts as an outer truncation angle for the jet.   
+
+Figure \ref{fig:jetStruct} shows an example of each model together with jet energy profiles drawn from the literature, mostly the result of numerical relativistic hydrodynamic simulations.  The Gaussian profile emulates jets with a flat core and sharp edges, typically the result of powerful successful jets \citep{Aloy:2005aa, Margutti:2018aa}.  Jets which are subject to stronger interactions with the surrounding medium can develop a profile with energetic wings and a narrow core, emulated by the analytic power law profile \citep{Mizuta:2009aa, Duffell:2013aa, Lazzati:2017aa}.
 
 A generic energy profile $E(\theta)$ may have several more parameters, but one can still associate an on-axis energy $E_0 = E(0)$ and an effective core width $\thC \sim |E''(0)/E_0|^{-1/2}$ which should fully specify the leading order near on-axis behaviour.  
 
@@ -159,9 +161,9 @@ The relativistic stages of evolution are followed by a Newtonian phase ($t > 200
 
 \subsection{Misaligned Evolution: $\thobs \gtrsim \thC$}
 
-When viewed at angles larger than $\thC$ the gradient $E'(\theta)$ over the visible patch becomes non-negligible.  To observers this energy gradient presents itself as a slowly rising or decaying afterglow light curve. The relativistic afterglow is comprised of two or three phases depending on whether the observer lies within the truncation angle, \emph{wing}, \emph{structured}, and \emph{post-jet break}.
+When viewed at angles larger than $\thC$ the gradient $E'(\theta)$ over the visible patch becomes non-negligible.  To observers this energy gradient presents itself as a slowly rising or decaying afterglow light curve. The relativistic afterglow is comprised of two or three phases depending on whether the observer lies within the truncation angle, \emph{far off-axis}, \emph{structured}, and \emph{post-jet break}.
 
-\emph{Wing} --- If the viewer lies outside the truncation angle, $\thobs > \thW$, then at early times the entire blast wave surface is off-axis and all emission is beaming suppressed.  This greatly reduces the early flux and leads to a dim but steeply rising light curve as the blast wave decelerates.  Emission is dominated by material on the edge nearest the observer and the angular size of the visible patch is constant in time.  This phase ends at $\tW$ when $\gamma^{-1} \sim \thobs-\thW$.  If $\thobs < \thW$ this phase is entirely absent.  Table \ref{tab:slopes} gives the temporal power-law slope of the light curve in this phase.  These slopes are derived in Appendix \ref{sec:derive1}.
+\emph{Far off-axis} --- If the viewer lies outside the truncation angle, $\thobs > \thW$, then at early times the entire blast wave surface is off-axis and all emission is beaming suppressed.  This greatly reduces the early flux and leads to a dim but steeply rising light curve as the blast wave decelerates.  Emission is dominated by material on the edge nearest the observer and the angular size of the visible patch is constant in time.  This phase ends at $\tW$ when $\gamma^{-1} \sim \thobs-\thW$.  If $\thobs < \thW$ this phase is entirely absent.  Table \ref{tab:slopes} gives the temporal power-law slope of the light curve in this phase.  These slopes are derived in Appendix \ref{sec:derive1}.
 
 \emph{Structured} --- The structured phase is the direct result of the energy gradient along the observer's line of site.  The usual (pre-jet break) decay is compensated for by regions of higher energy continuously coming into view as the jet decelerates.  These new contributions to the emission slow the decay and can even cause the observed flux to increase with time.
 
@@ -606,6 +608,8 @@ With recent progress in hydrodynamical codes and computer resources, numerical s
 
 There is agreement between the models that the jet energy is concentrated in a core of half-width $\lesssim 10^\circ$ with wings extending to larger angles.  Some models truncate at $\mathcal{O}(10)$ degrees, while others have large tails extending to near the equator.  The Gaussian and power-law models respectively emulate this behavior, providing a simple parameterized representation of the landscape of numerical models.  Of particular note are the Lazzati 2017 and Margutti 2018 models, both of which were calculated specifically for GW170817. The core of the Margutti model is has a profile very near Gaussian, while the Lazzati model has a strong resemblance to a power law.  
 
+
+\bibliography{structuredJets_sources}
 
 
 \end{document}
