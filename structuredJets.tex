@@ -71,8 +71,8 @@
 \begin{itemize}
 	\item Need to consider the \emph{structure} of GRB explosions (esp. binary neutron stars).  Structure may be radial (velocity stratification, $E(u)$) or angular ($E(\theta)$).  Both modes affect the afterglow.
 	\item Analytic description: \begin{itemize}
-		\item Velocity stratification / refreshed shock / cocoon leads to simple power-law behaviour depending on $k$ ($E_{>u} \propto u^{-k}$).  Breaks occur at deceleration time and when $E_{>u}$ shuts off.
-		\item Angular structure / structured jet leads to not-quite power-law behaviour, depending on $g \approx (\thobs - \theta)d \log E / d\theta$.  Breaks occur when $\thobs - \thW \approx 1/\gamma(\thW)$ and $\thobs \approx 1/\gamma(0)$.  $g = g(\theta)$, but $g\approx g_{eff}$ where $g_{eff} = g(\thobs/2)$.
+		\item Velocity stratification / refreshed shock / cocoon leads to simple power law behaviour depending on $k$ ($E_{>u} \propto u^{-k}$).  Breaks occur at deceleration time and when $E_{>u}$ shuts off.
+		\item Angular structure / structured jet leads to not-quite power law behaviour, depending on $g \approx (\thobs - \theta)d \log E / d\theta$.  Breaks occur when $\thobs - \thW \approx 1/\gamma(\thW)$ and $\thobs \approx 1/\gamma(0)$.  $g = g(\theta)$, but $g\approx g_{eff}$ where $g_{eff} = g(\thobs/2)$.
 		\end{itemize}
 	\item Numerical description: \begin{itemize}
 		\item Single-shell ODE for shock evolution
@@ -93,7 +93,7 @@ GW170817 changes the picture: new object with a strange afterglow.  Steep/late r
 
 The dominant contribution may be an angular distribution of energy within the blast wave (``structured jet'') combined with off-axis viewing (CITE Rossi04).  For 170817 this corresponds to the ``successful jet'' picture.  Alternately, radial stratification of velocity (``refreshed shock'') can cause a similar phase, most simply with a quasi-spherical (or at least top-hat) angular structure.  This situation is produced by the ``choked jet''  or ``cocoon'' picture of 170817. Understanding the effects of both structures on afterglows, and their dependence on the parameters of the burst, are vital to understanding GW counterparts.
 
-To this end, we have calculated the power-law temporal slope of the structured phase in both angular and radial structure dominated cases, along with the corresponding observed break times.  We have developed a semi-analytic numerical model of structured GRB afterglows for detailed comparison to data, which is now publicly available.
+To this end, we have calculated the power law temporal slope of the structured phase in both angular and radial structure dominated cases, along with the corresponding observed break times.  We have developed a semi-analytic numerical model of structured GRB afterglows for detailed comparison to data, which is now publicly available.
 
 Summary: In section 2 we discuss structured jets, in section 3 refreshed shocks, in section 4 our numerical model, section 5 application to GW170817, and section 6 future applications and discussion.
 
@@ -101,11 +101,11 @@ Summary: In section 2 we discuss structured jets, in section 3 refreshed shocks,
 
 The \emph{structured jet} is a GRB emission model where the isotropic-equivalent energy of a blast wave is a function of the angle from the jet axis: $\Eiso = E(\theta)$. The specific structure of a jet is determined by the intrinsic structure of the jet launching mechanism as well as the sculpting that occurs as the jet burrows out of the encasing ejecta debris (as in a binary neutron star merger) or stellar envelope (as in a collapsar).  
 
-Numerical simulations have revealed a variety of jet angular energy distributions, often containing an energetic core with power-law tails.  Figure \ref{fig:jetStruct} shows a collection of jet energy distributions from the literature (CITE curves in plots).  Lacking a well-established physical model of the true $E(\theta)$, in particular its dependence on the parameters of the system, we consider two simple parameterized models: a Gaussian jet and a power-law with a smooth core.  
+Numerical simulations have revealed a variety of jet angular energy distributions, often containing an energetic core with power law tails.  Figure \ref{fig:jetStruct} shows a collection of jet energy distributions from the literature \citep{Aloy:2005aa, Mizuta:2009aa, Duffell:2013aa, Lazzati:2017aa, Margutti:2018aa}.  Lacking a well-established physical model of the true $E(\theta)$, in particular its dependence on the parameters of the system, we consider two simple parameterized models: a Gaussian jet and a power law with a smooth core.  
 
 \begin{align}
 	E(\theta) &= E_0 \exp\left(-\frac{\theta^2}{2\thC^2}\right)  && \text{Gaussian} \label{eq:gauss}\\
-	E(\theta) &= E_0 \left(1 + \frac{\theta^2}{\thC^2} \right)^{-b/2}  && \text{power-law} \label{eq:pl}
+	E(\theta) &= E_0 \left(1 + \frac{\theta^2}{\thC^2} \right)^{-b/2}  && \text{power law} \label{eq:pl}
 \end{align}
 
 %
@@ -117,9 +117,9 @@ Numerical simulations have revealed a variety of jet angular energy distribution
 	\caption{Lateral profiles of isotropic equivalent energy $\Eiso$ as a function of angle from the jet axis $\theta$, individually rescaled to group similar profile shapes.  The thick grey lines show fiducial profiles with simple analytic expressions (Equations \eqref{eq:gauss} and \eqref{eq:pl}) while the thin colored lines show results from numerical simulations and analytic models chosen from the literature.  The blue line is the B1 numerical simulation of \cite{Aloy:2005aa}, orange the HE16N numerical simulation of \cite{Mizuta:2009aa}, green an analytic ``boosted fireball'' model with $\gamma_{\rm{B}}=10$ and $\eta_0=3$ from \cite{Duffell:2013aa}, red the numerical simulation from \cite{Lazzati:2017aa} (L17), and purple the numerical simulation from \cite{Margutti:2018aa} (M18).  The thick solid grey line is a Gaussian profile (Equation \eqref{eq:gauss}) with $E_0 = 3\times 10^{52}$ erg, $\thC = 6^\circ$, and $\thW=12^\circ$ and the thick dashed grey line is a smoothed power law profile (Equation \eqref{eq:pl}) with $E_0 = 10^{52}$ erg, $\thC = 4^\circ$, $\thW=20^\circ$, and $b=4.5$.  The Gaussian and power law profiles can emulate the basic properties of the energy profiles found in the literature. \label{fig:jetStruct}}
 \end{figure}
 
-Each fiducial model is parameterized by a normalization $E_0$, a width $\thC$, and a truncation angle $\thW$.  The power-law model also retains a power-law index $b$.  Outside $\thW$ the energy is initially zero, this acts as an outer truncation angle for the jet.   
+Each fiducial model is parameterized by a normalization $E_0$, a width $\thC$, and a truncation angle $\thW$.  The power law model also retains a power law index $b$.  Outside $\thW$ the energy is initially zero, this acts as an outer truncation angle for the jet.   
 
-Figure \ref{fig:jetStruct} shows an example of each model together with jet energy profiles drawn from the literature, mostly the result of numerical relativistic hydrodynamic simulations.  The Gaussian profile emulates jets with a flat core and sharp edges, typically the result of powerful successful jets \citep{Aloy:2005aa, Margutti:2018aa}.  Jets which are subject to stronger interactions with the surrounding medium can develop a profile with energetic wings and a narrow core, emulated by the analytic power law profile \citep{Mizuta:2009aa, Duffell:2013aa, Lazzati:2017aa}.
+Figure \ref{fig:jetStruct} shows an example of each model together with jet energy profiles drawn from the literature, mostly the result of numerical relativistic hydrodynamic simulations.  The Gaussian profile emulates jets with a flat core and sharp edges, typically the result of powerful successful jets \citep{Aloy:2005aa, Margutti:2018aa}.  Jets which are subject to stronger interactions with the surrounding medium can develop a profile with energetic wings and a narrow core, emulated by the analytic power law profile \citep{Mizuta:2009aa, Duffell:2013aa, Lazzati:2017aa}.  
 
 A generic energy profile $E(\theta)$ may have several more parameters, but one can still associate an on-axis energy $E_0 = E(0)$ and an effective core width $\thC \sim |E''(0)/E_0|^{-1/2}$ which should fully specify the leading order near on-axis behaviour.  
 
@@ -152,10 +152,10 @@ It is important to note that when $\thobs \neq 0$ the transition period is exten
 
 \begin{figure}
 	\plotone{figs/lc_on.pdf}
-	\caption{Aligned ($\thobs = \thC/2$) afterglow light curves for top-hat (blue), Gaussian (orange), and power-law (green) jets. When viewed on-axis, jets containing angular structure are very difficult to distinguish from top-hats.  The transition phase marking the onset of the jet break begins at $\tbm\sim3$ days with a shallow break and ends sharply at $\tbp \sim 100$ days.  These particular light curves use $\thC = 0.1$ rad, $\thW = 0.4$ rad, $E_0 = 10^{52}$erg, $n_0=10^{-2}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, $\epsB = 10^{-3}$, and $d_L=40$Mpc. \label{fig:onaxis}}
+	\caption{Aligned ($\thobs = \thC/2$) afterglow light curves for top-hat (blue), Gaussian (orange), and power law (green) jets. When viewed on-axis, jets containing angular structure are very difficult to distinguish from top-hats.  The transition phase marking the onset of the jet break begins at $\tbm\sim3$ days with a shallow break and ends sharply at $\tbp \sim 100$ days.  These particular light curves use $\thC = 0.1$ rad, $\thW = 0.4$ rad, $E_0 = 10^{52}$erg, $n_0=10^{-2}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, $\epsB = 10^{-3}$, and $d_L=40$Mpc. \label{fig:onaxis}}
 \end{figure}
 
-Figure \ref{fig:onaxis} shows representative top-hat, Gaussian, and power-law jet light curves in the aligned regime.  The light curves nearly overlap, demonstrating the similar evolution of all structured jet afterglows when viewed within the jet core.  Although we expect all afterglow blast waves to contain angular structure, the simple top-hat jet model is sufficient for aligned viewing.
+Figure \ref{fig:onaxis} shows representative top-hat, Gaussian, and power law jet light curves in the aligned regime.  The light curves nearly overlap, demonstrating the similar evolution of all structured jet afterglows when viewed within the jet core.  Although we expect all afterglow blast waves to contain angular structure, the simple top-hat jet model is sufficient for aligned viewing.
 
 The relativistic stages of evolution are followed by a Newtonian phase ($t > 200$ days in Figure \ref{fig:onaxis}) when the decelerating blast wave becomes non-relativistic, spreads sonically, and approaches a Sedov-Taylor solution.  We do not address the Newtonian phase of evolution in this work.
 
@@ -163,7 +163,7 @@ The relativistic stages of evolution are followed by a Newtonian phase ($t > 200
 
 When viewed at angles larger than $\thC$ the gradient $E'(\theta)$ over the visible patch becomes non-negligible.  To observers this energy gradient presents itself as a slowly rising or decaying afterglow light curve. The relativistic afterglow is comprised of two or three phases depending on whether the observer lies within the truncation angle, \emph{far off-axis}, \emph{structured}, and \emph{post-jet break}.
 
-\emph{Far off-axis} --- If the viewer lies outside the truncation angle, $\thobs > \thW$, then at early times the entire blast wave surface is off-axis and all emission is beaming suppressed.  This greatly reduces the early flux and leads to a dim but steeply rising light curve as the blast wave decelerates.  Emission is dominated by material on the edge nearest the observer and the angular size of the visible patch is constant in time.  This phase ends at $\tW$ when $\gamma^{-1} \sim \thobs-\thW$.  If $\thobs < \thW$ this phase is entirely absent.  Table \ref{tab:slopes} gives the temporal power-law slope of the light curve in this phase.  These slopes are derived in Appendix \ref{sec:derive1}.
+\emph{Far off-axis} --- If the viewer lies outside the truncation angle, $\thobs > \thW$, then at early times the entire blast wave surface is off-axis and all emission is beaming suppressed.  This greatly reduces the early flux and leads to a dim but steeply rising light curve as the blast wave decelerates.  Emission is dominated by material on the edge nearest the observer and the angular size of the visible patch is constant in time.  This phase ends at $\tW$ when $\gamma^{-1} \sim \thobs-\thW$.  If $\thobs < \thW$ this phase is entirely absent.  Table \ref{tab:slopes} gives the temporal power law slope of the light curve in this phase.  These slopes are derived in Appendix \ref{sec:derive1}.
 
 \emph{Structured} --- The structured phase is the direct result of the energy gradient along the observer's line of site.  The usual (pre-jet break) decay is compensated for by regions of higher energy continuously coming into view as the jet decelerates.  These new contributions to the emission slow the decay and can even cause the observed flux to increase with time.
 
@@ -211,12 +211,12 @@ The temporal and spectral slopes for various regimes are given in Table \ref{tab
 %	\enddata
 %\end{deluxetable*}
 
-The $g$ parameter evolves with time as $\theta^*$ sweeps from the jet edge to the core.  This produces deviations in the light curve from a pure power-law.  However, we find ultimately these deviations are not too large and the average slope is well approximated by $\geff  = g(\thobs/2)$.  For the power-law and Gaussian jet models this gives:
+The $g$ parameter evolves with time as $\theta^*$ sweeps from the jet edge to the core.  This produces deviations in the light curve from a pure power law.  However, we find ultimately these deviations are not too large and the average slope is well approximated by $\geff  = g(\thobs/2)$.  For the power law and Gaussian jet models this gives:
 \begin{align}
 	\geff &= \frac{\thobs^2}{4\thC^2} && \text{Gaussian}\ , \\
-	\geff &= \frac{b \thobs^2}{4 \thC^2+\thobs^2} && \text{power-law}\ . \label{eq:geff}
+	\geff &= \frac{b \thobs^2}{4 \thC^2+\thobs^2} && \text{power law}\ . \label{eq:geff}
 \end{align}
-These values may be used in Table \ref{tab:slopes} for an approximate power-law model of a structured jet with an appropriate viewing angle dependent temporal evolution.  These analytic results are in agreement with previous work on structured jets (CITE ROSSI) and the trans-relativistic numerical model described in Section \ref{sec:numerical}.
+These values may be used in Table \ref{tab:slopes} for an approximate power law model of a structured jet with an appropriate viewing angle dependent temporal evolution.  These analytic results are in agreement with previous work on structured jets (CITE ROSSI) and the trans-relativistic numerical model described in Section \ref{sec:numerical}.
 
 In the structured phase, the temporal slope depends directly on the ratio $\thobs/\thC$.  Therefore any measurement of the effective power law slope of an afterglow light curve in the structured phase can be used to measure this parameter.
 
@@ -224,16 +224,16 @@ In the structured phase, the temporal slope depends directly on the ratio $\thob
 
 \begin{figure}
 	\plotone{figs/lc_off1.pdf}
-	\caption{As Figure \ref{fig:onaxis} but $\thobs = 2\thC$.  The top-hat jet (with opening angle $\thC$) begins in the off-axis phase.  The Gaussian and power-law jets begin in the structured phase as $\thobs < \thW$.  All three models enter similar post-jet break phases. \label{fig:offaxis1}}
+	\caption{As Figure \ref{fig:onaxis} but $\thobs = 2\thC$.  The top-hat jet (with opening angle $\thC$) begins in the off-axis phase.  The Gaussian and power law jets begin in the structured phase as $\thobs < \thW$.  All three models enter similar post-jet break phases. \label{fig:offaxis1}}
 \end{figure}
 \begin{figure}
 	\plotone{figs/lc_off2.pdf}
 	\caption{As Figure \ref{fig:onaxis} but $\thobs = 6\thC$. All three models exhibit off-axis, structured, and post-jet break phases of evolution.  At larger opening angles the difference between structured models is more evident.  \label{fig:offaxis2}}
 \end{figure}
 
-Figures \ref{fig:offaxis1} and \ref{fig:offaxis2} display afterglows from the fiducial models in the misaligned regime at $\thobs = 2\thC$ and $\thobs=6\thC$ respectively.  At the moderate $2\thC$ viewing angle both structured models exhibit similar decaying light curves with slopes somewhat shallower than the aligned case. In this case $\thobs < \thW$ so neither model exhibits an off-axis phase.  The similar temporal evolution is easy to understand as at this angle both models have $\geff = 1$ and hence approximately equal power-law slopes in the structured phase.  At late times as more of the jet comes in to view the difference between all three models becomes negligible. 
+Figures \ref{fig:offaxis1} and \ref{fig:offaxis2} display afterglows from the fiducial models in the misaligned regime at $\thobs = 2\thC$ and $\thobs=6\thC$ respectively.  At the moderate $2\thC$ viewing angle both structured models exhibit similar decaying light curves with slopes somewhat shallower than the aligned case. In this case $\thobs < \thW$ so neither model exhibits an off-axis phase.  The similar temporal evolution is easy to understand as at this angle both models have $\geff = 1$ and hence approximately equal power law slopes in the structured phase.  At late times as more of the jet comes in to view the difference between all three models becomes negligible. 
 
-At the larger $6\thC$ viewing angle all three models exhibit off-axis, structured, and post-jet break phases of the afterglow.  The different $\tW$ between the Gaussian and power-law models is due to the different $E(\thW)$ of the two models. In the structured phase the Gaussian shows a rising light curve with slope $~1$ due to the large $\geff = 9$.  The power-law meanwhile has a smaller $\geff$ of $9/5$, giving rise to a very shallow decay. As at the other viewing angles, once the entire jet is visible at $\tb$ all models follow similar post-jet break evolutions.
+At the larger $6\thC$ viewing angle all three models exhibit off-axis, structured, and post-jet break phases of the afterglow.  The different $\tW$ between the Gaussian and power law models is due to the different $E(\thW)$ of the two models. In the structured phase the Gaussian shows a rising light curve with slope $~1$ due to the large $\geff = 9$.  The power law meanwhile has a smaller $\geff$ of $9/5$, giving rise to a very shallow decay. As at the other viewing angles, once the entire jet is visible at $\tb$ all models follow similar post-jet break evolutions.
 
 %
 % Comment: Add dashed line at 0 to slopes plot.
@@ -241,16 +241,16 @@ At the larger $6\thC$ viewing angle all three models exhibit off-axis, structure
 
 \begin{figure}
 	\plotone{figs/slopesJet.png}
-	\caption{Temporal slopes for the off-axis structured jet as a function of the structure parameter $g$ for the synchrotron spectral regimes D (blue, narrow), E (orange, narrow),  F (green, narrow), G (red, wide), and H (purple, wide).  The width of the G and H bands shows the dependency on $p$, the upper curves for $p=2$ and the lower for $p=3$.  The temporal power-law slope of a structured jet afterglow increases with $g$ in all spectral regimes. \label{fig:slopesG}}
+	\caption{Temporal slopes for the off-axis structured jet as a function of the structure parameter $g$ for the synchrotron spectral regimes D (blue, narrow), E (orange, narrow),  F (green, narrow), G (red, wide), and H (purple, wide).  The width of the G and H bands shows the dependency on $p$, the upper curves for $p=2$ and the lower for $p=3$.  The temporal power law slope of a structured jet afterglow increases with $g$ in all spectral regimes. \label{fig:slopesG}}
 \end{figure}
 
-Figure \ref{fig:slopesG} shows the structured phase power-law temporal slope as a function of $g$ for spectral regimes $D$--$H$. In the $G$ and $H$ regimes the spectral slope is a function of $p$, this dependence carries over into the temporal slope as well. The temporal slope is an increasing function of $g$ in all regimes.  At sufficiently large $g$ all regimes exhibit rising light curves, the specific $g$ at which the light curve begins to rise is regime dependent.
+Figure \ref{fig:slopesG} shows the structured phase power law temporal slope as a function of $g$ for spectral regimes $D$--$H$. In the $G$ and $H$ regimes the spectral slope is a function of $p$, this dependence carries over into the temporal slope as well. The temporal slope is an increasing function of $g$ in all regimes.  At sufficiently large $g$ all regimes exhibit rising light curves, the specific $g$ at which the light curve begins to rise is regime dependent.
 
 \section{Refreshed Shocks --- Fast Tails and Spherical Cocoons}\label{sec:refreshedShocks}
 
 An alternative mechanism to produce slow decays or rises in afterglow light curves is the \emph{refreshed shock}, where velocity stratification of the ejecta causes a prolonged period of energy injection in the afterglow.  This material may be a tail of fast outflowing ejecta or ejecta material accelerated through interaction with a possibly choked jet (e.g. a cocoon). (CITE Mooley, Hotokezaka, Nakar\&Piran, etc).  In either case, slow material initially coasting behind the shock is gradually incorporated into the blast wave as it decelerates, ``refreshing'' the shock.  This mechanism was first proposed as an energy injection scenario (CITE), and was proposed as the mechanism behind the GW170817 afterglow in the choked-jet scenario. (CITE Mooley, Hotokezaka, etc).
 
-In the simplest case the visible part of the blast wave is assumed to be quasi-spherical.  The distribution of material behind the blast wave is specified by $E_{>}(u)$, the energy of all material in the ejecta with four-velocity greater than $u$.  This is typically taken to be a power-law in $u$ within the finite domain $[\umin, \umax]$:
+In the simplest case the visible part of the blast wave is assumed to be quasi-spherical.  The distribution of material behind the blast wave is specified by $E_{>}(u)$, the energy of all material in the ejecta with four-velocity greater than $u$.  This is typically taken to be a power law in $u$ within the finite domain $[\umin, \umax]$:
 \begin{equation}
 	E_>(u) = E_r u^{-k}\ , \label{eq:Eu}
 \end{equation}
@@ -275,7 +275,7 @@ Equation \eqref{eq:tumin} assumes $E_r \gg \Mej c^2$.   The temporal and spectra
 
 \begin{figure}
 	\plotone{figs/slopesCocoon.png}
-	\caption{The temporal power-law slope of the spherical refreshed-shock afterglow light curve as a function of $k$.  Otherwise as Figure \ref{fig:slopesG}.  The temporal power-law slope of a structured jet afterglow increases with $k$ in all spectral regimes. \label{fig:slopesK}}
+	\caption{The temporal power law slope of the spherical refreshed-shock afterglow light curve as a function of $k$.  Otherwise as Figure \ref{fig:slopesG}.  The temporal power law slope of a structured jet afterglow increases with $k$ in all spectral regimes. \label{fig:slopesK}}
 \end{figure}
 
 \begin{deluxetable*}{CCCCCCC}
@@ -390,7 +390,7 @@ It should be noted all errors quoted here are numerical errors associated with t
 
 We use the electromagnetic afterglow of GW170817A (GRB170817A?) as an example application of both the analytic and numerical structured jet afterglow models.  
 
-Figure \ref{fig:170817Alc} shows the observations in radio, optical, and x-ray bands of the GW170817A afterglow.  No afterglow emission was detected until an x-ray detection by the Chandra observatory nine days after the GW trigger (CITE TrojaNature).  Further radio, optical, and x-ray observations showed a steady rising light curve with constant power-law slope until a peak near day 160.  At this point the light curve turned over and began a steep decay that continues to the present (CITE YearInTheLife).
+Figure \ref{fig:170817Alc} shows the observations in radio, optical, and x-ray bands of the GW170817A afterglow.  No afterglow emission was detected until an x-ray detection by the Chandra observatory nine days after the GW trigger (CITE TrojaNature).  Further radio, optical, and x-ray observations showed a steady rising light curve with constant power law slope until a peak near day 160.  At this point the light curve turned over and began a steep decay that continues to the present (CITE YearInTheLife).
 
 Interpreting the afterglow as arising from a structured jet allows one to quickly draw the following conclusions:
 \begin{enumerate}
@@ -606,7 +606,7 @@ With recent progress in hydrodynamical codes and computer resources, numerical s
    	\figcaption{Energy and Lorentz factor profiles of jet models.  Profiles of numerical simulations are reported in Morsony+2007 (green), Mizuta+2009 (brown), Duffell+2015 (orange), Lazzati+2017 (pink), Kathirgamaraju+2017 (red), and Margutti+2018 (purple). The analytic boosted fireball model (Duffell+2015) is shown in blue.  Energy profiles for Morsony07, Mizuta09, and Duffell15 have been scaled to $dE/d\Omega(\theta=0) = 10^{52}$ erg/sr.  For comparison we also show representative power law ( Eq. \eqref{eq:powerlaw}, $\theta_c=1^\circ$, $\theta_w=60^\circ$, thick grey) and Gaussian (\eqref{eq:Gaussian}, $\theta_c=5.7^\circ$, $\theta_w=23^\circ$, thick black) profiles.  \label{fig:jetStructure}}
 \end{figure}
 
-There is agreement between the models that the jet energy is concentrated in a core of half-width $\lesssim 10^\circ$ with wings extending to larger angles.  Some models truncate at $\mathcal{O}(10)$ degrees, while others have large tails extending to near the equator.  The Gaussian and power-law models respectively emulate this behavior, providing a simple parameterized representation of the landscape of numerical models.  Of particular note are the Lazzati 2017 and Margutti 2018 models, both of which were calculated specifically for GW170817. The core of the Margutti model is has a profile very near Gaussian, while the Lazzati model has a strong resemblance to a power law.  
+There is agreement between the models that the jet energy is concentrated in a core of half-width $\lesssim 10^\circ$ with wings extending to larger angles.  Some models truncate at $\mathcal{O}(10)$ degrees, while others have large tails extending to near the equator.  The Gaussian and power law models respectively emulate this behavior, providing a simple parameterized representation of the landscape of numerical models.  Of particular note are the Lazzati 2017 and Margutti 2018 models, both of which were calculated specifically for GW170817. The core of the Margutti model is has a profile very near Gaussian, while the Lazzati model has a strong resemblance to a power law.  
 
 
 \bibliography{structuredJets_sources}

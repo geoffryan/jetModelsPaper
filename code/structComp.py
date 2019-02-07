@@ -120,7 +120,7 @@ def loadTxt(filename, cols, skiprows, delimiter=None):
     return datT
 
 
-def duffell2015Oblate(theta, Etot=1.0e49):
+def duffell2015Oblate(theta, Etot=1.0e47):
 
     # data is dE/dOmega, scaled as Etot/M_0 c^2 = 0.024
 
@@ -312,8 +312,8 @@ if __name__ == "__main__":
     deg = 180.0/np.pi
     rad = np.pi/180.0
 
-    gG, EG = gaussian(theta, thC=6*rad, thW=15*rad, E0=3e52)
-    gPL, EPL = powerlaw(theta, thW=60*deg, thC=4*deg, b=4.0, E0=1e52)
+    gG, EG = gaussian(theta, thC=6*rad, thW=13*rad, E0=5e52)
+    gPL, EPL = powerlaw(theta, thW=60*rad, thC=4*rad, b=4.0, E0=1e52)
     gBF0303, EBF0303 = boostedFireball(theta)
     gBF1003, EBF1003 = boostedFireball(theta, gb=10)
     gBF0310, EBF0310 = boostedFireball(theta, eta0=10)
@@ -414,42 +414,47 @@ if __name__ == "__main__":
     ax[1].set_yscale('log')
     fig.tight_layout()
 
-    print("Saving structCompE.pdf")
-    fig.savefig("structCompE.pdf")
+    print("Saving structComp.pdf")
+    fig.savefig("structComp.pdf")
 
     print("Plotting")
-    figE, axE = plt.subplots(1, 1, figsize=(12, 9))
+    figE, axE = plt.subplots(1, 1, figsize=(8, 6))
 
     clr = ["k", "grey", "tab:blue", "tab:orange", "tab:green", "tab:red",
                 "tab:purple", "tab:brown", "tab:pink", "tab:olive", "tab:cyan"]
     ls = ['-', '--', ':', '-.']
 
-    axE.plot(theta*deg, EG, label="Gaussian", lw=4.0,
-             color=clr[0], ls=ls[0])
-    axE.plot(theta*deg, EPL, label="Power law", lw=4.0,
-             color=clr[1], ls=ls[0])
-    axE.plot(theta*deg, EBF1003,
-             label="Boosted Fireball $\gamma_B=10$ $\eta_0=3$",
+    axE.plot(theta*deg, EG, label="Gaussian", lw=3.0,
+             color=clr[1], ls=ls[0], alpha=0.65)
+    axE.plot(theta*deg, EPL, label="Power law", lw=3.0,
+             color=clr[1], ls=ls[1], alpha=0.65)
+    axE.plot(theta*deg, EA05, label="Aloy 2005",
              color=clr[2], ls=ls[0])
-    axE.plot(theta*deg, ED15o, label="Duffell 2015 Oblate",
+    axE.plot(theta*deg, EM07r5, label="Morsony 2007",
              color=clr[3], ls=ls[0])
-    axE.plot(theta*deg, EM07r5, label="Morsony 2007 realg5",
-             color=clr[4], ls=ls[0])
-    axE.plot(theta*deg, EM07p2, label="Morsony 2007 powg2",
-             color=clr[4], ls=ls[1])
-    axE.plot(theta*deg, EM18, label="Margutti 2018",
-             color=clr[6], ls=ls[0])
     axE.plot(theta*deg, EM09, label="Mizuta 2009",
-             color=clr[7], ls=ls[0])
+             color=clr[4], ls=ls[0])
+    axE.plot(theta*deg, EBF1003,
+             # label="Boosted Fireball $\gamma_B=10$ $\eta_0=3$",
+             label="Duffell 2013",
+             color=clr[5], ls=ls[0])
+    axE.plot(theta*deg, ED15o, label="Duffell 2015",
+             color=clr[6], ls=ls[0])
+    # axE.plot(theta*deg, EM07p2, label="Morsony 2007 powg2",
+    #          color=clr[4], ls=ls[1])
     axE.plot(theta*deg, EL17, label="Lazzati 2017",
+             color=clr[7], ls=ls[0])
+    axE.plot(theta*deg, EM18, label="Margutti 2018",
              color=clr[8], ls=ls[0])
 
-    axE.legend(loc='upper right', fontsize=12)
+    axE.legend(loc='upper right', fontsize=16)
 
     axE.set_xlabel(r'$\theta$ $({}^\circ)$', fontsize=16)
     axE.set_ylabel(r'$dE/d\Omega$ (erg/sr)', fontsize=16)
+    axE.tick_params(labelsize=16)
     axE.set_yscale('log')
     axE.set_ylim(3.0e48, 1.0e53)
+    axE.set_xlim(0.0, 35)
     figE.tight_layout()
 
     print("Saving structCompE.pdf")
