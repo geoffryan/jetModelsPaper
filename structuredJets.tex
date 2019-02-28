@@ -45,6 +45,7 @@
 \newcommand{\gmax}{\ensuremath{\gamma_{\mathrm{max}}}}
 \newcommand{\bmin}{\ensuremath{\beta_{\mathrm{min}}}}
 \newcommand{\bmax}{\ensuremath{\beta_{\mathrm{max}}}}
+\newcommand{\som}{\ensuremath{s_{\Omega}}}
 
 
 
@@ -129,26 +130,28 @@ In the ensuing discussion we often refer to sections of the blast wave surface b
 
 The transition between phases of evolution depends on the effective solid angle $\Delta \Omega$ of the patch of blast wave dominating the emission.  The size of this patch scales with the Lorentz factor $\gamma$ of the dominant region as:
 \begin{equation}
-	\Delta \Omega = \gamma^{-s_\Omega} \ .
+	\Delta \Omega = \gamma^{-\som} \ .
 \end{equation}
-The parameter $s_\Omega$ controls the growth rate of the visible patch, and is typically between 0 and 2.
+The parameter $\som$ controls the growth rate of the visible patch, and is typically between 0 and 2.
+
+
 
 \subsection{Aligned Evolution: $\thobs \lesssim \thC$}
 
 The aligned light curve of a structured jet is essentially identical to that of a standard top-hat viewed within the jet cone. (CITE Panaitescu \& Kumar).  The relativistic afterglow is comprised of three phases, \emph{pre-jet break}, \emph{transition}, and \emph{post-jet break}.  These are well described in the literature and are briefly reviewed here.
 
-\emph{Pre-jet break} ---  At early times the flux is dominated by the small patch of material whose emission is beamed towards the observer of angular width $\psi = |\theta-\thobs| \sim \gamma^{-1}$.  This patch is within the $\theta < \thC$ region where $E(\theta) \approx E_0$ and the structure plays a sub-dominant role.  The angular size of the visible patch grows with $s_\Omega = 2$.  Closure relations and scalings of the standard on-axis top-hat apply. (CITE Granot and Sari)
+\emph{Pre-jet break} ---  At early times the flux is dominated by the small patch of material whose emission is beamed towards the observer of angular width $\psi = |\theta-\thobs| \sim \gamma^{-1}$.  This patch is within the $\theta < \thC$ region where $E(\theta) \approx E_0$ and the structure plays a sub-dominant role.  The angular size of the visible patch grows with $\som = 2$.  Closure relations and scalings of the standard on-axis top-hat apply. (CITE Granot and Sari)
 
-\emph{Transition} ---  When $\gamma^{-1} \sim \thC-\thobs$ the near edge of the jet comes in to view.  Material outside $\thC$ is less energetic and contributes sub-dominantly to the afterglow emission.  The effective visible patch grows more slowly, $s_\Omega \lesssim 2$, and the decay of the afterglow steepens slightly. Closure relations and scalings of the standard on-axis top-hat apply only approximately (CITE vanEerten MacFadyen 2010).  
+\emph{Transition} ---  When $\gamma^{-1} \sim \thC-\thobs$ the near edge of the jet comes in to view.  Material outside $\thC$ is less energetic and contributes sub-dominantly to the afterglow emission.  The effective visible patch grows more slowly, $\som \lesssim 2$, and the decay of the afterglow steepens slightly. Closure relations and scalings of the standard on-axis top-hat apply only approximately (CITE vanEerten MacFadyen 2010).  
 
-\emph{Post-jet break} ---  When $\gamma^{-1} \sim \thC+\thobs$ the far edge of the jet comes in to view and growth of the visible patch ceases, $s_\Omega = 0$.  If the blast wave remains relativistic and non-spreading, the slope of the light curve is reduced by $-3/4$ relative to the pre-jet break slope.  However, in many circumstances the jet break begins when the blast wave is only trans-relativistic and spreading may have begun.  In these cases an analytic treatment of the light curve is slope is more difficult, but numerical simulations and analytic work estimate an additional reduction of "???" over the simple analytic result.
+\emph{Post-jet break} ---  When $\gamma^{-1} \sim \thC+\thobs$ the far edge of the jet comes in to view and growth of the visible patch ceases, $\som = 0$.  If the blast wave remains relativistic and non-spreading, the slope of the light curve is reduced by $-3/4$ relative to the pre-jet break slope.  However, in many circumstances the jet break begins when the blast wave is only trans-relativistic and spreading may have begun.  In these cases an analytic treatment of the light curve is slope is more difficult, but numerical simulations and analytic work estimate an additional reduction of "???" over the simple analytic result.
 
 The transition phase occurs at $\tbm$ and completes at $\tbp$, given in the single shell approximation (see Appendix \ref{sec:derive1}) by:
 \begin{align}
 	\tbpm &= \left(\frac{9}{16\pi} \frac{E_0}{n_0 \Mp c^5}\right)^{1/3} \left( 2 \sin \left(\frac{\thC\pm\thobs}{2}\right)\right)^{8/3} .\label{eq:tbpm}
 \end{align}
 
-It is important to note that when $\thobs \neq 0$ the transition period is extended, and the most significant transition in the light curve occurs at $\tbp$, the \emph{jet break}.  The jet break occurs, in all jets, when the effective angular size of the visible patch of the jet ceases to increase, that is when $s_\Omega = 0$.  
+It is important to note that when $\thobs \neq 0$ the transition period is extended, and the most significant transition in the light curve occurs at $\tbp$, the \emph{jet break}.  The jet break occurs, in all jets, when the effective angular size of the visible patch of the jet ceases to increase, that is when $\som = 0$.  
 
 \begin{figure}
 	\plotone{figs/lc_on.pdf}
@@ -190,11 +193,11 @@ The temporal and spectral slopes for various regimes are given in Table \ref{tab
 	\tablecaption{Structured jet temporal and spectral slopes: $F_\nu \propto \tobs^{-\alpha} \nu^{-\beta}$. See Equations \eqref{eq:gdef} and \eqref{eq:geff} for the definition and effective values of $g$. \label{tab:slopes}}
 	\tablehead{\colhead{Regime}& \colhead{Label} & \colhead{$\alpha_{\mathrm{off-axis}}$}& \colhead{$\alpha_{\mathrm{struct}}$}& \colhead{$\alpha_{\mathrm{struct,max}}$}& \colhead{$\alpha_{\mathrm{post, analytic}}$} & \colhead{$\beta$}}
 	\startdata
-	\nu<\nu_m<\nu_c     & D & -7 			& -\frac{5/2 + 3g}{8+g} 		& -3		& 1/4			& -1/3 \\
-	\nu_m<\nu<\nu_c     & G & -15/2 + 3p/2 	& \frac{-9/2 + 6p - 3g}{8+g} 	& -3		& 3p/4		& (p-1)/2 \\
-	\nu < \nu_c < \nu_m & E & -17/3 		& \frac{1/6 - 11g/3}{8+g} 		& -11/3	& 7/12		& -1/3 \\
-	\nu_c < \nu < \nu_m & F & -13/2 		& \frac{7/2 - 2g}{8+g} 		& -2		& 1			& 1/2 \\
-	\nu_c < \nu_m < \nu & H & -8 + 3p/2 		& \frac{-5/2 +6p  -2g}{8+g} 	& -2		& (3p+1)/4	& p/2 \\ 
+	\nu<\nu_m<\nu_c     & D & 7 			& \frac{1 + 3g}{8+g} 		& 3		& -1/4		& 1/3 \\
+	\nu_m<\nu<\nu_c     & G & 15/2 - 3p/2 	& \frac{3 - 6p +3g}{8+g} 	& 3		& -3p/4		& (1-p)/2 \\
+	\nu < \nu_c < \nu_m & E & 17/3 		& \frac{-5/3 + 11g/3}{8+g} 	& 11/3	& -7/12		& 1/3 \\
+	\nu_c < \nu < \nu_m & F & 13/2 		& \frac{-5 + 2g}{8+g} 		& 2		& -1			& -1/2 \\
+	\nu_c < \nu_m < \nu & H & 8 - 3p/2 		& \frac{1-6p  +2g}{8+g} 	& 2		& -(3p+1)/4	& -p/2 \\ 
 	\enddata
 \end{deluxetable*}
 
@@ -250,7 +253,7 @@ Figure \ref{fig:slopesG} shows the structured phase power law temporal slope as 
 
 An alternative mechanism to produce slow decays or rises in afterglow light curves is the \emph{refreshed shock}, where velocity stratification of the ejecta causes a prolonged period of energy injection in the afterglow.  This material may be a tail of fast outflowing ejecta or ejecta material accelerated through interaction with a possibly choked jet (e.g. a cocoon). (CITE Mooley, Hotokezaka, Nakar\&Piran, etc).  In either case, slow material initially coasting behind the shock is gradually incorporated into the blast wave as it decelerates, ``refreshing'' the shock.  This mechanism was first proposed as an energy injection scenario (CITE), and was proposed as the mechanism behind the GW170817 afterglow in the choked-jet scenario. (CITE Mooley, Hotokezaka, etc).
 
-In the simplest case the visible part of the blast wave is assumed to be quasi-spherical.  The distribution of material behind the blast wave is specified by $E_{>}(u)$, the energy of all material in the ejecta with four-velocity greater than $u$.  This is typically taken to be a power law in $u$ within the finite domain $[\umin, \umax]$:
+In the simplest case the visible part of the blast wave is assumed to be quasi-spherical.  The velocity distribution of material behind the blast wave is specified by $E_{>}(u)$, the energy of all material in the ejecta with four-velocity greater than $u$.  This is typically taken to be a power law in $u$ within the finite domain $[\umin, \umax]$:
 \begin{equation}
 	E_>(u) = E_r u^{-k}\ , \label{eq:Eu}
 \end{equation}
@@ -260,7 +263,7 @@ where $u \in (\umin, \umax)$ is the dimensionless four-velocity, $k>0$ is the po
 % Comment: define tdec, tmin IN THE TEXT.   Add (brief) discussion of light curve phases.
 %
 
-A blast wave will have an initial coasting period before sweeping up enough mass in the ambient medium to begin deceleration and be subject to refreshed shocks.  The shock refreshment ends when the blast wave decelerates past $\umin$.  In the single shell model with trans-relativistic equation of state used here, these times are:
+A blast wave will have an initial coasting period before sweeping up enough mass in the ambient medium to begin deceleration and be subject to refreshed shocks.  The transition between coasting and decelerating occurs in the bursters frame at $\tdec$. The shock refreshment ends when the blast wave decelerates past $\umin$, in the observers frame at $\tumin$.  In the single shell model with trans-relativistic equation of state used here, these times are:
 \begin{align}
 	\tdec &= \left(\frac{9}{4\pi} \frac{\Mej}{n_0 \Mp c^3} \frac{\gmax^2}{\bmax^3(\gmax+1)(4\umax^2+3)} \right)^{1/3}  \ ,\label{eq:tdec} \\
 	\tumin &= \left(\frac{9}{16\pi} \frac{E_r}{n_0 \Mp c^5}\right)^{1/3} \umin^{-8/3} \ .\label{eq:tumin}
@@ -293,21 +296,24 @@ Equation \eqref{eq:tumin} assumes $E_r \gg \Mej c^2$.   The temporal and spectra
 
 \section{Relation to Energy Injection Models}
 
-The light curves of both the angularly structured jet and refreshed shock models can be understood in terms of general energy injection mechanisms, which are typically parameterized as an additional power $L$ delivered to the blast wave.  This power is typically taken to decay in time as a power law, $L \propto t^{-q}$, with $q \in [0,1]$.
+The light curves of both the misaligned angularly structured jet and refreshed shock models can be understood in terms of general energy injection mechanisms, parameterized as an additional power $L$ delivered to the blast wave.  This power is typically taken to decay in time as a power law, $L \propto t^{-q}$, with $q \in [0,1]$.
 
-The mapping between energy injection and refreshed shocks was done in (CITE Zhang06).  That work specifies the index $s$ of the mass distribution $M_{>u} \propto u^{-s}$, which is related simply to the index $k$ by $k = s-1$. Under this mapping the closure relations in Table \ref{tab:slopes} are equivalent to those in (CITE Zhang06) and the model can be seen as equivalent to an energy injection model with $q = (8-2k) / (8+k)$.
+The mapping between energy injection and refreshed shocks was done by \cite{Zhang:2006aa}.  That work specifies the index $s$ of the mass distribution $M_{>u} \propto u^{-s}$, which is related simply to the index $k$ by $k = s-1$. Under this mapping the closure relations in Table \ref{tab:slopes} are equivalent to those in \cite{Zhang:2006aa} and the model can be seen as equivalent to an energy injection model with $q = (8-2k) / (8+k)$.
 
-There is no single mapping between the structured jet and energy injection or refreshed shock models.  However, a visual comparison between $\alpha_{\text{struct}}$ in Table \ref{tab:slopes} and $\alpha_{\text{refresh}}$ in Table \ref{tab:refreshSlopes} indicate the identical roles played by $g$ and $k$.  Indeed, a simple swap $g \leftrightarrow k$ produces almost identical closure relations.  However, as seen in Tables \ref{tab:slopes} and \ref{tab:refreshSlopes} or 
+Misaligned structured jets do not map as neatly onto energy injection models as the scaling of the visible patch, $\som = 1.0$, is different than in standard afterglows, $\som = 2$. Once this change is accounted for, the $g$ parameter plays the same role as $k$, as can be seen by a simple comparison between $\alpha_{\text{struct}}$ in Table \ref{tab:slopes} and $\alpha_{\text{refresh}}$ in Table \ref{tab:refreshSlopes}.  That is, a structured jet light curve is equivalent to a standard energy injection model with:
+\begin{align}
+	q &= (8-2g) / (8+g)  \label{eq:struct2ei} \\
+	\som &= 1
+\end{align}
 
-The mapping between structured jet and refreshed shock (and hence energy injection) models is a two step process.   Indeed, a stru
+Generic closure relations leaving the dependence on $\som$ explicit are presented in Table \ref{tab:generalSlopes}. 
+
 
 %
 % Comment: replace s_3 with s_Omega, s_{1,2} with s_gamma, s_t.
 %
 % "It is insightful..."
 %
-
-The numerical model described in Section \ref{sec:numerical} improves on these analytic approximations by ...
 
 
 %
@@ -319,83 +325,27 @@ The numerical model described in Section \ref{sec:numerical} improves on these a
 %
 
 \begin{deluxetable*}{CCCCCC}
-	\tablecaption{Generic structured phase temporal and spectral slopes: $F_\nu \propto \tobs^{-\alpha} \nu^{-\beta}$.  The visible patch of the jet has a solid angle which scales as $\gamma^{-s_3}$. See Equations \eqref{eq:gdef} and \eqref{eq:geff} for the definition and effective values of $g$.  A uniform relativistic blast wave pre-jet break has $s_3=2$, a relativistic blast wave with angular structure pre-jet break has $s_3 \approx 1.5$, and a relativistic blast wave post jet-break has $s_3 = 0$. For a refreshed-shock model replace $g$ with $k$, defined in Equation \eqref{eq:Eu}. \label{tab:generalSlopes}}
-	\tablehead{\colhead{Regime}& \colhead{Label} & \colhead{$\alpha_{\mathrm{struct}}$} & \colhead{$\beta$}}
+	\tablecaption{Generic closure relations for the afterglow of a relativistic blast wave in a homogeneous medium: $F_\nu \propto \tobs^{\alpha} \nu^{\beta}$.  See Equations \eqref{eq:gdef} and \eqref{eq:geff} for the definition and effective values of $g$ for misaligned structured jets.  Jets aligned with the viewer or without angular structure have $g=0$.  The visible patch of the jet has a solid angle which scales as $\gamma^{-\som}$.  A uniform relativistic blast wave pre-jet break has $\som=2$, a relativistic blast wave with angular structure pre-jet break has $\som \approx 1$, and a relativistic blast wave post jet-break has $\som = 0$.  For a refreshed-shock model replace $g$ with $k$, defined in Equation \eqref{eq:Eu}. \label{tab:generalSlopes}}
+	\tablehead{\colhead{Regime}& \colhead{Label} & \colhead{$\alpha$} & \colhead{$\beta$}}
 	\startdata
-	\nu<\nu_m<\nu_c     & D & \frac{2-3s_3 - 3g}{8+g} 		& -1/3 \\
-	\nu_m<\nu<\nu_c     & G & \frac{6p - 3s_3 - 3g}{8+g} 	& (p-1)/2 \\
-	\nu < \nu_c < \nu_m & E & \frac{14/3 - 3s_3 -11g/3}{8+g} 	& -1/3 \\
-	\nu_c < \nu < \nu_m & F & \frac{8-3s_3 -2g}{8+g} 		& 1/2 \\
-	\nu_c < \nu_m < \nu & H & \frac{6p - 2 - 3s_3 - 2g}{8+g} 	& p/2 \\ 
+	\nu<\nu_m<\nu_c     & D & \frac{-2 + 3\som + 3g}{8+g} 		& 1/3 \\
+	\nu_m<\nu<\nu_c     & G & \frac{-6p + 3\som + 3g}{8+g} 	& (1-p)/2 \\
+	\nu < \nu_c < \nu_m & E & \frac{-14/3 + 3\som + 11g/3}{8+g} 	& 1/3 \\
+	\nu_c < \nu < \nu_m & F & \frac{-8 + 3\som + 2g}{8+g} 		& -1/2 \\
+	\nu_c < \nu_m < \nu & H & \frac{-6p - 2 + 3\som + 2g}{8+g} 	& -p/2 
 	\enddata
 \end{deluxetable*}
-
-The structured jet $g(\theta)$ parameter can similarly...
-
-\section{Numerical Model: The \afterglowpy{} Package}\label{sec:numerical}
-
-To examine the detailed behavior of structured afterglows we constructed a numerical model, publicly available as the \afterglowpy{} Python package.
-
-The numerical model employs a trans-relativistic equation of state to evolve a blast wave in the single-shell approximation from the initial coasting phase through deceleration and spreading into the non-relativistic Sedov phase.  The observed flux density $F_\nu$ is calculated by numerically integrating the synchrotron emissivity over equal-observer-time surfaces.  
-
-The flux calculation follows the semi-analytic method of (CITE Hendrik 2010) using the shock evolution prescription outlined in (CITE Hendrik Review) modified to include refreshed shocks, energy injection, and jet spreading.  For a structured jet, the surface is divided into $N_\theta$ annular regions each of which is allocated an energy according to $E(\theta)$.  Each segment evolves independently and is otherwise treated as a section of a top-hat jet.
-
-\subsection{Numerical Algorithm}\label{subsec:algo}
-
-To compute the light curve of a top-hat jet we first must calculate the time evolution of the blast wave.  We utilize the single-shell approximation, treating the ejecta mass, contact discontinuity, and forward shock as a single unit propagating through a cold ambient medium with constant rest-mass density $\rho_0 = \Mp n_0$.  For a detailed derivation (CITE Hendrik 2010 + Hendrik Review).  The forward shock is a radius $R$ from the explosion and moves at a velocity $\beta_s$.  In terms of the fluid four-velocity behind the shock $u$ and its Lorentz factor $\gamma$ this may be written as:
-\begin{equation}
-	\dot{R} = \frac{4 u \gamma}{4 u^2 +3}c\ . \label{eq:Rdot}
-\end{equation}
-Here the time derivative $\dot{R}$ is taken with respect to elapsed time in the bursters' frame $t$.  
-
- The evolution of the four velocity is determined through conservation of energy.  The total energy in the trans-relativistic single shell approximation is:
-\begin{equation}
-	E = (\gamma - 1)\Mej c^2 + \frac{4\pi}{9} \rho_0 c^2 R^3 (4 u^2 + 3) \beta^2 \Omega\ . \label{eq:E}
-\end{equation}
-In Equation \eqref{eq:E} the first term is the kinetic energy of the ejected mass $\Mej$, assumed to have already accelerated and adiabatically cooled to its coasting velocity. The second term is the kinetic and thermal energy of the shocked ISM with three-velocity $\beta = u / \gamma$. The shocked ISM is confined to a cone of solid angle $\Omega = 2 \sin^2 (\theta_0/2)$ where $\theta_0$ is the half-opening angle of the jet. While the blast wave is relativistic $\theta_0$ is constant, but once the jet becomes non-relativistic it begins to spread due to its own internal pressure until the blast wave is spherical.  The spreading occurs at sound speed $c_s$ in the fluid rest-frame (CITE Hendrik 2010, Duffell+Laskar 2017):
-\begin{equation}
-	\dot{\theta_0} = \frac{c_s}{\gamma R}\ , \qquad \text{if } u < 1\text{ and } \theta_0 > \pi/2\ . \label{eq:thetadot}
-\end{equation}
-Given a (possibly constant) expression for $E$ Equation \eqref{eq:E} may be differentiated with respect to $t$ and solved for $\dot{u}$.  In a refreshed shock scenario $E = E_{>}(u)$, whereas for a standard energy injection model one may take $E \propto t^{-q}$.  In either case, Equation \eqref{eq:E} produces an equation for $\dot{u}$.  This defines a three dimensional system of ordinary differential equations in the variables $(R, u, \theta_0)$.  We solve this system using RK4 on a sequence of geometrically spaced values of $t$, typically $10^3$ points per decade.  This produces a numerical table of $R(t)$, $u(t)$, and $\theta_0(t)$ in terms of the burster time $t$.  The beginning and end points of the solution are chosen to encompass all required values of $\tobs$.
-
-Once the shock evolution is known, the flux is given by the integral:
-\begin{equation}
-	F_\nu(\tobs, \nuobs) = \frac{1}{4\pi \dL^2} \int \! \dd \Omega\ R^2\ \Delta R\  \delta^2\ \epsilon'_{\nu'} \ , \label{eq:flux}
-\end{equation}
-where $\tobs$ is the time in the observer's frame, $\nuobs$ the observational frequency, $\dL$ the luminosity distance, $\Delta R$ the shock width, $\delta$ the Doppler factor of the fluid, and $\epsilon'_{\nu'}$ the synchrotron emissivity in the fluid rest frame.  The integral is taken in spherical polar coordinates $(\theta, \phi$) where $\theta = 0$ aligns with the jet axis and $\phi=0$ is directed towards the observer.  The observer is at an angle $\thobs$ with the jet axis. The integrand is evaluated at a constant observer time $\tobs$, related to $t$ by:
-\begin{equation}
-	\tobs = t - \mu(\theta, \phi) R(t)/c\ , \label{eq:tobs}
-\end{equation}
-where 
-\begin{equation}
-	\mu = \cos \theta \cos \thobs + \sin \theta \sin \thobs \cos \phi\ . \label{eq:mu}
-\end{equation}
-The integral \eqref{eq:flux} is evaluated numerically using an adaptive Romberg integrator in each dimension, with a typical relative tolerances of $10^{-6}$.  Each evaluation of the integrand requires a binary search to determine the burster time $t$ at which to evaluate $R$, $u$, and $\theta_0$.  Fluid quantities are then calculated using the shock-jump conditions and the synchrotron emissivity is evaluated using the standard external shock formulae (CITE Hendrik, Granot+Sari).  The numerical accuracy of a top-hat light curve with this scheme is typically better than $10^{-4}$.  The structured jet calculation splits the integration domain into $N_\theta$ disjoint annuli, each evaluated as an independent top-hat and summed.  By default $N_\theta$ is chosen such that there will be 5 zones per $\thC$-sized interval, giving final light curves with a numerical accuracy of $10^{-2}$.
-
-\subsection{\afterglowpy{}}
-
-We have constructed the \afterglowpy{} Python package to implement this algorithm and provide it to the community.  The integration routine itself is written in C, wrapped as an extension for Python, and has been optimized to be used in intensive data analysis routines such as Markov Chain Monte-carlo which can require many thousands of evaluations.  
-
-\afterglowpy{} uses a standard RK4 algorithm to evolve the $(R(t), u(t), \theta_0(t))$ system of equations on a fixed logarithmically spaced grid of $t$.  The endpoints of the $t$-grid are chosen to bracket the burster frame times required to calculate the requested $\tobs$ with at least a decade of tolerance.  Initial conditions for $R$, $u$, and $\theta_0$ are those of a decelerating ultra-relativistic blast wave.  The user can set the density of the $t$-grid with the $n_t$ parameter: the number of grid points per decade of $t$.  The default value for $n_t$ is 1000, which is sufficiently dense that the shock ODE evolution is not the dominant error source but not so dense as to adversely impact performance.
-
-Each top-hat jet component is integrated in $\theta$ and $\phi$ using an adaptive Romberg scheme with a fixed relative tolerance and an adaptive absolute tolerance.  When summing over top-hat components of a structured jet, the innermost (core) component is calculated first.  As the calculation proceeds, the current running sum of the flux is used to set absolute tolerance in the Romberg integrator for each component.  This minimizes the computations performed on dim, off-axis sectors of the jet.  
-
-The structured jet is split into concentric top-hat components with a density $n_\theta$ per $\thC$-sized interval.  The choice of $n_\theta$ has the largest impact on the code performance and accuracy.  We find the choice $n_\theta = 5$ gives sufficiently quick performance at acceptable errors, typically on the order of $10^{-2}$.  TODO SHOW CONVERGENCE PLOT
-
-It should be noted all errors quoted here are numerical errors associated with the schemes used to solve Equations \ref{eq:Rdot}, \ref{eq:E}, and \ref{eq:thetadot} and perform the integral in Equation \ref{eq:flux}.  That is, they are the errors relative to solving these equations perfectly.  The equations themselves are, however, an approximation themselves to the full physics of an afterglow light curve.  Comparison and calibration against analytic calculations and hydrodynamic simulations is necessary to ensure physically realistic results.  
-
-\afterglowpy{} is available on PyPI and may be installed with {\tt pip}.  The source code is open and available at https://github.com/geoffryan/afterglowpy.
 
 \section{Application: GW170817A}
 
 We use the electromagnetic afterglow of GW170817A (GRB170817A?) as an example application of both the analytic and numerical structured jet afterglow models.  
 
-Figure \ref{fig:170817Alc} shows the observations in radio, optical, and x-ray bands of the GW170817A afterglow.  No afterglow emission was detected until an x-ray detection by the Chandra observatory nine days after the GW trigger (CITE TrojaNature).  Further radio, optical, and x-ray observations showed a steady rising light curve with constant power law slope until a peak near day 160.  At this point the light curve turned over and began a steep decay that continues to the present (CITE YearInTheLife).
+Figure \ref{fig:170817Alc} shows the observations in radio, optical, and x-ray bands of the GW170817A afterglow.  No afterglow emission was detected until an x-ray detection by the Chandra observatory nine days after the GW trigger \cite{Troja:2017aa}.  Further radio, optical, and x-ray observations showed a steady rising light curve with constant power law slope until a peak near day 160.  At this point the light curve turned over and began a steep decay that continues to the present (CITE YearInTheLife).
 
 Interpreting the afterglow as arising from a structured jet allows one to quickly draw the following conclusions:
 \begin{enumerate}
 	\item The spectral slope $\beta = 0.585$ (CITE, +uncertainties) throughout the entire evolution, identifying the relevant spectral regime as G: $\nu_m < \nuobs < \nu_c$, and $p = 2.17$.
-	\item The initial rising ($\alpha < 0$) light curve with declining spectrum ($\beta > 0$) identify this as a \emph{misaligned} evolution ($\thobs > \thC$).  Aligned jets may only have a rising light curve when viewed at frequencies below the peak frequency, that is when $\beta < 0$.
+	\item The initial rising ($\alpha > 0$) light curve with declining spectrum ($\beta < 0$) identify this as a \emph{misaligned} evolution ($\thobs > \thC$).  Aligned jets may only have a rising light curve when viewed at frequencies below the peak frequency, that is when $\beta < 0$.
 	\item The rising light curve maintains $\alpha  = 0.90 \pm 0.06$ (CITE YITL).  Using the closure relations from Table \ref{tab:slopes} we can identify this as the \emph{structured} phase and determine $\geff = 7.5 \pm 0.4$.  If the light curve underwent an \emph{off-axis} phase, it concluded before the afterglow was detected: $\tW < 9$d.  The peak can be identified as the jet-break: $\tb = 164 \pm 12$ d.
 	\item In the context of a Gaussian jet, the measurement of $\geff$ leads immediately to $\thobs / \thC = 5.5 \pm 0.2$.
 	\item Using the Fong 2015 (CITE Fong 2015) fiducial values of $E_0 \sim 2\times 10^{51}$erg and $n_0 \sim 10^{-2}$cm$^{-3}$ we can use the jet break $\tb$ measurement to determine $\thobs \approx 0.5 \pm 0.2$ rad ($29^\circ \pm 12^\circ$), assuming 1 dex uncertainties on $E_0$ and $n_0$.    This is in agreement with the LIGO measurement $\thobs \approx 28^\circ \pm 15^\circ$ (assuming the SHoES $H_0$).
@@ -521,7 +471,7 @@ Taking the ratio and simplifying gives:
 \end{eqnarray}
 The parameter $g$ is directly measurable from the light curve, given the spectral information which fixes $\beta$, $s_1$, and $s_2$.
 
-The full flux scaling equations also require an updated energy and circumburst density scaling. We can obtain the scalings for energy and density from dimensional analysis, following \cite{vanEertenMacFadyen2012} (specifically, by making use of the fact that the overall flux scalings for the different spectral regimes should obey those presented in table 1 of that paper).
+The full flux scaling equations also require an updated energy and circumburst density scaling. We can obtain the scalings for energy and density from dimensional analysis, following \cite{van-Eerten:2012ac} (specifically, by making use of the fact that the overall flux scalings for the different spectral regimes should obey those presented in table 1 of that paper).
 
 {\color{red}[RED STUFF IS WRONG SOMEHOW]
   For energy, it follows that (below $\nu_c$)

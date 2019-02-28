@@ -825,7 +825,7 @@ def getRegimePars(regime='D'):
     thC = 0.1
     thW = 0.4
     thV = 0.0
-    b = 4.0
+    b = 8.0
 
     p = 2.2
     epse_slow = 0.1
@@ -1215,12 +1215,14 @@ def calcSlopePost(jetModel, Y, regime):
 
 def makeAnalyticTestPlots():
 
-    regimes = ['D', 'E', 'F', 'G', 'H']
+    # regimes = ['D', 'E', 'F', 'G', 'H']
+    regimes = ['E', 'G', 'H']
     # regimes = ['D']
     jetModel = 4
     spread = False
 
-    thWs = [0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95]
+    # thWs = [0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95]
+    thWs = [0.25, 0.45, 0.65, 0.85]
     # thCs = [0.02, 0.04, 0.08, 0.12, 0.24, 0.48]
     if jetModel is 4:
         thCs = [0.02, 0.04, 0.08, 0.16]
@@ -1243,6 +1245,7 @@ def makeAnalyticTestPlots():
     alOffN = np.empty((NW, NV, NC))
     # alPreN = np.empty((NW, NV, NC))
     alStructN = np.empty((NW, NV, NC))
+    alStructN2 = np.empty((NW, NV, NC))
     alStructNAveLin = np.empty((NW, NV, NC))
     alStructNAveLog = np.empty((NW, NV, NC))
     alPostN = np.empty((NW, NV, NC))
@@ -1307,6 +1310,9 @@ def makeAnalyticTestPlots():
                                             spread=spread)
 
                     al = np.log(Fnutr/Fnutl) / np.log(tfac*tfac)
+                    al2 = np.log(Fnutr*Fnutl/(Fnu*Fnu)) / np.log(tfac)**2
+                    al3 = np.zeros(al.shape)
+                    al3[1:-1] = (al2[2:]-al2[:-2]) / np.log(tfac*tfac)
                     beta = np.log(Fnunr/Fnunl) / np.log(nufac*nufac)
 
                     if tW > 0.0:
@@ -1342,6 +1348,16 @@ def makeAnalyticTestPlots():
                     alStructNAveLin[k, j, i] = alNlin
                     alStructNAveLog[k, j, i] = alNlog
 
+                    indStruct = np.argwhere((t > tW) & (t < tb) & (al2 > 0))
+                    if len(indStruct) > 0:
+                        nStruct2 = indStruct[-1]
+                    else:
+                        indStruct = np.argwhere((t > tW) & (t < tb)
+                                                & (al3 > 0))
+                        nStruct2 = indStruct[-1]
+                    tStruct2 = np.sqrt(t[nStruct2]*t[nStruct2+1])
+                    alStructN2[k, j, i] = 0.5*(al[nStruct2]+al[nStruct2+1])
+
                     gs = gs0[i, j].subgridspec(4, 1, hspace=0.0)
                     axF = fig.add_subplot(gs[0:-2, 0])
                     axa = fig.add_subplot(gs[-2, 0])
@@ -1371,6 +1387,9 @@ def makeAnalyticTestPlots():
                     axF.axvline(tOff, ls=':', lw=4, color='lightgrey')
                     axa.axvline(tOff, ls=':', lw=4, color='lightgrey')
                     axb.axvline(tOff, ls=':', lw=4, color='lightgrey')
+                    axF.axvline(tStruct2, ls='-.', lw=4, color='lightgrey')
+                    axa.axvline(tStruct2, ls='-.', lw=4, color='lightgrey')
+                    axb.axvline(tStruct2, ls='-.', lw=4, color='lightgrey')
 
                     alOff = calcSlopeOffaxis(jetModel, Y, regime)
                     alStruct = calcSlopeStruct(jetModel, Y, regime)
@@ -1422,6 +1441,7 @@ def makeAnalyticTestPlots():
         fi = h5.File(filename, "w")
         fi.create_dataset("alOffN", data=alOffN)
         fi.create_dataset("alStructN", data=alStructN)
+        fi.create_dataset("alStructN2", data=alStructN2)
         fi.create_dataset("alStructNAveLin", data=alStructNAveLin)
         fi.create_dataset("alStructNAveLog", data=alStructNAveLog)
         fi.create_dataset("alPostN", data=alPostN)
