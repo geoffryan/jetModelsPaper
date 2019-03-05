@@ -134,7 +134,7 @@ The afterglow light curve of a structured jet follows one of two qualitatively d
 
 To compute the light curves of structured jet afterglows we constructed numerical and analytic models utilizing the single shell approximation of \cite{van-Eerten:2010aa, van-Eerten:2018ab}.  This approach integrates over the massive ejecta, contact discontinuity, and forward shock complex, treating it as a single fluid element with uniform radial structure. We utilize a trans-relativistic equation of state which smoothly interpolates between the ultra-relativistic and non-relativistic limits and include an approximate prescription for jet spreading.  This approach, with a simplified equation of state and jet spreading model, has been used successfully to model the synthetic light curves of top hat jets from multidimensional numerical relativistic hydrodynamics simulations \citep{van-Eerten:2010aa}.
 
-In the ultra-relativistic limit the single shell approximation provides useful scaling relations to compute the structured jet closure relations presented in Section \ref{sec:structuredjets}.  The full trans-relativistic numerical model is publicly available as the \afterglowpy{} Python package, described in more detail in Section \ref{subsec:afterglowpy}.
+In the ultra-relativistic limit the single shell approximation provides useful scaling relations to compute the structured jet closure relations presented in Section \ref{sec:structuredJets}.  The full trans-relativistic numerical model is publicly available as the \afterglowpy{} Python package, described in more detail in Section \ref{subsec:afterglowpy}.
 
 We utilize a standard spherical coordinate system $(r, \theta, \phi)$ with origin at the GRB central engine and polar axis aligned with the jet axis.  The blast wave forward shock has a radial position $R(t, \theta)$, where $t$ is the time measured in the burster frame. The observer is located in a direction $\hat{\bf n}$ which makes an angle $\thobs$ with the $z$-axis, $\hat{\bf n} \cdot \hat{\bf z} = \cos \thobs$, and is oriented along the $x$-axis, $\phobs = 0$.  A particular point on the blast wave $\hat{\bf r} = (\theta, \phi)$ makes an angle $\psi$ (with cosine $\mu$) with the viewer, $\mu = \cos \psi = \hat{\bf n} \cdot \hat{\bf r}$.
 
@@ -168,11 +168,13 @@ Once the shock evolution is known, the flux is given by the integral:
 \begin{equation}
 	F_\nu(\tobs, \nuobs) = \frac{1+z}{4\pi \dL^2} \int \! \dd \Omega\ R^2\ \Delta R\  \delta^2\ \epsilon'_{\nu'} \ , \label{eq:flux2}
 \end{equation}
-where $\Delta R$ is the shock width contributing to the emission. The integrand is evaluated at a constant observer time $\tobs$ and observer frequency $\nuobs$, related to $t$ and $\nu'$ by:
+where $\Delta R$ (TODO: add eq for Delta R) is the shock width contributing to the emission. The integrand is evaluated at a constant observer time $\tobs$ and observer frequency $\nuobs$, related to $t$ and $\nu'$ by:
 \begin{align}
 	\tobs &= (1+z) \left(t - \mu(\theta, \phi) R(t)/c\right)\ , \label{eq:tobs} \\
 	\nuobs &= (1+z)^{-1} \delta \nu' , \label{eq:nuobs}
 \end{align}
+
+TODO: Give formulae or reference for $\epsilon'_{\nu'}$.
 
 The integral \eqref{eq:flux2} may now be computed numerically or, in certain limits, analytically.
 
