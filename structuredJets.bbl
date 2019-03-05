@@ -9,9 +9,16 @@
 {Aloy}, M.~A., {Janka}, H.-T., \& {M{\"u}ller}, E. 2005, \aap, 436, 273,
   \dodoi{10.1051/0004-6361:20041865}
 
+\bibitem[{{Duffell} \& {Laskar}(2018)}]{Duffell:2018aa}
+{Duffell}, P.~C., \& {Laskar}, T. 2018, \apj, 865, 94,
+  \dodoi{10.3847/1538-4357/aadb9c}
+
 \bibitem[{{Duffell} \& {MacFadyen}(2013)}]{Duffell:2013aa}
 {Duffell}, P.~C., \& {MacFadyen}, A.~I. 2013, \apjl, 776, L9,
   \dodoi{10.1088/2041-8205/776/1/L9}
+
+\bibitem[{{Granot} \& {Sari}(2002)}]{Granot:2002aa}
+{Granot}, J., \& {Sari}, R. 2002, \apj, 568, 820, \dodoi{10.1086/338966}
 
 \bibitem[{{Lazzati} {et~al.}(2017){Lazzati}, {L{\'o}pez-C{\'a}mara},
   {Cantiello}, {Morsony}, {Perna}, \& {Workman}}]{Lazzati:2017aa}
@@ -28,6 +35,24 @@
 \bibitem[{{Mizuta} \& {Aloy}(2009)}]{Mizuta:2009aa}
 {Mizuta}, A., \& {Aloy}, M.~A. 2009, \apj, 699, 1261,
   \dodoi{10.1088/0004-637X/699/2/1261}
+
+\bibitem[{{Troja} {et~al.}(2017){Troja}, {Piro}, {van Eerten}, {Wollaeger},
+  {Im}, {Fox}, {Butler}, {Cenko}, {Sakamoto}, {Fryer}, {Ricci}, {Lien}, {Ryan},
+  {Korobkin}, {Lee}, {Burgess}, {Lee}, {Watson}, {Choi}, {Covino}, {D'Avanzo},
+  {Fontes}, {Gonz{\'a}lez}, {Khandrika}, {Kim}, {Kim}, {Lee}, {Lee}, {Kutyrev},
+  {Lim}, {S{\'a}nchez-Ram{\'{\i}}rez}, {Veilleux}, {Wieringa}, \&
+  {Yoon}}]{Troja:2017aa}
+{Troja}, E., {Piro}, L., {van Eerten}, H., {et~al.} 2017, \nat, 551, 71,
+  \dodoi{10.1038/nature24290}
+
+\bibitem[{{van Eerten}(2018)}]{van-Eerten:2018ab}
+{van Eerten}, H. 2018, International Journal of Modern Physics D, 27, 1842002,
+  \dodoi{10.1142/S0218271818420026}
+
+\bibitem[{{van Eerten} {et~al.}(2010){van Eerten}, {Zhang}, \&
+  {MacFadyen}}]{van-Eerten:2010aa}
+{van Eerten}, H., {Zhang}, W., \& {MacFadyen}, A. 2010, \apj, 722, 235,
+  \dodoi{10.1088/0004-637X/722/1/235}
 
 \bibitem[{{van Eerten} \& {MacFadyen}(2012)}]{van-Eerten:2012ac}
 {van Eerten}, H.~J., \& {MacFadyen}, A.~I. 2012, \apjl, 747, L30,
