@@ -199,13 +199,17 @@ It should be noted all errors quoted here are numerical errors associated with t
 
 \section{Structured Jet Light Curves}\label{sec:structuredJets}
 
-The transition between phases of evolution depends on the effective solid angle $\Delta \Omega$ of the patch of blast wave dominating the emission.  The size of this patch scales with the Lorentz factor $\gamma$ of the dominant region as:
+To fully characterize the light curves of structured jets we use \afterglowpy{} to construct light curves exploring dependence on jet structure model, viewing angle $\thobs$, opening angle $\thC$, and synchrotron regime.  
+
+We find the light curves of structured jets show two modes of behaviour, depending on whether the observer is \emph{aligned} ($\thobs < \thC$) or misaligned ($\thobs > \thC$). In the \emph{aligned} case, the light curves follow the standard on-axis top hat behaviour modified slightly for non-zero viewing angle.  There is little to distinguish between different structure $E(\theta)$, and the light curve is well-approximated by a broken power law with characteristic break times.  The \emph{misaligned} light curve also may present as a broken power law, but with closure relations explicitly dependent on viewing angle and jet angular structure.  
+
+We discuss aligned evolution in detail in Section \ref{subsec:aligned} and misaligned in Section \ref{subsec:misaligned}.  In both cases the transition between phases of evolution depends on the effective solid angle $\Delta \Omega$ of the patch of blast wave dominating the emission.  The size of this patch tends to scale with the Lorentz factor $\gamma$ of the dominant region as:
 \begin{equation}
 	\Delta \Omega = \gamma^{-\som} \ .
 \end{equation}
-The parameter $\som$ controls the growth rate of the visible patch, and is typically between 0 and 2.
+The parameter $\som$ controls the growth rate of the visible patch, and is typically between 0 and 2. 
 
-\subsection{Aligned Evolution: $\thobs \lesssim \thC$}
+\subsection{Aligned Evolution: $\thobs \lesssim \thC$} \label{subsec:aligned}
 
 The aligned light curve of a structured jet is essentially identical to that of a standard top-hat viewed within the jet cone. (CITE Panaitescu \& Kumar).  The relativistic afterglow is comprised of three phases, \emph{pre-jet break}, \emph{transition}, and \emph{post-jet break}.  These are well described in the literature and are briefly reviewed here.
 
@@ -215,10 +219,16 @@ The aligned light curve of a structured jet is essentially identical to that of 
 
 \emph{Post-jet break} ---  When $\gamma^{-1} \sim \thC+\thobs$ the far edge of the jet comes in to view and growth of the visible patch ceases, $\som = 0$.  If the blast wave remains relativistic and non-spreading, the slope of the light curve is reduced by $-3/4$ relative to the pre-jet break slope.  However, in many circumstances the jet break begins when the blast wave is only trans-relativistic and spreading may have begun.  In these cases an analytic treatment of the light curve is slope is more difficult, but numerical simulations and analytic work estimate an additional reduction of "???" over the simple analytic result.
 
-The transition phase occurs at $\tbm$ and completes at $\tbp$, given in the single shell approximation (see Appendix \ref{sec:derive1}) by:
+The transition between pre-jet break and post-jet break begins at $\tbm$ and completes at $\tbp$, given in the single shell approximation (see Appendix \ref{sec:derive1}) by:
 \begin{align}
 	\tbpm &= \left(\frac{9}{16\pi} \frac{E_0}{n_0 \Mp c^5}\right)^{1/3} \left( 2 \sin \left(\frac{\thC\pm\thobs}{2}\right)\right)^{8/3} .\label{eq:tbpm}
 \end{align}
+\begin{figure}
+	\plotone{figs/breaks_alignedOA_all.pdf}
+	\caption{Jet break time for on-axis ($\thobs=0$) observers for top-hat (blue circles), Gaussian (orange inverted triangles), and power law (green triangles) jets as a function of $\thC$. The dashed grey line is the analytic approximation $t_b = t_N \thC^{8/3}$. These particular light curves use $\thW = 5 \thC$, $E_0 = 10^{52}$erg, $n_0=10^{-3}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, and $\epsB = 10^{-4}$. \label{fig:tbOA}}
+\end{figure}
+
+
 
 It is important to note that when $\thobs \neq 0$ the transition period is extended, and the most significant transition in the light curve occurs at $\tbp$, the \emph{jet break}.  The jet break occurs, in all jets, when the effective angular size of the visible patch of the jet ceases to increase, that is when $\som = 0$.  
 
@@ -231,7 +241,7 @@ Figure \ref{fig:onaxis} shows representative top-hat, Gaussian, and power law je
 
 The relativistic stages of evolution are followed by a Newtonian phase ($t > 200$ days in Figure \ref{fig:onaxis}) when the decelerating blast wave becomes non-relativistic, spreads sonically, and approaches a Sedov-Taylor solution.  We do not address the Newtonian phase of evolution in this work.
 
-\subsection{Misaligned Evolution: $\thobs \gtrsim \thC$}
+\subsection{Misaligned Evolution: $\thobs \gtrsim \thC$}\ref{subsec:misaligned}
 
 When viewed at angles larger than $\thC$ the gradient $E'(\theta)$ over the visible patch becomes non-negligible.  To observers this energy gradient presents itself as a slowly rising or decaying afterglow light curve. The relativistic afterglow is comprised of two or three phases depending on whether the observer lies within the truncation angle, \emph{far off-axis}, \emph{structured}, and \emph{post-jet break}.
 
@@ -425,6 +435,14 @@ Interpreting the afterglow as arising from a structured jet allows one to quickl
 
 
 \section{Discussion}
+
+\begin{itemize}
+	\item Comparison with boxfit
+	\item Comparison with other GW170817A fits
+	\item Degeneracy between $E(\theta)$ and $\thobs$
+	\item $g$ vs $\thobs / \thC$ plot with GW170817
+	\item Looking forward to O3
+\end{itemize}
 
 \section{Summary}
 
