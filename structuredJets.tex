@@ -201,7 +201,7 @@ It should be noted all errors quoted here are numerical errors associated with t
 
 To fully characterize the light curves of structured jets we use \afterglowpy{} to construct light curves exploring dependence on jet structure model, viewing angle $\thobs$, opening angle $\thC$, and synchrotron regime.  
 
-We find the light curves of structured jets show two modes of behaviour, depending on whether the observer is \emph{aligned} ($\thobs < \thC$) or misaligned ($\thobs > \thC$). In the \emph{aligned} case, the light curves follow the standard on-axis top hat behaviour modified slightly for non-zero viewing angle.  There is little to distinguish between different structure $E(\theta)$, and the light curve is well-approximated by a broken power law with characteristic break times.  The \emph{misaligned} light curve also may present as a broken power law, but with closure relations explicitly dependent on viewing angle and jet angular structure.  
+We find the light curves of structured jets show two modes of behaviour, depending on whether the observer is \emph{aligned} ($\thobs < \thC$) or \emph{misaligned} ($\thobs > \thC$). In the \emph{aligned} case, the light curves follow the standard on-axis top hat behaviour modified slightly for non-zero viewing angle.  There is little to distinguish between different structure $E(\theta)$, and the light curve is well-approximated by a broken power law with characteristic break times.  The \emph{misaligned} light curve also may present as a broken power law, but with closure relations explicitly dependent on viewing angle and jet angular structure.  
 
 We discuss aligned evolution in detail in Section \ref{subsec:aligned} and misaligned in Section \ref{subsec:misaligned}.  In both cases the transition between phases of evolution depends on the effective solid angle $\Delta \Omega$ of the patch of blast wave dominating the emission.  The size of this patch tends to scale with the Lorentz factor $\gamma$ of the dominant region as:
 \begin{equation}
@@ -225,12 +225,12 @@ The transition between pre-jet break and post-jet break begins at $\tbm$ and com
 \end{align}
 \begin{figure}
 	\plotone{figs/breaks_alignedOA_all.pdf}
-	\caption{Jet break time for on-axis ($\thobs=0$) observers for top-hat (blue circles), Gaussian (orange inverted triangles), and power law (green triangles) jets as a function of $\thC$. The dashed grey line is the analytic approximation $t_b = t_N \thC^{8/3}$. These particular light curves use $\thW = 5 \thC$, $E_0 = 10^{52}$erg, $n_0=10^{-3}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, and $\epsB = 10^{-4}$. \label{fig:tbOA}}
+	\caption{Jet break time for on-axis ($\thobs=0$) observers for top-hat (blue circles), Gaussian (orange squares), and power law (green triangles) jets as a function of $\thC$. The dashed grey line is the analytic approximation $\tbpm = t_N (2\sin \thC/2)^{8/3}$. These particular light curves use $\thW = 5 \thC$, $E_0 = 10^{52}$erg, $n_0=10^{-3}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, and $\epsB = 10^{-4}$. \label{fig:tbOA}}
 \end{figure}
 
-
-
 It is important to note that when $\thobs \neq 0$ the transition period is extended, and the most significant transition in the light curve occurs at $\tbp$, the \emph{jet break}.  The jet break occurs, in all jets, when the effective angular size of the visible patch of the jet ceases to increase, that is when $\som = 0$.  
+
+Figure \ref{fig:tbOA} shows the jet break time for on-axis ($\thobs = 0$) viewers as a function of $\thC$ for top-hat, Gaussian, and power law jets calculated with \afterglowpy{}. Break times were extracted by fitting the numerical light curve with a two-component broken power law.
 
 \begin{figure}
 	\plotone{figs/lc_on.pdf}
@@ -241,7 +241,7 @@ Figure \ref{fig:onaxis} shows representative top-hat, Gaussian, and power law je
 
 The relativistic stages of evolution are followed by a Newtonian phase ($t > 200$ days in Figure \ref{fig:onaxis}) when the decelerating blast wave becomes non-relativistic, spreads sonically, and approaches a Sedov-Taylor solution.  We do not address the Newtonian phase of evolution in this work.
 
-\subsection{Misaligned Evolution: $\thobs \gtrsim \thC$}\ref{subsec:misaligned}
+\subsection{Misaligned Evolution: $\thobs \gtrsim \thC$} \label{subsec:misaligned}
 
 When viewed at angles larger than $\thC$ the gradient $E'(\theta)$ over the visible patch becomes non-negligible.  To observers this energy gradient presents itself as a slowly rising or decaying afterglow light curve. The relativistic afterglow is comprised of two or three phases depending on whether the observer lies within the truncation angle, \emph{far off-axis}, \emph{structured}, and \emph{post-jet break}.
 

@@ -425,7 +425,7 @@ def makeOnAPlot():
 
     fig, ax = plt.subplots(1, 1)
     ax.plot(thCs, tbTH/tN, marker='o', ls='')
-    ax.plot(thCs, tbG/tN, marker='v', ls='')
+    ax.plot(thCs, tbG/tN, marker='s', ls='')
     ax.plot(thCs, tbPL/tN, marker='^', ls='')
     ax.plot(thCs, np.power(2*np.sin(0.5*thCs), 8./3.), lw=4, ls='--',
             color='grey')
