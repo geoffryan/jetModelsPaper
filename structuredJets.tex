@@ -12,6 +12,7 @@
 
 \newcommand{\gwbns}{GW170817}
 \newcommand{\afterglowpy}{{\tt afterglowpy}}
+\newcommand{\boxfit}{{\tt BoxFit}}
 \newcommand{\python}{\tt{Python}}
 
 \newcommand{\dd}{\ensuremath{\mathrm{d}}}
@@ -66,25 +67,6 @@
 	Gamma-ray bursts (GRBs) associated with gravitational wave events are, and will likely continue to be, viewed at a larger inclination than their fellow GRBs without gravitational wave detections.  As demonstrated by the afterglow of GW170817A, this requires an extension of the common GRB afterglow models which typically assume emission from an on-axis top hat jet.  We present a characterization of the afterglows arising from structured jets, utilizing both trans-relativistic numerical calculations and simple analytic approximations.  In many cases the temporal slope before the jet break is found to be a simple function of the ratio between the inclination angle and effective half opening angle of the jet.  Our models, both numerical and analytic, are publicly available as an open source Python package.
 	
 \end{abstract}
-
-\section{outline}
-
-\begin{itemize}
-	\item Need to consider the \emph{structure} of GRB explosions (esp. binary neutron stars).  Structure may be radial (velocity stratification, $E(u)$) or angular ($E(\theta)$).  Both modes affect the afterglow.
-	\item Analytic description: \begin{itemize}
-		\item Velocity stratification / refreshed shock / cocoon leads to simple power law behaviour depending on $k$ ($E_{>u} \propto u^{-k}$).  Breaks occur at deceleration time and when $E_{>u}$ shuts off.
-		\item Angular structure / structured jet leads to not-quite power law behaviour, depending on $g \approx (\thobs - \theta)d \log E / d\theta$.  Breaks occur when $\thobs - \thW \approx 1/\gamma(\thW)$ and $\thobs \approx 1/\gamma(0)$.  $g = g(\theta)$, but $g\approx g_{eff}$ where $g_{eff} = g(\thobs/2)$.
-		\end{itemize}
-	\item Numerical description: \begin{itemize}
-		\item Single-shell ODE for shock evolution
-		\item Integrate over equal-$\tobs$ surfaces
-		\item Structured components independent.
-		\item public and open: install with \tt{pip}.
-		\end{itemize}
-	\item GW170817A - Both models are similar, fit GW170817A well!
-	\item Future observations: Rate of observed counter-parts will depend on degree of collimation of afterglow (jets have lower observed rates than cocoons).  Radial structure may have $k$ vary from object to object.  Angular structure WILL have $g$ vary from object to object.
-	\item Can we determine structure from the afterglow???
-\end{itemize}
 
 \section{Introduction}
 
@@ -158,10 +140,12 @@ Here the time derivative $\dot{R}$ is taken with respect to elapsed time in the 
 \begin{equation}
 	E = (\gamma - 1)\Mej c^2 + \frac{4\pi}{9} \rho_0 c^2 R^3 (4 u^2 + 3) \beta^2 \Omega\ . \label{eq:E}
 \end{equation}
-In Equation \eqref{eq:E} the first term is the kinetic energy of the ejected mass $\Mej$, assumed to have already accelerated and adiabatically cooled to its coasting velocity. The second term is the kinetic and thermal energy of the shocked ISM with three-velocity $\beta = u / \gamma$. The shocked ISM is confined to a cone of solid angle $\Omega = 2 \sin^2 (\theta_0/2)$ where $\theta_0$ is the half-opening angle of the jet. While the blast wave is relativistic $\theta_0$ is constant, but once the jet becomes non-relativistic it begins to spread due to its own internal pressure until the blast wave is spherical.  The spreading occurs at sound speed $c_s$ in the fluid rest-frame \citep{van-Eerten:2010aa, Duffell:2018aa}:
+In Equation \eqref{eq:E} the first term is the kinetic energy of the ejected mass $\Mej$, assumed to have already accelerated and adiabatically cooled to its coasting velocity. The second term is the kinetic and thermal energy of the shocked ISM with three-velocity $\beta = u / \gamma$. The shocked ISM is confined to a cone of solid angle $\Omega = 2 \sin^2 (\theta_0/2)$ where $\theta_0$ is the half-opening angle of the jet. While the blast wave is relativistic $\theta_0$ is constant, but once the jet edge comes in causal contact with the core it begins to spread due to its own internal pressure until the blast wave is spherical.  The spreading occurs at sound speed $c_s$ in the fluid rest-frame \citep{van-Eerten:2010aa, Duffell:2018aa}:
 \begin{equation}
-	\dot{\theta_0} = \frac{c_s}{\gamma R}\ , \qquad \text{if } u < 1\text{ and } \theta_0 > \pi/2\ . \label{eq:thetadot}
+	\dot{\theta_0} = \frac{c_s}{\gamma R}\ , \qquad \text{if } u < 3/\theta_0 \text{ and } \theta_0 > \pi/2\ . \label{eq:thetadot}
 \end{equation}
+The criterion $u < 3/\theta_0$ is satisfied when enough time has elapsed that a sound wave can propagate from $\theta = \theta_0$ to $\theta=0$ in a blast wave propagating in an ISM (CITE HENDRIK).  It is similar to the condition given in \cite{Duffell:2018aa}, which found a numerical factor of 2.5 (instead of 3) after calibrating to numerical simulations.  Our criteria differs from that used in (CITE Troja+) which used an overly simplistic $u < 1$ criterion to begin jet spreading.
+
 Given a (possibly constant) expression for $E$ Equation \eqref{eq:E} may be differentiated with respect to $t$ and solved for $\dot{u}$.  In a refreshed shock scenario $E = E_{>}(u)$, whereas for a standard energy injection model one may take $E \propto t^{-q}$.  In either case, Equation \eqref{eq:E} produces an equation for $\dot{u}$.  This defines a three dimensional system of ordinary differential equations in the variables $(R, u, \theta_0)$ which may be solved numerically or, in certain limits, analytically.
 
 Once the shock evolution is known, the flux is given by the integral:
@@ -193,7 +177,15 @@ Each evaluation of the integrand requires a binary search to determine the burst
 
 The numerical accuracy of a top-hat light curve with this scheme is typically better than $10^{-4}$.  The structured jet calculation splits the integration domain into $N_\theta$ disjoint annuli, each evaluated as an independent top-hat and summed.  By default $N_\theta$ is chosen such that there will be 5 zones per $\thC$-sized interval.   The choice of $N_\theta$ has the largest impact on the code performance and accuracy.  We find the choice $N_\theta = 5$ gives sufficiently quick performance at acceptable errors, typically on the order of $10^{-2}$.  TODO SHOW CONVERGENCE PLOT
 
-It should be noted all errors quoted here are numerical errors associated with the schemes used to solve Equations \ref{eq:Rdot}, \ref{eq:E}, and \ref{eq:thetadot} and perform the integral in Equation \ref{eq:flux2}.  That is, they are the errors relative to solving these equations perfectly.  The equations themselves are, however, an approximation themselves to the full physics of an afterglow light curve.  Comparison and calibration against analytic calculations and hydrodynamic simulations is necessary to ensure physically realistic results.  
+These errors quoted are numerical errors associated with the schemes used to solve Equations \ref{eq:Rdot}, \ref{eq:E}, and \ref{eq:thetadot} and perform the integral in Equation \ref{eq:flux2}.  That is, they are the errors relative to solving these equations perfectly.  The equations themselves are, however, an approximation themselves to the full physics of an afterglow light curve.  Comparison and calibration against analytic calculations and hydrodynamic simulations is necessary to ensure physically realistic results.  
+
+\begin{figure*}
+	\plotone{figs/boxfit_comp.pdf}
+	\caption{Top Panel: Comparison between top hat jet light curves from \afterglowpy{} (solid lines) and \boxfit{} (dashed lines). Bottom Panel: fraction difference between \afterglowpy{} and \boxfit{} light curves.  Four representative light curves are shown: radio on-axis ($\thobs=0$, $\nu=10^9$Hz, blue), radio off-axis ($\thobs=0.16$rad, $\nu=10^9$Hz, orange), x-ray on-axis ($\thobs=0$, $\nu=10^{18}$Hz, green), and x-ray off-axis ($\thobs=0.16$rad, $\nu=10^{18}$Hz, red).  Remaining parameters are shared: $\thC=0.1$rad, $\Eiso=10^{52}$erg, $\Eiso=10^{52}$erg, $n_0 = 10^{-3}$cm$^{-3}$, $p=2.2$, $\epse=10^{-1}$, $\epsB=10^{-2}$, $\dL=3.09 \times 10^{26}$cm, $z=0.028$. \label{fig:boxfitComp}}
+\end{figure*}
+
+Figure \ref{fig:boxfitComp} shows a comparison between top-hat light curves calculated with \afterglowpy{} and \boxfit{}.  The \boxfit{} code uses two-dimensional relativistic hydrodynamic simulations to fully capture the non-linear hydrodynamics of a decelerating blast wave and a ray tracing radiative transfer module to compute observed synchrotron light curves.  Figure \ref{fig:boxfitComp} shows the light curve of a $\thC=0.1$rad top-hat at radio and x-ray frequencies ($10^9$Hz and $10^{18}$Hz, respectively) with aligned ($\thobs = 0$) and misaligned ($\thobs=0.16$rad) viewing angles.  The overall agreement is good: \afterglowpy{} captures the salient features of both aligned and misaligned light curves including the jet break, spectral shape, and transition to the Sedov phase.  The relative error is less than 50\% before the onset of spreading.
+
 
 \afterglowpy{} is available on PyPI and may be installed with {\tt pip}.  The source code is open and available at https://github.com/geoffryan/afterglowpy.
 
@@ -429,20 +421,21 @@ Interpreting the afterglow as arising from a structured jet allows one to quickl
 	\item In the context of a Gaussian jet, the measurement of $\geff$ leads immediately to $\thobs / \thC = 5.5 \pm 0.2$.
 	\item Using the Fong 2015 (CITE Fong 2015) fiducial values of $E_0 \sim 2\times 10^{51}$erg and $n_0 \sim 10^{-2}$cm$^{-3}$ we can use the jet break $\tb$ measurement to determine $\thobs \approx 0.5 \pm 0.2$ rad ($29^\circ \pm 12^\circ$), assuming 1 dex uncertainties on $E_0$ and $n_0$.    This is in agreement with the LIGO measurement $\thobs \approx 28^\circ \pm 15^\circ$ (assuming the SHoES $H_0$).
 	\item The combined measurements of $\thobs$ and $\thobs/\thC$ then imply $\thC \approx 0.09 \pm 0.04$ rad ($5^\circ  \pm 2^\circ$).
-	
 \end{enumerate}
 
+Bayesian parameter estimation utilizing \afterglowpy{} and a Markov chain Monte Carlo sampler was performed in \cite{van-eerten:2018aa}.  The conclusions were very similar to the above analytic estimates, inferring for a Gaussian jet model $\thobs = 0.52\pm0.16$ and $\thC=0.08\pm0.02$.  Incorporating the LIGO posterior for $\thobs$, assuming the Planck value for $H_0$, tightens the constraints to $\thobs = 0.38\pm0.11$ and $\thC=0.06\pm0.02$.  Utilizing the full numerical \afterglowpy{} model allows $E_0$, $n_0$, $p$, $\epse$, and $\epsB$ to also be inferred, although given the lack of observed spectral features in the GW170817 afterglow the resulting constraints are quite broad.
 
 
 \section{Discussion}
 
 \begin{itemize}
-	\item Comparison with boxfit
 	\item Comparison with other GW170817A fits
 	\item Degeneracy between $E(\theta)$ and $\thobs$
 	\item $g$ vs $\thobs / \thC$ plot with GW170817
 	\item Looking forward to O3
 \end{itemize}
+
+Many groups have used structured jet models to analyze the afterglow of GW170817A \citep{Mooley:2018ab, Ghirlanda:2019aa, Lamb:2019aa, Wu:2018aa}.
 
 \section{Summary}
 

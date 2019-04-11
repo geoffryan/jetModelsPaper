@@ -95,12 +95,18 @@ def fit_pl(t, F, printOutput=False):
     return res.x, res.fun, 2
 
 
-def fit_pl2(t, F, printOutput=False):
+def fit_pl2(t, F, tN, thV, thC, printOutput=False):
 
-    N = len(t)
-    b0 = np.log(F[-1]/F[0]) / np.log(t[-1]/t[0])
-    t0 = t[N//2]
-    F0 = F[N//2]
+    tbp = tN * np.power(2*np.sin(0.5*np.fabs(thV+thC)), 8.0/3.0)
+
+    try:
+        ip = np.argwhere(t > tbp)[0]
+    except IndexError:
+        ip = len(t)//2
+    b0 = np.log(F[ip]/F[0]) / np.log(t[ip]/t[0])
+    b1 = np.log(F[-1]/F[ip]) / np.log(t[-1]/t[ip])
+    t0 = t[ip]
+    F0 = F[ip]
 
     bounds = [(math.log10(F.min())-1, math.log10(F.max())+1),
               (math.log10(t.min()), math.log10(t.max())),
@@ -110,7 +116,7 @@ def fit_pl2(t, F, printOutput=False):
     lt0 = math.log10(t0)
 
     print("chi2(x0) = {0:.3e}".format(
-          chi2([lF0, lt0, b0, b0], t, F, f_pl2)))
+          chi2([lF0, lt0, b0, b1], t, F, f_pl2)))
 
     res = opt.minimize(chi2, [lF0, lt0, b0, b0], (t, F, f_pl2),
                        bounds=bounds, method='TNC',
@@ -126,17 +132,31 @@ def fit_pl2(t, F, printOutput=False):
     return y, res.fun, 4
 
 
-def fit_pl3(t, F, printOutput=False):
+def fit_pl3(t, F, tN, thV, thC, printOutput=False):
 
-    N = len(t)
-    b0 = np.log(F[-1]/F[0]) / np.log(t[-1]/t[0])
-    t0 = t[N//3]
-    t1 = t[(2*N)//3]
-    F0 = F[N//3]
+    tbm = tN * np.power(2*np.sin(0.5*np.fabs(thV-thC)), 8.0/3.0)
+    tbp = tN * np.power(2*np.sin(0.5*np.fabs(thV+thC)), 8.0/3.0)
 
-    lF0 = math.log10(F0)
-    lt0 = math.log10(t0)-0.1
-    lt1 = math.log10(t1)+0.1
+    try:
+        im = np.argwhere(t > tbm)[0]
+        ip = np.argwhere(t > tbp)[0]
+    except IndexError:
+        im = len(t)//3
+        ip = 2*im
+    print(tbm, tbp, im, ip)
+    if im == ip:
+        if ip < len(t)-1:
+            ip += 1
+        else:
+            im -= 1
+
+    lt0 = math.log10(t[im])
+    lt1 = math.log10(t[ip])
+    lF0 = math.log10(F[im])
+
+    b0 = np.log(F[im]/F[0]) / np.log(t[im]/t[0])
+    b1 = np.log(F[ip]/F[im]) / np.log(t[ip]/t[im])
+    b2 = np.log(F[-1]/F[ip]) / np.log(t[-1]/t[ip])
 
     bounds = [(math.log10(F.min())-1, math.log10(F.max())+1),
               (math.log10(t.min()), math.log10(t.max())),
@@ -145,7 +165,7 @@ def fit_pl3(t, F, printOutput=False):
 
     print("chi2(x0) = {0:.3e}".format(
           chi2([lF0, lt0, lt1, b0, b0, b0], t, F, f_pl3)))
-    res = opt.minimize(chi2, [lF0, lt0, lt1, b0, b0, b0], (t, F, f_pl3),
+    res = opt.minimize(chi2, [lF0, lt0, lt1, b0, b1, b2], (t, F, f_pl3),
                        bounds=bounds, method='TNC',
                        options={'maxiter': 8000})
     print("chi2(x1) = {0:.3e}".format(
@@ -171,8 +191,10 @@ def findBreaks(regime, NU, jetModel, Y, n=None, plot=False, ax=None, fig=None):
     chim = 2*np.sin(0.5*np.fabs(thC-thV))
     chip = 2*np.sin(0.5*(thC+thV))
 
-    t = np.geomspace(0.03 * tN * math.pow(chim, 8.0/3.0),
-                     min(tN, 3*tN*math.pow(chip, 8.0/3.0)), 300)
+    t = np.geomspace(1.0e-1 * tN * math.pow(chim, 8.0/3.0),
+                     min(0.8*tN, 3*tN*math.pow(chip, 8.0/3.0)), 300)
+    # t = np.geomspace(0.1 * tN * math.pow(chim, 8.0/3.0),
+    #                  min(0.8*tN, 3*tN*math.pow(chip, 8.0/3.0)), 300)
     nu = np.empty(t.shape)
     nu[:] = NU
 
@@ -193,12 +215,25 @@ def findBreaks(regime, NU, jetModel, Y, n=None, plot=False, ax=None, fig=None):
 
     good = be_err < 0.01
 
-    i1 = good.nonzero()[0][0]
-    later_inds = (~good)[i1:].nonzero()[0]
-    if len(later_inds) > 0:
-        i2 = i1 + later_inds[0]
-    else:
-        i2 = len(t)
+    agood = []
+    reading = False
+    i1 = -1
+    i2 = -1
+    for i in range(len(good)):
+        if good[i] and not reading:
+            i1 = i
+            reading = True
+        if not good[i] and reading:
+            i2 = i
+            reading = False
+            agood.append([i1, i2])
+    if reading:
+        agood.append([i1, len(good)])
+    agood = np.array(agood)
+    ngood = agood[:, 1] - agood[:, 0]
+    j = np.argmax(ngood)
+    i1 = agood[j, 0]
+    i2 = agood[j, 1]
 
     print(i2-i1)
 
@@ -222,13 +257,13 @@ def findBreaks(regime, NU, jetModel, Y, n=None, plot=False, ax=None, fig=None):
             ax.plot(t, f_pl(t, *y))
         return 1, y[1]
     elif n is 2:
-        y, chi2, n = fit_pl2(t, Fnu, plot)
+        y, chi2, n = fit_pl2(t, Fnu, tN, thV, thC, plot)
         if plot:
             ax.plot(t, f_pl2(t, *y))
             ax.axvline(y[1], color='grey', ls='--', alpha=0.5)
         return 2, y[1], y[2], y[3]
     elif n is 3:
-        y, chi2, n = fit_pl3(t, Fnu, plot)
+        y, chi2, n = fit_pl3(t, Fnu, tN, thV, thC, plot)
         if plot:
             ax.plot(t, f_pl3(t, *y))
             ax.axvline(y[1], color='grey', ls='--', alpha=0.5)
@@ -236,8 +271,8 @@ def findBreaks(regime, NU, jetModel, Y, n=None, plot=False, ax=None, fig=None):
         return 3, y[1], y[2], y[3], y[4], y[5]
     else:
         y1, chi21, n1 = fit_pl(t, Fnu, plot)
-        y2, chi22, n2 = fit_pl2(t, Fnu, plot)
-        y3, chi23, n3 = fit_pl3(t, Fnu, plot)
+        y2, chi22, n2 = fit_pl2(t, Fnu, tN, thV, thC, plot)
+        y3, chi23, n3 = fit_pl3(t, Fnu, tN, thV, thC, plot)
 
         rc1 = chi21/(n1-1)
         rc2 = chi22/(n2-1)
@@ -598,7 +633,7 @@ def makeOffAPlot():
         plt.close(fig)
 
 
-def makeVeryOffAPlot():
+def makeVeryOffAPlot(nfit=2):
 
     thV = 0.0
     E0 = 1.0e52
@@ -624,8 +659,8 @@ def makeVeryOffAPlot():
     tbG = []
     tbPL = []
 
-    thCs = np.array([0.02, 0.04, 0.08, 0.16])
-    thVoCs = np.array([1.5, 2.0, 4.0, 6.0])
+    thCs = np.array([0.02, 0.04, 0.08, 0.12, 0.15])
+    thVoCs = np.array([1.5, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0])
     # thCs = np.array([0.02])
     # thVoCs = np.array([0.25, 0.5, 0.75])
 
@@ -655,15 +690,32 @@ def makeVeryOffAPlot():
             Y[2] = thC
             Y[3] = 5*thC
             print("theta_v / theta_c: " + str(thVoC))
-            print("  top hat")
-            res = findBreaks(regime, NU, -1, Y, 3, plot=plot, ax=axTH[j, i])
-            tTH.append([res[1], res[2]])
-            print("  Gaussian")
-            res = findBreaks(regime, NU, 0, Y, 3, plot=plot, ax=axG[j, i])
-            tG.append([res[1], res[2]])
-            print("  Power law")
-            res = findBreaks(regime, NU, 4, Y, 3, plot=plot, ax=axPL[j, i])
-            tPL.append([res[1], res[2]])
+            if nfit is 3:
+                print("  top hat")
+                res = findBreaks(regime, NU, -1, Y, 3, plot=plot,
+                                 ax=axTH[j, i])
+                tTH.append([res[1], res[2]])
+                print("  Gaussian")
+                res = findBreaks(regime, NU, 0, Y, 3, plot=plot,
+                                 ax=axG[j, i])
+                tG.append([res[1], res[2]])
+                print("  Power law")
+                res = findBreaks(regime, NU, 4, Y, 3, plot=plot,
+                                 ax=axPL[j, i])
+                tPL.append([res[1], res[2]])
+            else:
+                print("  top hat")
+                res = findBreaks(regime, NU, -1, Y, 2, plot=plot,
+                                 ax=axTH[j, i])
+                tTH.append([res[1]])
+                print("  Gaussian")
+                res = findBreaks(regime, NU, 0, Y, 2, plot=plot,
+                                 ax=axG[j, i])
+                tG.append([res[1]])
+                print("  Power law")
+                res = findBreaks(regime, NU, 4, Y, 2, plot=plot,
+                                 ax=axPL[j, i])
+                tPL.append([res[1]])
         tbTH.append(tTH)
         tbG.append(tG)
         tbPL.append(tPL)
@@ -701,23 +753,24 @@ def makeVeryOffAPlot():
 
     fig, ax = plt.subplots(1, 1)
     ax.plot(thCs, tbTH[:, j1, 0]/tN, marker='o', ls='', color='C0')
-    ax.plot(thCs, tbTH[:, j1, 1]/tN, marker='o', ls='', color='C0')
     ax.plot(thCs, tbTH[:, j2, 0]/tN, marker='v', ls='', color='C0')
-    ax.plot(thCs, tbTH[:, j2, 1]/tN, marker='v', ls='', color='C0')
     ax.plot(thCs, tbTH[:, j3, 0]/tN, marker='^', ls='', color='C0')
-    ax.plot(thCs, tbTH[:, j3, 1]/tN, marker='^', ls='', color='C0')
     ax.plot(thCs, tbG[:, j1, 0]/tN, marker='o', ls='', color='C1')
-    ax.plot(thCs, tbG[:, j1, 1]/tN, marker='o', ls='', color='C1')
     ax.plot(thCs, tbG[:, j2, 0]/tN, marker='v', ls='', color='C1')
-    ax.plot(thCs, tbG[:, j2, 1]/tN, marker='v', ls='', color='C1')
     ax.plot(thCs, tbG[:, j3, 0]/tN, marker='^', ls='', color='C1')
-    ax.plot(thCs, tbG[:, j3, 1]/tN, marker='^', ls='', color='C1')
     ax.plot(thCs, tbPL[:, j1, 0]/tN, marker='o', ls='', color='C2')
-    ax.plot(thCs, tbPL[:, j1, 1]/tN, marker='o', ls='', color='C2')
     ax.plot(thCs, tbPL[:, j2, 0]/tN, marker='v', ls='', color='C2')
-    ax.plot(thCs, tbPL[:, j2, 1]/tN, marker='v', ls='', color='C2')
     ax.plot(thCs, tbPL[:, j3, 0]/tN, marker='^', ls='', color='C2')
-    ax.plot(thCs, tbPL[:, j3, 1]/tN, marker='^', ls='', color='C2')
+    if nfit is 3:
+        ax.plot(thCs, tbTH[:, j1, 1]/tN, marker='o', ls='', color='C0')
+        ax.plot(thCs, tbTH[:, j2, 1]/tN, marker='v', ls='', color='C0')
+        ax.plot(thCs, tbTH[:, j3, 1]/tN, marker='^', ls='', color='C0')
+        ax.plot(thCs, tbG[:, j1, 1]/tN, marker='o', ls='', color='C1')
+        ax.plot(thCs, tbG[:, j2, 1]/tN, marker='v', ls='', color='C1')
+        ax.plot(thCs, tbG[:, j3, 1]/tN, marker='^', ls='', color='C1')
+        ax.plot(thCs, tbPL[:, j1, 1]/tN, marker='o', ls='', color='C2')
+        ax.plot(thCs, tbPL[:, j2, 1]/tN, marker='v', ls='', color='C2')
+        ax.plot(thCs, tbPL[:, j3, 1]/tN, marker='^', ls='', color='C2')
     # ax.plot(thCs, np.power(2*np.sin(0.5*thCs*thVoCs), 8./3.), lw=4, ls='--',
     #         color='grey')
     ax.set_xscale('log')
@@ -734,11 +787,12 @@ def makeVeryOffAPlot():
     for i in range(len(thCs)):
         fig, ax = plt.subplots(1, 1)
         ax.plot(thVoCs, tbTH[i, :, 0]/tN, ls='--', color='C0')
-        ax.plot(thVoCs, tbTH[i, :, 1]/tN, ls='-', color='C0')
         ax.plot(thVoCs, tbG[i, :, 0]/tN, ls='--', color='C1')
-        ax.plot(thVoCs, tbG[i, :, 1]/tN, ls='-', color='C1')
         ax.plot(thVoCs, tbPL[i, :, 0]/tN, ls='--', color='C2')
-        ax.plot(thVoCs, tbPL[i, :, 1]/tN, ls='-', color='C2')
+        if nfit is 3:
+            ax.plot(thVoCs, tbTH[i, :, 1]/tN, ls='-', color='C0')
+            ax.plot(thVoCs, tbG[i, :, 1]/tN, ls='-', color='C1')
+            ax.plot(thVoCs, tbPL[i, :, 1]/tN, ls='-', color='C2')
         ax.plot(thVoCs, np.power(2*np.sin(0.5*thCs[i]*thVoCs), 8./3.),
                 ls='-', color='grey')
         ax.set_xscale('log')
@@ -753,11 +807,253 @@ def makeVeryOffAPlot():
         plt.close(fig)
 
 
+def makeGeneralPlot(nfit=None):
+
+    thV = 0.0
+    E0 = 1.0e52
+    thC = 0.03
+    thW = 0.4
+    b = 5.0
+    n0 = 1.0e-3
+    p = 2.2
+    epse = 0.1
+    epsB = 1.0e-4
+    xiN = 1.0
+
+    dL = 3.0e26
+
+    Y = np.array([thV, E0, thC, thW, b, 0.0, 0.0, 0.0, n0, p, epse, epsB,
+                  xiN, dL])
+    tN = math.pow(9 * E0 / (16.0*np.pi*n0*grb.mp*grb.c**5), 1.0/3.0)
+
+    NU = 1.0e17
+    regime = 'G'
+
+    tbTH = []
+    tbG = []
+    tbPL = []
+
+    alTH = []
+    alG = []
+    alPL = []
+
+    thCs = np.array([0.02, 0.04, 0.08, 0.12, 0.15])
+    thVs = np.array([0.0, 0.01, 0.03, 0.06, 0.1, 0.135, 0.2, 0.3, 0.4,
+                     0.6, 0.8, 1.0, 1.2])
+    # thCs = np.array([0.02])
+    # thVoCs = np.array([0.25, 0.5, 0.75])
+
+    plot = True
+
+    NC = len(thCs)
+    NV = len(thVs)
+    if plot:
+        figTH, axTH = plt.subplots(NV, NC, figsize=(NC*2, 2*NV))
+        figG, axG = plt.subplots(NV, NC, figsize=(NC*2, 2*NV))
+        figPL, axPL = plt.subplots(NV, NC, figsize=(NC*2, 2*NV))
+    else:
+        figTH = None
+        figG = None
+        figPL = None
+        axTH = np.empty((NV, NC))
+        axG = np.empty((NV, NC))
+        axPL = np.empty((NV, NC))
+
+    for i, thC in enumerate(thCs):
+        tTH = []
+        tG = []
+        tPL = []
+        aTH = []
+        aG = []
+        aPL = []
+        print("theta_c: " + str(thC))
+        for j, thV in enumerate(thVs):
+            Y[0] = thV
+            Y[2] = thC
+            Y[3] = 5*thC
+            print("theta_v: " + str(thV))
+            print("  top hat")
+            res = findBreaks(regime, NU, -1, Y, n=nfit, plot=plot,
+                             ax=axTH[j, i])
+            tTH.append([res[k+1] for k in range(res[0]-1)])
+            aTH.append([res[k+res[0]] for k in range(res[0])])
+            print("  Gaussian")
+            res = findBreaks(regime, NU, 0, Y, n=nfit, plot=plot,
+                             ax=axG[j, i])
+            tG.append([res[k+1] for k in range(res[0]-1)])
+            aG.append([res[k+res[0]] for k in range(res[0])])
+            print("  Power law")
+            res = findBreaks(regime, NU, 4, Y, n=nfit, plot=plot,
+                             ax=axPL[j, i])
+            tPL.append([res[k+1] for k in range(res[0]-1)])
+            aPL.append([res[k+res[0]] for k in range(res[0])])
+        tbTH.append(tTH)
+        tbG.append(tG)
+        tbPL.append(tPL)
+        alTH.append(aTH)
+        alG.append(aG)
+        alPL.append(aPL)
+
+    if plot:
+        figTH.tight_layout()
+        name = "breaks_general_lc_TH.png"
+        print("Saving " + name)
+        figTH.savefig(name)
+        plt.close(figTH)
+
+        figG.tight_layout()
+        name = "breaks_general_lc_G.png"
+        print("Saving " + name)
+        figG.savefig(name)
+        plt.close(figG)
+
+        figPL.tight_layout()
+        name = "breaks_general_lc_PL.png"
+        print("Saving " + name)
+        figPL.savefig(name)
+        plt.close(figPL)
+
+    tbTH = np.array(tbTH)
+    tbG = np.array(tbG)
+    tbPL = np.array(tbPL)
+
+    print(tbTH)
+    print(tbG)
+    print(tbPL)
+
+    """
+    j1 = 0
+    j2 = len(thVs)//2
+    j3 = len(thVs)-1
+
+    fig, ax = plt.subplots(1, 1)
+    ax.plot(thCs, tbTH[:, j1, 0]/tN, marker='o', ls='', color='C0')
+    ax.plot(thCs, tbTH[:, j2, 0]/tN, marker='v', ls='', color='C0')
+    ax.plot(thCs, tbTH[:, j3, 0]/tN, marker='^', ls='', color='C0')
+    ax.plot(thCs, tbG[:, j1, 0]/tN, marker='o', ls='', color='C1')
+    ax.plot(thCs, tbG[:, j2, 0]/tN, marker='v', ls='', color='C1')
+    ax.plot(thCs, tbG[:, j3, 0]/tN, marker='^', ls='', color='C1')
+    ax.plot(thCs, tbPL[:, j1, 0]/tN, marker='o', ls='', color='C2')
+    ax.plot(thCs, tbPL[:, j2, 0]/tN, marker='v', ls='', color='C2')
+    ax.plot(thCs, tbPL[:, j3, 0]/tN, marker='^', ls='', color='C2')
+    if nfit is 3:
+        ax.plot(thCs, tbTH[:, j1, 1]/tN, marker='o', ls='', color='C0')
+        ax.plot(thCs, tbTH[:, j2, 1]/tN, marker='v', ls='', color='C0')
+        ax.plot(thCs, tbTH[:, j3, 1]/tN, marker='^', ls='', color='C0')
+        ax.plot(thCs, tbG[:, j1, 1]/tN, marker='o', ls='', color='C1')
+        ax.plot(thCs, tbG[:, j2, 1]/tN, marker='v', ls='', color='C1')
+        ax.plot(thCs, tbG[:, j3, 1]/tN, marker='^', ls='', color='C1')
+        ax.plot(thCs, tbPL[:, j1, 1]/tN, marker='o', ls='', color='C2')
+        ax.plot(thCs, tbPL[:, j2, 1]/tN, marker='v', ls='', color='C2')
+        ax.plot(thCs, tbPL[:, j3, 1]/tN, marker='^', ls='', color='C2')
+    # ax.plot(thCs, np.power(2*np.sin(0.5*thCs*thVoCs), 8./3.), lw=4, ls='--',
+    #         color='grey')
+    ax.set_xscale('log')
+    ax.set_yscale('log')
+    ax.set_xlabel(r'$\theta_C$')
+    ax.set_ylabel(r'$t_b / t_N$')
+    fig.tight_layout()
+
+    name = "breaks_general_all.pdf"
+    print("Saving " + name)
+    fig.savefig(name)
+    plt.close(fig)
+    """
+
+    for i in range(len(thCs)):
+        fig, ax = plt.subplots(1, 1)
+        if nfit is 2:
+            TB = np.array([tbTH[i][k][0] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='-', color='C0')
+            TB = np.array([tbG[i][k][0] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='-', color='C1')
+            TB = np.array([tbPL[i][k][0] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='-', color='C2')
+        elif nfit is 3:
+            TB = np.array([tbTH[i][k][0] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='--', color='C0')
+            TB = np.array([tbG[i][k][0] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='--', color='C1')
+            TB = np.array([tbPL[i][k][0] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='--', color='C2')
+            TB = np.array([tbTH[i][k][1] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='-', color='C0')
+            TB = np.array([tbG[i][k][1] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='-', color='C1')
+            TB = np.array([tbPL[i][k][1] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='-', color='C2')
+        else:
+            TB = np.array([tbTH[i][k][0] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='--', color='C0')
+            TB = np.array([tbG[i][k][0] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='--', color='C1')
+            TB = np.array([tbPL[i][k][0] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='--', color='C2')
+            TB = np.array([tbTH[i][k][-1] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='-', color='C0')
+            TB = np.array([tbG[i][k][-1] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='-', color='C1')
+            TB = np.array([tbPL[i][k][-1] for k in range(NV)])
+            ax.plot(thVs, TB/tN, ls='-', color='C2')
+
+        ax.plot(thVs, np.power(2*np.sin(0.5*np.fabs(thVs-thCs[i])), 8./3.),
+                ls='--', color='grey')
+        ax.plot(thVs, np.power(2*np.sin(0.5*np.fabs(thVs+thCs[i])), 8./3.),
+                ls=':', color='grey')
+        ax.plot(thVs, np.power(2*np.sin(0.5*thVs), 8./3.),
+                ls='-', color='grey')
+        ax.set_xscale('log')
+        ax.set_yscale('log')
+        ax.set_xlabel(r'$\theta_V$')
+        ax.set_ylabel(r'$t_b / t_N$')
+        fig.tight_layout()
+
+        name = "breaks_general_thC_{0:.02f}.pdf".format(thCs[i])
+        print("Saving " + name)
+        fig.savefig(name)
+        plt.close(fig)
+
+    fig, ax = plt.subplots(1, 1)
+    for i in range(NC):
+        al = [alTH[i][k][0] for k in range(NV)]
+        ax.plot(thVs/thCs[i], al, color='C0', ls='', marker='.')
+        al = [alTH[i][k][1] for k in range(NV)]
+        ax.plot(thVs/thCs[i], al, color='C0', ls='', marker='+')
+        if nfit is 3:
+            al = [alTH[i][k][2] for k in range(NV)]
+            ax.plot(thVs/thCs[i], al, color='C0', ls='', marker='x')
+        al = [alG[i][k][0] for k in range(NV)]
+        ax.plot(thVs/thCs[i], al, color='C1', ls='', marker='.')
+        al = [alG[i][k][1] for k in range(NV)]
+        ax.plot(thVs/thCs[i], al, color='C1', ls='', marker='+')
+        if nfit is 3:
+            al = [alG[i][k][2] for k in range(NV)]
+            ax.plot(thVs/thCs[i], al, color='C1', ls='', marker='x')
+        al = [alPL[i][k][0] for k in range(NV)]
+        ax.plot(thVs/thCs[i], al, color='C2', ls='', marker='.')
+        al = [alPL[i][k][1] for k in range(NV)]
+        ax.plot(thVs/thCs[i], al, color='C2', ls='', marker='+')
+        if nfit is 3:
+            al = [alPL[i][k][2] for k in range(NV)]
+            ax.plot(thVs/thCs[i], al, color='C2', ls='', marker='x')
+
+    ax.set_xscale('log')
+    ax.set_xlabel(r'$\theta_V / \theta_C$')
+    ax.set_ylabel(r'$\alpha$')
+    fig.tight_layout()
+
+    name = "breaks_general_alpha.pdf"
+    print("Saving " + name)
+    fig.savefig(name)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
 
-    makeOnAPlot()
-    makeOffAPlot()
-    makeVeryOffAPlot()
+    # makeOnAPlot()
+    # makeOffAPlot()
+    # makeVeryOffAPlot(2)
+    makeGeneralPlot(3)
     # makeSlopesPlot()
 
     plt.show()

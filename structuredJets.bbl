@@ -17,8 +17,24 @@
 {Duffell}, P.~C., \& {MacFadyen}, A.~I. 2013, \apjl, 776, L9,
   \dodoi{10.1088/2041-8205/776/1/L9}
 
+\bibitem[{{Ghirlanda} {et~al.}(2019){Ghirlanda}, {Salafia}, {Paragi},
+  {Giroletti}, {Yang}, {Marcote}, {Blanchard}, {Agudo}, {An}, {Bernardini},
+  {Beswick}, {Branchesi}, {Campana}, {Casadio}, {Chassande-Mottin}, {Colpi},
+  {Covino}, {D{\rsquo}Avanzo}, {D{\rsquo}Elia}, {Frey}, {Gawronski},
+  {Ghisellini}, {Gurvits}, {Jonker}, {van Langevelde}, {Melandri}, {Moldon},
+  {Nava}, {Perego}, {Perez-Torres}, {Reynolds}, {Salvaterra}, {Tagliaferri},
+  {Venturi}, {Vergani}, \& {Zhang}}]{Ghirlanda:2019aa}
+{Ghirlanda}, G., {Salafia}, O.~S., {Paragi}, Z., {et~al.} 2019, Science, 363,
+  968, \dodoi{10.1126/science.aau8815}
+
 \bibitem[{{Granot} \& {Sari}(2002)}]{Granot:2002aa}
 {Granot}, J., \& {Sari}, R. 2002, \apj, 568, 820, \dodoi{10.1086/338966}
+
+\bibitem[{{Lamb} {et~al.}(2019){Lamb}, {Lyman}, {Levan}, {Tanvir}, {Kangas},
+  {Fruchter}, {Gompertz}, {Hjorth}, {Mandel}, {Oates}, {Steeghs}, \&
+  {Wiersema}}]{Lamb:2019aa}
+{Lamb}, G.~P., {Lyman}, J.~D., {Levan}, A.~J., {et~al.} 2019, \apjl, 870, L15,
+  \dodoi{10.3847/2041-8213/aaf96b}
 
 \bibitem[{{Lazzati} {et~al.}(2017){Lazzati}, {L{\'o}pez-C{\'a}mara},
   {Cantiello}, {Morsony}, {Perna}, \& {Workman}}]{Lazzati:2017aa}
@@ -36,6 +52,12 @@
 {Mizuta}, A., \& {Aloy}, M.~A. 2009, \apj, 699, 1261,
   \dodoi{10.1088/0004-637X/699/2/1261}
 
+\bibitem[{{Mooley} {et~al.}(2018){Mooley}, {Deller}, {Gottlieb}, {Nakar},
+  {Hallinan}, {Bourke}, {Frail}, {Horesh}, {Corsi}, \&
+  {Hotokezaka}}]{Mooley:2018ab}
+{Mooley}, K.~P., {Deller}, A.~T., {Gottlieb}, O., {et~al.} 2018, \nat, 561,
+  355, \dodoi{10.1038/s41586-018-0486-3}
+
 \bibitem[{{Troja} {et~al.}(2017){Troja}, {Piro}, {van Eerten}, {Wollaeger},
   {Im}, {Fox}, {Butler}, {Cenko}, {Sakamoto}, {Fryer}, {Ricci}, {Lien}, {Ryan},
   {Korobkin}, {Lee}, {Burgess}, {Lee}, {Watson}, {Choi}, {Covino}, {D'Avanzo},
@@ -44,6 +66,11 @@
   {Yoon}}]{Troja:2017aa}
 {Troja}, E., {Piro}, L., {van Eerten}, H., {et~al.} 2017, \nat, 551, 71,
   \dodoi{10.1038/nature24290}
+
+\bibitem[{{van Eerten} {et~al.}(2018){van Eerten}, {Ryan}, {Ricci}, {Burgess},
+  {Wieringa}, {Piro}, {Cenko}, \& {Sakamoto}}]{van-eerten:2018aa}
+{van Eerten}, E.~T.~H., {Ryan}, G., {Ricci}, R., {et~al.} 2018, arXiv e-prints.
+\newblock \doarXiv{1808.06617}
 
 \bibitem[{{van Eerten}(2018)}]{van-Eerten:2018ab}
 {van Eerten}, H. 2018, International Journal of Modern Physics D, 27, 1842002,
@@ -57,6 +84,10 @@
 \bibitem[{{van Eerten} \& {MacFadyen}(2012)}]{van-Eerten:2012ac}
 {van Eerten}, H.~J., \& {MacFadyen}, A.~I. 2012, \apjl, 747, L30,
   \dodoi{10.1088/2041-8205/747/2/L30}
+
+\bibitem[{{Wu} \& {MacFadyen}(2018)}]{Wu:2018aa}
+{Wu}, Y., \& {MacFadyen}, A. 2018, \apj, 869, 55,
+  \dodoi{10.3847/1538-4357/aae9de}
 
 \bibitem[{{Zhang} {et~al.}(2006){Zhang}, {Fan}, {Dyks}, {Kobayashi},
   {M{\'e}sz{\'a}ros}, {Burrows}, {Nousek}, \& {Gehrels}}]{Zhang:2006aa}
