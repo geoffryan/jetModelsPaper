@@ -5,6 +5,12 @@
 \providecommand{\doeprint}[1]{\href{http://ascl.net/#1}{\nolinkurl{http://ascl.net/#1}}}
 \providecommand{\doarXiv}[1]{\href{https://arxiv.org/abs/#1}{\nolinkurl{https://arxiv.org/abs/#1}}}
 
+\bibitem[{{Abbott} {et~al.}(2017){Abbott}, {Abbott}, {Abbott}, {Acernese},
+  {Ackley}, {Adams}, {Adams}, {Addesso}, {Adhikari}, {Adya}, \&
+  et~al.}]{Abbott:2017aa}
+{Abbott}, B.~P., {Abbott}, R., {Abbott}, T.~D., {et~al.} 2017, \nat, 551, 85,
+  \dodoi{10.1038/nature24471}
+
 \bibitem[{{Aloy} {et~al.}(2005){Aloy}, {Janka}, \& {M{\"u}ller}}]{Aloy:2005aa}
 {Aloy}, M.~A., {Janka}, H.-T., \& {M{\"u}ller}, E. 2005, \aap, 436, 273,
   \dodoi{10.1051/0004-6361:20041865}
@@ -17,18 +23,28 @@
 {Duffell}, P.~C., \& {MacFadyen}, A.~I. 2013, \apjl, 776, L9,
   \dodoi{10.1088/2041-8205/776/1/L9}
 
+\bibitem[{{Foreman-Mackey} {et~al.}(2013){Foreman-Mackey}, {Hogg}, {Lang}, \&
+  {Goodman}}]{Foreman-Mackey:2013aa}
+{Foreman-Mackey}, D., {Hogg}, D.~W., {Lang}, D., \& {Goodman}, J. 2013, \pasp,
+  125, 306, \dodoi{10.1086/670067}
+
 \bibitem[{{Ghirlanda} {et~al.}(2019){Ghirlanda}, {Salafia}, {Paragi},
   {Giroletti}, {Yang}, {Marcote}, {Blanchard}, {Agudo}, {An}, {Bernardini},
   {Beswick}, {Branchesi}, {Campana}, {Casadio}, {Chassande-Mottin}, {Colpi},
-  {Covino}, {D{\rsquo}Avanzo}, {D{\rsquo}Elia}, {Frey}, {Gawronski},
-  {Ghisellini}, {Gurvits}, {Jonker}, {van Langevelde}, {Melandri}, {Moldon},
-  {Nava}, {Perego}, {Perez-Torres}, {Reynolds}, {Salvaterra}, {Tagliaferri},
-  {Venturi}, {Vergani}, \& {Zhang}}]{Ghirlanda:2019aa}
+  {Covino}, {D'Avanzo}, {D'Elia}, {Frey}, {Gawronski}, {Ghisellini}, {Gurvits},
+  {Jonker}, {van Langevelde}, {Melandri}, {Moldon}, {Nava}, {Perego},
+  {Perez-Torres}, {Reynolds}, {Salvaterra}, {Tagliaferri}, {Venturi},
+  {Vergani}, \& {Zhang}}]{Ghirlanda:2019aa}
 {Ghirlanda}, G., {Salafia}, O.~S., {Paragi}, Z., {et~al.} 2019, Science, 363,
   968, \dodoi{10.1126/science.aau8815}
 
 \bibitem[{{Granot} \& {Sari}(2002)}]{Granot:2002aa}
 {Granot}, J., \& {Sari}, R. 2002, \apj, 568, 820, \dodoi{10.1086/338966}
+
+\bibitem[{{Hotokezaka} {et~al.}(2018){Hotokezaka}, {Nakar}, {Gottlieb},
+  {Nissanke}, {Masuda}, {Hallinan}, {Mooley}, \& {Deller}}]{Hotokezaka:2018aa}
+{Hotokezaka}, K., {Nakar}, E., {Gottlieb}, O., {et~al.} 2018, arXiv e-prints.
+\newblock \doarXiv{1806.10596}
 
 \bibitem[{{Lamb} {et~al.}(2019){Lamb}, {Lyman}, {Levan}, {Tanvir}, {Kangas},
   {Fruchter}, {Gompertz}, {Hjorth}, {Mandel}, {Oates}, {Steeghs}, \&
@@ -58,6 +74,12 @@
 {Mooley}, K.~P., {Deller}, A.~T., {Gottlieb}, O., {et~al.} 2018, \nat, 561,
   355, \dodoi{10.1038/s41586-018-0486-3}
 
+\bibitem[{{Planck Collaboration} {et~al.}(2016){Planck Collaboration}, {Ade},
+  {Aghanim}, {Arnaud}, {Ashdown}, {Aumont}, {Baccigalupi}, {Banday},
+  {Barreiro}, {Bartlett}, \& et~al.}]{Planck-Collaboration:2016aa}
+{Planck Collaboration}, {Ade}, P.~A.~R., {Aghanim}, N., {et~al.} 2016, \aap,
+  594, A13, \dodoi{10.1051/0004-6361/201525830}
+
 \bibitem[{{Troja} {et~al.}(2017){Troja}, {Piro}, {van Eerten}, {Wollaeger},
   {Im}, {Fox}, {Butler}, {Cenko}, {Sakamoto}, {Fryer}, {Ricci}, {Lien}, {Ryan},
   {Korobkin}, {Lee}, {Burgess}, {Lee}, {Watson}, {Choi}, {Covino}, {D'Avanzo},
@@ -67,8 +89,13 @@
 {Troja}, E., {Piro}, L., {van Eerten}, H., {et~al.} 2017, \nat, 551, 71,
   \dodoi{10.1038/nature24290}
 
+\bibitem[{{Troja} {et~al.}(2018){Troja}, {Piro}, {Ryan}, {van Eerten}, {Ricci},
+  {Wieringa}, {Lotti}, {Sakamoto}, \& {Cenko}}]{Troja:2018aa}
+{Troja}, E., {Piro}, L., {Ryan}, G., {et~al.} 2018, \mnras, 478, L18,
+  \dodoi{10.1093/mnrasl/sly061}
+
 \bibitem[{{van Eerten} {et~al.}(2018){van Eerten}, {Ryan}, {Ricci}, {Burgess},
-  {Wieringa}, {Piro}, {Cenko}, \& {Sakamoto}}]{van-eerten:2018aa}
+  {Wieringa}, {Piro}, {Cenko}, \& {Sakamoto}}]{van-Eerten:2018aa}
 {van Eerten}, E.~T.~H., {Ryan}, G., {Ricci}, R., {et~al.} 2018, arXiv e-prints.
 \newblock \doarXiv{1808.06617}
 
