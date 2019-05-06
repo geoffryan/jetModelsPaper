@@ -1,0 +1,12 @@
+# text.usetex: True
+font.family: serif
+font.serif: cmr10
+font.size: 10.0
+
+mathtext.fontset: cm
+mathtext.rm: serif
+
+figure.figsize: 3.5, 2.5
+
+legend.fontsize: 8.0
+legend.labelspacing: 0.2

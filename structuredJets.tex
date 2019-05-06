@@ -420,7 +420,7 @@ Generic closure relations leaving the dependence on $\som$ explicit are presente
 
 We use the electromagnetic afterglow of \gwbns{} as an example application of both the analytic and numerical structured jet afterglow models.  
 
-Figure \ref{fig:170817Alc} shows the observations in radio, optical, and x-ray bands of the \gwbns{} afterglow.  No afterglow emission was detected until an x-ray detection by the Chandra observatory nine days after the GW trigger \cite{Troja:2017aa}.  Further radio, optical, and x-ray observations showed a steady rising light curve with constant power law slope until a peak near day 160.  At this point the light curve turned over and began a steep decay that continues to the present (CITE YearInTheLife).
+Figure \ref{fig:170817Alc} shows the observations in radio, optical, and x-ray bands of the \gwbns{} afterglow.  No afterglow emission was detected until an x-ray detection by the Chandra observatory nine days after the GW trigger \cite{Troja:2017aa}.  Further radio, optical, and x-ray observations showed a steady rising light curve with constant power law slope until a peak near day 160.  At this point the light curve turned over and began a steep decay that continues to the present \citep{van-Eerten:2018aa}.
 
 Interpreting the afterglow as arising from a structured jet allows one to quickly draw the following conclusions:
 \begin{enumerate}
@@ -432,8 +432,7 @@ Interpreting the afterglow as arising from a structured jet allows one to quickl
 	\item The combined measurements of $\thobs$ and $\thobs/\thC$ then imply $\thC \approx 0.09 \pm 0.04$ rad ($5^\circ  \pm 2^\circ$).
 \end{enumerate}
 
-For a more detailed analysis we performed Bayesian parameter estimation utilizing \afterglowpy{} and the \emcee{} Markov chain Monte Carlo sampler \citep{Foreman-Mackey:2013aa}.  We used the light curve data reported in \citet{van-Eerten:2018aa} with additional \hubble{} observations reported in \citet{Lamb:2019aa}. Reported measurement uncertainties were assumed to be independ
-ent and Gaussian, upper limits were treated as observations of zero flux with a 1-sigma Gaussian uncertainty. 
+For a more detailed analysis we performed Bayesian parameter estimation utilizing \afterglowpy{} and the \emcee{} Markov chain Monte Carlo sampler \citep{Foreman-Mackey:2013aa}.  We used the light curve data reported in \citet{van-Eerten:2018aa} with additional \hubble{} observations reported in \citet{Lamb:2019aa}. Reported measurement uncertainties were assumed to be independent and Gaussian, upper limits were treated as observations of zero flux with a 1-sigma Gaussian uncertainty. 
 
 We fit both the Gaussian and power law structured jet models, fixing $\xi_N = 1$ and $\dL = 1.23 \times 10^{26}$cm.  The fit parameters, their priors, and their marginalized posteriors are given in Table \ref{tab:MCMC}. Both models were run with 300 walkers for 64 000 iterations, discarding the first 16 000 iterations as a burn-in.  The viewing angle prior is the posterior found in analysis of the \gwbns{} gravitational wave signal assuming the value of $H_0$ reported by the \planck{} collaboration \citep{Abbott:2017aa, Planck-Collaboration:2016aa, Troja:2018aa}.  
 
@@ -468,12 +467,13 @@ We fit both the Gaussian and power law structured jet models, fixing $\xi_N = 1$
 
 Figures \ref{fig:cornerGaussian} and \ref{fig:cornerPowerlaw} show the one- and two-dimensional marginalized views of the posterior distribution for the Gaussian. and power law jet model fits, respectively.  Table \ref{tab:MCMC} additionally gives constraints on the total jet energy \Etot{} and the ratio $\thobs/\thC$. The parameters $E_0$, $n_0$, $\epse$, and $\epsB$ are only constrained to within an order of magnitude, due partially to the observed radio, optical, and x-ray data all lying on the same synchrotron power-law segment.  These parameters are shared between jet models, and are broadly consistent between the two fits with the possible exception of $n_0$.  The electron energy index $p$ is extremely well constrained by both models, of course, due precisely to the large range of data laying on the same synchrotron segment.  The total jet energy in both models in constrained to be on the order $10^{51}$erg.
 
-Of most interest are the geometric parameters: the viewing angle $\thobs$ and the jet structure parameters $\thC$, $\thW$, and $b$.  Both models constrain $\thobs$ and $\thC$ reasonably well, but constrain the combination $\thobs/\thC$ far better.  This is very evident by the corresponding map of the posterior in Figures \ref{fig:cornerGaussian} and \ref{fig:cornerPowerlaw}, which clearly displays a preferred linear relationship between $\thobs$ and $\thC$.  This is the manifestation of the structured jet closure relations with $g \approx \geff(\thobs/\thC)$.  The looser constraint on $\thobs/\thC$ in the power law jet comes from the additional freedom of the $b$ parameter, which has an effect on $\geff$ in that model (see Equation \eqref{eq:geff}). The truncation angle $\thW$ is essentially unconstrained in the Gaussian fit as a far off-axis phase was not observed.  In the power law fit, however, $\thW$ is constrained to be quite narrow so as to avoid the early bright wings.
+Of most interest are the geometric parameters: the viewing angle $\thobs$ and the jet structure parameters $\thC$, $\thW$, and $b$.  Encouragingly, the fits agree with the back-of-the-envelope reasoning from the analytic closure relations and break time scalings.  Both models constrain $\thobs$ and $\thC$ reasonably well, but constrain the combination $\thobs/\thC$ far better.  This is very evident by the corresponding map of the posterior in Figures \ref{fig:cornerGaussian} and \ref{fig:cornerPowerlaw}, which clearly displays a preferred linear relationship between $\thobs$ and $\thC$.  This is the manifestation of the structured jet closure relations with $g \approx \geff(\thobs/\thC)$.  The looser constraint on $\thobs/\thC$ in the power law jet comes from the additional freedom of the $b$ parameter, which has an effect on $\geff$ in that model (see Equation \eqref{eq:geff}). The truncation angle $\thW$ is essentially unconstrained in the Gaussian fit as a far off-axis phase was not observed.  In the power law fit, however, $\thW$ is constrained to be quite narrow so as to avoid the early bright wings.
 
 Despite the tight constraints each model gives on $\thobs$, $\thC$, and especially $\thobs/\thC$, the resulting posteriors are incompatible with each other.  The median and 68\% uncertainties in Table \ref{tab:MCMC} display only a mild tension in $\thobs$  and $\thC$ themselves, but a very large discrepancy in $\thobs/\thC$.  This is, of course, due to the very different energy profiles $E(\theta)$ in each model.  Both models can easily accommodate a rising light curve $F_\nu \sim t^{0.9}$, that is produce an effective structure parameter $\geff = 7.5$, but do so using very different geometries.  
 
 
 \section{Discussion}
+
 
 \begin{itemize}
 	\item Comparison with other \gwbns{} fits
@@ -482,15 +482,29 @@ Despite the tight constraints each model gives on $\thobs$, $\thC$, and especial
 	\item Looking forward to O3
 \end{itemize}
 
+\subsection{Inferring $\thobs$ and $E(\theta)$}
+
+Information about the viewing angle and jet structure is clearly encoded within misaligned afterglow light curves, primarily through the temporal slope $\alpha$ during the structured phase.   This parameter alone, however, does not uniquely identify a particular structure model or observer inclination.  When trying to infer information about a particular afterglow, there is a massive degeneracy between $E(\theta)$ and $\thobs$.  
+
+This degeneracy is a blessing and a curse.  The presence of an extended slowly decaying or rising afterglow is a largely model independent prediction of misaligned viewing and the presence of non-trivial jet structure.  Unfortunately, this same model independence makes it very difficult to distinguish between jet structure profiles, leaving both $E(\theta)$ and $\thobs$ uncertain.
+
+There are at least two ways of easing this degeneracy: incorporating data other than the afterglow light curve itself and looking at population-level statistics.  Utilizing posteriors from the gravitational wave signal or fitting the VLBI observations of superluminal apparent motion can greatly improve constraints on $\thobs$ \citep{Troja:2018aa, Hotokezaka:2018aa, Ghirlanda:2019aa}.  Since the afterglow presumably provides good constraints on $\geff$ (via $\alpha$), improved knowledge of $\thobs$ immediately improves knowledge of $\thC$, $b$, and any other parameters relevant to $E(\theta)$.  In some cases this may rule out a particular $E(\theta)$ entirely by pushing the relevant parameters to extreme values, for instance it is hard (but not impossible) to reconcile the observations of \gwbns{} with a power law jet with $b=2$.
+
+\begin{figure}
+	\plotone{figs/g_plot.pdf}
+	\caption{Structure parameter $g$ as a function of $\thobs/\thC$ for different structured jet models: Gaussian (blue), $b=2$ power law (orange), $b=4$ power law (green), and $b=6$ power law (red).  The inferred value $g = 8.2\pm0.5$ for \gwbns{} is shown in as the grey band. \label{fig:gPop}}
+\end{figure}
+
+In the future, it may be possible to attack the question of determining $E(\theta)$ at the population level.  Figure \ref{fig:gPop} shows the structure parameter $g$ as a function of $\thobs/\thC$ for several jet models, as well as the inferred value from \gwbns{}.  If all short GRB jets share a jet profile shape, they should trace out a single curve in this space.  As more misaligned afterglows are observed, measurements of $g$ can populate this diagram and potentially rule out models (such as potentially the $b=2$ power law).  Model-independent constraints on $\thobs/\thC$ will greatly aid this procedure.  Moreover, each structure model should predict a different observed distribution of $g$, depending on the shape of the $g(\thobs/\thC)$ curve and the detectability of each burst.  With sufficient observations of $g$ alone and understanding of the observational biases, it may be possible to infer the underlying $g(\thobs/\thC)$ curve and $E(\theta)$ itself.
+
+\subsection{Comparison With Other \gwbns{} Analyses}
+
+
 Many groups have used structured jet models to analyze the afterglow of \gwbns{}, among the most recent with comparable models are \citet{Hotokezaka:2018aa, Ghirlanda:2019aa, Lamb:2019aa, Wu:2018aa}.  Of these, \citet{Hotokezaka:2018aa, Ghirlanda:2019aa, Lamb:2019aa} use semi-analytic methods similar to the present work to construct afterglow light curves, while \citet{Wu:2018aa} utilizes analytic scaling relations and a template bank constructed from numerical simulations.  Additionally, \citet{Hotokezaka:2018aa, Ghirlanda:2019aa} include constraints from the VLBI measurements of the \gwbns{} radio centroid's apparent superluminal motion.
 
 Of these, \citet{Mooley:2018ab, Hotokezaka:2018aa, Ghirlanda:2019aa} include the apparent superluminal motion
 
-
-The misaligned structured jet afterglow's primary feature is the viewing-angle-dependent extended rise or decline before the jet break.  This phase is well described by the closure relations in Table \ref{tab:slopes} and depends on the single parameter $g$.  For better or for worse, this single parameter 
-
-
-The observational signature of a misaligned structured jet is the extended rise or slow decline before the jet break, $F_\nu \propto t^{\alpha(g)}$.  Unfortunately
+\subsection{O3 And Beyond}
 
 
 \section{Summary}
