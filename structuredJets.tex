@@ -6,12 +6,12 @@
 \usepackage{amsfonts}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=cyan,
-}
+%\hypersetup{
+%    colorlinks=true,
+%    linkcolor=blue,
+%    filecolor=magenta,      
+%    urlcolor=cyan,
+%}
 
 \newcommand{\eps}{\ensuremath{\epsilon}}
 \newcommand{\gam}{\ensuremath{\gamma}}
@@ -111,7 +111,7 @@ Numerical simulations have revealed a variety of jet angular energy distribution
 %
 
 \begin{figure}
-	\plotone{figs/jetStructureComparison.pdf}
+	\includegraphics[width=\columnwidth]{figs/jetStructureComparison.pdf}
 	\caption{Lateral profiles of isotropic equivalent energy $\Eiso$ as a function of angle from the jet axis $\theta$, individually rescaled to group similar profile shapes.  The thick grey lines show fiducial profiles with simple analytic expressions (Equations \eqref{eq:gauss} and \eqref{eq:pl}) while the thin colored lines show results from numerical simulations and analytic models chosen from the literature.  The blue line is the B1 numerical simulation of \cite{Aloy:2005aa}, orange the HE16N numerical simulation of \cite{Mizuta:2009aa}, green an analytic ``boosted fireball'' model with $\gamma_{\rm{B}}=10$ and $\eta_0=3$ from \cite{Duffell:2013aa}, red the numerical simulation from \cite{Lazzati:2017aa} (L17), and purple the numerical simulation from \cite{Margutti:2018aa} (M18).  The thick solid grey line is a Gaussian profile (Equation \eqref{eq:gauss}) with $E_0 = 3\times 10^{52}$ erg, $\thC = 6^\circ$, and $\thW=12^\circ$ and the thick dashed grey line is a smoothed power law profile (Equation \eqref{eq:pl}) with $E_0 = 10^{52}$ erg, $\thC = 4^\circ$, $\thW=20^\circ$, and $b=4.5$.  The Gaussian and power law profiles can emulate the basic properties of the energy profiles found in the literature. \label{fig:jetStruct}}
 \end{figure}
 
@@ -205,7 +205,7 @@ Comparing to \boxfit{} tests the fidelity of some of the assumptions and approxi
 %These errors quoted are numerical errors associated with the schemes used to solve Equations \ref{eq:Rdot}, \ref{eq:E}, and \ref{eq:thetadot} and perform the integral in Equation \ref{eq:flux2}.  That is, they are the errors relative to solving these equations perfectly.  The equations themselves are, however, an approximation themselves to the full physics of an afterglow light curve.  Comparison and calibration against analytic calculations and hydrodynamic simulations is necessary to ensure physically realistic results.  
 %
 \begin{figure*}
-	\plotone{figs/boxfit_comp.pdf}
+	\includegraphics[width=\textwidth]{figs/boxfit_comp.pdf}
 	\caption{Top Panel: Comparison between top hat jet light curves from \afterglowpy{} (solid lines) and \boxfit{} (dashed lines). Bottom Panel: Fractional difference between \afterglowpy{} and \boxfit{} light curves.  Four representative light curves are shown: radio on-axis ($\thobs=0$, $\nu=10^9$Hz, blue), radio off-axis ($\thobs=0.16$rad, $\nu=10^9$Hz, orange), x-ray on-axis ($\thobs=0$, $\nu=10^{18}$Hz, green), and x-ray off-axis ($\thobs=0.16$rad, $\nu=10^{18}$Hz, red).  Remaining parameters are shared: $\thC=0.1$rad, $\Eiso=10^{52}$erg, $n_0 = 10^{-3}$cm$^{-3}$, $p=2.2$, $\epse=10^{-1}$, $\epsB=10^{-2}$, $\dL=3.09 \times 10^{26}$cm, $z=0.028$. \label{fig:boxfitComp}}
 \end{figure*}
 
@@ -220,11 +220,18 @@ It bears pointing out that some of the hard discrepancy between the codes is due
 
 \afterglowpy{} is available on PyPI and may be installed with {\tt pip}.  The source code is open and available at \url{https://github.com/geoffryan/afterglowpy}.
 
+%%%%%%%%%%%%%%%%%%
+%
+% Afterglows Section
+%
+%%%%%%%%%%%%%%%%%%%%
+
 \section{Structured Jet Light Curves}\label{sec:structuredJets}
 
 To fully characterize the light curves of structured jets we use \afterglowpy{} to construct light curves exploring dependence on jet structure model, viewing angle $\thobs$, opening angle $\thC$, and synchrotron regime.  
 
-We find the light curves of structured jets show two modes of behaviour, depending on whether the observer is \emph{aligned} ($\thobs < \thC$) or \emph{misaligned} ($\thobs > \thC$). In the \emph{aligned} case, the light curves follow the standard on-axis top hat behaviour modified slightly for non-zero viewing angle.  There is little to distinguish between different structure $E(\theta)$, and the light curve is well-approximated by a broken power law with characteristic break times.  The \emph{misaligned} light curve also may present as a broken power law, but with closure relations explicitly dependent on viewing angle and jet angular structure.  
+We find the light curves of structured jets show two modes of behaviour, depending on whether the observer is \emph{aligned} ($\thobs < \thC$) or \emph{misaligned} ($\thobs > \thC$) TODO: CITE PREVIOUS STRUCTURED JET WORK
+ In the \emph{aligned} case, the light curves follow the standard on-axis top hat behaviour modified slightly for non-zero viewing angle.  There is little to distinguish between different structure $E(\theta)$, and the light curve is well-approximated by a broken power law with characteristic break times \citep{Granot:2002aa}.  The \emph{misaligned} light curve also may present as a broken power law, but with closure relations explicitly dependent on viewing angle and jet angular structure.  
 
 We discuss aligned evolution in detail in Section \ref{subsec:aligned} and misaligned in Section \ref{subsec:misaligned}.  In both cases the transition between phases of evolution depends on the effective solid angle $\Delta \Omega$ of the patch of blast wave dominating the emission.  The size of this patch tends to scale with the Lorentz factor $\gamma$ of the dominant region as:
 \begin{equation}
@@ -247,7 +254,7 @@ The transition between pre-jet break and post-jet break begins at $\tbm$ and com
 	\tbpm &= \left(\frac{9}{16\pi} \frac{E_0}{n_0 \Mp c^5}\right)^{1/3} \left( 2 \sin \left(\frac{\thC\pm\thobs}{2}\right)\right)^{8/3} .\label{eq:tbpm}
 \end{align}
 \begin{figure}
-	\plotone{figs/breaks_alignedOA_all.pdf}
+	\includegraphics[width=\columnwidth]{figs/breaks_alignedOA_all.pdf}
 	\caption{Jet break time for on-axis ($\thobs=0$) observers for top-hat (blue circles), Gaussian (orange squares), and power law (green triangles) jets as a function of $\thC$. The dashed grey line is the analytic approximation $\tbpm = t_N (2\sin \thC/2)^{8/3}$. These particular light curves use $\thW = 5 \thC$, $E_0 = 10^{52}$erg, $n_0=10^{-3}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, and $\epsB = 10^{-4}$. \label{fig:tbOA}}
 \end{figure}
 
@@ -256,9 +263,14 @@ It is important to note that when $\thobs \neq 0$ the transition period is exten
 Figure \ref{fig:tbOA} shows the jet break time for on-axis ($\thobs = 0$) viewers as a function of $\thC$ for top-hat, Gaussian, and power law jets calculated with \afterglowpy{}. Break times were extracted by fitting the numerical light curve with a two-component broken power law.
 
 \begin{figure}
-	\plotone{figs/lc_on.pdf}
+	\includegraphics[width=\columnwidth]{figs/lc_on.pdf}
 	\caption{Aligned ($\thobs = \thC/2$) afterglow light curves for top-hat (blue), Gaussian (orange), and power law (green) jets. When viewed on-axis, jets containing angular structure are very difficult to distinguish from top-hats.  The transition phase marking the onset of the jet break begins at $\tbm\sim3$ days with a shallow break and ends sharply at $\tbp \sim 100$ days.  These particular light curves use $\thC = 0.1$ rad, $\thW = 0.4$ rad, $E_0 = 10^{52}$erg, $n_0=10^{-2}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, $\epsB = 10^{-3}$, and $d_L=40$Mpc. \label{fig:onaxis}}
 \end{figure}
+
+\begin{figure*}
+	\includegraphics[width=\textwidth]{figs/lc_thV_model_multi.pdf}
+	\caption{Aligned ($\thobs = \thC/2$) afterglow light curves for top-hat (blue), Gaussian (orange), and power law (green) jets. When viewed on-axis, jets containing angular structure are very difficult to distinguish from top-hats.  The transition phase marking the onset of the jet break begins at $\tbm\sim3$ days with a shallow break and ends sharply at $\tbp \sim 100$ days.  These particular light curves use $\thC = 0.1$ rad, $\thW = 0.4$ rad, $E_0 = 10^{52}$erg, $n_0=10^{-2}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, $\epsB = 10^{-3}$, and $d_L=40$Mpc. \label{fig:onaxis}}
+\end{figure*}
 
 Figure \ref{fig:onaxis} shows representative top-hat, Gaussian, and power law jet light curves in the aligned regime.  The light curves nearly overlap, demonstrating the similar evolution of all structured jet afterglows when viewed within the jet core.  Although we expect all afterglow blast waves to contain angular structure, the simple top-hat jet model is sufficient for aligned viewing.
 
@@ -279,7 +291,7 @@ When viewed at angles larger than $\thC$ the gradient $E'(\theta)$ over the visi
 \end{align}
 
 \begin{figure}
-	\plotone{figs/jetDecomp.pdf}
+	\includegraphics[width=\columnwidth]{figs/jetDecomp.pdf}
 	\caption{A Gaussian structured jet, decomposed into emission from different latitudes $\theta$.  The off-axis, structured, and post-jet break phases are all clearly visible.  The structured phase is the result of the brightest point of the blast-wave tracking from the wings $(\theta =\thW$) to the jet core ($\theta=\thC$). \label{fig:decomp}}
 \end{figure}
 Figure \ref{fig:decomp} shows the light curve of a Gaussian structured jet along with the emissions from different latitudes.  The part of the blast wave dominating the emission tracks from the high latitude wings $\theta \approx \thW$ to the core $\theta \approx 0$. The angular size of the visible patch grows approximately as $\gamma^{-1.0}$. (NEED PLOT?)
@@ -328,11 +340,11 @@ In the structured phase, the temporal slope depends directly on the ratio $\thob
 \emph{Post-jet break} --- Once the entire jet is visible (ie. the observer is within the beaming cone of the entire jet) the visible patch no longer grows and emission is dominated by the decelerating core.  This phase follows exactly the post-jet break scalings of the aligned case, except with a much delayed break time $\tb$.
 
 \begin{figure}
-	\plotone{figs/lc_off1.pdf}
+	\includegraphics[width=\columnwidth]{figs/lc_off1.pdf}
 	\caption{As Figure \ref{fig:onaxis} but $\thobs = 2\thC$.  The top-hat jet (with opening angle $\thC$) begins in the off-axis phase.  The Gaussian and power law jets begin in the structured phase as $\thobs < \thW$.  All three models enter similar post-jet break phases. \label{fig:offaxis1}}
 \end{figure}
 \begin{figure}
-	\plotone{figs/lc_off2.pdf}
+	\includegraphics[width=\columnwidth]{figs/lc_off2.pdf}
 	\caption{As Figure \ref{fig:onaxis} but $\thobs = 6\thC$. All three models exhibit off-axis, structured, and post-jet break phases of evolution.  At larger opening angles the difference between structured models is more evident.  \label{fig:offaxis2}}
 \end{figure}
 
@@ -345,7 +357,7 @@ At the larger $6\thC$ viewing angle all three models exhibit off-axis, structure
 %
 
 \begin{figure}
-	\plotone{figs/slopesJet.png}
+	\includegraphics[width=\columnwidth]{figs/slopesJet.png}
 	\caption{Temporal slopes for the off-axis structured jet as a function of the structure parameter $g$ for the synchrotron spectral regimes D (blue, narrow), E (orange, narrow),  F (green, narrow), G (red, wide), and H (purple, wide).  The width of the G and H bands shows the dependency on $p$, the upper curves for $p=2$ and the lower for $p=3$.  The temporal power law slope of a structured jet afterglow increases with $g$ in all spectral regimes. \label{fig:slopesG}}
 \end{figure}
 
@@ -379,7 +391,7 @@ Equation \eqref{eq:tumin} assumes $E_r \gg \Mej c^2$.   The temporal and spectra
 
 
 \begin{figure}
-	\plotone{figs/slopesCocoon.png}
+	\includegraphics[width=\columnwidth]{figs/slopesCocoon.png}
 	\caption{The temporal power law slope of the spherical refreshed-shock afterglow light curve as a function of $k$.  Otherwise as Figure \ref{fig:slopesG}.  The temporal power law slope of a structured jet afterglow increases with $k$ in all spectral regimes. \label{fig:slopesK}}
 \end{figure}
 
@@ -478,12 +490,12 @@ We fit both the Gaussian and power law structured jet models, fixing $\xi_N = 1$
 \end{deluxetable*}
 
 \begin{figure*}
-	\plotone{figs/cornerGaussian.png}
+	\includegraphics[width=\textwidth]{figs/cornerGaussian.png}
 	\caption{Views of the posterior parameter distribution for a Gaussian jet fit to the \gwbns{} afterglow.  The diagonal contains one-dimensional marginalized posteriors for each fit parameter, while the off-diagonal plots contain two-dimensional maps of the posterior marginalized over all but the two corresponding parameters. \label{fig:cornerGaussian}}
 \end{figure*}
 
 \begin{figure*}
-	\plotone{figs/cornerPowerlaw.png}
+	\includegraphics[width=\textwidth]{figs/cornerPowerlaw.png}
 	\caption{Views of the posterior parameter distribution for a power law jet fit to the \gwbns{} afterglow.  The diagonal contains one-dimensional marginalized posteriors for each fit parameter, while the off-diagonal plots contain two-dimensional maps of the posterior marginalized over all but the two corresponding parameters. \label{fig:cornerPowerlaw}}
 \end{figure*}
 
@@ -505,7 +517,7 @@ This degeneracy is a blessing and a curse.  The presence of an extended slowly d
 There are at least two ways of easing this degeneracy: incorporating data other than the afterglow light curve itself and looking at population-level statistics.  Utilizing posteriors from the gravitational wave signal or fitting the VLBI observations of superluminal apparent motion can greatly improve constraints on $\thobs$ \citep{Troja:2018aa, Hotokezaka:2018aa, Ghirlanda:2019aa}.  Since the afterglow presumably provides good constraints on $\geff$ (via $\alpha$), improved knowledge of $\thobs$ immediately improves knowledge of $\thC$, $b$, and any other parameters relevant to $E(\theta)$.  In some cases this may rule out a particular $E(\theta)$ entirely by pushing the relevant parameters to extreme values, for instance it is hard (but not impossible) to reconcile the observations of \gwbns{} with a power law jet with $b=2$.
 
 \begin{figure}
-	\plotone{figs/g_plot.pdf}
+	\includegraphics[width=\columnwidth]{figs/g_plot.pdf}
 	\caption{Structure parameter $g$ as a function of $\thobs/\thC$ for different structured jet models: Gaussian (blue), $b=2$ power law (orange), $b=4$ power law (green), and $b=6$ power law (red).  The inferred value $g = 8.2\pm0.5$ for \gwbns{} is shown in as the grey band. \label{fig:gPop}}
 \end{figure}
 
