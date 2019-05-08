@@ -5,6 +5,13 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
 
 \newcommand{\eps}{\ensuremath{\epsilon}}
 \newcommand{\gam}{\ensuremath{\gamma}}
@@ -66,9 +73,9 @@
 
 \author{Hendrik van Eerten}
 
-\author{Eleonora Troja}
+% \author{Eleonora Troja}
 
-\author{Luigi Piro}
+% \author{Luigi Piro}
 
 
 \begin{abstract}
@@ -136,73 +143,82 @@ The observed flux $F_\nu(\tobs, \nuobs)$ at observer time $\tobs$ and frequency 
 \end{equation}
 where $z$ is the redshift of the source, $\dL$ is the luminosity distance, $\delta$ the doppler factor of the emitting fluid with respect to the observer, and $\epsilon'_{\nu'}$ the fluid rest-frame emissivity.
 
-To accommodate an initial structure profile $E(\theta)$ we consider the integrand of Equation \eqref{eq:flux} as a function of the polar angle $\theta$.  We assume each constant $\theta$ annulus evolves independently, as an equivalent top hat of width $\thC = \theta$.  This is a very good approximation when transverse velocities are low: when the blast wave is ultra-relativistic and has not begun to spread and when the blast wave is non-relativistic and the spreading has ceased \citep{van-Eerten:2010aa}.  Once jet spreading begins in earnest the errors are larger, and this approach can be best viewed as an interpolation between the correct ultra-relativistic and non-relativistic limits \citep{van-Eerten:2010aa}.
+To accommodate an initial structure profile $E(\theta)$ we consider the integrand of Equation \eqref{eq:flux} as a function of the polar angle $\theta$.  We assume each constant $\theta$ annulus evolves independently, as an equivalent top hat of initial width $\thC = \theta$.  This is a very good approximation when transverse velocities are low: when the blast wave is ultra-relativistic and has not begun to spread and when the blast wave is non-relativistic and the spreading has ceased \citep{van-Eerten:2010aa}.  Once jet spreading begins in earnest the errors are larger, and this approach can be best viewed as an interpolation between the correct ultra-relativistic and non-relativistic limits \citep{van-Eerten:2010aa}.
  
-To compute the light curve of a top-hat jet of width $\theta$ we first must calculate the time evolution of the blast wave. In the single-shell approximation we treat the ejecta mass, contact discontinuity, and forward shock as a single unit propagating through a cold ambient medium with constant rest-mass density $\rho_0 = \Mp n_0$.  The forward shock is a radius $R$ from the explosion and moves at a velocity $\beta_s$.  In terms of the fluid four-velocity behind the shock $u$ and its Lorentz factor $\gamma$ this may be written as:
+To compute the light curve of a top-hat jet of initial width $\thC$ we first must calculate the time evolution of the blast wave. In the single-shell approximation we treat the ejecta mass, contact discontinuity, and forward shock as a single unit propagating through a cold ambient medium with constant rest-mass density $\rho_0 = \Mp n_0$.  We utilize the TM trans-relativistic equation of state to describe the fluid consistently throughout its evolution \citep{Mignone:2005aa}.  The forward shock is a radius $R$ from the explosion, and the fluid behind the shock has four-velocity $u$ and Lorentz factor $\gamma$.  The shock jump conditions can be used to determine the shock speed:
 \begin{equation}
 	\dot{R} = \frac{4 u \gamma}{4 u^2 +3}c\ . \label{eq:Rdot}
 \end{equation}
 Here the time derivative $\dot{R}$ is taken with respect to elapsed time in the bursters' frame $t$.  
 
  The evolution of the four velocity is determined through conservation of energy.  The total energy in the trans-relativistic single shell approximation is:
+\begin{align}
+	E &= (\gamma - 1)\Mej c^2 + \frac{4\pi}{9} \rho_0 c^2 R^3 (4 u^2 + 3) \beta^2 f_\Omega \ , \label{eq:E} \\
+	f_\Omega &= 2 \sin^2\left( \theta_j / 2 \right)\ . \label{eq:fOm}
+\end{align}
+In Equation \eqref{eq:E} the first term is the kinetic energy of the ejected mass $\Mej$, assumed to have already accelerated and adiabatically cooled to its coasting velocity. The second term is the kinetic and thermal energy of the shocked ISM with three-velocity $\beta = u / \gamma$.  Equation \eqref{eq:fOm} describes the fractional solid angle of the jet in terms of the time dependent opening angle $\theta_j(t)$. While the blast wave is relativistic $\theta_j = \thC$ and $f_\Omega$ is constant, but once the jet edge comes in causal contact with the core it begins to spread due to its own internal pressure. The jet spreads and $\theta_j$ increases until the blast wave is spherical and $f_\Omega=1$.  The spreading occurs at sound speed $c_s$ in the fluid rest-frame, causing the opening angle of the jet to increase as \citep{van-Eerten:2010aa, Duffell:2018aa}:
 \begin{equation}
-	E = (\gamma - 1)\Mej c^2 + \frac{4\pi}{9} \rho_0 c^2 R^3 (4 u^2 + 3) \beta^2 \Omega\ . \label{eq:E}
+	\dot{\theta_j} = \frac{c_s}{\gamma R}\ , \qquad \text{if } u < 1/3\thC \text{ and } \theta_j > \pi/2\ . \label{eq:thetadot}
 \end{equation}
-In Equation \eqref{eq:E} the first term is the kinetic energy of the ejected mass $\Mej$, assumed to have already accelerated and adiabatically cooled to its coasting velocity. The second term is the kinetic and thermal energy of the shocked ISM with three-velocity $\beta = u / \gamma$. The shocked ISM is confined to a cone of solid angle $\Omega = 2 \sin^2 (\theta_0/2)$ where $\theta_0$ is the half-opening angle of the jet. While the blast wave is relativistic $\theta_0$ is constant, but once the jet edge comes in causal contact with the core it begins to spread due to its own internal pressure until the blast wave is spherical.  The spreading occurs at sound speed $c_s$ in the fluid rest-frame \citep{van-Eerten:2010aa, Duffell:2018aa}:
-\begin{equation}
-	\dot{\theta_0} = \frac{c_s}{\gamma R}\ , \qquad \text{if } u < 1/3\thC \text{ and } \theta_0 > \pi/2\ . \label{eq:thetadot}
-\end{equation}
-The criterion $u < 1/3\theta_0$ is satisfied when enough time has elapsed that a sound wave can propagate from $\theta = \thC$ to $\theta=0$ in a blast wave propagating in a uniform ISM (CITE HENDRIK).  It is similar to the condition given in \cite{Duffell:2018aa}, which found a numerical factor of 2.5 (instead of 3) after calibrating to numerical simulations.  Our criteria differs from that used in (CITE Troja+) which used an overly simplistic $u < 1$ criterion to begin jet spreading.
+The criterion $u < 1/3\thC$ is satisfied when a sound wave can propagate from $\theta = \thC$ to $\theta=0$ in a blast wave propagating in a uniform ISM (CITE HENDRIK).  It is similar to the condition given in \cite{Duffell:2018aa}, which found a numerical factor of 2.5 (instead of 3) after calibrating to numerical simulations.  Our criteria differs from that used in \citet{Troja:2018aa, Piro:2019aa, van-Eerten:2018aa} which used an overly simplistic $u < 1$ criterion to begin jet spreading.
 
-Given a (possibly constant) expression for $E$ Equation \eqref{eq:E} may be differentiated with respect to $t$ and solved for $\dot{u}$.  In a refreshed shock scenario $E = E_{>}(u)$, whereas for a standard energy injection model one may take $E \propto t^{-q}$.  In either case, Equation \eqref{eq:E} produces an equation for $\dot{u}$.  This defines a three dimensional system of ordinary differential equations in the variables $(R, u, \theta_0)$ which may be solved numerically or, in certain limits, analytically.
+Given an expression for $E$ in terms of $t$, $R$, $u$, and $\theta_j$, Equation \eqref{eq:E} may be differentiated with respect to $t$ and solved for $\dot{u}$. A standard adiabatic evolution will maintain $E=$ constant, while in a continuously refreshed shock scenario $E = E_{>u}(u)$ and in standard energy injection models $E \propto t^-q$.  This defines a three dimensional system of ordinary differential equations (ODEs) in the variables $(R, u, \theta_j)$ which may be solved numerically or, in certain limits, analytically from appropriate initial conditions.
 
-Once the shock evolution is known, the flux is given by the integral:
+Once the shock evolution ($R(t)$, $u(t)$, $\theta_j(t)$) is known, the flux is given by the integral:
+\begin{align}
+	F_\nu(\tobs, \nuobs) &= \frac{1+z}{4\pi \dL^2} \int \! \dd \Omega\ R^2\ \Delta R\  \delta^2\ \epsilon'_{\nu'} \ , \label{eq:flux2}
+\end{align}
+where $\Delta R$ is the effective shock width contributing to the emission \citep{van-Eerten:2010aa}:
 \begin{equation}
-	F_\nu(\tobs, \nuobs) = \frac{1+z}{4\pi \dL^2} \int \! \dd \Omega\ R^2\ \Delta R\  \delta^2\ \epsilon'_{\nu'} \ , \label{eq:flux2}
+	\Delta R = \frac{1}{1-\mu \dot{R}} \frac{R}{12\gamma^2} \ . \label{eq:dr}
 \end{equation}
-where $\Delta R$ (TODO: add eq for Delta R) is the shock width contributing to the emission. The integrand is evaluated at a constant observer time $\tobs$ and observer frequency $\nuobs$, related to $t$ and $\nu'$ by:
+ The integrand is evaluated at a constant observer time $\tobs$ and observer frequency $\nuobs$, related to $t$ and $\nu'$ by:
 \begin{align}
 	\tobs &= (1+z) \left(t - \mu(\theta, \phi) R(t)/c\right)\ , \label{eq:tobs} \\
 	\nuobs &= (1+z)^{-1} \delta \nu' , \label{eq:nuobs}
 \end{align}
 
-TODO: Give formulae or reference for $\epsilon'_{\nu'}$.
+The rest-frame synchrotron emissivity may be calculated to numerous ways with varying degrees of physics and accuracy.  We use the standard broken power law formalism with characteristic frequencies $\nu_m$ and $\nu_c$, with the cooling frequency $\nu_c$ calculated via the global cooling approximation \citep{Granot:2002aa, van-Eerten:2010aa}.
 
-The integral \eqref{eq:flux2} may now be computed numerically or, in certain limits, analytically.
 
 \subsection{\afterglowpy{}} \label{subsec:afterglowpy}
 
 
-The integral \eqref{eq:flux2} is evaluated numerically using an adaptive Romberg integrator in each dimension, with a typical relative tolerances of $10^{-6}$.  
+We have constructed the \afterglowpy{} Python package to implement the numerical computation of light curves according to Section \ref{subsec:algo} and provide it to the community.  The integration routine itself is written in C, wrapped as an extension for Python, and has been optimized to be used in intensive data analysis routines such as Markov Chain Monte-carlo which can require many thousands or millions of evaluations.  
 
-We have constructed the \afterglowpy{} Python package to implement the numerical computation of light curves according to Section \ref{subsec:algo} and provide it to the community.  The integration routine itself is written in C, wrapped as an extension for Python, and has been optimized to be used in intensive data analysis routines such as Markov Chain Monte-carlo which can require many thousands of evaluations.  
+\afterglowpy{} uses a standard RK4 algorithm to evolve the $(R(t), u(t), \theta_j(t))$ system of equations on a fixed logarithmically spaced grid of $t$.  The endpoints of the $t$-grid are chosen to bracket the burster frame times required to calculate the requested $\tobs$.  Initial conditions for $R$, $u$, and $\theta$ are typically those of a decelerating ultra-relativistic blast wave.  The user can set the density of the $t$-grid with the {\tt tRes} parameter: the number of grid points per decade of $t$.  The default value for {\tt tRes} is 1000, which is sufficiently dense that the shock ODE evolution is not the dominant error source but not so dense as to adversely impact performance.
 
-\afterglowpy{} uses a standard RK4 algorithm to evolve the $(R(t), u(t), \theta_0(t))$ system of equations on a fixed logarithmically spaced grid of $t$.  The endpoints of the $t$-grid are chosen to bracket the burster frame times required to calculate the requested $\tobs$ with at least a decade of tolerance.  Initial conditions for $R$, $u$, and $\theta_0$ are those of a decelerating ultra-relativistic blast wave.  The user can set the density of the $t$-grid with the $n_t$ parameter: the number of grid points per decade of $t$.  The default value for $n_t$ is 1000, which is sufficiently dense that the shock ODE evolution is not the dominant error source but not so dense as to adversely impact performance.
+Each top-hat jet component is integrated in $\theta$ and $\phi$ using an adaptive Romberg scheme with a fixed relative tolerance of $10^{-6}$ and an adaptive absolute tolerance.  When summing over top-hat components of a structured jet, the innermost (core) component is calculated first.  As the calculation proceeds, the current running sum of the flux is used to set absolute tolerance for the next component.  This minimizes the computations performed on dim, off-axis sectors of the jet.  
 
-Each top-hat jet component is integrated in $\theta$ and $\phi$ using an adaptive Romberg scheme with a fixed relative tolerance and an adaptive absolute tolerance.  When summing over top-hat components of a structured jet, the innermost (core) component is calculated first.  As the calculation proceeds, the current running sum of the flux is used to set absolute tolerance in the Romberg integrator for each component.  This minimizes the computations performed on dim, off-axis sectors of the jet.  
+Each evaluation of the integrand requires a binary search to determine the burster time $t$ at which to evaluate $R$, $u$, and $\theta_j$.  Fluid quantities are then calculated using the shock-jump conditions and the synchrotron emissivity is evaluated using the standard external shock formulae \citep{Granot:2002aa,van-Eerten:2010aa}.  
 
-Each evaluation of the integrand requires a binary search to determine the burster time $t$ at which to evaluate $R$, $u$, and $\theta_0$.  Fluid quantities are then calculated using the shock-jump conditions and the synchrotron emissivity is evaluated using the standard external shock formulae \citep{Granot:2002aa,van-Eerten:2010aa}.  
-
-The numerical accuracy of a top-hat light curve with this scheme is typically better than $10^{-4}$.  The structured jet calculation splits the integration domain into $N_\theta$ disjoint annuli, each evaluated as an independent top-hat and summed.  By default $N_\theta$ is chosen such that there will be 5 zones per $\thC$-sized interval.   The choice of $N_\theta$ has the largest impact on the code performance and accuracy.  We find the choice $N_\theta = 5$ gives sufficiently quick performance at acceptable errors, typically on the order of $10^{-2}$.  TODO SHOW CONVERGENCE PLOT
+The numerical accuracy of a top-hat light curve with this integration scheme is typically better than $10^{-4}$.  The structured jet calculation splits the integration domain into {\tt latRes} disjoint annuli, each evolved as an independent top-hat and their emission summed.  By default {\tt latRes} is chosen such that there will be 5 zones per $\thC$-sized interval of $\theta$.   The choice of  {\tt latRes} has the largest impact on the code performance and accuracy.  We find the choice $\mathtt{latRes} = 5$ gives sufficiently quick performance at acceptable errors, typically on the order of $10^{-2}$.  TODO SHOW CONVERGENCE PLOT
 
 
 \subsection{Comparison To \boxfit{}} \label{subsec:boxfitcomp}
 
-\afterglowpy{}, in utilizing the semi-analytic methods of Section \ref{subsec:algo}, trades some amount of physical accuracy for great flexibility.  We gauge this trade-off by comparing to the \boxfit{} code, a standard tool which calculates high fidelity afterglow light curves based on numerical simulations.  
+\afterglowpy{}, in utilizing the semi-analytic methods of Section \ref{subsec:algo}, trades some amount of physical accuracy for great flexibility.  We gauge this trade-off by comparing to the \boxfit{} code, a standard tool which calculates high fidelity afterglow light curves based on numerical simulations.  \boxfit{} uses two-dimensional relativistic hydrodynamic simulations to fully capture the non-linear hydrodynamics of a decelerating blast wave and a ray tracing radiative transfer module to compute observed synchrotron light curves.  
+
+Comparing to \boxfit{} tests the fidelity of some of the assumptions and approximations of the single shell approach used by \afterglowpy{}.  The simpler analytic version of the scheme on which \afterglowpy{} is based differed from \boxfit{} by factors from 2 to 8 \citep{vanEerten:2010aa}.  We find \afterglowpy{} performs much better, with a relative difference of less than 50\% for the bulk of the evolution.  The difference is worst, up to a factor of 3 relative to \boxfit{}, at the onset of jet spreading.
+
 
 %These errors quoted are numerical errors associated with the schemes used to solve Equations \ref{eq:Rdot}, \ref{eq:E}, and \ref{eq:thetadot} and perform the integral in Equation \ref{eq:flux2}.  That is, they are the errors relative to solving these equations perfectly.  The equations themselves are, however, an approximation themselves to the full physics of an afterglow light curve.  Comparison and calibration against analytic calculations and hydrodynamic simulations is necessary to ensure physically realistic results.  
 %
 \begin{figure*}
 	\plotone{figs/boxfit_comp.pdf}
-	\caption{Top Panel: Comparison between top hat jet light curves from \afterglowpy{} (solid lines) and \boxfit{} (dashed lines). Bottom Panel: fraction difference between \afterglowpy{} and \boxfit{} light curves.  Four representative light curves are shown: radio on-axis ($\thobs=0$, $\nu=10^9$Hz, blue), radio off-axis ($\thobs=0.16$rad, $\nu=10^9$Hz, orange), x-ray on-axis ($\thobs=0$, $\nu=10^{18}$Hz, green), and x-ray off-axis ($\thobs=0.16$rad, $\nu=10^{18}$Hz, red).  Remaining parameters are shared: $\thC=0.1$rad, $\Eiso=10^{52}$erg, $\Eiso=10^{52}$erg, $n_0 = 10^{-3}$cm$^{-3}$, $p=2.2$, $\epse=10^{-1}$, $\epsB=10^{-2}$, $\dL=3.09 \times 10^{26}$cm, $z=0.028$. \label{fig:boxfitComp}}
+	\caption{Top Panel: Comparison between top hat jet light curves from \afterglowpy{} (solid lines) and \boxfit{} (dashed lines). Bottom Panel: Fractional difference between \afterglowpy{} and \boxfit{} light curves.  Four representative light curves are shown: radio on-axis ($\thobs=0$, $\nu=10^9$Hz, blue), radio off-axis ($\thobs=0.16$rad, $\nu=10^9$Hz, orange), x-ray on-axis ($\thobs=0$, $\nu=10^{18}$Hz, green), and x-ray off-axis ($\thobs=0.16$rad, $\nu=10^{18}$Hz, red).  Remaining parameters are shared: $\thC=0.1$rad, $\Eiso=10^{52}$erg, $n_0 = 10^{-3}$cm$^{-3}$, $p=2.2$, $\epse=10^{-1}$, $\epsB=10^{-2}$, $\dL=3.09 \times 10^{26}$cm, $z=0.028$. \label{fig:boxfitComp}}
 \end{figure*}
 
-Figure \ref{fig:boxfitComp} shows a comparison between top-hat light curves calculated with \afterglowpy{} and \boxfit{}.  The \boxfit{} code uses two-dimensional relativistic hydrodynamic simulations to fully capture the non-linear hydrodynamics of a decelerating blast wave and a ray tracing radiative transfer module to compute observed synchrotron light curves.  Figure \ref{fig:boxfitComp} shows the light curve of a $\thC=0.1$rad top-hat at radio and x-ray frequencies ($10^9$Hz and $10^{18}$Hz, respectively) with aligned ($\thobs = 0$) and misaligned ($\thobs=0.16$rad) viewing angles.  The overall agreement is good: \afterglowpy{} captures the salient features of both aligned and misaligned light curves including the jet break, spectral shape, and transition to the Sedov phase.  The relative error is less than 50\% before the onset of spreading.
+Figure \ref{fig:boxfitComp} shows a comparison between top-hat light curves calculated with \afterglowpy{} and \boxfit{}.   Figure \ref{fig:boxfitComp} shows the light curve of a $\thC=0.1$ rad top-hat jet at radio and x-ray frequencies ($10^9$Hz and $10^{18}$Hz, respectively) with aligned ($\thobs = 0$) and misaligned ($\thobs=0.16$rad) viewing angles.  The light curves begin in the ultra relativistic Blandford-Mckee phase and continue to the Newtonian Sedov phase.
 
-TODO: FINISH THIS SECTION.
+The overall agreement is good: \afterglowpy{} captures the salient features of both aligned and misaligned light curves including the jet break, spectral shape, transition to the Sedov phase, and the early steep rise for misaligned viewing.  
+At early times, \boxfit{} lacks the simulation coverage to produce accurate fluxes, leading to a large discrepancy.  Once proper coverage is attained, \boxfit{} and \afterglowpy{} show less than 50\% relative discrepancy until the jet break passes and jet spreading begins.  After the jet break the \afterglowpy{} light curves show a marked excess relative to \boxfit{}, the relative error increasing to approximately 1.0 and 2.0 for the aligned and misaligned radio light curves, respectively.  The x-ray light curves achieve approximately half the error of the radio.  After a short period the \afterglowpy{} light curves begin to decrease, recovering the \boxfit{} slope, and asymptote to similar light curves in the Newtonian regime with a small constant offset from \boxfit{}.
 
+As expected, \afterglowpy{} models the early and late afterglow well, but struggles in an intermediate phase during jet spreading.  In particular it appears that \afterglowpy{} begins its spreading late relative to \boxfit{}.  This phase is precisely where the non-linear hydrodynamics of the blast wave are most important, and hardest to model with simple semi-analytic approximations.  Any work utilizing \afterglowpy{} should be aware of this fact, and be careful when treating data from this regime.
 
-\afterglowpy{} is available on PyPI and may be installed with {\tt pip}.  The source code is open and available at https://github.com/geoffryan/afterglowpy.
+It bears pointing out that some of the hard discrepancy between the codes is due to the test itself: the sharp-edged nature of the top-hat jet exacerbates discrepancies in how these edges are treated.  An angularly structured jet with non-trivial $E(\theta)$ may smooth over the differences in approach between the codes: we may expect \afterglowpy{} to be more accurate for structured jets than top-hats.  \afterglowpy{} is by no means a replacement for full numerical simulations, but is a useful and flexible tool which captures much of the important physics of GRB afterglows at a very small fraction of the cost of a relativistic numerical hydrodynamic simulation.
+
+\afterglowpy{} is available on PyPI and may be installed with {\tt pip}.  The source code is open and available at \url{https://github.com/geoffryan/afterglowpy}.
 
 \section{Structured Jet Light Curves}\label{sec:structuredJets}
 
