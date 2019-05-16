@@ -44,6 +44,30 @@ def slopePost(p, regime='G'):
         return -0.25*(1+3*p)
 
 
+def Etheta(jetType, th, Y):
+    E0 = Y[1]
+    thC = Y[2]
+    thW = Y[3]
+    b = Y[4]
+    if jetType == 0:
+        if th > thW:
+            return 0
+        return E0*math.exp(-0.5*th*th/(thC*thC))
+    elif jetType == 4:
+        if th > thW:
+            return 0
+        TH = math.sqrt(1.0 + th*th/(thC*thC))
+        return E0*math.pow(TH, -b)
+    elif jetType == -2:
+        if th > thW or th < thC:
+            return 0
+        return E0
+    else:
+        if th > thC:
+            return 0
+        return E0
+
+
 def f_pl(t, a, b):
     return a * np.power(t, b)
 
@@ -68,6 +92,27 @@ def f_pl3(t, F0, t0, t1, b0, b1, b2):
     return F
 
 
+def al_pl(t, a, b):
+    al = np.empty(t.shape)
+    al[:] = b
+    return al
+
+
+def al_pl2(t, F0, t0, b0, b1):
+    al = np.empty(t.shape)
+    al[t < t0] = b0
+    al[t >= t0] = b1
+    return al
+
+
+def al_pl3(t, F0, t0, t1, b0, b1, b2):
+    al = np.empty(t.shape)
+    al[t < t0] = b0
+    al[t >= t0] = b1
+    al[t >= t1] = b2
+    return al
+
+
 def chi2(x, t, F, f):
     y = x.copy()
     if len(x) is 4:
@@ -79,7 +124,7 @@ def chi2(x, t, F, f):
     return (dF*dF).sum()
 
 
-def fit_pl(t, F, printOutput=False):
+def fit_pl(t, F, printMode=None):
 
     b0 = np.log(F[-1]/F[0]) / np.log(t[-1]/t[0])
     a0 = (np.log(F[0])*np.log(t[-1])
@@ -89,13 +134,16 @@ def fit_pl(t, F, printOutput=False):
 
     res = opt.minimize(chi2, [a0, b0], (t, F, f_pl), bounds=bounds,
                        tol=1.0e-16)
-    if printOutput or not res.success:
+    if printMode is 'all':
         print(res)
+    elif printMode is 'summary':
+        print("Success: " + str(res.success) + " chi2={0:.2e}".format(
+              res.fun))
 
     return res.x, res.fun, 2
 
 
-def fit_pl2(t, F, tN, thV, thC, printOutput=False):
+def fit_pl2(t, F, tN, thV, thC, printMode=None):
 
     tbp = tN * np.power(2*np.sin(0.5*np.fabs(thV+thC)), 8.0/3.0)
 
@@ -115,16 +163,21 @@ def fit_pl2(t, F, tN, thV, thC, printOutput=False):
     lF0 = math.log10(F0)
     lt0 = math.log10(t0)
 
-    print("chi2(x0) = {0:.3e}".format(
-          chi2([lF0, lt0, b0, b1], t, F, f_pl2)))
+    if printMode is 'all':
+        print("chi2(x0) = {0:.3e}".format(
+              chi2([lF0, lt0, b0, b1], t, F, f_pl2)))
 
     res = opt.minimize(chi2, [lF0, lt0, b0, b0], (t, F, f_pl2),
                        bounds=bounds, method='TNC',
                        options={'maxiter': 8000})
-    print("chi2(x1) = {0:.3e}".format(
-          chi2(res.x, t, F, f_pl2)))
-    if printOutput or not res.success:
+    if printMode is 'all':
+        print("chi2(x1) = {0:.3e}".format(
+              chi2(res.x, t, F, f_pl2)))
+    if printMode is 'all':
         print(res)
+    elif printMode is 'summary':
+        print("Success: " + str(res.success) + " chi2={0:.2e}".format(
+              res.fun))
 
     y = res.x.copy()
     y[0:2] = np.power(10.0, res.x[0:2])
@@ -132,18 +185,25 @@ def fit_pl2(t, F, tN, thV, thC, printOutput=False):
     return y, res.fun, 4
 
 
-def fit_pl3(t, F, tN, thV, thC, printOutput=False):
+def fit_pl3(t, F, tN, thV, thC, printMode=None):
 
     tbm = tN * np.power(2*np.sin(0.5*np.fabs(thV-thC)), 8.0/3.0)
     tbp = tN * np.power(2*np.sin(0.5*np.fabs(thV+thC)), 8.0/3.0)
 
+    """
     try:
         im = np.argwhere(t > tbm)[0]
         ip = np.argwhere(t > tbp)[0]
     except IndexError:
         im = len(t)//3
         ip = 2*im
-    print(tbm, tbp, im, ip)
+    """
+
+    im = len(t)//3
+    ip = 2*im
+
+    if printMode is 'all':
+        print(tbm, tbp, im, ip)
     if im == ip:
         if ip < len(t)-1:
             ip += 1
@@ -163,15 +223,19 @@ def fit_pl3(t, F, tN, thV, thC, printOutput=False):
               (math.log10(t.min()), math.log10(t.max())),
               (-4, 4), (-4, 4), (-4, 4)]
 
-    print("chi2(x0) = {0:.3e}".format(
-          chi2([lF0, lt0, lt1, b0, b0, b0], t, F, f_pl3)))
+    if printMode is 'all':
+        print("chi2(x0) = {0:.3e}".format(
+              chi2([lF0, lt0, lt1, b0, b0, b0], t, F, f_pl3)))
     res = opt.minimize(chi2, [lF0, lt0, lt1, b0, b1, b2], (t, F, f_pl3),
                        bounds=bounds, method='TNC',
                        options={'maxiter': 8000})
-    print("chi2(x1) = {0:.3e}".format(
-          chi2(res.x, t, F, f_pl3)))
-    if printOutput or not res.success:
+    if printMode is 'all':
+        print("chi2(x1) = {0:.3e}".format(chi2(res.x, t, F, f_pl3)))
+    if printMode is 'all':
         print(res)
+    elif printMode is 'summary':
+        print("Success: " + str(res.success) + " chi2={0:.2e}".format(
+              res.fun))
 
     y = res.x.copy()
     y[0:3] = np.power(10.0, res.x[0:3])
@@ -179,11 +243,13 @@ def fit_pl3(t, F, tN, thV, thC, printOutput=False):
     return y, res.fun, 6
 
 
-def findBreaks(regime, NU, jetModel, Y, n=None, plot=False, ax=None, fig=None):
+def findBreaks(regime, NU, jetModel, Y, n=None, spread=False,
+               plot=False, ax=None, fig=None, printMode=None):
 
     thV = Y[0]
     E0 = Y[1]
     thC = Y[2]
+    thW = Y[3]
     n0 = Y[8]
     p = Y[9]
 
@@ -191,15 +257,28 @@ def findBreaks(regime, NU, jetModel, Y, n=None, plot=False, ax=None, fig=None):
     chim = 2*np.sin(0.5*np.fabs(thC-thV))
     chip = 2*np.sin(0.5*(thC+thV))
 
-    t = np.geomspace(1.0e-1 * tN * math.pow(chim, 8.0/3.0),
-                     min(0.8*tN, 3*tN*math.pow(chip, 8.0/3.0)), 300)
+    EW = Etheta(jetModel, thW, Y)
+    tNW = math.pow(9 * EW / (16.0*np.pi*n0*grb.mp*grb.c**5), 1.0/3.0)
+    chiW = 2*np.sin(0.5*np.fabs(thV - thW))
+
+    t0_OnA = tN * math.pow(chim, 8.0/3.0)
+    t0_OfA = tNW * math.pow(chiW, 8.0/3.0)
+
+    """
+    t0 = t0_OnA
+    if thV > thW:
+        t0 = min(t0_OnA, t0_OfA)
+    """
+
+    t0 = min(t0_OnA, t0_OfA)
+    t = np.geomspace(1.0e-1 * t0, min(0.8*tN, 3*tN*math.pow(chip, 8.0/3.0)),
+                     300)
     # t = np.geomspace(0.1 * tN * math.pow(chim, 8.0/3.0),
     #                  min(0.8*tN, 3*tN*math.pow(chip, 8.0/3.0)), 300)
     nu = np.empty(t.shape)
     nu[:] = NU
 
     tRes = 1000
-    spread = False
 
     vfac = 0.25
     Fnu = grb.fluxDensity(t, nu, jetModel, 0, *Y, tRes=tRes, spread=spread)
@@ -235,16 +314,27 @@ def findBreaks(regime, NU, jetModel, Y, n=None, plot=False, ax=None, fig=None):
     i1 = agood[j, 0]
     i2 = agood[j, 1]
 
-    print(i2-i1)
+    if printMode is 'all':
+        print(i2-i1)
 
     if plot:
         if ax is None:
-            fig, ax = plt.subplots(2, 1, figsize=(6, 4))
-        ax.plot(t, Fnu, lw=4)
-        ax.plot(t[i1:i2], Fnu[i1:i2])
+            fig = plt.figure(figsize=(6, 4))
+            gs = fig.add_gridspec(4, 1, hspace=0)
+            ax0 = fig.add_subplot(gs[:-1])
+            ax0.get_xaxis().set_visible(False)
+            ax1 = fig.add_subplot(gs[-1])
+            ax = [ax0, ax1]
+        ax[0].plot(t, Fnu, lw=4)
+        ax[0].plot(t[i1:i2], Fnu[i1:i2])
+        al = np.log(Fnu[2:]/Fnu[:-2]) / np.log(t[2:]/t[:-2])
+        N = len(t)
+        ax[1].plot(t[1:-1], al, lw=4)
+        ax[1].plot(t[max(1, i1):min(i2, N-1)], al[max(i1-1, 0):min(i2-1, N-2)])
 
-        ax.set_xscale('log')
-        ax.set_yscale('log')
+        ax[0].set_xscale('log')
+        ax[0].set_yscale('log')
+        ax[1].set_xscale('log')
 
     t = np.geomspace(t[i1], t[i2-1], 100)
     nu = np.empty(t.shape)
@@ -252,39 +342,51 @@ def findBreaks(regime, NU, jetModel, Y, n=None, plot=False, ax=None, fig=None):
     Fnu = grb.fluxDensity(t, nu, jetModel, 0, *Y, tRes=tRes, spread=spread)
 
     if n is 1:
-        y, chi2, n = fit_pl(t, Fnu, plot)
+        y, chi2, n = fit_pl(t, Fnu, plot, printMode)
         if plot:
-            ax.plot(t, f_pl(t, *y))
+            ax[0].plot(t, f_pl(t, *y))
+            ax[1].plot(t, al_pl(t, *y))
         return 1, y[1]
     elif n is 2:
-        y, chi2, n = fit_pl2(t, Fnu, tN, thV, thC, plot)
+        y, chi2, n = fit_pl2(t, Fnu, tN, thV, thC, printMode)
         if plot:
-            ax.plot(t, f_pl2(t, *y))
-            ax.axvline(y[1], color='grey', ls='--', alpha=0.5)
+            ax[0].plot(t, f_pl2(t, *y))
+            ax[1].plot(t, al_pl2(t, *y))
+            ax[0].axvline(y[1], color='grey', ls='--', alpha=0.5)
+            ax[1].axvline(y[1], color='grey', ls='--', alpha=0.5)
         return 2, y[1], y[2], y[3]
     elif n is 3:
-        y, chi2, n = fit_pl3(t, Fnu, tN, thV, thC, plot)
+        y, chi2, n = fit_pl3(t, Fnu, tN, thV, thC, printMode)
         if plot:
-            ax.plot(t, f_pl3(t, *y))
-            ax.axvline(y[1], color='grey', ls='--', alpha=0.5)
-            ax.axvline(y[2], color='grey', ls='--', alpha=0.5)
+            ax[0].plot(t, f_pl3(t, *y))
+            ax[1].plot(t, al_pl3(t, *y))
+            ax[0].axvline(y[1], color='grey', ls='--', alpha=0.5)
+            ax[0].axvline(y[2], color='grey', ls='--', alpha=0.5)
+            ax[1].axvline(y[1], color='grey', ls='--', alpha=0.5)
+            ax[1].axvline(y[2], color='grey', ls='--', alpha=0.5)
         return 3, y[1], y[2], y[3], y[4], y[5]
     else:
-        y1, chi21, n1 = fit_pl(t, Fnu, plot)
-        y2, chi22, n2 = fit_pl2(t, Fnu, tN, thV, thC, plot)
-        y3, chi23, n3 = fit_pl3(t, Fnu, tN, thV, thC, plot)
+        y1, chi21, n1 = fit_pl(t, Fnu, printMode)
+        y2, chi22, n2 = fit_pl2(t, Fnu, tN, thV, thC, printMode)
+        y3, chi23, n3 = fit_pl3(t, Fnu, tN, thV, thC, printMode)
 
         rc1 = chi21/(n1-1)
         rc2 = chi22/(n2-1)
         rc3 = chi23/(n3-1)
 
         if plot:
-            ax.plot(t, f_pl(t, *y1), color='C2')
-            ax.plot(t, f_pl2(t, *y2), color='C3')
-            ax.plot(t, f_pl3(t, *y3), color='C4')
-            ax.axvline(y2[1], color='C3', ls='--', alpha=0.5)
-            ax.axvline(y3[1], color='C4', ls='--', alpha=0.5)
-            ax.axvline(y3[2], color='C4', ls='--', alpha=0.5)
+            ax[0].plot(t, f_pl(t, *y1), color='C2')
+            ax[0].plot(t, f_pl2(t, *y2), color='C3')
+            ax[0].plot(t, f_pl3(t, *y3), color='C4')
+            ax[1].plot(t, al_pl(t, *y1), color='C2')
+            ax[1].plot(t, al_pl2(t, *y2), color='C3')
+            ax[1].plot(t, al_pl3(t, *y3), color='C4')
+            ax[0].axvline(y2[1], color='C3', ls='--', alpha=0.5)
+            ax[0].axvline(y3[1], color='C4', ls='--', alpha=0.5)
+            ax[0].axvline(y3[2], color='C4', ls='--', alpha=0.5)
+            ax[1].axvline(y2[1], color='C3', ls='--', alpha=0.5)
+            ax[1].axvline(y3[1], color='C4', ls='--', alpha=0.5)
+            ax[1].axvline(y3[2], color='C4', ls='--', alpha=0.5)
             print(rc1, rc2, rc3)
             print(y1[-1])
             print(y2[-2], y2[-1])
