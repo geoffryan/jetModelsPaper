@@ -39,7 +39,7 @@ def powerlaw(theta, thC=0.1, thW=0.4, E0=3.0e53, n0=1.0, t0=1.0e7, b=3):
     E = np.empty(atheta.shape)
     g = np.empty(atheta.shape)
 
-    Th = np.sqrt(1.0 + th*th/(thC*thC))
+    Th = np.sqrt(1.0 + th*th/(b*thC*thC))
 
     E[onaxis] = E0/(4*np.pi) * np.power(Th, -b)
     g[onaxis] = np.sqrt(17*E[onaxis]/(2*n0*mp*c*c*c*c*c)) * math.pow(t0, -1.5)
@@ -313,7 +313,7 @@ if __name__ == "__main__":
     rad = np.pi/180.0
 
     gG, EG = gaussian(theta, thC=6*rad, thW=13*rad, E0=5e52)
-    gPL, EPL = powerlaw(theta, thW=60*rad, thC=4*rad, b=4.0, E0=1e52)
+    gPL, EPL = powerlaw(theta, thW=60*rad, thC=2*rad, b=4.0, E0=1e52)
     gBF0303, EBF0303 = boostedFireball(theta)
     gBF1003, EBF1003 = boostedFireball(theta, gb=10)
     gBF0310, EBF0310 = boostedFireball(theta, eta0=10)
@@ -464,7 +464,7 @@ if __name__ == "__main__":
     figE2, axE2 = plt.subplots(1, 1, figsize=(6, 4.5))
 
     gG, EG = gaussian(theta, thC=6*rad, thW=13*rad, E0=3e52)
-    gPL, EPL = powerlaw(theta, thW=60*rad, thC=4*rad, b=4.5, E0=1e52)
+    gPL, EPL = powerlaw(theta, thW=60*rad, thC=2*rad, b=4.5, E0=1e52)
 
     clr = ["k", "grey", "tab:blue", "tab:orange", "tab:green", "tab:red",
                 "tab:purple", "tab:brown", "tab:pink", "tab:olive", "tab:cyan"]
@@ -517,7 +517,7 @@ if __name__ == "__main__":
     figEc, axEc = plt.subplots(1, 1, figsize=(3.5, 3.0))
 
     gG, EG = gaussian(theta, thC=6*rad, thW=12*rad, E0=3e52)
-    gPL, EPL = powerlaw(theta, thW=60*rad, thC=4*rad, b=4.5, E0=1e52)
+    gPL, EPL = powerlaw(theta, thW=60*rad, thC=2*rad, b=4.5, E0=1e52)
 
     clr = ["k", "grey", "tab:blue", "tab:orange", "tab:green", "tab:red",
                 "tab:purple", "tab:brown", "tab:pink", "tab:olive", "tab:cyan"]

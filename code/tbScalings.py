@@ -271,6 +271,8 @@ def findBreaks(regime, NU, jetModel, Y, n=None, spread=False,
     """
 
     t0 = min(t0_OnA, t0_OfA)
+    # if t0 < 1.0:
+    #     t0 = 1.0
     t = np.geomspace(1.0e-1 * t0, min(0.8*tN, 3*tN*math.pow(chip, 8.0/3.0)),
                      300)
     # t = np.geomspace(0.1 * tN * math.pow(chim, 8.0/3.0),

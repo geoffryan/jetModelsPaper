@@ -12,3 +12,5 @@ legend.fontsize: 8.0
 legend.labelspacing: 0.2
 
 savefig.bbox:   tight
+
+# axes.prop_cycle : cycler('color', ['4e79a7', 'f28e2b', 'e15759', '76b7b2', '59a14f', 'edc498', 'b07aa1', 'ff9da7', '9c755f', 'bab0ac'])

@@ -476,7 +476,8 @@ def f_powerlaw(th, thC, thW, b=2):
     ath = np.atleast_1d(th)
     f = np.empty(ath.shape)
     valid = ath <= thW
-    f[valid] = 1.0 / np.power(np.sqrt(1.0 + (ath[valid] / thC)**2), b)
+    # f[valid] = 1.0 / np.power(np.sqrt(1.0 + (ath[valid] / thC)**2), b)
+    f[valid] = 1.0 / np.power(np.sqrt(1.0 + ((ath[valid] / thC)**2)/b), b)
     f[~valid] = 0.0
     return f
 
@@ -825,7 +826,7 @@ def getRegimePars(regime='D'):
     thC = 0.1
     thW = 0.4
     thV = 0.0
-    b = 8.0
+    b = 7.0
 
     p = 2.2
     epse_slow = 0.1
@@ -1215,11 +1216,12 @@ def calcSlopePost(jetModel, Y, regime):
 
 def makeAnalyticTestPlots():
 
-    # regimes = ['D', 'E', 'F', 'G', 'H']
-    regimes = ['E', 'G', 'H']
+    regimes = ['D', 'E', 'F', 'G', 'H']
+    # regimes = ['E', 'G', 'H']
     # regimes = ['D']
+    # regimes = ['H']
     jetModel = 4
-    spread = False
+    spread = True
 
     # thWs = [0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95]
     thWs = [0.25, 0.45, 0.65, 0.85]
@@ -1281,7 +1283,7 @@ def makeAnalyticTestPlots():
 
             # fig, ax = plt.subplots(3*NV, NC, figsize=(2*NC, 6*NV))
             panelWidth = 6.0
-            panelHeight = 6.0
+            panelHeight = 9.0
             fig = plt.figure(figsize=(panelWidth*NV, panelHeight*NC))
             gs0 = fig.add_gridspec(NC, NV)
 
@@ -1296,7 +1298,7 @@ def makeAnalyticTestPlots():
 
                     tW = calcTW(jetModel, Y, regime)
                     tb = calcTB(jetModel, Y, regime)
-                    # tbpm = calcTBpm(jetModel, Y, regime)
+                    tbpm = calcTBpm(jetModel, Y, regime)
 
                     Fnu = grb.fluxDensity(t, nu, jetModel, 0, *Y,
                                           spread=spread)
@@ -1348,47 +1350,82 @@ def makeAnalyticTestPlots():
                     alStructNAveLin[k, j, i] = alNlin
                     alStructNAveLog[k, j, i] = alNlog
 
-                    indStruct = np.argwhere((t > tW) & (t < tb) & (al2 > 0))
+                    indStruct = np.argwhere((t[:-1] > tW) & (t[:-1] < tb)
+                                            & (al2[:-1] > 0)
+                                            & (al2[1:] < 0))
+                    # indStruct = np.argwhere((t > tW) & (t < tb) & (al2 > 0))
+
                     if len(indStruct) > 0:
                         nStruct2 = indStruct[-1]
                     else:
-                        indStruct = np.argwhere((t > tW) & (t < tb)
-                                                & (al3 > 0))
-                        nStruct2 = indStruct[-1]
+                        # indStruct = np.argwhere((t > tW) & (t < tb)
+                        #                         & (al3 > 0))
+                        # nStruct2 = indStruct[-1]
+                        indStruct1 = np.argwhere((t[:-1] > tW) & (t[:-1] < tb)
+                                                 & (al3[:-1] > 0)
+                                                 & (al3[1:] < 0))
+                        indStruct2 = np.argwhere((t[:-1] > tW) & (t[:-1] < tb)
+                                                 & (al3[:-1] < 0)
+                                                 & (al3[1:] > 0))
+                        if len(indStruct1) > 0:
+                            nStruct2 = indStruct1[-1]
+                        elif len(indStruct2) > 0:
+                            nStruct2 = indStruct2[-1]
+                        else:
+                            nStruct2 = nStruct
+
                     tStruct2 = np.sqrt(t[nStruct2]*t[nStruct2+1])
                     alStructN2[k, j, i] = 0.5*(al[nStruct2]+al[nStruct2+1])
 
-                    gs = gs0[i, j].subgridspec(4, 1, hspace=0.0)
-                    axF = fig.add_subplot(gs[0:-2, 0])
-                    axa = fig.add_subplot(gs[-2, 0])
+                    gs = gs0[i, j].subgridspec(6, 1, hspace=0.0)
+                    axF = fig.add_subplot(gs[0:-4, 0])
+                    axa = fig.add_subplot(gs[-4, 0])
+                    axa2 = fig.add_subplot(gs[-3, 0])
+                    axa3 = fig.add_subplot(gs[-2, 0])
                     axb = fig.add_subplot(gs[-1, 0])
 
                     if tW > 0.0:
                         axF.axvline(tW, ls='--', color='grey')
                         axa.axvline(tW, ls='--', color='grey')
+                        axa2.axvline(tW, ls='--', color='grey')
+                        axa3.axvline(tW, ls='--', color='grey')
                         axb.axvline(tW, ls='--', color='grey')
                     if tb > 0.0:
                         axF.axvline(tb, ls='-', color='grey')
                         axa.axvline(tb, ls='-', color='grey')
+                        axa2.axvline(tb, ls='-', color='grey')
+                        axa3.axvline(tb, ls='-', color='grey')
                         axb.axvline(tb, ls='-', color='grey')
-                    # if tbpm > 0.0:
-                    #    axF.axvline(tbpm, ls=':', color='grey')
-                    #    axa.axvline(tbpm, ls=':', color='grey')
-                    #    axb.axvline(tbpm, ls=':', color='grey')
+                    if tbpm > 0.0:
+                        axF.axvline(tbpm, ls=':', color='grey')
+                        axa.axvline(tbpm, ls=':', color='grey')
+                        axa2.axvline(tbpm, ls=':', color='grey')
+                        axa3.axvline(tbpm, ls=':', color='grey')
+                        axb.axvline(tbpm, ls=':', color='grey')
                     axF.axvline(tN, ls='-', lw=4, color='lightgrey')
                     axa.axvline(tN, ls='-', lw=4, color='lightgrey')
+                    axa2.axvline(tN, ls='-', lw=4, color='lightgrey')
+                    axa3.axvline(tN, ls='-', lw=4, color='lightgrey')
                     axb.axvline(tN, ls='-', lw=4, color='lightgrey')
                     axF.axvline(tStruct, ls=':', lw=4, color='lightgrey')
                     axa.axvline(tStruct, ls=':', lw=4, color='lightgrey')
+                    axa2.axvline(tStruct, ls=':', lw=4, color='lightgrey')
+                    axa3.axvline(tStruct, ls=':', lw=4, color='lightgrey')
                     axb.axvline(tStruct, ls=':', lw=4, color='lightgrey')
                     axF.axvline(tPost, ls=':', lw=4, color='lightgrey')
                     axa.axvline(tPost, ls=':', lw=4, color='lightgrey')
+                    axa2.axvline(tPost, ls=':', lw=4, color='lightgrey')
+                    axa3.axvline(tPost, ls=':', lw=4, color='lightgrey')
                     axb.axvline(tPost, ls=':', lw=4, color='lightgrey')
                     axF.axvline(tOff, ls=':', lw=4, color='lightgrey')
                     axa.axvline(tOff, ls=':', lw=4, color='lightgrey')
+                    axa2.axvline(tOff, ls=':', lw=4, color='lightgrey')
+                    axa3.axvline(tOff, ls=':', lw=4, color='lightgrey')
                     axb.axvline(tOff, ls=':', lw=4, color='lightgrey')
                     axF.axvline(tStruct2, ls='-.', lw=4, color='lightgrey')
                     axa.axvline(tStruct2, ls='-.', lw=4, color='lightgrey')
+                    axa2.axvline(tStruct2, ls='-.', lw=4, color='lightgrey')
+                    axa3.axvline(tStruct2, ls='-.', lw=4, color='lightgrey')
                     axb.axvline(tStruct2, ls='-.', lw=4, color='lightgrey')
 
                     alOff = calcSlopeOffaxis(jetModel, Y, regime)
@@ -1406,11 +1443,15 @@ def makeAnalyticTestPlots():
 
                     axF.plot(t, Fnu)
                     axa.plot(t, al)
+                    axa2.plot(t, al2)
+                    axa3.plot(t, al3)
                     axb.plot(t, beta)
 
                     axF.set_xscale('log')
                     axF.set_yscale('log')
                     axa.set_xscale('log')
+                    axa2.set_xscale('log')
+                    axa3.set_xscale('log')
                     axb.set_xscale('log')
 
                     lim = axF.get_ylim()
@@ -1427,6 +1468,8 @@ def makeAnalyticTestPlots():
                     if j == 0:
                         axF.set_ylabel(r'$F_\nu$')
                         axa.set_ylabel(r'$\alpha$')
+                        axa2.set_ylabel(r"$\alpha'$")
+                        axa3.set_ylabel(r"$\alpha''$")
                         axb.set_ylabel(r'$\beta$')
                     if i == NV-1:
                         axb.set_xlabel(r'$t$')

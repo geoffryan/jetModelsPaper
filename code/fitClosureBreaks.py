@@ -9,21 +9,21 @@ pltDir = "scalingsGaussian/"
 regime = 'G'
 nu = 1.0e16
 jetModel = 0
-b = 0
+b = 8
 Y = np.array([0.6, 1.0e53, 0.1, 0.4, b, 0.0, 0.0, 0.0, 1.0, 2.2,
               0.1, 1.0e-6, 1.0, 1.0e26])
-spread = False
-n = 3
+spread = True
+# n = 3
 
-NW = 3
-NV = 5
-NC = 3
+NW = 4
+NV = 11
+NC = 7
 
 panelSize = 2
 
 thVs = np.linspace(0.0, 1.0, NV)
-thCs = np.linspace(0.05, 0.2, NC)
-thWs = np.linspace(0.1, 0.8, NW)
+thCs = np.linspace(0.04, 0.24, NC)
+thWs = np.linspace(0.15, 0.75, NW)
 
 tb0 = np.empty((NV, NC, NW))
 tb1 = np.empty((NV, NC, NW))
@@ -44,7 +44,7 @@ for k in range(NW):
         thV = thVs[i]
         for j in range(NC):
             thC = thCs[j]
-            print("thW = {0:.3f} thV={0:.3f} thC={1:.3f}".format(
+            print("thW = {0:.3f} thV={1:.3f} thC={2:.3f}".format(
                     thW, thV, thC))
             gs = gs0[i, j].subgridspec(4, 1, hspace=0)
             ax0 = fig.add_subplot(gs[:-1])
@@ -149,7 +149,7 @@ fig, ax = plt.subplots(1, 1)
 for k in range(NW):
     for i in range(NC):
         ax.plot(thVs/thCs[i], al1[:, i, k], color=color[i], ls=ls[k])
-ax.set_xlabel(r'$\theta_{\mathrm{obs}}$')
+ax.set_xlabel(r'$\theta_{\mathrm{obs}} / \theta_C$')
 ax.set_ylabel(r'$\alpha_1$')
 fig.tight_layout()
 figname = pltDir + "al1_thVothC.pdf"

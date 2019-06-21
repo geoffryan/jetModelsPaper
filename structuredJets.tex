@@ -54,6 +54,7 @@
 \newcommand{\Eiso}{\ensuremath{E_{\mathrm{iso}}}}
 \newcommand{\Etot}{\ensuremath{E_{\mathrm{tot}}}}
 \newcommand{\geff}{\ensuremath{g_{\mathrm{eff}}}}
+\newcommand{\theff}{\ensuremath{\theta_{\mathrm{eff}}}}
 \newcommand{\umin}{\ensuremath{u_{\mathrm{min}}}}
 \newcommand{\umax}{\ensuremath{u_{\mathrm{max}}}}
 \newcommand{\gmin}{\ensuremath{\gamma_{\mathrm{min}}}}
@@ -73,10 +74,8 @@
 \affil{Joint Space-Science Institute, University of Maryland, College Park, MD 20742, USA}
 
 \author{Hendrik van Eerten}
-
-% \author{Eleonora Troja}
-
-% \author{Luigi Piro}
+\author{Luigi Piro}
+\author{Eleonora Troja}
 
 
 \begin{abstract}
@@ -149,11 +148,11 @@ Summary: In section 2 we discuss structured jets, in section 3 refreshed shocks,
 
 The \emph{structured jet} is a GRB emission model where the isotropic-equivalent energy of a blast wave is a function of the angle from the jet axis: $\Eiso = E(\theta)$. The specific structure of a jet is determined by the intrinsic structure of the jet launching mechanism as well as the sculpting that occurs as the jet burrows out of the encasing ejecta debris (as in a binary neutron star merger) or stellar envelope (as in a collapsar).  
 
-Numerical simulations have revealed a variety of jet angular energy distributions, often containing an energetic core with power law tails.  Figure \ref{fig:jetStruct} shows a collection of jet energy distributions from the literature \citep{Aloy:2005aa, Mizuta:2009aa, Duffell:2013aa, Lazzati:2017aa, Margutti:2018aa}.  Lacking a well-established physical model of the true $E(\theta)$, in particular its dependence on the parameters of the system, we consider two simple parameterized models: a Gaussian jet and a power law with a smooth core.  
+Numerical simulations have revealed a variety of jet angular energy distributions, often containing an energetic core with power law tails.  Figure \ref{fig:jetStruct} shows a collection of jet energy distributions from the literature \citep{Aloy:2005aa, Mizuta:2009aa, Duffell:2013aa, Lazzati:2017aa, Margutti:2018aa}.  Lacking a well-established physical model of the true $E(\theta)$, in particular its dependence on the parameters of the system, we consider two simple parameterized models: a Gaussian jet and a power law jet with a smooth core.  
 
 \begin{align}
 	E(\theta) &= E_0 \exp\left(-\frac{\theta^2}{2\thC^2}\right)  && \text{Gaussian} \label{eq:gauss}\\
-	E(\theta) &= E_0 \left(1 + \frac{\theta^2}{\thC^2} \right)^{-b/2}  && \text{power law} \label{eq:pl}
+	E(\theta) &= E_0 \left(1 + \frac{\theta^2}{b\thC^2} \right)^{-b/2}  && \text{power law} \label{eq:pl}
 \end{align}
 
 %
@@ -162,14 +161,18 @@ Numerical simulations have revealed a variety of jet angular energy distribution
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{figs/jetStructureComparison.pdf}
-	\caption{Lateral profiles of isotropic equivalent energy $\Eiso$ as a function of angle from the jet axis $\theta$, individually rescaled to group similar profile shapes.  The thick grey lines show fiducial profiles with simple analytic expressions (Equations \eqref{eq:gauss} and \eqref{eq:pl}) while the thin colored lines show results from numerical simulations and analytic models chosen from the literature.  The blue line is the B1 numerical simulation of \cite{Aloy:2005aa}, orange the HE16N numerical simulation of \cite{Mizuta:2009aa}, green an analytic ``boosted fireball'' model with $\gamma_{\rm{B}}=10$ and $\eta_0=3$ from \cite{Duffell:2013aa}, red the numerical simulation from \cite{Lazzati:2017aa} (L17), and purple the numerical simulation from \cite{Margutti:2018aa} (M18).  The thick solid grey line is a Gaussian profile (Equation \eqref{eq:gauss}) with $E_0 = 3\times 10^{52}$ erg, $\thC = 6^\circ$, and $\thW=12^\circ$ and the thick dashed grey line is a smoothed power law profile (Equation \eqref{eq:pl}) with $E_0 = 10^{52}$ erg, $\thC = 4^\circ$, $\thW=20^\circ$, and $b=4.5$.  The Gaussian and power law profiles can emulate the basic properties of the energy profiles found in the literature. \label{fig:jetStruct}}
+	\caption{Lateral profiles of isotropic equivalent energy $\Eiso$ as a function of angle from the jet axis $\theta$, individually rescaled to group similar profile shapes.  The thick grey lines show fiducial profiles with simple analytic expressions (Equations \eqref{eq:gauss} and \eqref{eq:pl}) while the thin colored lines show results from numerical simulations and analytic models chosen from the literature.  The blue line is the B1 numerical simulation of \cite{Aloy:2005aa}, orange the HE16N numerical simulation of \cite{Mizuta:2009aa}, green an analytic ``boosted fireball'' model with $\gamma_{\rm{B}}=10$ and $\eta_0=3$ from \cite{Duffell:2013aa}, red the numerical simulation from \cite{Lazzati:2017aa} (L17), and purple the numerical simulation from \cite{Margutti:2018aa} (M18).  The thick solid grey line is a Gaussian profile (Equation \eqref{eq:gauss}) with $E_0 = 3\times 10^{52}$ erg, $\thC = 6^\circ$, and $\thW=12^\circ$ and the thick dashed grey line is a smoothed power law profile (Equation \eqref{eq:pl}) with $E_0 = 10^{52}$ erg, $\thC = 2^\circ$, $\thW=20^\circ$, and $b=4.5$.  The Gaussian and power law profiles can emulate the basic properties of the energy profiles found in the literature. \label{fig:jetStruct}}
 \end{figure}
 
-Each fiducial model is parameterized by a normalization $E_0$, a width $\thC$, and a truncation angle $\thW$.  The power law model also retains a power law index $b$.  Outside $\thW$ the energy is initially zero, this acts as an outer truncation angle for the jet.   
+Each fiducial model is parameterized by a normalization $E_0$, a width $\thC$, and a truncation angle $\thW$.  The power law model also retains a power law index $b$.  Outside $\thW$ the energy is initially zero, this acts as an outer truncation angle for the jet.   Our power law profile includes a factor of $b^{-1}$ in the base which does not usually appear in the literature \citep{Granot:2003aa, Hotokezaka:2018aa}.  This serves to normalize the value of $\thC$ and make it comparable between power laws of different $b$ and Gaussian jets.  Both structure profiles obey
+\begin{equation}
+	\left . \frac{d^2}{d\theta^2} \log E \right \rvert_{\theta=0} = -\frac{1}{\thC^2}\ , \label{eq:thCdef}
+\end{equation} 
+which we take as a generic definition for $\thC$.
 
 Figure \ref{fig:jetStruct} shows an example of each model together with jet energy profiles drawn from the literature, mostly the result of numerical relativistic hydrodynamic simulations.  The Gaussian profile emulates jets with a flat core and sharp edges, typically the result of powerful successful jets \citep{Aloy:2005aa, Margutti:2018aa}.  Jets which are subject to stronger interactions with the surrounding medium can develop a profile with energetic wings and a narrow core, emulated by the analytic power law profile \citep{Mizuta:2009aa, Duffell:2013aa, Lazzati:2017aa}.  
 
-A generic energy profile $E(\theta)$ may have several more parameters, but one can still associate with it an on-axis energy $E_0 = E(0)$ and an effective core width $\thC \sim |E''(0)/E_0|^{-1/2}$ which should fully specify the leading order near on-axis behaviour.  
+A generic energy profile $E(\theta)$, for instance from a numerical hydrodynamics simulation, may have several more parameters, but one can still associate with it an on-axis energy $E_0 = E(0)$ and an effective core width $\thC \sim |E''(0)/E_0|^{-1/2}$ which should fully specify the leading order near on-axis behaviour.  
 
 The afterglow light curve of a structured jet follows one of two qualitatively different regimes depending on the orientation of the viewer with respect to $\thC$.  We refer to the regimes as ``aligned'' when $\thobs < \thC$, and ``misaligned'' when $\thobs > \thC$.  
 
@@ -377,6 +380,10 @@ The temporal and spectral slopes for various regimes are given in Table \ref{tab
 %\end{deluxetable*}
 
 The $g$ parameter evolves with time as $\theta^*$ sweeps from the jet edge to the core.  This produces deviations in the light curve from a pure power law.  However, we find ultimately these deviations are not too large and the average slope is well approximated by $\geff  = g(\thobs/2)$.  For the power law and Gaussian jet models this gives:
+\begin{align}
+	\theff &= \frac{\thobs}{2}&& \text{Gaussian}\ , \\
+	\theff &= \frac{\thobs}{\sqrt{1.8+2.1b^{-1.25} + (0.49-0.86b^{-1.25})\thobs/\thC}}&& \text{power law}\ . \label{eq:theff}
+\end{align}
 \begin{align}
 	\geff &= \frac{\thobs^2}{4\thC^2} && \text{Gaussian}\ , \\
 	\geff &= \frac{b \thobs^2}{4 \thC^2+\thobs^2} && \text{power law}\ . \label{eq:geff}
