@@ -1,0 +1,89 @@
+- title: I would vote for 'gamma-ray burst afterglow analysis in the multi-messenger era'
+
+abstract
+- you speak of plural MM counterpart GRBs, we only have one so far.
+- mention 'closure relations' already in abstract
+- one can come away from reading the abstract that radial structure and chocked yets are not part of this paper's considerations
+
+introduction:
+
+Additional relevant citations
+
+- cite older papers on viewing angle.
+Meszaros, Rees, Wijers, 1998: http://adsabs.harvard.edu/abs/1998ApJ...499..301M
+Nakamura 1999, http://adsabs.harvard.edu/abs/1999ApJ...522L.101N
+Rossi, Lazzati, Rees, 2002, http://adsabs.harvard.edu/abs/2002MNRAS.332..945R
+Kumar, Granot, 2003, http://adsabs.harvard.edu/abs/2003ApJ...591.1075K
+Granot, Kumar 2003, http://adsabs.harvard.edu/abs/2003ApJ...591.1086G
+Bing, Meszaros, 2002, http://adsabs.harvard.edu/abs/2002ApJ...571..876Z
+Peng+ http://adsabs.harvard.edu/abs/2005ApJ...626..966P
+Yamazaki 2004, http://ads.nao.ac.jp/abs/2004ApJ...606L..33Y
+
+- Mention X-ray flares and add some references. 
+X-ray flashes:
+Arefiev+ 2003, http://adsabs.harvard.edu/abs/2003ApJ...586.1238A
+Fan+, 2004, http://adsabs.harvard.edu/abs/2004MNRAS.351L..78F
+Heise 2003, http://adsabs.harvard.edu/abs/2003AIPC..662..229H
+Yamazaki+, 2002, http://adsabs.harvard.edu/abs/2002ApJ...571L..31Y
+Yamazaki+, 2003, http://ads.nao.ac.jp/abs/2003ApJ...593..941Y
+
+early cocoon versus succesful jet:
+Huang, Dai Lu, 2002, http://adsabs.harvard.edu/abs/2002MNRAS.332..735H
+
+- Mention again closure relations in introduction. Good starting point for citations: 
+Racusin 2009, https://ui.adsabs.harvard.edu/abs/2009ApJ...698...43R/abstract
+includes a table (table 1) plus summary of earlier closure relations with citations to papers.
+
+- cite gill & granot as attempt to fit with top-hat jet
+
+section 2 motivation
+- be explicit about the fact that the definitions of theta_c are different between models. Maybe mention as well how they encompass different fractions of total jet energy, for example.
+
+- section 3
+- cite the Mignone paper where the EOS was taken from: https://ui.adsabs.harvard.edu/abs/2005ApJS..160..199M/abstract
+
+section 3.1
+- definition of Doppler shift delta is only given in appendix, perhaps better done here along with its introduction
+
+- cite some relevant earlier works on the single shell models, an extensive list of citations are citations 55-64 from my 2018 review paper in IJMPD
+
+- Mention that our factor 3 derives from the time it takes to establish full causal contact across the surface of a decelerating shell as can be analytically calculated from the relativistic sound speed limit and the radial fluid velocity, include citation of van Eerten 2013 'gamma-ray burst afterglow theory' where this point was first made.
+
+- 'used an overly simplistic' -> 'used a simplified' NO need for such a value judgment here
+
+section 3.2
+
+- be clear that afterglowpy software does not come integrated into Bayesian analysis package. Cite relevant Feroz & Hobson, Foreman-Mackey papers on multinest and Emcee respectively as examples of packages with which the user can combine
+
+section 3.3
+
+- "trades some amount of physical accuracy for great flexibility" you do not specify relative to what this statement should be taken
+
+section 4.
+
+- further to point about earlier structured jet models pre 170817, here is another opportunity to reiterate the 'inevitability' of structured jet models in the MM era. Ties in with relative non-importance structured jet models for on-axis viewers, as discussed in second paragraph
+
+- "blast wave is only transrelativistic" -> already not only, or 'has become' without either
+
+section 4.1
+
+- "we do not address the Newtonian phase of evolution in this work" Yes we do, the model fully includes that. We do not dwell too much on slope / closure relation implications. Better rephrased as a statement purely limited to closure relations, for example by a reference to Leventis (and/or citations therein) about where to find non-relativistic closure relations in the literature. We certainly want to avoid people thinking our model is incomplete, ie ultra-relativistic flow only.
+
+- "to observers this energy gradient presents itself as a slowly rising..." At this point you ought to make the connection once more to 170817 were ofcourse exactly this behaviour was seen.
+
+- your figures on light curves that were going to be replaced by the multi-panel figure do not mention the b value for the power law model. I take this to be 2, but needs explicit mention
+
+- Figures plotting d log F / d lot t versus g (fig 8 in my printed copy, for example, but that number might be changed in the latest) would benefit from a horizontal dashed gray line in the background at 0, and explicit labels 'rising flux' and 'decaying flux' above and below respectively
+
+- appendix
+
+- 'spreading does not begin in earnest' -> statement too vague
+
+- why are you using delta_s not delta for a discussion of beaming? I guess this is about the motion of the shock front stretching the shell width as experienced by the traveling photon, but this might benefit from an explicit mention.
+
+- is the use of 'on-axis' appropriate between A6 and A7, or should that be 'aligned'
+
+- first 'off-axis' expression for delta is not justified in words in text, unless I missed that. 
+
+ 
+
