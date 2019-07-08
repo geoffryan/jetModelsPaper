@@ -1214,6 +1214,47 @@ def calcSlopePost(jetModel, Y, regime):
     return alpha
 
 
+def calcThetaEff(jetModel, Y):
+
+    thEff = 0.0
+    thV = jetModel[0]
+    thC = jetModel[2]
+    b = jetModel[4]
+
+    if jetModel == 0:
+        thEff = 0.5*thV
+    elif jetModel == 4:
+        thEff = thV / np.sqrt(1.83+2.10*np.power(b, -1.25)
+                              + (0.486-0.862*np.power(b, -1.15)) * thV/thC)
+    return thEff
+
+
+def calcGEff(jetModel, Y):
+
+    thV = jetModel[0]
+    thC = jetModel[2]
+    b = jetModel[4]
+
+    dlfdth = 0.0
+    thEff = calcThetaEff(jetModel, Y)
+
+    if jetModel == 0:
+        dlfdth = -thEff / (thC*thC)
+    elif jetModel == 4:
+        dlfdth = -thEff / (thC*thC + thEff*thEff/b)
+
+    return -(thEff-thV) * dlfdth
+
+
+def calcSlopeStructEff(jetModel, Y, regime):
+
+    geff = calcGEff(jetModel, Y)
+
+    al = calcSlopeStruct(jetModel, Y, regime, g=geff, som=1.0)
+
+    return al
+
+
 def makeAnalyticTestPlots():
 
     regimes = ['D', 'E', 'F', 'G', 'H']

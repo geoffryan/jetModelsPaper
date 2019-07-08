@@ -1,6 +1,7 @@
 import numpy as np
 import grbpy as grb
 import matplotlib.pyplot as plt
+# import paperPlots as pp
 
 
 def plotPanel(fig, gs0, t, nu, thV, Y, Z, modelLegend=False):

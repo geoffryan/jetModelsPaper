@@ -58,6 +58,9 @@
 {Hotokezaka}, K., {Nakar}, E., {Gottlieb}, O., {et~al.} 2018, arXiv e-prints.
 \newblock \doarXiv{1806.10596}
 
+\bibitem[{{Ioka} \& {Nakamura}(2001)}]{Ioka:2001aa}
+{Ioka}, K., \& {Nakamura}, T. 2001, \apjl, 554, L163, \dodoi{10.1086/321717}
+
 \bibitem[{{Kumar} \& {Granot}(2003)}]{Kumar:2003aa}
 {Kumar}, P., \& {Granot}, J. 2003, \apj, 591, 1075, \dodoi{10.1086/375186}
 
@@ -103,12 +106,19 @@
 {Moderski}, R., {Sikora}, M., \& {Bulik}, T. 2000, \apj, 529, 151,
   \dodoi{10.1086/308257}
 
+\bibitem[{{Nakamura}(1999)}]{Nakamura:1999aa}
+{Nakamura}, T. 1999, \apjl, 522, L101, \dodoi{10.1086/312235}
+
 \bibitem[{{Nakar} {et~al.}(2004){Nakar}, {Granot}, \& {Guetta}}]{Nakar:2004aa}
 {Nakar}, E., {Granot}, J., \& {Guetta}, D. 2004, \apjl, 606, L37,
   \dodoi{10.1086/421107}
 
 \bibitem[{{Panaitescu} \& {Kumar}(2003)}]{Panaitescu:2003aa}
 {Panaitescu}, A., \& {Kumar}, P. 2003, \apj, 592, 390, \dodoi{10.1086/375563}
+
+\bibitem[{{Peng} {et~al.}(2005){Peng}, {K{\"o}nigl}, \& {Granot}}]{Peng:2005aa}
+{Peng}, F., {K{\"o}nigl}, A., \& {Granot}, J. 2005, \apj, 626, 966,
+  \dodoi{10.1086/430045}
 
 \bibitem[{{Piro} {et~al.}(2019){Piro}, {Troja}, {Zhang}, {Ryan}, {van Eerten},
   {Ricci}, {Wieringa}, {Tiengo}, {Butler}, {Cenko}, {Fox}, {Khandrika},
@@ -179,6 +189,19 @@
 \bibitem[{{Wu} \& {MacFadyen}(2018)}]{Wu:2018aa}
 {Wu}, Y., \& {MacFadyen}, A. 2018, \apj, 869, 55,
   \dodoi{10.3847/1538-4357/aae9de}
+
+\bibitem[{{Yamazaki} {et~al.}(2002){Yamazaki}, {Ioka}, \&
+  {Nakamura}}]{Yamazaki:2002aa}
+{Yamazaki}, R., {Ioka}, K., \& {Nakamura}, T. 2002, \apjl, 571, L31,
+  \dodoi{10.1086/341225}
+
+\bibitem[{{Yamazaki} {et~al.}(2003){Yamazaki}, {Ioka}, \&
+  {Nakamura}}]{Yamazaki:2003aa}
+---. 2003, \apj, 593, 941, \dodoi{10.1086/376677}
+
+\bibitem[{{Yamazaki} {et~al.}(2004){Yamazaki}, {Ioka}, \&
+  {Nakamura}}]{Yamazaki:2004aa}
+---. 2004, \apjl, 606, L33, \dodoi{10.1086/421084}
 
 \bibitem[{{Zhang} {et~al.}(2006){Zhang}, {Fan}, {Dyks}, {Kobayashi},
   {M{\'e}sz{\'a}ros}, {Burrows}, {Nousek}, \& {Gehrels}}]{Zhang:2006aa}

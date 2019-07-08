@@ -19,6 +19,7 @@
 \newcommand{\Del}{\ensuremath{\Delta}}
 
 \newcommand{\gwbns}{GW170817A}
+\newcommand{\grbbns}{GRB170817A}
 \newcommand{\afterglowpy}{{\tt afterglowpy}}
 \newcommand{\boxfit}{{\tt BoxFit}}
 \newcommand{\python}{{\tt Python}}
@@ -27,6 +28,9 @@
 \newcommand{\hubble}{{\em Hubble Space Telescope}}
 \newcommand{\planck}{{\em Planck}}
 \newcommand{\beppoSAX}{{\em BeppoSAX}}
+\newcommand{\swift}{{\em Swift}}
+\newcommand{\swiftXRT}{{\em Swift-XRT}}
+\newcommand{\chandra}{{\em Chandra}}
 
 \newcommand{\dd}{\ensuremath{\mathrm{d}}}
 \newcommand{\Mej}{\ensuremath{M_{\mathrm{ej}}}}
@@ -62,6 +66,7 @@
 \newcommand{\bmin}{\ensuremath{\beta_{\mathrm{min}}}}
 \newcommand{\bmax}{\ensuremath{\beta_{\mathrm{max}}}}
 \newcommand{\som}{\ensuremath{s_{\Omega}}}
+\newcommand{\OO}{\ensuremath{\mathcal{O}}}
 
 
 \begin{document}
@@ -88,19 +93,62 @@
 
 \section{Introduction}
 
+\subsection{Wowee! 170817}
+
+The binary neutron star merger \gwbns{} and its associated electromagnetic counterparts provided a wealth of data to high energy astrophysics (CITE).  Not least among these was its peculiar non-thermal afterglow, first detected in X-rays 9 days after the merger \citep{Troja:2017aa}.  This was followed by radio 16 days after the merger and optical 73 days after the merger (CITE Radio \& Optical follow-up).  Unlike any short gamma-ray burst (GRB) afterglow observed before, \grbbns{} steadily {\em rose} in brightness for ~160 days in all observed bands.  After peak, the emission quickly decayed at a rate similar to other GRB afterglows.
+
+The absence of early X-ray emission, with early non-detections by \swiftXRT{} and a deep upper limit from \chandra{}, led early analyses to consider the effect if viewing angle on the emission \citep{Troja:2017aa} (CITE MORE).  Given the gravitational wave signal of a binary neutron star merger is observable almost regardless of of orientation, it is in fact expected that GRB/GW events would be viewed at moderate inclination.
+
+As \grbbns{}'s afterglow continued to rise for weeks after the burst, it became evident the emission could not be explained by a simple uniform ``top hat'' jet viewed off axis.  More sophisticated models were considered: ``structured jets'' with non-uniform angular distribution of energy and quasi-isotropic ``refreshed shocks'' with significant velocity stratification of the ejecta and modest Lorentz factors.  The observation of apparent superluminal motion of the radio centroid and the steep turnover of the light curve after 160 days confirmed the relativistic and collimated nature of the outflow, in accordance with the structured jet picture.
+
+
+
+\subsection{History of structure and viewing angle}
+
+The first GRB afterglow was discovered by \beppoSAX{} as part of GRB 970228 \citep{Wijers:1997aa}.  GRB afterglows present as broadband synchrotron emission following the prompt gamma-ray signal and can last for days, weeks, months, and years.  
+
+\subsubsection{Standard model}
+
+The GRB afterglow emission arises from the 
+
+\subsubsection{Angular Structure}
+\subsubsection{Viewing Angle}
+
+\subsection{Overview of 170817A analysis/models}
+
+\subsection{What we're doing}
+
+In this paper we develop a theoretical model of the electromagnetic afterglow of generic structured jets for arbitrary viewing inclinations.  The model takes as input the energy and Lorentz factor angular profiles, which may be intrinsic to the jet launching mechanism 
+
+The light curves resemble broken power laws.  We calculate viewing angle dependent closure relations, directly relating the effective temporal evolution of the light curve to the viewing angle and explosion geometry.  
+
+
+
+
+\newpage
+
+
+\newpage
+
+\subsection{Lit Review}
 \begin{itemize}
 \item \citet{Meszaros:1998aa} First discusses effect of angular structure in $E$ and $\Gamma$, predicts rising light curves when seen off axis, calculates closure relations in various cases.
-\item \citet{Dalal:2002aa} Considers emission from boosted lightbulb, refers to $\thobs > \theta_j$ as ``off-axis,'' points out off-axis jet breaks will be delayed and dim, light curves converge at late time.
+\item \citet{Nakamura:1999aa} Far off-axis emission from top-hat jet in stellar wind environment, application to GRB 980425.
 \item \citet{Moderski:2000aa} Relativistic effects (equal arrival time surface, etc) smear jet-break.
-\item \citet{Rossi:2002aa} Considers jets with $E\propto \theta^{-2}$.  Verifies at early times line-of-sight material dominates over core and wings, light curves resemble on-axis top-hats, but jet break is due to observer angle.  Simple emission model.  Postulates variety of jet-breaks due to off-axis structured jets, instead of distribution of $\Eiso$, $\thC$.  $t_b \propto \thobs^{8/3}$.  
-\item \citet{Granot:2002ab} Off-axis viewing of top hat jets, computed as boosted light bulb, analytic top-hat, and hydro sim. $\thobs < \theta_j$ look like on-axis top-hats, jet breaks increase with $\thobs$, evidence for $\thobs$-dependent slope before jet break in hydro models.
+\item \citet{Ioka:2001aa} Viewing angle dependent prompt emission.  GRB prompt peak $L$ - spectral lag relation from viewing angle.  
 \item \citet{Lipunov:2001aa, Zhang:2002aa} universal structured jet, $\theta^{-2}$, may explain jet breaks, etc.
+\item \citet{Rossi:2002aa} Considers jets with $E\propto \theta^{-2}$.  Verifies at early times line-of-sight material dominates over core and wings, light curves resemble on-axis top-hats, but jet break is due to observer angle.  Simple emission model.  Postulates variety of jet-breaks due to off-axis structured jets, instead of distribution of $\Eiso$, $\thC$.  $t_b \propto \thobs^{8/3}$.  
+\item \citet{Dalal:2002aa} Considers emission from boosted lightbulb, refers to $\thobs > \theta_j$ as ``off-axis,'' points out off-axis jet breaks will be delayed and dim, light curves converge at late time.
+\item \citet{Granot:2002ab} Off-axis viewing of top hat jets, computed as boosted light bulb, analytic top-hat, and hydro sim. $\thobs < \theta_j$ look like on-axis top-hats, jet breaks increase with $\thobs$, evidence for $\thobs$-dependent slope before jet break in hydro models.
+\item \citet{Yamazaki:2002aa, Yamazaki:2003aa} XRF as off-axis prompt GRB using \citet{Ioka:2001aa} model.
 \item \citet{Panaitescu:2003aa} Off-axis viewing of power-law jets $E\propto \theta^{-q}$ with sharp cores.  Analytic blast waves, detailed treatment of relativistic emission and synchrotron spectrum. When viewing within the core, no large effect so long as $q \geq 2$.  Analytic formulae for aligned observers, numerical only for misaligned.  Core visible at $t_a \sim E_0^{1/3} \thobs^{8/3}$ in ISM.  Structure may only steepen jet breaks, proposes examining pre- and post- jet break slopes to determine whether structure is evident.
 \item \citet{Kumar:2003aa} Numerical evolution of radially-integrated Gaussian, top-hat, and power-law jets/  ``Therefore, a simple model in which the energy per unit solid angle is taken to be time independent and each element of the jet behaves as if it were part of a spherical flow with the same can serve as a useful approximation for the jet dynamics, as long as the jet is sufficiently relativistic.''
 \item \citet{Granot:2003aa} ``structured jet:'' jet with angular structure. Smooth power law in $\Theta = \sqrt{1 + \theta^2/\thC^2}$.  Analysis of power-law jet light curves from \citet{Kumar:2003aa}. Only considers USJ, top-hat, and permutations.  Find deviations from top-hat appearance small, USJ must have $E\approx \theta^{-2}$, $\Gamma\approx \theta^{0 < 1}$.
 \item \citet{Salmonson:2003aa} Numerical and analytic study of top-hat and structured jets.  Computes doppler factor and angular size in asymptotic limits (no cooling frequency), finds far-off-axis closure relations.  Examines `bump' seen when initially strongly beamed emission becomes structured, then proceeds to jet break.
 \item \citet{Nakar:2004aa} Distribution of luminosity and jet-breaks rules out USJ. 
 \item \citet{Rossi:2004aa}. Light curves and polarization for top-hat, USJ, and Gaussian jet.  Gaussian jet shows slowly rising flux at sufficiently large viewing angles. Time dependence of polarization signal may distinguish between USJ and Gaussian.
+\item \citet{Yamazaki:2004aa} $E_P$ -- $E_{iso}$ prompt relation from viewing angle.
+\item \citet{Peng:2005aa} Two-component (narrow + wide) jet, afterglows, blurred jet breaks, off-axis as XRF.
 \end{itemize}
 
 
@@ -281,8 +329,13 @@ It bears pointing out that some of the hard discrepancy between the codes is due
 
 To fully characterize the light curves of structured jets we use \afterglowpy{} to construct light curves exploring dependence on jet structure model, viewing angle $\thobs$, opening angle $\thC$, and synchrotron regime.  
 
-We find the light curves of structured jets show two modes of behaviour, depending on whether the observer is \emph{aligned} ($\thobs < \thC$) or \emph{misaligned} ($\thobs > \thC$) TODO: CITE PREVIOUS STRUCTURED JET WORK
- In the \emph{aligned} case, the light curves follow the standard on-axis top hat behaviour modified slightly for non-zero viewing angle.  There is little to distinguish between different structure $E(\theta)$, and the light curve is well-approximated by a broken power law with characteristic break times \citep{Granot:2002aa}.  The \emph{misaligned} light curve also may present as a broken power law, but with closure relations explicitly dependent on viewing angle and jet angular structure.  
+Using the definition of $\thC$ in Equation \eqref{eq:thCdef} we may write the angular energy profile near the jet axis as:
+\begin{equation}
+	E(\theta) = E_0 \left (1 - \frac{\theta^2}{2\thC^2} \right) + \OO(\theta^3) \label{eq:EthetaNear}
+\end{equation}
+
+The light curves of structured jets show two modes of behaviour, depending on whether the observer is \emph{aligned} ($\thobs < \thC$) or \emph{misaligned} ($\thobs > \thC$).
+In the \emph{aligned} case, the light curves follow the standard on-axis top hat behaviour modified slightly for non-zero viewing angle.  There is little to distinguish between different structure $E(\theta)$, and the light curve is well-approximated by a broken power law with characteristic break times \citep{Granot:2002aa}.  The \emph{misaligned} light curve also may present as a broken power law, but with closure relations explicitly dependent on viewing angle and jet angular structure.  
 
 We discuss aligned evolution in detail in Section \ref{subsec:aligned} and misaligned in Section \ref{subsec:misaligned}.  In both cases the transition between phases of evolution depends on the effective solid angle $\Delta \Omega$ of the patch of blast wave dominating the emission.  The size of this patch tends to scale with the Lorentz factor $\gamma$ of the dominant region as:
 \begin{equation}

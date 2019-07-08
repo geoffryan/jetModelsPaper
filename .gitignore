@@ -1,6 +1,12 @@
 structuredJets.pdf
+structuredJets_sources.bib
 *.log
 *.synctex.gz
 *.aux
+*.blg
 code/*.pdf
 code/*.png
+
+.DS_Store
+*.swp
+__pycache__/
