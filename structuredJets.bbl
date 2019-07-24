@@ -15,6 +15,10 @@
 {Aloy}, M.~A., {Janka}, H.-T., \& {M{\"u}ller}, E. 2005, \aap, 436, 273,
   \dodoi{10.1051/0004-6361:20041865}
 
+\bibitem[{{Blandford} \& {McKee}(1976)}]{Blandford:1976aa}
+{Blandford}, R.~D., \& {McKee}, C.~F. 1976, Physics of Fluids, 19, 1130,
+  \dodoi{10.1063/1.861619}
+
 \bibitem[{{Dalal} {et~al.}(2002){Dalal}, {Griest}, \& {Pruet}}]{Dalal:2002aa}
 {Dalal}, N., {Griest}, K., \& {Pruet}, J. 2002, \apj, 564, 209,
   \dodoi{10.1086/324142}
@@ -49,6 +53,10 @@
   {Woosley}}]{Granot:2002ab}
 {Granot}, J., {Panaitescu}, A., {Kumar}, P., \& {Woosley}, S.~E. 2002, \apjl,
   570, L61, \dodoi{10.1086/340991}
+
+\bibitem[{{Granot} \& {Piran}(2012)}]{Granot:2012aa}
+{Granot}, J., \& {Piran}, T. 2012, \mnras, 421, 570,
+  \dodoi{10.1111/j.1365-2966.2011.20335.x}
 
 \bibitem[{{Granot} \& {Sari}(2002)}]{Granot:2002aa}
 {Granot}, J., \& {Sari}, R. 2002, \apj, 568, 820, \dodoi{10.1086/338966}
@@ -113,6 +121,11 @@
 {Nakar}, E., {Granot}, J., \& {Guetta}, D. 2004, \apjl, 606, L37,
   \dodoi{10.1086/421107}
 
+\bibitem[{{Nava} {et~al.}(2013){Nava}, {Sironi}, {Ghisellini}, {Celotti}, \&
+  {Ghirlanda}}]{Nava:2013aa}
+{Nava}, L., {Sironi}, L., {Ghisellini}, G., {Celotti}, A., \& {Ghirlanda}, G.
+  2013, \mnras, 433, 2107, \dodoi{10.1093/mnras/stt872}
+
 \bibitem[{{Panaitescu}(2005{\natexlab{a}})}]{Panaitescu:2005aa}
 {Panaitescu}, A. 2005{\natexlab{a}}, \mnras, 362, 921,
   \dodoi{10.1111/j.1365-2966.2005.09352.x}
@@ -140,6 +153,15 @@
 {Planck Collaboration}, {Ade}, P.~A.~R., {Aghanim}, N., {et~al.} 2016, \aap,
   594, A13, \dodoi{10.1051/0004-6361/201525830}
 
+\bibitem[{{Press} {et~al.}(2007){Press}, {Teukolsky}, {Vetterling}, \&
+  {Flannery}}]{Press:2007aa}
+{Press}, W.~H., {Teukolsky}, S.~A., {Vetterling}, W.~T., \& {Flannery}, B.~P.
+  2007, Numerical Recipes 3rd Edition: The Art of Scientific Computing, 3rd
+  edn. (New York, NY, USA: Cambridge University Press)
+
+\bibitem[{{Rhoads}(1999)}]{Rhoads:1999aa}
+{Rhoads}, J.~E. 1999, \apj, 525, 737, \dodoi{10.1086/307907}
+
 \bibitem[{{Rossi} {et~al.}(2002){Rossi}, {Lazzati}, \& {Rees}}]{Rossi:2002aa}
 {Rossi}, E., {Lazzati}, D., \& {Rees}, M.~J. 2002, \mnras, 332, 945,
   \dodoi{10.1046/j.1365-8711.2002.05363.x}
@@ -166,28 +188,55 @@
 {Troja}, E., {Piro}, L., {van Eerten}, H., {et~al.} 2017, \nat, 551, 71,
   \dodoi{10.1038/nature24290}
 
-\bibitem[{{Troja} {et~al.}(2018){Troja}, {Piro}, {Ryan}, {van Eerten}, {Ricci},
-  {Wieringa}, {Lotti}, {Sakamoto}, \& {Cenko}}]{Troja:2018aa}
-{Troja}, E., {Piro}, L., {Ryan}, G., {et~al.} 2018, \mnras, 478, L18,
-  \dodoi{10.1093/mnrasl/sly061}
+\bibitem[{{Troja} {et~al.}(2018{\natexlab{a}}){Troja}, {Piro}, {Ryan}, {van
+  Eerten}, {Ricci}, {Wieringa}, {Lotti}, {Sakamoto}, \& {Cenko}}]{Troja:2018aa}
+{Troja}, E., {Piro}, L., {Ryan}, G., {et~al.} 2018{\natexlab{a}}, \mnras, 478,
+  L18, \dodoi{10.1093/mnrasl/sly061}
+
+\bibitem[{{Troja} {et~al.}(2018{\natexlab{b}}){Troja}, {Ryan}, {Piro}, {van
+  Eerten}, {Cenko}, {Yoon}, {Lee}, {Im}, {Sakamoto}, {Gatkine}, {Kutyrev}, \&
+  {Veilleux}}]{Troja:2018ab}
+{Troja}, E., {Ryan}, G., {Piro}, L., {et~al.} 2018{\natexlab{b}}, Nature
+  Communications, 9, 4089, \dodoi{10.1038/s41467-018-06558-7}
+
+\bibitem[{{Troja} {et~al.}(2019){Troja}, {Castro-Tirado}, {Becerra Gonzalez},
+  {Hu}, {Ryan}, {Cenko}, {Ricci}, {Novara}, {Sanchez-Ramirez}, {Acosta-Pulido},
+  {Caballero Garcia}, {Guziy}, {Jeong}, {Lien}, {Marquez}, {Pandey}, {Park},
+  {Tello}, {Sakamoto}, {Sokolov}, {Sokolov}, {Tiengo}, {Valeev}, {Zhang}, \&
+  {Veilleux}}]{Troja:2019aa}
+{Troja}, E., {Castro-Tirado}, A.~J., {Becerra Gonzalez}, J., {et~al.} 2019,
+  arXiv e-prints, arXiv:1905.01290.
+\newblock \doarXiv{1905.01290}
 
 \bibitem[{{van Eerten} {et~al.}(2018){van Eerten}, {Ryan}, {Ricci}, {Burgess},
   {Wieringa}, {Piro}, {Cenko}, \& {Sakamoto}}]{van-Eerten:2018aa}
 {van Eerten}, E.~T.~H., {Ryan}, G., {Ricci}, R., {et~al.} 2018, arXiv e-prints.
 \newblock \doarXiv{1808.06617}
 
+\bibitem[{{van Eerten}(2013)}]{van-Eerten:2013ab}
+{van Eerten}, H. 2013, arXiv e-prints, arXiv:1309.3869.
+\newblock \doarXiv{1309.3869}
+
 \bibitem[{{van Eerten}(2018)}]{van-Eerten:2018ab}
-{van Eerten}, H. 2018, International Journal of Modern Physics D, 27, 1842002,
+---. 2018, International Journal of Modern Physics D, 27, 1842002,
   \dodoi{10.1142/S0218271818420026}
+
+\bibitem[{{van Eerten} {et~al.}(2012){van Eerten}, {van der Horst}, \&
+  {MacFadyen}}]{van-Eerten:2012ab}
+{van Eerten}, H., {van der Horst}, A., \& {MacFadyen}, A. 2012, \apj, 749, 44,
+  \dodoi{10.1088/0004-637X/749/1/44}
 
 \bibitem[{{van Eerten} {et~al.}(2010){van Eerten}, {Zhang}, \&
   {MacFadyen}}]{van-Eerten:2010aa}
 {van Eerten}, H., {Zhang}, W., \& {MacFadyen}, A. 2010, \apj, 722, 235,
   \dodoi{10.1088/0004-637X/722/1/235}
 
-\bibitem[{{van Eerten} \& {MacFadyen}(2012)}]{van-Eerten:2012ac}
-{van Eerten}, H.~J., \& {MacFadyen}, A.~I. 2012, \apjl, 747, L30,
-  \dodoi{10.1088/2041-8205/747/2/L30}
+\bibitem[{{van Eerten} \& {MacFadyen}(2012{\natexlab{a}})}]{van-Eerten:2012aa}
+{van Eerten}, H.~J., \& {MacFadyen}, A.~I. 2012{\natexlab{a}}, \apj, 751, 155,
+  \dodoi{10.1088/0004-637X/751/2/155}
+
+\bibitem[{{van Eerten} \& {MacFadyen}(2012{\natexlab{b}})}]{van-Eerten:2012ac}
+---. 2012{\natexlab{b}}, \apjl, 747, L30, \dodoi{10.1088/2041-8205/747/2/L30}
 
 \bibitem[{{Wijers} {et~al.}(1997){Wijers}, {Rees}, \&
   {Meszaros}}]{Wijers:1997aa}

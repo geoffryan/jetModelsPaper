@@ -50,6 +50,7 @@
 \newcommand{\epse}{\ensuremath{\varepsilon_{\mathrm{e}}}}
 \newcommand{\epseb}{\ensuremath{\bar{\varepsilon}_{\mathrm{e}}}}
 \newcommand{\epsB}{\ensuremath{\varepsilon_{\mathrm{B}}}}
+\newcommand{\xiN}{\ensuremath{\xi_N}}
 \newcommand{\sigT}{\ensuremath{\sigma_{\mathrm{T}}}}
 \newcommand{\dL}{\ensuremath{d_{\mathrm{L}}}}
 \newcommand{\qe}{\ensuremath{q_{\mathrm{e}}}}
@@ -71,7 +72,8 @@
 
 \begin{document}
 
-\title{GRB Afterglows In The Multi-Messenger Era  OR  Electromagnetic Afterglows Of Structured Jets  OR  Structured Jets At All Angles}
+\title{GRB Afterglows In The Multi-Messenger Era  \hspace{10in} OR\hspace{10in}   Electromagnetic Afterglows Of Structured Jets \hspace{10in}  OR\hspace{10in}  Structured Jets At All Angles\hspace{10in}  OR \hspace{10in}The Electromagnetic Afterglows of Structured Jets: Numerical Models and Closure Relations}
+
 \correspondingauthor{Geoffrey Ryan}
 \email{gsryan@umd.edu}
 
@@ -83,10 +85,13 @@
 \author{Eleonora Troja}
 
 
+
 \begin{abstract}
 	Gamma-ray bursts (GRBs) associated with gravitational wave events are, and will likely continue to be, viewed at a larger inclination than their fellow GRBs without gravitational wave detections.  As demonstrated by the afterglow of \gwbns{}, this requires an extension of the common GRB afterglow models which typically assume emission from an on-axis top hat jet.  We present a characterization of the afterglows arising from structured jets, utilizing both trans-relativistic numerical calculations and simple analytic approximations.  In many cases the temporal slope before the jet break is found to be a simple function of the ratio between the viewing angle and effective half opening angle of the jet.  This provides a useful handle in the analysis of structured GRB afterglow light curves, but does not completely resolve the degeneracy between viewing angle and jet structure model.  Our models, both numerical and analytic, are publicly available as the open source \python{} package \afterglowpy{}.
 	
 % Present new closure relations for structured jets, compare with established relations for choked jet models...	
+
+% Add sentence explaining "jet structure" ==> "angular jet structure", we calculate closure relations and explicitly relate them to energy injection/refreshed shock/velocity stratification models.
 	
 	
 \end{abstract}
@@ -97,14 +102,19 @@ The binary neutron star merger event \gwbns{} provided, quite literally, a new v
 
 The lack of early emission, slow rising light curve, apparent motion of the radio centroid, and sharp decline post-peak are all consistent with emission from a \emph{structured jet}, a collimated blast wave with a non-trivial angular distribution of energy, viewed a moderate angle away from the jet axis (CITE YITL, Mooley, Ghirlanda, Lamb, Hotokezaka, ...).  The combined effects of a moderate viewing angle and angular structure in the jet produce a light curve significantly different from the standard on-axis uniform ``top-hat'' jet used extensively in GRB afterglow analysis. Since the gravitational wave signal of a binary neutron star merger is nearly isotropic, it is expected the majority of future GW-GRBs will also be viewed at significant inclination and may have similarly peculiar light curves as \gwbns{}.
 
-A solid theoretical understanding of structured jet afterglows, including viewing angle effects, will be required to make the most use of future GW-GRB observations, the \gwbns{} dataset, and re-analysis of archival short GRBs.  To this end, we have calculated the explicit viewing angle and structure-dependent closure relations governing the afterglows of structured jets.  We have also developed the computational tool \afterglowpy{}: a public, open source \python{} package for on-the-fly computation of structured jet afterglows with arbitrary viewing angle.
+A solid theoretical understanding of structured jet afterglows, including viewing angle effects, will be required to make the most use of future GW-GRB observations, the \gwbns{} dataset, and re-analysis of archival short GRBs.  % Mention standard tools, explain closure relations
+To this end, we have calculated the explicit viewing angle and structure-dependent closure relations governing the afterglows of structured jets.  We have also developed the computational tool \afterglowpy{}: a public, open source \python{} package for on-the-fly computation of structured jet afterglows with arbitrary viewing angle.
+
+% We generalize closure relations... mention energy injection
 
 Jet structure and viewing angle have a long history as potential explanations for temporal behaviors and breaks in GRB afterglows.  \citet{Meszaros:1998aa} first considered anisotropic models and noted they may present as ``orphan afterglows'' without a prompt GRB signal if viewed sufficiently off-axis.  Detailed theoretical calculations of structured jet afterglow light curves concluded several facts: on-axis structured light curves resemble those from top hat jets, off-axis structured light curves show a temporal break at an observer time $t_b$ that scales with the viewing angle $\thobs$ as $t_b\propto \thobs^{8/3}$, and the pre-break slope can depend on the viewing angle and particular structure model \citep{Rossi:2002aa, Dalal:2002aa, Granot:2002aa, Panaitescu:2003aa, Kumar:2003aa, Granot:2003aa, Salmonson:2003aa, Rossi:2004aa}. The ``Universal Structured Jet'' was a structured jet with isotropic-equivalent energy $E \propto \theta^{-2}$ proposed to explain the diversity of jet-break times as a viewing angle effect  \citep{Lipunov:2001aa, Zhang:2002aa}, although this was ultimately unsuccessful \citep{Nakar:2004aa}. 
 
 The temporal break in the structured jet afterglow light curve can be more significant than in top hat models, and has been invoked to explain some observed jet breaks which do not easily fit the standard closure relations \citep{Panaitescu:2005aa, Panaitescu:2005ab}, although other dynamical and spectral processes can have similar effects (CITE Piro2005, COrsi\&Piro2006).  GRB prompt emission viewed significantly off-axis was (is?) the proposed origin for X-ray flashes \citep{Ioka:2001aa, Yamazaki:2002aa, Yamazaki:2003aa, Peng:2005aa}.  More recently, small non-zero viewing angles have been measured in a subset of the \swiftXRT{} afterglow sample \citep{Ryan:2015aa}.
 
 
-In this paper, we calculate.  In Section \ref{sec:motivation} we review the general properties of structured jets and their necessity to GRB afterglows.  In Section \ref{sec:numerical} we develop our theoretical framework and describe its numerical implementation in \afterglowpy{}.  Section \ref{sec:structuredJets} characterizes the general behavior of structured jet afterglow light curves, provides the closure relations with explicit viewing angle dependence, and relates structured jets to standard energy injection models.  Section \ref{sec:gw170817} demonstrates an application to \gwbns{}. Section \ref{sec:discussion} gives further discussion and Section \ref{sec:summary} gives the summary.  Detailed derivation of the closure relations is provided in Appendices \ref{app:derive1} and \ref{app:derive2}.
+In this paper, we provide...  In Section \ref{sec:motivation} we review the general properties of structured jets and their necessity to GRB afterglows.  In Section \ref{sec:numerical} we develop our theoretical framework and describe its numerical implementation in \afterglowpy{}.  Section \ref{sec:structuredJets} characterizes the general behavior of structured jet afterglow light curves, provides the closure relations with explicit viewing angle dependence, and relates structured jets to standard energy injection models.  Section \ref{sec:gw170817} demonstrates an application to \gwbns{}. Section \ref{sec:discussion} gives further discussion and Section \ref{sec:summary} gives the summary.  Detailed derivation of the closure relations is provided in Appendices \ref{app:derive1} and \ref{app:derive2}.
+
+% Explicitly say we were the first to find x-ray, predict steep post-break slope.
 
 
 \newpage
@@ -199,9 +209,16 @@ To this end, we have calculated the power law temporal slope of the structured p
 
 Summary: In section 2 we discuss structured jets, in section 3 refreshed shocks, in section 4 our numerical model, section 5 application to \gwbns{}, and section 6 future applications and discussion.
 
+%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  WHY STRUCTURED JETS
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \section{Motivation: Why Structured Jets?}\label{sec:motivation}
 
-The \emph{structured jet} is a GRB emission model where the isotropic-equivalent energy of a blast wave is a function of the angle from the jet axis: $\Eiso = E(\theta)$. The specific structure of a jet is determined by the intrinsic structure of the jet launching mechanism as well as the sculpting that occurs as the jet burrows out of the encasing ejecta debris (as in a binary neutron star merger) or stellar envelope (as in a collapsar).  
+The \emph{structured jet} is a GRB jet model where the isotropic-equivalent energy of the blast wave is a function of the angle from the jet axis: $\Eiso = E(\theta)$. The particular angular structure of a jet is first imposed by the jet launching mechanism and then modified by the sculpting that occurs as the jet burrows out of the surrounding ejecta debris (as in a binary neutron star merger) or stellar envelope (as in a collapsar).  In the case of neutron star mergers, it is not a given that there is sufficient ejecta in the polar regions to significantly alter the intrinsic jet structure.
 
 Numerical simulations have revealed a variety of jet angular energy distributions, often containing an energetic core with power law tails.  Figure \ref{fig:jetStruct} shows a collection of jet energy distributions from the literature \citep{Aloy:2005aa, Mizuta:2009aa, Duffell:2013aa, Lazzati:2017aa, Margutti:2018aa}.  Lacking a well-established physical model of the true $E(\theta)$, in particular its dependence on the parameters of the system, we consider two simple parameterized models: a Gaussian jet and a power law jet with a smooth core.  
 
@@ -210,13 +227,9 @@ Numerical simulations have revealed a variety of jet angular energy distribution
 	E(\theta) &= E_0 \left(1 + \frac{\theta^2}{b\thC^2} \right)^{-b/2}  && \text{power law} \label{eq:pl}
 \end{align}
 
-%
-% Update jet Structure models paper.
-%
-
 \begin{figure}
 	\includegraphics[width=\columnwidth]{figs/jetStructureComparison.pdf}
-	\caption{Lateral profiles of isotropic equivalent energy $\Eiso$ as a function of angle from the jet axis $\theta$, individually rescaled to group similar profile shapes.  The thick grey lines show fiducial profiles with simple analytic expressions (Equations \eqref{eq:gauss} and \eqref{eq:pl}) while the thin colored lines show results from numerical simulations and analytic models chosen from the literature.  The blue line is the B1 numerical simulation of \cite{Aloy:2005aa}, orange the HE16N numerical simulation of \cite{Mizuta:2009aa}, green an analytic ``boosted fireball'' model with $\gamma_{\rm{B}}=10$ and $\eta_0=3$ from \cite{Duffell:2013aa}, red the numerical simulation from \cite{Lazzati:2017aa} (L17), and purple the numerical simulation from \cite{Margutti:2018aa} (M18).  The thick solid grey line is a Gaussian profile (Equation \eqref{eq:gauss}) with $E_0 = 3\times 10^{52}$ erg, $\thC = 6^\circ$, and $\thW=12^\circ$ and the thick dashed grey line is a smoothed power law profile (Equation \eqref{eq:pl}) with $E_0 = 10^{52}$ erg, $\thC = 2^\circ$, $\thW=20^\circ$, and $b=4.5$.  The Gaussian and power law profiles can emulate the basic properties of the energy profiles found in the literature. \label{fig:jetStruct}}
+	\caption{Lateral profiles of isotropic equivalent energy $\Eiso$ as a function of angle from the jet axis $\theta$, individually rescaled to group similar profile shapes.  The thick grey lines show fiducial profiles with simple analytic expressions (Equations \eqref{eq:gauss} and \eqref{eq:pl}) while the thin colored lines show results from numerical simulations and analytic models chosen from the literature.  The blue line is the B1 numerical simulation of \cite{Aloy:2005aa}, orange the HE16N numerical simulation of \cite{Mizuta:2009aa}, green an analytic ``boosted fireball'' model with $\gamma_{\rm{B}}=10$ and $\eta_0=3$ from \cite{Duffell:2013aa}, red the numerical simulation from \cite{Lazzati:2017aa} (L17), and purple the numerical simulation from \cite{Margutti:2018aa} (M18).  The thick solid grey line is a Gaussian profile (Equation \eqref{eq:gauss}) with $E_0 = 3\times 10^{52}$ erg, $\thC = 6^\circ$, and $\thW=12^\circ$ and the thick dashed grey line is a power law profile (Equation \eqref{eq:pl}) with $E_0 = 10^{52}$ erg, $\thC = 2^\circ$, $\thW=20^\circ$, and $b=4.5$.  The Gaussian and power law profiles can emulate the basic properties of the energy profiles found in the literature. \label{fig:jetStruct}}
 \end{figure}
 
 Each fiducial model is parameterized by a normalization $E_0$, a width $\thC$, and a truncation angle $\thW$.  The power law model also retains a power law index $b$.  Outside $\thW$ the energy is initially zero, this acts as an outer truncation angle for the jet.   Our power law profile includes a factor of $b^{-1}$ in the base which does not usually appear in the literature \citep{Granot:2003aa, Hotokezaka:2018aa}.  This serves to normalize the value of $\thC$ and make it comparable between power laws of different $b$ and Gaussian jets.  Both structure profiles obey
@@ -225,6 +238,10 @@ Each fiducial model is parameterized by a normalization $E_0$, a width $\thC$, a
 \end{equation} 
 which we take as a generic definition for $\thC$.
 
+% Add description of each paper, explaining method of collimation/structure generation.
+
+% Gaussian is  b--> infty
+
 Figure \ref{fig:jetStruct} shows an example of each model together with jet energy profiles drawn from the literature, mostly the result of numerical relativistic hydrodynamic simulations.  The Gaussian profile emulates jets with a flat core and sharp edges, typically the result of powerful successful jets \citep{Aloy:2005aa, Margutti:2018aa}.  Jets which are subject to stronger interactions with the surrounding medium can develop a profile with energetic wings and a narrow core, emulated by the analytic power law profile \citep{Mizuta:2009aa, Duffell:2013aa, Lazzati:2017aa}.  
 
 A generic energy profile $E(\theta)$, for instance from a numerical hydrodynamics simulation, may have several more parameters, but one can still associate with it an on-axis energy $E_0 = E(0)$ and an effective core width $\thC \sim |E''(0)/E_0|^{-1/2}$ which should fully specify the leading order near on-axis behaviour.  
@@ -232,14 +249,20 @@ A generic energy profile $E(\theta)$, for instance from a numerical hydrodynamic
 The afterglow light curve of a structured jet follows one of two qualitatively different regimes depending on the orientation of the viewer with respect to $\thC$.  We refer to the regimes as ``aligned'' when $\thobs < \thC$, and ``misaligned'' when $\thobs > \thC$.  
 
 
+%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  METHODS
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{Methods And The \afterglowpy{} Package}\label{sec:numerical}
 
-To compute the light curves of structured jet afterglows we constructed numerical and analytic models utilizing the single shell approximation of \cite{van-Eerten:2010aa, van-Eerten:2018ab}.  This approach integrates over the massive ejecta, contact discontinuity, and forward shock complex, treating it as a single fluid element with uniform radial structure. We utilize a trans-relativistic equation of state which smoothly interpolates between the ultra-relativistic and non-relativistic limits and include an approximate prescription for jet spreading.  This approach, with a simplified equation of state and jet spreading model, has been used successfully to model the synthetic light curves of top hat jets from multidimensional numerical relativistic hydrodynamics simulations \citep{van-Eerten:2010aa}.
+To compute the light curves of structured jet afterglows we constructed numerical and analytic models utilizing the single shell approximation of \cite{van-Eerten:2010aa, van-Eerten:2018ab}.  Iterations of this model have been applied in the \gwbns{} x-ray discovery paper \citep{Troja:2017aa}, follow-up studies of \gwbns{} \citep{Troja:2018aa, Piro:2019aa, van-Eerten:2018aa}, and in examinations of archival kilonova candidates \citep{Troja:2018ab, Troja:2019aa}. This approach integrates over the massive ejecta, contact discontinuity, and forward shock complex, treating it as a single fluid element with uniform radial structure. We utilize a trans-relativistic equation of state which smoothly interpolates between the ultra-relativistic and non-relativistic limits \citep{van-Eerten:2013ab, Nava:2013aa} and include an approximate prescription for jet spreading.  This approach, with a simplified equation of state and jet spreading model, has been used successfully to model the synthetic light curves of top hat jets from multidimensional numerical relativistic hydrodynamics simulations \citep{van-Eerten:2010aa}.
 
 In the ultra-relativistic limit the single shell approximation provides useful scaling relations to compute the structured jet closure relations presented in Section \ref{sec:structuredJets}.  The full trans-relativistic numerical model is publicly available as the \afterglowpy{} Python package, described in more detail in Section \ref{subsec:afterglowpy}.
 
-We utilize a standard spherical coordinate system $(r, \theta, \phi)$ with origin at the GRB central engine and polar axis aligned with the jet axis.  The blast wave forward shock has a radial position $R(t, \theta)$, where $t$ is the time measured in the burster frame. The observer is located in a direction $\hat{\bf n}$ which makes an angle $\thobs$ with the $z$-axis, $\hat{\bf n} \cdot \hat{\bf z} = \cos \thobs$, and is oriented along the $x$-axis, $\phobs = 0$.  A particular point on the blast wave $\hat{\bf r} = (\theta, \phi)$ makes an angle $\psi$ (with cosine $\mu$) with the viewer, $\mu = \cos \psi = \hat{\bf n} \cdot \hat{\bf r}$.
+We utilize a standard spherical coordinate system $(r, \theta, \phi)$ with origin at the GRB central engine and polar axis aligned with the jet axis.  The blast wave forward shock has a radial position $R(t, \theta)$, where $t$ is the time measured in the burster frame. The observer is located in a direction $\hat{\bf n}$ which makes an angle $\thobs$ with the $z$-axis, $\hat{\bf n} \cdot \hat{\bf z} = \cos \thobs$, and is oriented along the $x$-axis, $\phobs = 0$.  A particular point on the blast wave $\hat{\bf r} = (\theta, \phi)$ makes an angle $\psi$ (with cosine $\mu$) with the viewer direction, $\mu = \cos \psi = \hat{\bf n} \cdot \hat{\bf r}$.
 
 \subsection{The Single Shell Approximation}\label{subsec:algo}
 
@@ -251,7 +274,7 @@ where $z$ is the redshift of the source, $\dL$ is the luminosity distance, $\del
 
 To accommodate an initial structure profile $E(\theta)$ we consider the integrand of Equation \eqref{eq:flux} as a function of the polar angle $\theta$.  We assume each constant-$\theta$ annulus evolves independently, as an equivalent top hat of initial width $\theta_j = \theta$.  This is a very good approximation when transverse velocities are low: when the blast wave is ultra-relativistic and has not begun to spread and when the blast wave is non-relativistic and the spreading has ceased \citep{van-Eerten:2010aa}.  Once jet spreading begins in earnest the errors are larger, and this approach can be best viewed as an interpolation between the correct ultra-relativistic and non-relativistic limits \citep{van-Eerten:2010aa}.
  
-To compute the light curve of a top-hat jet of initial width $\thC$ we first must calculate the time evolution of the blast wave. In the single-shell approximation we treat the ejecta mass, contact discontinuity, and forward shock as a single unit propagating through a cold ambient medium with constant rest-mass density $\rho_0 = \Mp n_0$.  We utilize the TM trans-relativistic equation of state to describe the fluid consistently throughout its evolution \citep{Mignone:2005aa}.  The forward shock is a radius $R$ from the explosion, and the fluid behind the shock has four-velocity $u$ and Lorentz factor $\gamma$.  The shock jump conditions can be used to determine the shock speed:
+To compute the light curve of a top-hat jet of initial width $\theta_0$ we first must calculate the time evolution of the blast wave. In the single-shell approximation we treat the ejecta mass, contact discontinuity, and forward shock as a single unit propagating through a cold ambient medium with constant rest-mass density $\rho_0 = \Mp n_0$.  We utilize the ``TM'' trans-relativistic equation of state to describe the fluid consistently throughout its evolution \citep{Mignone:2005aa}.  The forward shock is at radius $R$ from the explosion, and the fluid behind the shock has four-velocity $u$ and Lorentz factor $\gamma$.  The shock jump conditions can be used to determine the shock speed:
 \begin{equation}
 	\dot{R} = \frac{4 u \gamma}{4 u^2 +3}c\ . \label{eq:Rdot}
 \end{equation}
@@ -262,15 +285,39 @@ Here the time derivative $\dot{R}$ is taken with respect to elapsed time in the 
 	E &= (\gamma - 1)\Mej c^2 + \frac{4\pi}{9} \rho_0 c^2 R^3 (4 u^2 + 3) \beta^2 f_\Omega \ , \label{eq:E} \\
 	f_\Omega &= 2 \sin^2\left( \theta_j / 2 \right)\ . \label{eq:fOm}
 \end{align}
-In Equation \eqref{eq:E} the first term is the kinetic energy of the ejected mass $\Mej$, assumed to have already accelerated and adiabatically cooled to its coasting velocity. The second term is the kinetic and thermal energy of the shocked ISM with three-velocity $\beta = u / \gamma$.  Equation \eqref{eq:fOm} describes the fractional solid angle of the jet in terms of the time dependent opening angle $\theta_j(t)$. While the blast wave is relativistic $\theta_j = \thC$ and $f_\Omega$ is constant, but once the jet edge comes in causal contact with the core it begins to spread due to its own internal pressure. The jet spreads and $\theta_j$ increases until the blast wave is spherical and $f_\Omega=1$.  The spreading occurs at sound speed $c_s$ in the fluid rest-frame, causing the opening angle of the jet to increase as \citep{van-Eerten:2010aa, Duffell:2018aa}:
+% TODO: Update spreading description
+In Equation \eqref{eq:E} the first term is the kinetic energy of the ejected mass $\Mej$, assumed to have already accelerated and adiabatically cooled to its coasting velocity. The second term is the kinetic and thermal energy of the shocked ISM with three-velocity $\beta = u / \gamma$.  Equation \eqref{eq:fOm} describes the fractional solid angle of the jet in terms of the time dependent opening angle $\theta_j(t)$.
+
+Pressure gradients along the blast wave surface can drive lateral spreading of the jet, causing $\theta_j(t)$ (and $f_\Omega$) to increase with time  from its initial value $\theta_j(0) = \theta_0$ (CITE Rhoads?).  Initially spreading is negligible as each fluid element of the highly relativistic jet is only in causal contact with nearby regions of similar pressure.  Spreading begins once sound waves have had sufficient time to travel across the surface of the jet and communicate the presence of pressure gradients, launching rarefaction waves which drive the jet to spread at its local sound speed \citep{Rhoads:1999aa, van-Eerten:2012aa, Duffell:2018aa}.  Spreading continues until the blast wave becomes spherical and $f_\Omega = 1$.
+
+Numerous semi-analytic prescriptions for jet spreading exist in the literature, for example \citet{Rhoads:1999aa} (R99), \citet{Granot:2012aa} (GP12), and \citet{Duffell:2018aa} (DL18).  To remain consistent with the presence of angular structure in the jet and ensure spreading occurs at sonic speeds in our adopted equation of state it is necessary to construct our own jet spreading prescription.  
+
+A wave traveling at the sound speed $c_s$ in the fluid rest frame will maintain a velocity $\beta_{\bot} c$ laterally along the shock front:
 \begin{equation}
-	\dot{\theta_j} = \frac{c_s}{\gamma R}\ , \qquad \text{if } u < 1/3\thC \text{ and } \theta_j > \pi/2\ . \label{eq:thetadot}
+	\beta_\bot = \gamma \sqrt{ (1-\beta \dot{R}/c)c_s^2 - (\dot{R}/c - \beta)^2} \ .
 \end{equation}
-The criterion $u < 1/3\thC$ is satisfied when a sound wave can propagate from $\theta = \thC$ to $\theta=0$ in a blast wave propagating in a uniform ISM (CITE HENDRIK).  It is similar to the condition given in \cite{Duffell:2018aa}, which found a numerical factor of 2.5 (instead of 3) after calibrating to numerical simulations.  Our criteria differs from that used in \citet{Troja:2018aa, Piro:2019aa, van-Eerten:2018aa} which used an overly simplistic $u < 1$ criterion to begin jet spreading.
+Using the shock-jump conditions and TM equation of state this reduces to:
+\begin{equation}
+	\beta_\bot = \sqrt{\frac{2u^2+3}{4u^2+3}} \frac{\dot{R}}{2\gamma c}\ . \label{eq:spreadVel}
+\end{equation}
+In the ultra-relativistic limit $\beta_\bot = \sqrt{3/8} c_s/(c\gamma) = 1/(\sqrt{8} \gamma)$.  In this same limit, a signal launched at $t=0$ traveling at $\beta_\bot$ along the shock front will cover an angular distance  $\Delta \theta = 1/(3\sqrt{2}\gamma)$(CITE Hendrik).  Taking $\thC$, defined by Equation \eqref{eq:thCdef}, as the angular scale for order unity changes in the jet pressure, we can approximate the onset of spreading as when $u = 1/(3\sqrt{2}\thC)$.  Further taking $\beta_\bot$ as the expansion velocity once spreading begins, we can write an evolution equation for $\theta_j$:
+\begin{equation}
+	\dot{\theta}_j = \begin{cases}
+					0 & \text{if } u > 1/(3\sqrt{2} \thC)\\
+					\beta_\bot c / R &\text{otherwise}
+				\end{cases}\ . \label{eq:thetadot}
+\end{equation}
+The spreading prescription in Equation \eqref{eq:thetadot} is very similar to existing models in the literature.  Like R99, GP12 ($a=0$ case), and DL18 in the ultra-relativistic limit we have $\dot{\theta}_j \propto 1/(\gamma t)$.  Like DL18 we freeze spreading completely while $u \thC$ exceeds a threshold value.  In fact, while $u \gg 1$ our prescription is equivalent to the DL18 model with parameters $P_k = Q_k = 3\sqrt{2}$, a slight modification to their numerically fit values $P_k = 4.0$ and $Q_k = 2.5$.  Afterglow light curves computed using Equation \eqref{eq:thetadot} were found to agree better with established simulation based models (see Section \ref{subsec:bioxfitcomp}) than those computed with the DL18 parameters.  This jet spreading prescription differs from that used in \citet{Troja:2018aa, Piro:2019aa, van-Eerten:2018aa} which used a simple $u < 1$ criterion to begin jet spreading and set $\beta_\bot = c_s / (c \gamma)$.
 
-Given an expression for $E$ in terms of $t$, $R$, $u$, and $\theta_j$, Equation \eqref{eq:E} may be differentiated with respect to $t$ and solved for $\dot{u}$. A standard adiabatic evolution will maintain $E=$ constant, while in a continuously refreshed shock scenario $E = E_{>u}(u)$ and in standard energy injection models $E \propto t^-q$.  This defines a three dimensional system of ordinary differential equations (ODEs) in the variables $(R, u, \theta_j)$ which may be solved numerically or, in certain limits, analytically from appropriate initial conditions.
-
-Once the shock evolution ($R(t)$, $u(t)$, $\theta_j(t)$) is known, the flux is given by the integral:
+% TODO: clarify role of E, where these formulas come from.
+Given an expression for the total blast wave energy $E$ in terms of $t$, $R$ and $u$, Equations \eqref{eq:Rdot}, \eqref{eq:E}, and \eqref{eq:thetadot} are sufficient to write a system of ordinary differential equations (ODEs) in $R(t)$, $u(t)$, and $\theta_j(t)$. A standard adiabatic blast wave maintains constant $E$, while energy injection and refreshed shock models may add dependence on $t$ or $u$. The general form of the shock evolution equations are then:
+\begin{align}
+	\dot{R} &= \frac{4 u \gamma}{4 u^2 +3}c  \label{eq:ODE1}\\
+	\dot{\theta}_j &= \frac{1}{2\gamma}\sqrt{\frac{2u^2+3}{4u^2+3}} \frac{\dot{R}}{R}  \label{eq:ODE2} \\
+	\dot{u} &= -\frac{E_{sw}(4u^2+3)\beta^2 (3\dot{R}/R + \cot (\theta_j/2) \dot{\theta}_j) - \partial_t E}{2 E_{sw} u (4u^4 + 8u^2 + 3)\gamma^{-4} + \beta \Mej c^2 - \partial_u E}  \label{eq:ODE3} \\
+	E_{sw} &\equiv \frac{4\pi}{9} \rho_0 c^2 R^3 f_\Omega\ . \nonumber
+\end{align}
+Equations \eqref{eq:ODE1}-\eqref{eq:ODE3} define a three dimensional system of ODEs in the variables $(R, u, \theta_j)$ which may be solved numerically or, in certain limits, analytically from appropriate initial conditions.  Once the shock evolution ($R(t)$, $u(t)$, $\theta_j(t)$) is known, the flux is given by the integral:
 \begin{align}
 	F_\nu(\tobs, \nuobs) &= \frac{1+z}{4\pi \dL^2} \int \! \dd \Omega\ R^2\ \Delta R\  \delta^2\ \epsilon'_{\nu'} \ , \label{eq:flux2}
 \end{align}
@@ -284,7 +331,33 @@ where $\Delta R$ is the effective shock width contributing to the emission \cite
 	\nuobs &= (1+z)^{-1} \delta \nu' , \label{eq:nuobs}
 \end{align}
 
-The rest-frame synchrotron emissivity may be calculated to numerous ways with varying degrees of physics and accuracy.  We use the standard broken power law formalism with characteristic frequencies $\nu_m$ and $\nu_c$, with the cooling frequency $\nu_c$ calculated via the global cooling approximation \citep{Granot:2002aa, van-Eerten:2010aa}.
+% TODO: Look at this again, more detail.
+The rest-frame synchrotron emissivity $\epsilon'_{\nu'}$ may be calculated with varying levels of sophistication.  We use the standard broken power law formalism with characteristic frequencies $\nu_m$ and $\nu_c$, with the cooling frequency $\nu_c$ calculated via the global cooling approximation \citep{Granot:2002aa, van-Eerten:2010aa}.  The fluid behind the shock has rest-frame number density $n' = 4n_0\gamma$, thermal energy $e'_{th} = (\gamma-1)m_p n' c^2$, and magnetic field strength $B = \sqrt{8\pi e'_{th} \epsB}$, where $\epsB$ is the fraction of thermal energy in the magnetic field. We assume a fraction $\xiN$ of the electron population is shock-accelerated electrons with a fraction $\epse$ of the thermal energy and have a Lorentz factor distribution $N(\gamma_e) \propto \gamma_e^{-p}$ with index $p>2$.
+
+Each characteristic frequency $\nu_i$ has a corresponding Lorentz factor $\gamma_i$:
+\begin{equation}
+	\nu_i = \frac{3e B}{4 \pi m_e c}  \gamma_i^2 \ ,
+\end{equation}
+where $e$ is the elementary charge.  These characteristic Lorentz factors are:
+\begin{align}
+	\gamma_m &= \frac{2-p}{1-p} \frac{\epse e'_{th}}{\xiN n' m_e c^2}\ , \\
+	\gamma_c &= \frac{6\pi m_e \gamma c}{\sigma_T B^2 t}\ .
+\end{align}
+The synchrotron spectrum has peak emissivity $\epsilon_P$:
+\begin{equation}
+	\epsilon_P = \frac{p-1}{2}\frac{\sqrt{3} e^3 \xiN n' B}{m_e c^2}\ .
+\end{equation}
+Finally, the rest-frame emissivity $\epsilon'_{\nu'}$ is given as:
+\begin{equation}
+	\epsilon'_{\nu'} = \epsilon_P \times \begin{cases}
+					(\nu' / \nu_m)^{1/3} & \nu' < \nu_m < \nu_c \\
+					(\nu' / \nu_m)^{-(p-1)/2} & \nu_m < \nu' < \nu_c \\
+					(\nu_c / \nu_m)^{-(p-1)/2}(\nu' / \nu_c)^{-p/2} & \nu_m < \nu_c < \nu' \\
+					(\nu' / \nu_c)^{1/3} & \nu' < \nu_c < \nu_m \\
+					(\nu' / \nu_c)^{-1/2} & \nu_c < \nu' < \nu_m \\
+					(\nu_m / \nu_c)^{-1/2}(\nu' / \nu_m)^{-p/2} & \nu_c < \nu_m < \nu'
+				\end{cases} \label{eq:syncSpec}
+\end{equation}
 
 
 \subsection{\afterglowpy{}} \label{subsec:afterglowpy}
@@ -292,9 +365,9 @@ The rest-frame synchrotron emissivity may be calculated to numerous ways with va
 
 We have constructed the \afterglowpy{} Python package to implement the numerical computation of light curves according to Section \ref{subsec:algo} and provide it to the community.  The integration routine itself is written in C, wrapped as an extension for Python, and has been optimized to be used in intensive data analysis routines such as Markov Chain Monte-carlo which can require many thousands or millions of evaluations.  
 
-\afterglowpy{} uses a standard RK4 algorithm to evolve the $(R(t), u(t), \theta_j(t))$ system of equations on a fixed logarithmically spaced grid of $t$.  The endpoints of the $t$-grid are chosen to bracket the burster frame times required to calculate the requested $\tobs$.  Initial conditions for $R$, $u$, and $\theta$ are typically those of a decelerating ultra-relativistic blast wave.  The user can set the density of the $t$-grid with the {\tt tRes} parameter: the number of grid points per decade of $t$.  The default value for {\tt tRes} is 1000, which is sufficiently dense that the shock ODE evolution is not the dominant error source but not so dense as to adversely impact performance.
+\afterglowpy{} uses the standard fourth order Runge-Kutta algorithm to numerically solve the $(R(t), u(t), \theta_j(t))$ system of ordinary differential equations on a fixed logarithmically spaced grid of $t$ \citep{Press:2007aa}.  The endpoints of the $t$-grid are chosen to bracket the burster frame times required to calculate the requested $\tobs$.  Initial conditions for $R$, $u$, and $\theta$ are typically those of a decelerating ultra-relativistic blast wave.  The user can set the density of the $t$-grid with the {\tt tRes} parameter: the number of grid points per decade of $t$.  The default value for {\tt tRes} is 1000, which is sufficiently dense that the blast wave ODE evolution is not the dominant error source but not so dense as to adversely impact performance.
 
-Each top-hat jet component is integrated in $\theta$ and $\phi$ using an adaptive Romberg scheme with a fixed relative tolerance of $10^{-6}$ and an adaptive absolute tolerance.  When summing over top-hat components of a structured jet, the innermost (core) component is calculated first.  As the calculation proceeds, the current running sum of the flux is used to set absolute tolerance for the next component.  This minimizes the computations performed on dim, off-axis sectors of the jet.  
+Each top-hat jet component is integrated in $\theta$ and $\phi$ using an adaptive Romberg scheme with a fixed relative tolerance of $10^{-6}$ and an adaptive absolute tolerance.  When summing over top-hat components of a structured jet, the innermost (core) component is calculated first.  As the calculation proceeds, the current running sum of the flux is used to set absolute tolerance for the next component.  This minimizes the computations performed on dim sectors of the jet far from the line of sight.
 
 Each evaluation of the integrand requires a binary search to determine the burster time $t$ at which to evaluate $R$, $u$, and $\theta_j$.  Fluid quantities are then calculated using the shock-jump conditions and the synchrotron emissivity is evaluated using the standard external shock formulae \citep{Granot:2002aa,van-Eerten:2010aa}.  
 
@@ -303,10 +376,9 @@ The numerical accuracy of a top-hat light curve with this integration scheme is 
 
 \subsection{Comparison To \boxfit{}} \label{subsec:boxfitcomp}
 
-\afterglowpy{}, in utilizing the semi-analytic methods of Section \ref{subsec:algo}, trades some amount of physical accuracy for great flexibility.  We gauge this trade-off by comparing to the \boxfit{} code, a standard tool which calculates high fidelity afterglow light curves based on numerical simulations.  \boxfit{} uses two-dimensional relativistic hydrodynamic simulations to fully capture the non-linear hydrodynamics of a decelerating blast wave and a ray tracing radiative transfer module to compute observed synchrotron light curves.  
+\afterglowpy{}, in utilizing the semi-analytic methods of Section \ref{subsec:algo}, trades some amount of physical accuracy for great flexibility.  We gauge this trade-off by comparing to the \boxfit{} code, a standard tool which calculates high fidelity afterglow light curves based on numerical simulations \citep{van-Eerten:2012ab}.  
 
-Comparing to \boxfit{} tests the fidelity of some of the assumptions and approximations of the single shell approach used by \afterglowpy{}.  The simpler analytic version of the scheme on which \afterglowpy{} is based differed from \boxfit{} by factors from 2 to 8 \citep{van-Eerten:2010aa}.  We find \afterglowpy{} performs much better, with a relative difference of less than 50\% for the bulk of the evolution.  The difference is worst, up to a factor of 3 relative to \boxfit{}, at the onset of jet spreading.
-
+\boxfit{} uses two-dimensional relativistic hydrodynamic simulations to fully capture the non-linear hydrodynamics of a decelerating blast wave and a ray tracing radiative transfer module to compute observed synchrotron light curves.  The simulations begin from a top hat jet initial condition with a Blandford-Mckee radial profile \citep{Blandford:1976aa}, are evolved adiabatically with the trans-relativistic TM equation of state, and fully capture the lateral spreading of the jet \citep{van-Eerten:2012ab}.  Comparison to \boxfit{}, with its much more accurate hydrodynamic evolution, tests the fidelity of the assumptions and approximations of the single shell approach used by \afterglowpy{} and is a very useful calibration point.  
 
 %These errors quoted are numerical errors associated with the schemes used to solve Equations \ref{eq:Rdot}, \ref{eq:E}, and \ref{eq:thetadot} and perform the integral in Equation \ref{eq:flux2}.  That is, they are the errors relative to solving these equations perfectly.  The equations themselves are, however, an approximation themselves to the full physics of an afterglow light curve.  Comparison and calibration against analytic calculations and hydrodynamic simulations is necessary to ensure physically realistic results.  
 %
