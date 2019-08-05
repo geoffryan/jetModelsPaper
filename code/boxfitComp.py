@@ -100,9 +100,12 @@ def compareAll():
 
 def makeNiceFigure():
 
-    curves = ['100', '130', '102', '132']
+    curves = []
+    curves += ['100', '130', '102', '132']
+    # curves += ['000', '002', '030', '032']
+    # curves += ['200', '202', '230', '232']
 
-    colors = ['C0', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6']
+    colors = ['C0', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9']
 
     fig = plt.figure(figsize=(8, 6))
     gs = fig.add_gridspec(4, 1, hspace=0)
@@ -125,7 +128,7 @@ def makeNiceFigure():
         t, nu, FnuBF, jT, sT, Y, z = out
         thV = Y[0]
         # thC = Y[2]
-        Fnu = grb.fluxDensity(t, nu, jT, sT, *Y, z=z, spread=5)
+        Fnu = grb.fluxDensity(t, nu, jT, sT, *Y, z=z)
         if code[2] == '0':
             log10nu = 9
         elif code[2] == '0':

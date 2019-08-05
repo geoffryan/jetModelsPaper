@@ -4,67 +4,109 @@ import matplotlib.pyplot as plt
 # import paperPlots as pp
 
 
-def plotPanel(fig, gs0, t, nu, thV, Y, Z, modelLegend=False):
+def plotPanel(fig, gs0, t, nu, jetType, Y, Z, thVLegend=False):
 
     gs = gs0.subgridspec(3, 1, hspace=0.0)
     axF = fig.add_subplot(gs[0:-1, 0])
     axa = fig.add_subplot(gs[-1, 0])
+    # axs = fig.add_subplot(gs[-1, 0])
 
     tfac = 0.3
 
     tb = t * (1.0 + tfac)
     ta = t / (1.0 - tfac)
 
-    c = ['C0', 'C2', 'C1', 'C3']
-    ls = ['--', '-', '-.', ':']
+    b = Y[4]
+
+    if jetType == -1:
+        c = 'C0'
+        ls = '--'
+        name = 'top hat'
+    elif jetType == 0:
+        c = 'C2'
+        ls = '-'
+        name = 'Gaussian'
+    elif jetType == 4 and b < 4:
+        c = 'C1'
+        ls = '-.'
+        name = 'power law b={0:d}'.format(int(b))
+    elif jetType == 4 and b >= 4:
+        c = 'C3'
+        ls = ':'
+        name = 'power law b={0:d}'.format(int(b))
+    else:
+        c = 'C4'
+        ls = '-'
+        name = 'unknown'
 
     thC = Y[2]
 
-    Y[0] = thV
+    thVs = np.array([0.0, 0.5*thC, 0.9*thC, 2*thC, 4*thC, 6*thC, 8*thC])
+    alpha = np.linspace(0.2, 1.0, len(thVs))
 
-    FnuTH = grb.fluxDensity(t, nu, -1, 0, *Y, **Z)
-    FnuTHa = grb.fluxDensity(ta, nu, -1, 0, *Y, **Z)
-    FnuTHb = grb.fluxDensity(tb, nu, -1, 0, *Y, **Z)
+    th = np.linspace(0.0, Y[3], 300)
+    # phi = np.zeros(th.shape)
+    # t_th = np.empty(th.shape)
+    nu_th = np.empty(th.shape)
+    nu_th[:] = nu[0]
 
-    FnuG = grb.fluxDensity(t, nu, 0, 0, *Y, **Z)
-    FnuGa = grb.fluxDensity(ta, nu, 0, 0, *Y, **Z)
-    FnuGb = grb.fluxDensity(tb, nu, 0, 0, *Y, **Z)
+    for i, thV in enumerate(thVs):
 
-    Y[4] = 2
-    FnuPL1 = grb.fluxDensity(t, nu, 4, 0, *Y, **Z)
-    FnuPL1a = grb.fluxDensity(ta, nu, 4, 0, *Y, **Z)
-    FnuPL1b = grb.fluxDensity(tb, nu, 4, 0, *Y, **Z)
+        Y[0] = thV
 
-    Y[4] = 6
-    # Y[2] = np.sqrt(3)*thC
-    FnuPL2 = grb.fluxDensity(t, nu, 4, 0, *Y, **Z)
-    FnuPL2a = grb.fluxDensity(ta, nu, 4, 0, *Y, **Z)
-    FnuPL2b = grb.fluxDensity(tb, nu, 4, 0, *Y, **Z)
-    Y[2] = thC
+        Fnu = grb.fluxDensity(t, nu, jetType, 0, *Y, **Z)
+        Fnua = grb.fluxDensity(ta, nu, jetType, 0, *Y, **Z)
+        Fnub = grb.fluxDensity(tb, nu, jetType, 0, *Y, **Z)
 
-    alTH = np.log(FnuTHb/FnuTHa) / np.log(tb/ta)
-    alG = np.log(FnuGb/FnuGa) / np.log(tb/ta)
-    alPL1 = np.log(FnuPL1b/FnuPL1a) / np.log(tb/ta)
-    alPL2 = np.log(FnuPL2b/FnuPL2a) / np.log(tb/ta)
+        al = np.log(Fnub/Fnua) / np.log(tb/ta)
 
-    axF.plot(t, FnuTH, label='Top-Hat', color=c[0], ls=ls[0])
-    axF.plot(t, FnuG, label='Gaussian Jet', color=c[1], ls=ls[1])
-    axF.plot(t, FnuPL1, label='Power Law Jet $b=2$', color=c[2], ls=ls[2])
-    axF.plot(t, FnuPL2, label='Power Law Jet $b=6$', color=c[3], ls=ls[3])
+        """
+        dOma = np.empty(Fnu.shape)
+        dOmb = np.empty(Fnu.shape)
+        dOm = np.empty(Fnu.shape)
+        thsa = np.empty(Fnu.shape)
+        thsb = np.empty(Fnu.shape)
+        ths = np.empty(Fnu.shape)
+        for j in range(len(t)):
+            t_th[:] = ta[j]
+            Inu = grb.intensity(th, phi, t_th, nu_th, jetType, 0, *Y, **Z)
+            dOma[j] = Fnua[j] / Inu.max()
+            thsa[j] = th[Inu.argmax()]
+            t_th[:] = tb[j]
+            Inu = grb.intensity(th, phi, t_th, nu_th, jetType, 0, *Y, **Z)
+            dOmb[j] = Fnub[j] / Inu.max()
+            thsb[j] = th[Inu.argmax()]
+            t_th[:] = t[j]
+            Inu = grb.intensity(th, phi, t_th, nu_th, jetType, 0, *Y, **Z)
+            dOm[j] = Fnu[j] / Inu.max()
+            ths[j] = th[Inu.argmax()]
+        _, _, us, _ = grb.jet.shockVals(ths, np.zeros(t.shape),
+                                        t, jetType, *Y)
+        _, _, usa, _ = grb.jet.shockVals(thsa, np.zeros(t.shape),
+                                         ta, jetType, *Y)
+        _, _, usb, _ = grb.jet.shockVals(thsb, np.zeros(t.shape),
+                                         tb, jetType, *Y)
 
-    axa.plot(t, alTH, color=c[0], ls=ls[0])
-    axa.plot(t, alG, color=c[1], ls=ls[1])
-    axa.plot(t, alPL1, color=c[2], ls=ls[2])
-    axa.plot(t, alPL2, color=c[3], ls=ls[3])
+        som = np.log(dOmb/dOma) / np.log(usb/usa)
+        """
+
+        axF.plot(t, Fnu,
+                 label=r'$\theta_{{\mathrm{{obs}}}} = $ {0:.2f} rad'.format(
+                    thV), color=c, ls=ls, alpha=alpha[i])
+
+        axa.plot(t, al, color=c, ls=ls, alpha=alpha[i])
+        # axs.plot(t, som, color=c, ls=ls, alpha=alpha[i])
 
     axa.set_xscale('log')
     axa.set_yscale('linear')
     axF.set_xscale('log')
     axF.set_yscale('log')
+    # axs.set_xscale('log')
+    # axs.set_yscale('linear')
 
     axF.get_xaxis().set_visible(False)
 
-    axa.set_yticks([-2, 0, 2, 4])
+    axa.set_yticks([-4, -2, 0, 2, 4])
 
     axF.set_ylabel(r'$F_{\nu}$ (1 keV)')
     axa.set_xlabel(r'$t$ (s)')
@@ -73,13 +115,15 @@ def plotPanel(fig, gs0, t, nu, thV, Y, Z, modelLegend=False):
     axF.set_xlim(t[0], t[-1])
     axF.set_ylim(1.0e-10, 1.0e-3)
     axa.set_xlim(t[0], t[-1])
-    axa.set_ylim(-3, 5)
+    axa.set_ylim(-4, 5)
 
-    if modelLegend:
+    # axs.set_ylim(-3.1, 0.1)
+
+    if thVLegend:
         axF.legend(loc='lower left')
 
-    axF.text(0.95, 0.95, r'$\theta_{{\mathrm{{obs}}}} = $ {0:.2f} rad'.format(
-             thV), transform=axF.transAxes, horizontalalignment='right',
+    axF.text(0.95, 0.95, name,
+             transform=axF.transAxes, horizontalalignment='right',
              verticalalignment='top')
 
 
@@ -109,14 +153,15 @@ t = np.geomspace(1.0e4, 1.0e8, 100)
 nu = np.empty(t.shape)
 nu[:] = 2.41798926e17  # 1 keV
 
-plotPanel(fig, gs[0, 0], t, nu, 0.0, Y0, Z, modelLegend=True)
-plotPanel(fig, gs[0, 1], t, nu, 2*thC, Y0, Z)
-plotPanel(fig, gs[1, 0], t, nu, 4*thC, Y0, Z)
-plotPanel(fig, gs[1, 1], t, nu, 6*thC, Y0, Z)
+plotPanel(fig, gs[0, 0], t, nu, -1, Y0, Z, thVLegend=True)
+plotPanel(fig, gs[0, 1], t, nu, 0, Y0, Z)
+plotPanel(fig, gs[1, 0], t, nu, 4, Y0, Z)
+Y0[4] = 6
+plotPanel(fig, gs[1, 1], t, nu, 4, Y0, Z)
 
 fig.tight_layout()
 
-figname = "lc_thV_model_multi.pdf"
+figname = "lc_model_thV_multi.pdf"
 print("Saving " + figname)
 fig.savefig(figname)
 plt.close(fig)
