@@ -1148,27 +1148,26 @@ def calcSlopeOffaxis(jetModel, Y, regime):
 
 def calcSlopeStruct(jetModel, Y, regime, g=None, som=None):
 
-    thV = Y[0]
-    thC = Y[2]
-    thW = Y[3]
-    b = Y[4]
     p = Y[9]
 
     beta, al1, D, s1, s2, p = get_powers(regime, p)
     al2 = 3+s2
 
-    f = get_f(jetModel, thC, thW, b)
-
-    thS = min(0.5*thV, 0.5*thW)
-    psiS = thV-thS
-
-    dth = max(0.1*thC, 1.0e-6)
-    fR = f(thS+dth)
-    fL = f(thS-dth)
-
-    dlfdth = math.log(fR/fL) / (2*dth)
-
     if g is None:
+        thV = Y[0]
+        thC = Y[2]
+        thW = Y[3]
+        b = Y[4]
+        f = get_f(jetModel, thC, thW, b)
+
+        thS = min(0.5*thV, 0.5*thW)
+        psiS = thV-thS
+
+        dth = max(0.1*thC, 1.0e-6)
+        fR = f(thS+dth)
+        fL = f(thS-dth)
+
+        dlfdth = math.log(fR/fL) / (2*dth)
         g = -psiS * dlfdth
     if som is None:
         som = 1.0
@@ -1217,9 +1216,9 @@ def calcSlopePost(jetModel, Y, regime):
 def calcThetaEff(jetModel, Y):
 
     thEff = 0.0
-    thV = jetModel[0]
-    thC = jetModel[2]
-    b = jetModel[4]
+    thV = Y[0]
+    thC = Y[2]
+    b = Y[4]
 
     if jetModel == 0:
         thEff = 0.5*thV
@@ -1231,9 +1230,9 @@ def calcThetaEff(jetModel, Y):
 
 def calcGEff(jetModel, Y):
 
-    thV = jetModel[0]
-    thC = jetModel[2]
-    b = jetModel[4]
+    thV = Y[0]
+    thC = Y[2]
+    b = Y[4]
 
     dlfdth = 0.0
     thEff = calcThetaEff(jetModel, Y)
@@ -1243,7 +1242,7 @@ def calcGEff(jetModel, Y):
     elif jetModel == 4:
         dlfdth = -thEff / (thC*thC + thEff*thEff/b)
 
-    return -(thEff-thV) * dlfdth
+    return (thEff-thV) * dlfdth
 
 
 def calcSlopeStructEff(jetModel, Y, regime):

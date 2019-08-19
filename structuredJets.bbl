@@ -19,6 +19,10 @@
 {Blandford}, R.~D., \& {McKee}, C.~F. 1976, Physics of Fluids, 19, 1130,
   \dodoi{10.1063/1.861619}
 
+\bibitem[{{Corsi} \& {Piro}(2006)}]{Corsi:2006aa}
+{Corsi}, A., \& {Piro}, L. 2006, \aap, 458, 741,
+  \dodoi{10.1051/0004-6361:20065280}
+
 \bibitem[{{Dalal} {et~al.}(2002){Dalal}, {Griest}, \& {Pruet}}]{Dalal:2002aa}
 {Dalal}, N., {Griest}, K., \& {Pruet}, J. 2002, \apj, 564, 209,
   \dodoi{10.1086/324142}
@@ -109,14 +113,6 @@
 {Mizuta}, A., \& {Aloy}, M.~A. 2009, \apj, 699, 1261,
   \dodoi{10.1088/0004-637X/699/2/1261}
 
-\bibitem[{{Moderski} {et~al.}(2000){Moderski}, {Sikora}, \&
-  {Bulik}}]{Moderski:2000aa}
-{Moderski}, R., {Sikora}, M., \& {Bulik}, T. 2000, \apj, 529, 151,
-  \dodoi{10.1086/308257}
-
-\bibitem[{{Nakamura}(1999)}]{Nakamura:1999aa}
-{Nakamura}, T. 1999, \apjl, 522, L101, \dodoi{10.1086/312235}
-
 \bibitem[{{Nakar} {et~al.}(2004){Nakar}, {Granot}, \& {Guetta}}]{Nakar:2004aa}
 {Nakar}, E., {Granot}, J., \& {Guetta}, D. 2004, \apjl, 606, L37,
   \dodoi{10.1086/421107}
@@ -140,6 +136,12 @@
 \bibitem[{{Peng} {et~al.}(2005){Peng}, {K{\"o}nigl}, \& {Granot}}]{Peng:2005aa}
 {Peng}, F., {K{\"o}nigl}, A., \& {Granot}, J. 2005, \apj, 626, 966,
   \dodoi{10.1086/430045}
+
+\bibitem[{{Piro} {et~al.}(2005){Piro}, {De Pasquale}, {Soffitta}, {Lazzati},
+  {Amati}, {Costa}, {Feroci}, {Frontera}, {Guidorzi}, {in't Zand}, {Montanari},
+  \& {Nicastro}}]{Piro:2005aa}
+{Piro}, L., {De Pasquale}, M., {Soffitta}, P., {et~al.} 2005, \apj, 623, 314,
+  \dodoi{10.1086/428377}
 
 \bibitem[{{Piro} {et~al.}(2019){Piro}, {Troja}, {Zhang}, {Ryan}, {van Eerten},
   {Ricci}, {Wieringa}, {Tiengo}, {Butler}, {Cenko}, {Fox}, {Khandrika},
@@ -199,19 +201,20 @@
 {Troja}, E., {Ryan}, G., {Piro}, L., {et~al.} 2018{\natexlab{b}}, Nature
   Communications, 9, 4089, \dodoi{10.1038/s41467-018-06558-7}
 
-\bibitem[{{Troja} {et~al.}(2019){Troja}, {Castro-Tirado}, {Becerra Gonzalez},
-  {Hu}, {Ryan}, {Cenko}, {Ricci}, {Novara}, {Sanchez-Ramirez}, {Acosta-Pulido},
-  {Caballero Garcia}, {Guziy}, {Jeong}, {Lien}, {Marquez}, {Pandey}, {Park},
-  {Tello}, {Sakamoto}, {Sokolov}, {Sokolov}, {Tiengo}, {Valeev}, {Zhang}, \&
-  {Veilleux}}]{Troja:2019aa}
-{Troja}, E., {Castro-Tirado}, A.~J., {Becerra Gonzalez}, J., {et~al.} 2019,
-  arXiv e-prints, arXiv:1905.01290.
-\newblock \doarXiv{1905.01290}
+\bibitem[{{Troja} {et~al.}(2019{\natexlab{a}}){Troja}, {van Eerten}, {Ryan},
+  {Ricci}, {Burgess}, {Wieringa}, {Piro}, {Cenko}, \&
+  {Sakamoto}}]{Troja:2019ab}
+{Troja}, E., {van Eerten}, H., {Ryan}, G., {et~al.} 2019{\natexlab{a}}, \mnras,
+  2169, \dodoi{10.1093/mnras/stz2248}
 
-\bibitem[{{van Eerten} {et~al.}(2018){van Eerten}, {Ryan}, {Ricci}, {Burgess},
-  {Wieringa}, {Piro}, {Cenko}, \& {Sakamoto}}]{van-Eerten:2018aa}
-{van Eerten}, E.~T.~H., {Ryan}, G., {Ricci}, R., {et~al.} 2018, arXiv e-prints.
-\newblock \doarXiv{1808.06617}
+\bibitem[{{Troja} {et~al.}(2019{\natexlab{b}}){Troja}, {Castro-Tirado},
+  {Becerra Gonzalez}, {Hu}, {Ryan}, {Cenko}, {Ricci}, {Novara},
+  {Sanchez-Ramirez}, {Acosta-Pulido}, {Caballero Garcia}, {Guziy}, {Jeong},
+  {Lien}, {Marquez}, {Pandey}, {Park}, {Tello}, {Sakamoto}, {Sokolov},
+  {Sokolov}, {Tiengo}, {Valeev}, {Zhang}, \& {Veilleux}}]{Troja:2019aa}
+{Troja}, E., {Castro-Tirado}, A.~J., {Becerra Gonzalez}, J., {et~al.}
+  2019{\natexlab{b}}, arXiv e-prints, arXiv:1905.01290.
+\newblock \doarXiv{1905.01290}
 
 \bibitem[{{van Eerten}(2013)}]{van-Eerten:2013ab}
 {van Eerten}, H. 2013, arXiv e-prints, arXiv:1309.3869.
@@ -238,11 +241,6 @@
 \bibitem[{{van Eerten} \& {MacFadyen}(2012{\natexlab{b}})}]{van-Eerten:2012ac}
 ---. 2012{\natexlab{b}}, \apjl, 747, L30, \dodoi{10.1088/2041-8205/747/2/L30}
 
-\bibitem[{{Wijers} {et~al.}(1997){Wijers}, {Rees}, \&
-  {Meszaros}}]{Wijers:1997aa}
-{Wijers}, R.~A.~M.~J., {Rees}, M.~J., \& {Meszaros}, P. 1997, \mnras, 288, L51,
-  \dodoi{10.1093/mnras/288.4.L51}
-
 \bibitem[{{Wu} \& {MacFadyen}(2018)}]{Wu:2018aa}
 {Wu}, Y., \& {MacFadyen}, A. 2018, \apj, 869, 55,
   \dodoi{10.3847/1538-4357/aae9de}
@@ -255,10 +253,6 @@
 \bibitem[{{Yamazaki} {et~al.}(2003){Yamazaki}, {Ioka}, \&
   {Nakamura}}]{Yamazaki:2003aa}
 ---. 2003, \apj, 593, 941, \dodoi{10.1086/376677}
-
-\bibitem[{{Yamazaki} {et~al.}(2004){Yamazaki}, {Ioka}, \&
-  {Nakamura}}]{Yamazaki:2004aa}
----. 2004, \apjl, 606, L33, \dodoi{10.1086/421084}
 
 \bibitem[{{Zhang} {et~al.}(2006){Zhang}, {Fan}, {Dyks}, {Kobayashi},
   {M{\'e}sz{\'a}ros}, {Burrows}, {Nousek}, \& {Gehrels}}]{Zhang:2006aa}
