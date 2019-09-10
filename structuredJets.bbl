@@ -106,8 +106,8 @@
 
 \bibitem[{{Mignone} {et~al.}(2005){Mignone}, {Plewa}, \&
   {Bodo}}]{Mignone:2005aa}
-{Mignone}, A., {Plewa}, T., \& {Bodo}, G. 2005, \apjs, 160, 199,
-  \dodoi{10.1086/430905}
+{Mignone}, A., {Plewa}, T., \& {Bodo}, G. 2005, The Astrophysical Journal
+  Supplement Series, 160, 199, \dodoi{10.1086/430905}
 
 \bibitem[{{Mizuta} \& {Aloy}(2009)}]{Mizuta:2009aa}
 {Mizuta}, A., \& {Aloy}, M.~A. 2009, \apj, 699, 1261,
@@ -180,6 +180,10 @@
 
 \bibitem[{{Salmonson}(2003)}]{Salmonson:2003aa}
 {Salmonson}, J.~D. 2003, \apj, 592, 1002, \dodoi{10.1086/375580}
+
+\bibitem[{{Sari} {et~al.}(1999){Sari}, {Piran}, \& {Halpern}}]{Sari:1999aa}
+{Sari}, R., {Piran}, T., \& {Halpern}, J.~P. 1999, \apjl, 519, L17,
+  \dodoi{10.1086/312109}
 
 \bibitem[{{Troja} {et~al.}(2017){Troja}, {Piro}, {van Eerten}, {Wollaeger},
   {Im}, {Fox}, {Butler}, {Cenko}, {Sakamoto}, {Fryer}, {Ricci}, {Lien}, {Ryan},

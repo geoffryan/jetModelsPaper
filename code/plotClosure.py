@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-import grbpy as grb
+import afterglowpy as grb
 
 decompPlot = False
 

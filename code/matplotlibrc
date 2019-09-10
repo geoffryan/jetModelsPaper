@@ -5,6 +5,7 @@ font.size: 10.0
 
 mathtext.fontset: cm
 mathtext.rm: serif
+# text.latex.preamble: \usepackage{amss}
 
 figure.figsize: 3.5, 2.5
 

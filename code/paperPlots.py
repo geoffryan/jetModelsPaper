@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.collections as collections
 import h5py as h5
-import grbpy as grb
+import afterglowpy as grb
 
 sec2year = grb.sec2day / 365.25
 year2sec = grb.day2sec * 365.25
