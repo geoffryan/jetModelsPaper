@@ -29,6 +29,7 @@ highlightPhases = False
 highlightTransitions = True
 
 phaseLabels = True
+breakLabels = True
 
 Y0 = np.array([thV, E0, thC, thW, b, L0, ts, q, n0, p, epse, epsB, xiN, dL])
 Z = {'z': z, 'spread': False}
@@ -36,7 +37,7 @@ Zg = Z.copy()
 Zg['g0'] = g0
 
 width = 7.5
-height = 3.5
+height = 3
 
 fig = plt.figure(figsize=(width, height))
 gs = fig.add_gridspec(1, 3, wspace=0.0)
@@ -59,7 +60,7 @@ Y1[0] = 0.0
 Y2[0] = thW - 2*thC
 Y3[0] = thW + 2*thC
 
-tmin1 = t.min()
+tmin1 = 3.0e3  # t.min()
 tmax1 = t.max()
 tmin2 = 1.0e4
 tmax2 = t.max()
@@ -103,12 +104,12 @@ t3_STR = np.geomspace(3.0e5, 2.0e7, 100)
 t3_POS = np.geomspace(4.0e7, t.max(), 100)
 
 F1_PRE = Fnu1[np.searchsorted(t, t1_PRE[len(t1_PRE)//2])] * 3
-F1_POS = Fnu1[np.searchsorted(t, t1_POS[len(t1_POS)//2])] * 3
-F1_POS2 = Fnu1[np.searchsorted(t, t1_POS[len(t1_POS)//2])] / 3
+F1_POS = Fnu1[np.searchsorted(t, t1_POS[len(t1_POS)//2])] * 5
+F1_POS2 = Fnu1[np.searchsorted(t, t1_POS[len(t1_POS)//2])] / 4
 
 F2_PRE = Fnu2[np.searchsorted(t, t2_PRE[len(t2_PRE)//2])] * 3
-F2_STR = Fnu2[np.searchsorted(t, t2_STR[len(t2_STR)//2])] * 3
-F2_POS = Fnu2[np.searchsorted(t, t2_POS[len(t2_POS)//2])] * 3
+F2_STR = Fnu2[np.searchsorted(t, t2_STR[len(t2_STR)//2])] * 2
+F2_POS = Fnu2[np.searchsorted(t, t2_POS[len(t2_POS)//2])] * 4
 F2_POS2 = Fnu2[np.searchsorted(t, t2_POS[len(t2_POS)//2])] / 3
 
 F3_FOA = Fnu3[np.searchsorted(t, t3_FOA[len(t3_FOA)//2])] * 3
@@ -116,11 +117,23 @@ F3_STR = Fnu3[np.searchsorted(t, t3_STR[len(t3_STR)//2])] * 3
 F3_POS = Fnu3[np.searchsorted(t, t3_POS[len(t3_POS)//2])] * 3
 F3_POS2 = Fnu3[np.searchsorted(t, t3_POS[len(t3_POS)//2])] / 3
 
+t1b1 = math.sqrt(t1_PRE.max() * t1_POS.min())
+
+t2b1 = math.sqrt(t2_PRE.max() * t2_STR.min())
+t2b2 = math.sqrt(t2_STR.max() * t2_POS.min())
+
+t3b1 = math.sqrt(t3_FOA.max() * t3_STR.min())
+t3b2 = math.sqrt(t3_STR.max() * t3_POS.min())
+
 
 buf = 1.1
 spanProps = {'color': 'lightgrey',
              'alpha': 0.7,
              'lw': 0}
+lineProps = {'color': 'lightgrey',
+             'alpha': 1.0,
+             'lw': 2,
+             'ls': '--'}
 if highlightPhases:
     ax1.axvspan(t1_PRE.min()/buf, t1_PRE.max()*buf, **spanProps)
     ax1.axvspan(t1_POS.min()/buf, t1_POS.max()*buf, **spanProps)
@@ -134,13 +147,14 @@ if highlightPhases:
     ax3.axvspan(t3_POS.min()/buf, t3_POS.max()*buf, **spanProps)
 
 if highlightTransitions:
-    ax1.axvspan(t1_PRE.max()*buf, t1_POS.min()/buf, **spanProps)
 
-    ax2.axvspan(t2_PRE.max()*buf, t2_STR.min()/buf, **spanProps)
-    ax2.axvspan(t2_STR.max()*buf, t2_POS.min()/buf, **spanProps)
+    ax1.axvline(t1b1, **lineProps)
 
-    ax3.axvspan(t3_FOA.max()*buf, t3_STR.min()/buf, **spanProps)
-    ax3.axvspan(t3_STR.max()*buf, t3_POS.min()/buf, **spanProps)
+    ax2.axvline(t2b1, **lineProps)
+    ax2.axvline(t2b2, **lineProps)
+
+    ax3.axvline(t3b1, **lineProps)
+    ax3.axvline(t3b2, **lineProps)
 
 ax1.plot(t, Fnu1, lw=3)
 ax2.plot(t, Fnu2, lw=3)
@@ -196,24 +210,36 @@ if phaseLabels:
                  'verticalalignment': 'center',
                  'fontsize': 8}
 
-    ax1.text(math.sqrt(max(tmin1, t1_PRE.min()) * min(tmax1, t1_PRE.max())),
-             3e-5, "pre-\njet break", **textProps)
-    ax1.text(math.sqrt(max(tmin1, t1_POS.min()) * min(tmax1, t1_POS.max())),
-             1e-6, "post-\njet break", **textProps)
+    ax1.text(math.sqrt(tmin1 * t1b1),
+             2e-5, "pre-\njet break", **textProps)
+    ax1.text(math.sqrt(t1b1 * tmax1),
+             3e-6, "post-\njet break", **textProps)
 
-    ax2.text(math.sqrt(max(tmin2, t2_PRE.min()) * min(tmax2, t2_PRE.max())),
+    ax2.text(math.sqrt(tmin2 * t2b1),
              1e-7, "pre-\njet break", **textProps)
-    ax2.text(math.sqrt(max(tmin2, t2_STR.min()) * min(tmax2, t2_STR.max())),
-             1e-8, "structured", **textProps)
-    ax2.text(math.sqrt(max(tmin2, t2_POS.min()) * min(tmax2, t2_POS.max())),
+    ax2.text(math.sqrt(t2b1 * t2b2),
+             2e-8, "structured", **textProps)
+    ax2.text(math.sqrt(t2b2 * tmax2),
              1e-7, "post-\njet break", **textProps)
 
-    ax3.text(math.sqrt(max(tmin3, t3_FOA.min()) * min(tmax3, t3_FOA.max())),
-             1e-9, "far-\noff-axis", **textProps)
-    ax3.text(math.sqrt(max(tmin3, t3_STR.min()) * min(tmax3, t3_STR.max())),
-             3e-8, "structured", **textProps)
-    ax3.text(math.sqrt(max(tmin3, t3_POS.min()) * min(tmax3, t3_POS.max())),
-             3e-8, "post-\njet break", **textProps)
+    ax3.text(math.sqrt(tmin3 * t3b1),
+             1.5e-9, "far-\noff-axis", **textProps)
+    ax3.text(math.sqrt(t3b1 * t3b2),
+             2.2e-8, "structured", **textProps)
+    ax3.text(math.sqrt(t3b2 * tmax3),
+             4e-8, "post-\njet break", **textProps)
+
+if breakLabels:
+    textProps = {'horizontalalignment': 'left',
+                 'verticalalignment': 'bottom',
+                 'fontsize': 10}
+    buf = 1.1
+    ax1.text(buf*t1b1, Fmin, r"$t_b$", **textProps)
+    # ax2.text(t2b1, Fmin, r"$t_b$", **textProps)
+    ax2.text(buf*t2b2, Fmin, r"$t_b$", **textProps)
+    ax3.text(buf*t3b1, Fmin, r"$t_W$", **textProps)
+    ax3.text(buf*t3b2, Fmin, r"$t_b$", **textProps)
+
 
 for ax in axs:
     ax.set_xscale('log')

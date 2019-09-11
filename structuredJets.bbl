@@ -11,6 +11,13 @@
 {Abbott}, B.~P., {Abbott}, R., {Abbott}, T.~D., {et~al.} 2017, \nat, 551, 85,
   \dodoi{10.1038/nature24471}
 
+\bibitem[{{Alexander} {et~al.}(2018){Alexander}, {Margutti}, {Blanchard},
+  {Fong}, {Berger}, {Hajela}, {Eftekhari}, {Chornock}, {Cowperthwaite},
+  {Giannios}, {Guidorzi}, {Kathirgamaraju}, {MacFadyen}, {Metzger}, {Nicholl},
+  {Sironi}, {Villar}, {Williams}, {Xie}, \& {Zrake}}]{Alexander:2018aa}
+{Alexander}, K.~D., {Margutti}, R., {Blanchard}, P.~K., {et~al.} 2018, \apjl,
+  863, L18, \dodoi{10.3847/2041-8213/aad637}
+
 \bibitem[{{Aloy} {et~al.}(2005){Aloy}, {Janka}, \& {M{\"u}ller}}]{Aloy:2005aa}
 {Aloy}, M.~A., {Janka}, H.-T., \& {M{\"u}ller}, E. 2005, \aap, 436, 273,
   \dodoi{10.1051/0004-6361:20041865}
@@ -27,6 +34,11 @@
 {Dalal}, N., {Griest}, K., \& {Pruet}, J. 2002, \apj, 564, 209,
   \dodoi{10.1086/324142}
 
+\bibitem[{{D'Alessio} {et~al.}(2006){D'Alessio}, {Piro}, \&
+  {Rossi}}]{DAlessio:2006aa}
+{D'Alessio}, V., {Piro}, L., \& {Rossi}, E.~M. 2006, \aap, 460, 653,
+  \dodoi{10.1051/0004-6361:20054501}
+
 \bibitem[{{Duffell} \& {Laskar}(2018)}]{Duffell:2018aa}
 {Duffell}, P.~C., \& {Laskar}, T. 2018, \apj, 865, 94,
   \dodoi{10.3847/1538-4357/aadb9c}
@@ -34,6 +46,15 @@
 \bibitem[{{Duffell} \& {MacFadyen}(2013)}]{Duffell:2013aa}
 {Duffell}, P.~C., \& {MacFadyen}, A.~I. 2013, \apjl, 776, L9,
   \dodoi{10.1088/2041-8205/776/1/L9}
+
+\bibitem[{{Fong} {et~al.}(2019){Fong}, {Blanchard}, {Alexander}, {Strader},
+  {Margutti}, {Hajela}, {Villar}, {Wu}, {Ye}, {Berger}, {Chornock},
+  {Coppejans}, {Cowperthwaite}, {Eftekhari}, {Giannios}, {Guidorzi},
+  {Kathirgamaraju}, {Laskar}, {MacFadyen}, {Metzger}, {Nicholl}, {Paterson},
+  {Terreran}, {Sand}, {Sironi}, {Williams}, {Xie}, \& {Zrake}}]{Fong:2019aa}
+{Fong}, W.-f., {Blanchard}, P.~K., {Alexander}, K.~D., {et~al.} 2019, arXiv
+  e-prints, arXiv:1908.08046.
+\newblock \doarXiv{1908.08046}
 
 \bibitem[{{Foreman-Mackey} {et~al.}(2013){Foreman-Mackey}, {Hogg}, {Lang}, \&
   {Goodman}}]{Foreman-Mackey:2013aa}
@@ -113,6 +134,12 @@
 {Mizuta}, A., \& {Aloy}, M.~A. 2009, \apj, 699, 1261,
   \dodoi{10.1088/0004-637X/699/2/1261}
 
+\bibitem[{{Mooley} {et~al.}(2018){Mooley}, {Deller}, {Gottlieb}, {Nakar},
+  {Hallinan}, {Bourke}, {Frail}, {Horesh}, {Corsi}, \&
+  {Hotokezaka}}]{Mooley:2018ab}
+{Mooley}, K.~P., {Deller}, A.~T., {Gottlieb}, O., {et~al.} 2018, \nat, 561,
+  355, \dodoi{10.1038/s41586-018-0486-3}
+
 \bibitem[{{Nakar} {et~al.}(2004){Nakar}, {Granot}, \& {Guetta}}]{Nakar:2004aa}
 {Nakar}, E., {Granot}, J., \& {Guetta}, D. 2004, \apjl, 606, L37,
   \dodoi{10.1086/421107}
@@ -161,6 +188,11 @@
   2007, Numerical Recipes 3rd Edition: The Art of Scientific Computing, 3rd
   edn. (New York, NY, USA: Cambridge University Press)
 
+\bibitem[{{Racusin} {et~al.}(2009){Racusin}, {Liang}, {Burrows}, {Falcone},
+  {Sakamoto}, {Zhang}, {Zhang}, {Evans}, \& {Osborne}}]{Racusin:2009aa}
+{Racusin}, J.~L., {Liang}, E.~W., {Burrows}, D.~N., {et~al.} 2009, \apj, 698,
+  43, \dodoi{10.1088/0004-637X/698/1/43}
+
 \bibitem[{{Rhoads}(1999)}]{Rhoads:1999aa}
 {Rhoads}, J.~E. 1999, \apj, 525, 737, \dodoi{10.1086/307907}
 
@@ -184,6 +216,13 @@
 \bibitem[{{Sari} {et~al.}(1999){Sari}, {Piran}, \& {Halpern}}]{Sari:1999aa}
 {Sari}, R., {Piran}, T., \& {Halpern}, J.~P. 1999, \apjl, 519, L17,
   \dodoi{10.1086/312109}
+
+\bibitem[{{Troja} {et~al.}(2016){Troja}, {Sakamoto}, {Cenko}, {Lien},
+  {Gehrels}, {Castro-Tirado}, {Ricci}, {Capone}, {Toy}, {Kutyrev}, {Kawai},
+  {Cucchiara}, {Fruchter}, {Gorosabel}, {Jeong}, {Levan}, {Perley},
+  {Sanchez-Ramirez}, {Tanvir}, \& {Veilleux}}]{Troja:2016aa}
+{Troja}, E., {Sakamoto}, T., {Cenko}, S.~B., {et~al.} 2016, \apj, 827, 102,
+  \dodoi{10.3847/0004-637X/827/2/102}
 
 \bibitem[{{Troja} {et~al.}(2017){Troja}, {Piro}, {van Eerten}, {Wollaeger},
   {Im}, {Fox}, {Butler}, {Cenko}, {Sakamoto}, {Fryer}, {Ricci}, {Lien}, {Ryan},
@@ -266,5 +305,10 @@
 \bibitem[{{Zhang} \& {M{\'e}sz{\'a}ros}(2002)}]{Zhang:2002aa}
 {Zhang}, B., \& {M{\'e}sz{\'a}ros}, P. 2002, \apj, 571, 876,
   \dodoi{10.1086/339981}
+
+\bibitem[{{Zhang} {et~al.}(2015){Zhang}, {van Eerten}, {Burrows}, {Ryan},
+  {Evans}, {Racusin}, {Troja}, \& {MacFadyen}}]{Zhang:2015aa}
+{Zhang}, B.-B., {van Eerten}, H., {Burrows}, D.~N., {et~al.} 2015, The
+  Astrophysical Journal, 806, 15, \dodoi{10.1088/0004-637X/806/1/15}
 
 \end{thebibliography}
