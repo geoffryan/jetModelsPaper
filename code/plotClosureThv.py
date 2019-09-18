@@ -28,8 +28,8 @@ def plotOnAxes(ax, jetType, Y, regime, thVs=None, thCs=None, thWs=None,
 thV = 0.0
 E0 = 1.0e53
 thC = 0.05
-thW = 4*thC
-b = 10
+thW = 6*thC
+b = 4
 L0 = 0
 ts = 0
 q = 0
@@ -53,30 +53,33 @@ figG, axG = plt.subplots(1, 1)
 figPL, axPL = plt.subplots(1, 1)
 
 colors = ['C0', 'C1', 'C2', 'C3', 'C4', 'C5']
-thVs = [thC, 2*thC, 4*thC, 6*thC, 8*thC]
+thVs = np.array([thC, 2*thC, 4*thC, 6*thC, 8*thC])
 thV = 0.3
-thCs = [thV/8, thV/6, thV/4, thV/2, thV]
+thCs = np.array([thV/8, thV/6, thV/4, thV/2])
 
 # for i, thV in enumerate(thVs):
 for i, thC in enumerate(thCs):
- 
+
     Y[0] = thV
     Y[2] = thC
+
+    Y[3] = thV-0.05
 
     alG = pp.calcSlopeStructEff(0, Y, 'G')
     alPL = pp.calcSlopeStructEff(4, Y, 'G')
 
     tb = 0.2 * np.power(9*E0/(16*np.pi*n0*grb.mp*grb.c**5), 1.0/3.0)\
         * np.power(2*np.sin(0.5*(thC+thV)), 8.0/3.0)
+    t0 = tb / 5
 
-    ib = np.searchsorted(t, tb)
+    i0 = np.searchsorted(t, t0)
 
     Fnu = grb.fluxDensity(t, nu, 0, 0, *Y)
     # axG.plot(t/tb, Fnu/Fnu[ib], color=colors[i])
     # axG.plot(t/tb, np.power(t/tb, alG),
     #          color=colors[i], ls='--')
     axG.plot(t, Fnu, color=colors[i])
-    axG.plot(t, 1.5*Fnu[ib] * np.power(t/tb, alG),
+    axG.plot(t, Fnu[i0] * np.power(t/t0, alG),
              color=colors[i], ls='--', lw=3.0, alpha=0.5)
 
     Fnu = grb.fluxDensity(t, nu, 4, 0, *Y)
@@ -84,7 +87,7 @@ for i, thC in enumerate(thCs):
     # axPL.plot(t/tb, np.power(t/tb, alPL),
     #           color=colors[i], ls='--')
     axPL.plot(t, Fnu, color=colors[i])
-    axPL.plot(t, 1.5*Fnu[ib] * np.power(t/tb, alPL),
+    axPL.plot(t, Fnu[i0] * np.power(t/t0, alPL),
               color=colors[i], ls='--', lw=3.0, alpha=0.5)
 
 figs = [figG, figPL]

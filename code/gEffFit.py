@@ -90,6 +90,9 @@ for i in range(Nb):
     ax.plot(thV, gmed, color=cs[i], marker='o')
 ax.set_xscale('log')
 ax.set_yscale('log')
+ax.set_xlabel(r'$\theta_{\mathrm{obs}}$')
+ax.set_ylabel(r'$g$')
+
 
 coeffs = []
 
@@ -122,6 +125,8 @@ for i in range(Nb):
     ax2.plot(thVoC, g2med, color=cs[i], marker='o')
 ax2.set_xscale('log')
 ax2.set_yscale('log')
+ax2.set_xlabel(r'$\theta_{\mathrm{obs}} / \theta_{\mathrm{c}}$')
+ax2.set_ylabel(r'$\theta_{\mathrm{obs}}^2 / \theta_{\mathrm{c}}^2 times 1/g$')
 # ax2.set_ylim(0, 30)
 
 coeffs = np.array(coeffs)
@@ -136,8 +141,9 @@ fig5, ax5 = plt.subplots(coeffs.shape[1], 1, figsize=(6, 6))
 B = np.linspace(b.min()-1, b.max()+1, 100)
 for i in range(coeffs.shape[1]):
     try:
-        res = opt.curve_fit(f_apbxp, b, coeffs[:, i], [0.0, 0.0, 0.0])
+        res = opt.curve_fit(f_apbxp, b, coeffs[:, i], [0.0, 0.0, -1.0])
     except RuntimeError:
+        print("Runtime Error")
         res = (np.zeros(3), )
 
     print(res[0])
@@ -184,5 +190,40 @@ for i in range(Nb):
 ax4.set_xscale('log')
 ax4.set_yscale('log')
 """
+
+fig6, ax6 = plt.subplots(1, 1, figsize=(8, 6))
+
+coeffs2 = []
+
+for l in range(NVC):
+
+    for k in range(NC):
+        good = (athV/athC == thVoC[l]) & (athC == thC[k])
+        if good.any():
+            sortInds = np.argsort(ab[good])
+            ax6.plot(ab[good][sortInds],
+                     ag[good][sortInds] / (0.25*thVoC[l]**2),
+                     marker=ms[k], alpha=0.4, ls='')
+    gmed = np.empty(Nb)
+    for i in range(Nb):
+        good = (athV/athC == thVoC[l]) & (ab == b[i])
+        if good.any():
+            gmed[i] = np.median(ag[good] / (0.25*thVoC[l]**2))
+        else:
+            gmed[i] == np.nan
+
+    res = np.polyfit(1.0/b, b*(gmed-1), 4)
+    coeffs2.append(res)
+
+    B = np.linspace(b[0]-0.5, b[-1]+0.5, 100)
+    poly = np.zeros(B.shape)
+    for m in range(res.shape[0]):
+        poly += res[m]*np.power(1.0/B, res.shape[0]-1-m)
+
+    ax6.plot(b, gmed, color=cs[l % len(cs)])
+    ax6.plot(B, 1 + poly/B, ls='--', color=cs[l % len(cs)])
+
+ax6.set_xscale('linear')
+ax6.set_yscale('log')
 
 plt.show()

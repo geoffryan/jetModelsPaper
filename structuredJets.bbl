@@ -5,11 +5,21 @@
 \providecommand{\doeprint}[1]{\href{http://ascl.net/#1}{\nolinkurl{http://ascl.net/#1}}}
 \providecommand{\doarXiv}[1]{\href{https://arxiv.org/abs/#1}{\nolinkurl{https://arxiv.org/abs/#1}}}
 
-\bibitem[{{Abbott} {et~al.}(2017){Abbott}, {Abbott}, {Abbott}, {Acernese},
-  {Ackley}, {Adams}, {Adams}, {Addesso}, {Adhikari}, {Adya}, \&
+\bibitem[{{Abbott} {et~al.}(2017{\natexlab{a}}){Abbott}, {Abbott}, {Abbott},
+  {Acernese}, {Ackley}, {Adams}, {Adams}, {Addesso}, {Adhikari}, {Adya}, \&
+  et~al.}]{Abbott:2017ab}
+{Abbott}, B.~P., {Abbott}, R., {Abbott}, T.~D., {et~al.} 2017{\natexlab{a}},
+  \prl, 119, 161101, \dodoi{10.1103/PhysRevLett.119.161101}
+
+\bibitem[{{Abbott} {et~al.}(2017{\natexlab{b}}){Abbott}, {Abbott}, {Abbott},
+  {Acernese}, {Ackley}, {Adams}, {Adams}, {Addesso}, {Adhikari}, {Adya}, \&
+  et~al.}]{Abbott:2017ac}
+---. 2017{\natexlab{b}}, \apjl, 848, L12, \dodoi{10.3847/2041-8213/aa91c9}
+
+\bibitem[{{Abbott} {et~al.}(2017{\natexlab{c}}){Abbott}, {Abbott}, {Abbott},
+  {Acernese}, {Ackley}, {Adams}, {Adams}, {Addesso}, {Adhikari}, {Adya}, \&
   et~al.}]{Abbott:2017aa}
-{Abbott}, B.~P., {Abbott}, R., {Abbott}, T.~D., {et~al.} 2017, \nat, 551, 85,
-  \dodoi{10.1038/nature24471}
+---. 2017{\natexlab{c}}, \nat, 551, 85, \dodoi{10.1038/nature24471}
 
 \bibitem[{{Alexander} {et~al.}(2018){Alexander}, {Margutti}, {Blanchard},
   {Fong}, {Berger}, {Hajela}, {Eftekhari}, {Chornock}, {Cowperthwaite},
@@ -38,6 +48,13 @@
   {Rossi}}]{DAlessio:2006aa}
 {D'Alessio}, V., {Piro}, L., \& {Rossi}, E.~M. 2006, \aap, 460, 653,
   \dodoi{10.1051/0004-6361:20054501}
+
+\bibitem[{{D'Avanzo} {et~al.}(2018){D'Avanzo}, {Campana}, {Salafia},
+  {Ghirlanda}, {Ghisellini}, {Melandri}, {Bernardini}, {Branchesi},
+  {Chassande-Mottin}, {Covino}, {D'Elia}, {Nava}, {Salvaterra}, {Tagliaferri},
+  \& {Vergani}}]{DAvanzo:2018aa}
+{D'Avanzo}, P., {Campana}, S., {Salafia}, O.~S., {et~al.} 2018, \aap, 613, L1,
+  \dodoi{10.1051/0004-6361/201832664}
 
 \bibitem[{{Duffell} \& {Laskar}(2018)}]{Duffell:2018aa}
 {Duffell}, P.~C., \& {Laskar}, T. 2018, \apj, 865, 94,
@@ -86,16 +103,38 @@
 \bibitem[{{Granot} \& {Sari}(2002)}]{Granot:2002aa}
 {Granot}, J., \& {Sari}, R. 2002, \apj, 568, 820, \dodoi{10.1086/338966}
 
+\bibitem[{{Haggard} {et~al.}(2017){Haggard}, {Nynka}, {Ruan}, {Kalogera},
+  {Cenko}, {Evans}, \& {Kennea}}]{Haggard:2017aa}
+{Haggard}, D., {Nynka}, M., {Ruan}, J.~J., {et~al.} 2017, \apjl, 848, L25,
+  \dodoi{10.3847/2041-8213/aa8ede}
+
+\bibitem[{{Hallinan} {et~al.}(2017){Hallinan}, {Corsi}, {Mooley}, {Hotokezaka},
+  {Nakar}, {Kasliwal}, {Kaplan}, {Frail}, {Myers}, {Murphy}, {De}, {Dobie},
+  {Allison}, {Bannister}, {Bhalerao}, {Chandra}, {Clarke}, {Giacintucci}, {Ho},
+  {Horesh}, {Kassim}, {Kulkarni}, {Lenc}, {Lockman}, {Lynch}, {Nichols},
+  {Nissanke}, {Palliyaguru}, {Peters}, {Piran}, {Rana}, {Sadler}, \&
+  {Singer}}]{Hallinan:2017aa}
+{Hallinan}, G., {Corsi}, A., {Mooley}, K.~P., {et~al.} 2017, Science, 358,
+  1579, \dodoi{10.1126/science.aap9855}
+
 \bibitem[{{Hotokezaka} {et~al.}(2018){Hotokezaka}, {Nakar}, {Gottlieb},
   {Nissanke}, {Masuda}, {Hallinan}, {Mooley}, \& {Deller}}]{Hotokezaka:2018aa}
 {Hotokezaka}, K., {Nakar}, E., {Gottlieb}, O., {et~al.} 2018, arXiv e-prints.
 \newblock \doarXiv{1806.10596}
+
+\bibitem[{{Hotokezaka} \& {Piran}(2015)}]{Hotokezaka:2015aa}
+{Hotokezaka}, K., \& {Piran}, T. 2015, \mnras, 450, 1430,
+  \dodoi{10.1093/mnras/stv620}
 
 \bibitem[{{Ioka} \& {Nakamura}(2001)}]{Ioka:2001aa}
 {Ioka}, K., \& {Nakamura}, T. 2001, \apjl, 554, L163, \dodoi{10.1086/321717}
 
 \bibitem[{{Kumar} \& {Granot}(2003)}]{Kumar:2003aa}
 {Kumar}, P., \& {Granot}, J. 2003, \apj, 591, 1075, \dodoi{10.1086/375186}
+
+\bibitem[{{Lamb} \& {Kobayashi}(2017)}]{Lamb:2017aa}
+{Lamb}, G.~P., \& {Kobayashi}, S. 2017, \mnras, 472, 4953,
+  \dodoi{10.1093/mnras/stx2345}
 
 \bibitem[{{Lamb} {et~al.}(2019){Lamb}, {Lyman}, {Levan}, {Tanvir}, {Kangas},
   {Fruchter}, {Gompertz}, {Hjorth}, {Mandel}, {Oates}, {Steeghs}, \&
@@ -112,6 +151,15 @@
   {Prokhorov}}]{Lipunov:2001aa}
 {Lipunov}, V.~M., {Postnov}, K.~A., \& {Prokhorov}, M.~E. 2001, Astronomy
   Reports, 45, 236, \dodoi{10.1134/1.1353364}
+
+\bibitem[{{Lyman} {et~al.}(2018){Lyman}, {Lamb}, {Levan}, {Mandel}, {Tanvir},
+  {Kobayashi}, {Gompertz}, {Hjorth}, {Fruchter}, {Kangas}, {Steeghs}, {Steele},
+  {Cano}, {Copperwheat}, {Evans}, {Fynbo}, {Gall}, {Im}, {Izzo}, {Jakobsson},
+  {Milvang-Jensen}, {O'Brien}, {Osborne}, {Palazzi}, {Perley}, {Pian},
+  {Rosswog}, {Rowlinson}, {Schulze}, {Stanway}, {Sutton}, {Th{\"o}ne}, {de
+  Ugarte Postigo}, {Watson}, {Wiersema}, \& {Wijers}}]{Lyman:2018aa}
+{Lyman}, J.~D., {Lamb}, G.~P., {Levan}, A.~J., {et~al.} 2018, Nature Astronomy,
+  2, 751, \dodoi{10.1038/s41550-018-0511-3}
 
 \bibitem[{{Margutti} {et~al.}(2018){Margutti}, {Alexander}, {Xie}, {Sironi},
   {Metzger}, {Kathirgamaraju}, {Fong}, {Blanchard}, {Berger}, {MacFadyen},
@@ -134,15 +182,31 @@
 {Mizuta}, A., \& {Aloy}, M.~A. 2009, \apj, 699, 1261,
   \dodoi{10.1088/0004-637X/699/2/1261}
 
-\bibitem[{{Mooley} {et~al.}(2018){Mooley}, {Deller}, {Gottlieb}, {Nakar},
-  {Hallinan}, {Bourke}, {Frail}, {Horesh}, {Corsi}, \&
+\bibitem[{{Mooley} {et~al.}(2018{\natexlab{a}}){Mooley}, {Nakar}, {Hotokezaka},
+  {Hallinan}, {Corsi}, {Frail}, {Horesh}, {Murphy}, {Lenc}, {Kaplan}, {de},
+  {Dobie}, {Chandra}, {Deller}, {Gottlieb}, {Kasliwal}, {Kulkarni}, {Myers},
+  {Nissanke}, {Piran}, {Lynch}, {Bhalerao}, {Bourke}, {Bannister}, \&
+  {Singer}}]{Mooley:2018aa}
+{Mooley}, K.~P., {Nakar}, E., {Hotokezaka}, K., {et~al.} 2018{\natexlab{a}},
+  \nat, 554, 207, \dodoi{10.1038/nature25452}
+
+\bibitem[{{Mooley} {et~al.}(2018{\natexlab{b}}){Mooley}, {Deller}, {Gottlieb},
+  {Nakar}, {Hallinan}, {Bourke}, {Frail}, {Horesh}, {Corsi}, \&
   {Hotokezaka}}]{Mooley:2018ab}
-{Mooley}, K.~P., {Deller}, A.~T., {Gottlieb}, O., {et~al.} 2018, \nat, 561,
-  355, \dodoi{10.1038/s41586-018-0486-3}
+{Mooley}, K.~P., {Deller}, A.~T., {Gottlieb}, O., {et~al.} 2018{\natexlab{b}},
+  \nat, 561, 355, \dodoi{10.1038/s41586-018-0486-3}
+
+\bibitem[{{Nakar} {et~al.}(2018){Nakar}, {Gottlieb}, {Piran}, {Kasliwal}, \&
+  {Hallinan}}]{Nakar:2018aa}
+{Nakar}, E., {Gottlieb}, O., {Piran}, T., {Kasliwal}, M.~M., \& {Hallinan}, G.
+  2018, The Astrophysical Journal, 867, 18, \dodoi{10.3847/1538-4357/aae205}
 
 \bibitem[{{Nakar} {et~al.}(2004){Nakar}, {Granot}, \& {Guetta}}]{Nakar:2004aa}
 {Nakar}, E., {Granot}, J., \& {Guetta}, D. 2004, \apjl, 606, L37,
   \dodoi{10.1086/421107}
+
+\bibitem[{{Nakar} \& {Piran}(2011)}]{Nakar:2011aa}
+{Nakar}, E., \& {Piran}, T. 2011, \nat, 478, 82, \dodoi{10.1038/nature10365}
 
 \bibitem[{{Nava} {et~al.}(2013){Nava}, {Sironi}, {Ghisellini}, {Celotti}, \&
   {Ghirlanda}}]{Nava:2013aa}
@@ -159,6 +223,11 @@
 
 \bibitem[{{Panaitescu} \& {Kumar}(2003)}]{Panaitescu:2003aa}
 {Panaitescu}, A., \& {Kumar}, P. 2003, \apj, 592, 390, \dodoi{10.1086/375563}
+
+\bibitem[{{Panaitescu} {et~al.}(1998){Panaitescu}, {M{\'e}sz{\'a}ros}, \&
+  {Rees}}]{Panaitescu:1998aa}
+{Panaitescu}, A., {M{\'e}sz{\'a}ros}, P., \& {Rees}, M.~J. 1998, \apj, 503,
+  314, \dodoi{10.1086/305995}
 
 \bibitem[{{Peng} {et~al.}(2005){Peng}, {K{\"o}nigl}, \& {Granot}}]{Peng:2005aa}
 {Peng}, F., {K{\"o}nigl}, A., \& {Granot}, J. 2005, \apj, 626, 966,
@@ -193,6 +262,10 @@
 {Racusin}, J.~L., {Liang}, E.~W., {Burrows}, D.~N., {et~al.} 2009, \apj, 698,
   43, \dodoi{10.1088/0004-637X/698/1/43}
 
+\bibitem[{{Rees} \& {M{\'e}sz{\'a}ros}(1998)}]{Rees:1998aa}
+{Rees}, M.~J., \& {M{\'e}sz{\'a}ros}, P. 1998, \apjl, 496, L1,
+  \dodoi{10.1086/311244}
+
 \bibitem[{{Rhoads}(1999)}]{Rhoads:1999aa}
 {Rhoads}, J.~E. 1999, \apj, 525, 737, \dodoi{10.1086/307907}
 
@@ -212,6 +285,10 @@
 
 \bibitem[{{Salmonson}(2003)}]{Salmonson:2003aa}
 {Salmonson}, J.~D. 2003, \apj, 592, 1002, \dodoi{10.1086/375580}
+
+\bibitem[{{Sari} \& {M{\'e}sz{\'a}ros}(2000)}]{Sari:2000aa}
+{Sari}, R., \& {M{\'e}sz{\'a}ros}, P. 2000, \apjl, 535, L33,
+  \dodoi{10.1086/312689}
 
 \bibitem[{{Sari} {et~al.}(1999){Sari}, {Piran}, \& {Halpern}}]{Sari:1999aa}
 {Sari}, R., {Piran}, T., \& {Halpern}, J.~P. 1999, \apjl, 519, L17,
@@ -287,6 +364,10 @@
 \bibitem[{{Wu} \& {MacFadyen}(2018)}]{Wu:2018aa}
 {Wu}, Y., \& {MacFadyen}, A. 2018, \apj, 869, 55,
   \dodoi{10.3847/1538-4357/aae9de}
+
+\bibitem[{{Xie} {et~al.}(2018){Xie}, {Zrake}, \& {MacFadyen}}]{Xie:2018aa}
+{Xie}, X., {Zrake}, J., \& {MacFadyen}, A. 2018, \apj, 863, 58,
+  \dodoi{10.3847/1538-4357/aacf9c}
 
 \bibitem[{{Yamazaki} {et~al.}(2002){Yamazaki}, {Ioka}, \&
   {Nakamura}}]{Yamazaki:2002aa}

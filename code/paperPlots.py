@@ -1077,6 +1077,25 @@ def calcTN0(Y, aE0=1.0, an0=1.0):
     return tN0
 
 
+def calcTC(jetModel, Y, regime):
+
+    thV = Y[0]
+    thC = Y[2]
+    thW = Y[3]
+    b = Y[4]
+    p = Y[9]
+
+    if thC >= thV:
+        return 0.0
+
+    f = get_f(jetModel, thC, thW, b)
+    tN0 = calcTN0(Y)
+
+    tC = np.asscalar(calc_tp(thC, tN0, thV, f, regime, p))
+
+    return tC
+
+
 def calcTW(jetModel, Y, regime):
 
     thV = Y[0]
