@@ -557,43 +557,48 @@ def makeNicePlot(t, thV, thC, thW, E0, n0, p, jetType, seg):
 """
 
 
-def plotSlopes(p, s3, name):
+def plotSlopes(p, som, varName, name):
 
-    g = np.linspace(0, 10, 200)
+    g = np.linspace(0, 20, 200)
 
     segs = ['D', 'E', 'F', 'G', 'H']
+    segLabel = [r'D ($\nu < \nu_m < \nu_c$)', r'E ($\nu < \nu_c < \nu_m$)',
+                r'F ($\nu_c < \nu < \nu_m$)', r'G ($\nu_m < \nu < \nu_c$)',
+                r'H ($\nu_m,\nu_c < \nu$)']
 
     fig, ax = plt.subplots(1, 1)
 
     colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red', 'tab:purple']
 
     for i, seg in enumerate(segs):
-        s1_p2 = em_slope_g(2.0, seg)
-        s2_p2 = em_slope_t(2.0, seg)
+        sg_p2 = em_slope_g(2.0, seg)
+        st_p2 = em_slope_t(2.0, seg)
         be_p2 = sync_slope(2.0, seg)
 
-        s1 = em_slope_g(p, seg)
-        s2 = em_slope_t(p, seg)
+        sg = em_slope_g(p, seg)
+        st = em_slope_t(p, seg)
         be = sync_slope(p, seg)
 
-        s1_p3 = em_slope_g(3.0, seg)
-        s2_p3 = em_slope_t(3.0, seg)
+        sg_p3 = em_slope_g(3.0, seg)
+        st_p3 = em_slope_t(3.0, seg)
         be_p3 = sync_slope(3.0, seg)
 
-        s = (2*(3+s2)-3*(2+s3+s1-be)+(3+s2)*g) / (8+g)
-        s_p2 = (2*(3+s2_p2)-3*(2+s3+s1_p2-be_p2)+(3+s2_p2)*g) / (8+g)
-        s_p3 = (2*(3+s2_p3)-3*(2+s3+s1_p3-be_p3)+(3+s2_p3)*g) / (8+g)
+        s = (3*be - 3*sg + 2*st + 3*som + (3+st)*g) / (8+g)
+        s_p2 = (3*be_p2 - 3*sg_p2 + 2*st_p2 + 3*som + (3+st_p2)*g) / (8+g)
+        s_p3 = (3*be_p3 - 3*sg_p3 + 2*st_p3 + 3*som + (3+st_p3)*g) / (8+g)
 
-        ax.fill_between(g, s_p2, s_p3, alpha=0.5, color=colors[i])
-        ax.plot(g, s, label=seg, alpha=1.0, color=colors[i])
+        ax.fill_between(g, s_p2, s_p3, alpha=0.5, color=colors[i], linewidth=0)
+        ax.plot(g, s, label=segLabel[i], alpha=1.0, color=colors[i])
 
     ax.set_ylim(-3, 3)
 
-    ax.set_ylabel(r'$d \log F_\nu\ /\ d \log t_{obs}$')
-    ax.set_xlabel(r'$g$')
+    ax.set_xlabel(varName)
+    ax.set_ylabel(r'$\alpha_{\mathrm{struct}}$')
 
-    fig.legend()
+    ax.legend()
+    print("Saving " + name)
     fig.savefig(name)
+    plt.close(fig)
 
 
 def plotG(name, jetType, mode=0):
@@ -632,7 +637,7 @@ if __name__ == "__main__":
     thW = 0.4
     E0 = 1.0e52
     n0 = 1.0e-2
-    p = 2.3
+    p = 2.2
     jetType = 0
     seg = 'D'
 
@@ -642,10 +647,12 @@ if __name__ == "__main__":
     k = 5
     Mej = 1.0e-8
 
+    """
     fig1, fig2 = plot_lc_jet(t, 0.25, thC, thW, E0, n0, p, jetType, seg)
     fig3, fig4 = plot_lc_jet(t, 0.45, thC, thW, E0, n0, p, jetType, seg)
     fig5, fig6 = plot_lc_jet(t, 0.7, thC, thW, E0, n0, p, jetType, seg)
     fig7, fig8 = plot_lc_jet(t, 1.0, thC, thW, E0, n0, p, jetType, seg)
+    """
 
     # fig = makeNicePlot(t, thV, thC, thW, E0, n0, p, jetType, seg)
 
@@ -654,6 +661,7 @@ if __name__ == "__main__":
     # fig13, fig14 = plot_lc_cocoon(t, umax, umin, Er, 5, Mej, n0, p, 3, seg)
     # fig15, fig16 = plot_lc_cocoon(t, umax, umin, Er, 10, Mej, n0, p, 3, seg)
 
+    """
     if fig1 is not None:
         fig1.savefig("lc_pl_thV_0p25.png")
     if fig2 is not None:
@@ -673,6 +681,7 @@ if __name__ == "__main__":
         fig7.savefig("lc_pl_thV_1p00.png")
     if fig8 is not None:
         fig8.savefig("lc_decomp_thV_1p00.png")
+    """
 
     # if fig9 is not None:
     #     fig9.savefig("lc_pl_k_01.png")
@@ -686,11 +695,11 @@ if __name__ == "__main__":
     # if fig15 is not None:
     #     fig15.savefig("lc_pl_k_10.png")
 
-    plotSlopes(p, -2, "slopesOn.png")
-    plotSlopes(p, -1, "slopesStruct.png")
-    plotG('struct_g_gaussian', 0)
-    plotG('struct_g_powerlaw', 4)
-    plotG('struct_g_gaussian_scaled', 0, 1)
-    plotG('struct_g_powerlaw_scaled', 4, 1)
+    plotSlopes(p, 1, r"$g$", "slopesStruct.pdf")
+    plotSlopes(p, 2, r"$k$", "slopesCocoon.pdf")
+    # plotG('struct_g_gaussian', 0)
+    # plotG('struct_g_powerlaw', 4)
+    # plotG('struct_g_gaussian_scaled', 0, 1)
+    # plotG('struct_g_powerlaw_scaled', 4, 1)
 
     plt.show()

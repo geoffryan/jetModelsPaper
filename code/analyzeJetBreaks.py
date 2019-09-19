@@ -43,8 +43,70 @@ if __name__ == "__main__":
 
     num = math.pow(0.15, 3.0/8.0)
 
+    chiOnCoeff = 1.18
+    chiOffCoeff = 0.53
+
     chi = np.maximum(1.18*thCs[:, None], 0.53*(thCs[:, None] + thVs[None, :]))
     color = ['C{0:d}'.format(i) for i in range(10)]
+
+    E53 = 1.0e53
+    E50 = 1.0e50
+    n00 = 1.0
+    nm3 = 1.0e-3
+    th0p1 = 0.1
+    th0p2 = 0.2
+    th0p3 = 0.3
+
+    coeff_On_53_00_0p1_s = math.pow(9*E53/(16*math.pi*grb.mp*n00*grb.c**5),
+                                    1.0/3.0) * math.pow(chiOnCoeff * th0p1,
+                                                        8.0/3.0)
+    coeff_On_53_00_0p1_d = coeff_On_53_00_0p1_s * grb.sec2day
+    coeff_Off_53_00_0p1_s = math.pow(9*E53/(16*math.pi*grb.mp*n00*grb.c**5),
+                                     1.0/3.0) * math.pow(chiOffCoeff * th0p1,
+                                                         8.0/3.0)
+    coeff_Off_53_00_0p1_d = coeff_Off_53_00_0p1_s * grb.sec2day
+    coeff_Off_53_00_0p2_s = math.pow(9*E53/(16*math.pi*grb.mp*n00*grb.c**5),
+                                     1.0/3.0) * math.pow(chiOffCoeff * th0p2,
+                                                         8.0/3.0)
+    coeff_Off_53_00_0p2_d = coeff_Off_53_00_0p2_s * grb.sec2day
+    coeff_Off_53_00_0p3_s = math.pow(9*E53/(16*math.pi*grb.mp*n00*grb.c**5),
+                                     1.0/3.0) * math.pow(chiOffCoeff * th0p3,
+                                                         8.0/3.0)
+    coeff_Off_53_00_0p3_d = coeff_Off_53_00_0p3_s * grb.sec2day
+
+    coeff_On_50_m3_0p1_s = math.pow(9*E50/(16*math.pi*grb.mp*nm3*grb.c**5),
+                                    1.0/3.0) * math.pow(chiOnCoeff * th0p1,
+                                                        8.0/3.0)
+    coeff_On_50_m3_0p1_d = coeff_On_50_m3_0p1_s * grb.sec2day
+    coeff_Off_50_m3_0p1_s = math.pow(9*E50/(16*math.pi*grb.mp*nm3*grb.c**5),
+                                     1.0/3.0) * math.pow(chiOffCoeff * th0p1,
+                                                         8.0/3.0)
+    coeff_Off_50_m3_0p1_d = coeff_Off_50_m3_0p1_s * grb.sec2day
+    coeff_Off_50_m3_0p2_s = math.pow(9*E50/(16*math.pi*grb.mp*nm3*grb.c**5),
+                                     1.0/3.0) * math.pow(chiOffCoeff * th0p2,
+                                                         8.0/3.0)
+    coeff_Off_50_m3_0p2_d = coeff_Off_50_m3_0p2_s * grb.sec2day
+    coeff_Off_50_m3_0p3_s = math.pow(9*E50/(16*math.pi*grb.mp*nm3*grb.c**5),
+                                     1.0/3.0) * math.pow(chiOffCoeff * th0p3,
+                                                         8.0/3.0)
+    coeff_Off_50_m3_0p3_d = coeff_Off_50_m3_0p3_s * grb.sec2day
+
+    print("tj_On_E53_n00_th0p1 = {0:.4e} s = {1:.4e} days".format(
+          coeff_On_53_00_0p1_s, coeff_On_53_00_0p1_d))
+    print("tj_Off_E53_n00_th0p1 = {0:.4e} s = {1:.4e} days".format(
+          coeff_Off_53_00_0p1_s, coeff_Off_53_00_0p1_d))
+    print("tj_Off_E53_n00_th0p2 = {0:.4e} s = {1:.4e} days".format(
+          coeff_Off_53_00_0p2_s, coeff_Off_53_00_0p2_d))
+    print("tj_Off_E53_n00_th0p3 = {0:.4e} s = {1:.4e} days".format(
+          coeff_Off_53_00_0p3_s, coeff_Off_53_00_0p3_d))
+    print("tj_On_E50_nm3_th0p1 = {0:.4e} s = {1:.4e} days".format(
+          coeff_On_50_m3_0p1_s, coeff_On_50_m3_0p1_d))
+    print("tj_Off_E50_nm3_th0p1 = {0:.4e} s = {1:.4e} days".format(
+          coeff_Off_50_m3_0p1_s, coeff_Off_50_m3_0p1_d))
+    print("tj_Off_E50_nm3_th0p2 = {0:.4e} s = {1:.4e} days".format(
+          coeff_Off_50_m3_0p2_s, coeff_Off_50_m3_0p2_d))
+    print("tj_Off_E50_nm3_th0p3 = {0:.4e} s = {1:.4e} days".format(
+          coeff_Off_50_m3_0p3_s, coeff_Off_50_m3_0p3_d))
 
     fig, ax = plt.subplots(3, 2, figsize=(8, 9))
     ax[0, 0].plot(thCs, thCs, color='grey', ls='--')
@@ -106,9 +168,11 @@ if __name__ == "__main__":
     print(((tau_g[:, 0]+tau_pl2[:, 0]+tau_pl6[:, 0])
            * np.power(thCs, -8.0/3.0)).mean() / 3.0)
 
+    tau_theo = np.power(chi, 8.0/3.0)
+
     figOnA, axOnA = plt.subplots(1, 1)
-    axOnA.plot(thCs, np.power(chi[:, 0], 8.0/3.0),
-               ls='--', color='grey', lw=4,
+    axOnA.plot(thCs, tau_theo[:, 0],
+               ls='--', color='grey', alpha=0.8, lw=4,
                label=r'Analytic')
     axOnA.plot(thCs, tau_g[:, 0], ls='-', color='tab:green',
                label=r'Gaussian Jet')
@@ -125,7 +189,7 @@ if __name__ == "__main__":
     axOnA.set_yscale('log')
 
     axOnA.set_xlabel(r'$\theta_{\mathrm{c}}$ (rad)')
-    axOnA.set_ylabel(r'$t_b / t_{\mathrm{N}}$')
+    axOnA.set_ylabel(r'$t_{\mathrm{b}} / t_{\mathrm{NR}}$')
 
     figOnA.tight_layout()
     name = "jetbreak_OnAxis.pdf"
@@ -136,7 +200,7 @@ if __name__ == "__main__":
     for i in range(len(thCs))[::4]:
         thC = thCs[i]
         print("Off-Axis thetaC = {0:.4f}".format(thC))
-        if i == 0:
+        if i == -1:
             labelA = r'Analytic'
             labelG = r'Gaussian Jet'
             labelPL2 = r'Power Law Jet $b=2$'
@@ -146,8 +210,9 @@ if __name__ == "__main__":
             labelG = None
             labelPL2 = None
             labelPL6 = None
-        axOffA.plot(thVs, np.power(chi[i, :], 8.0/3.0),
-                    ls='--', color='grey', lw=4,
+
+        axOffA.plot(thVs, tau_theo[i, :],
+                    ls='--', color='grey', alpha=0.8, lw=4,
                     label=labelA)
         axOffA.plot(thVs, tau_g[i, :], ls='-', color='tab:green',
                     label=labelG)
@@ -156,13 +221,56 @@ if __name__ == "__main__":
         axOffA.plot(thVs, tau_pl6[i, :], ls=':', color='tab:red',
                     label=labelPL6)
 
-    axOffA.legend()
+        """
+        axOffA.text(0.0, np.power(chi[i, 0], 8.0/3.0),
+                    r"$\theta_{{\mathrm{{c}}}} = {0:.2f}$ rad".format(thC),
+                    horizontalalignment='left', verticalalignment='bottom')
+        """
+
+    fracDiff_g = np.fabs((tau_g - tau_theo) / tau_theo)
+    fracDiff_pl2 = np.fabs((tau_pl2 - tau_theo) / tau_theo)
+    fracDiff_pl6 = np.fabs((tau_pl6 - tau_theo) / tau_theo)
+
+    print("Gaussian frac diff(min/mean/max): OnAxis  {0:.2e}/{1:.2e}/{2:.2e}"
+          .format(fracDiff_g[:, 0].min(), fracDiff_g[:, 0].mean(),
+                  fracDiff_g[:, 0].max()))
+    print("                                  OffAxis {0:.2e}/{1:.2e}/{2:.2e}"
+          .format(fracDiff_g.min(), fracDiff_g.mean(), fracDiff_g.max()))
+
+    print("PowerLaw2 frac diff(min/mean/max): OnAxis  {0:.2e}/{1:.2e}/{2:.2e}"
+          .format(fracDiff_pl2[:, 0].min(), fracDiff_pl2[:, 0].mean(),
+                  fracDiff_pl2[:, 0].max()))
+    print("                                   OffAxis {0:.2e}/{1:.2e}/{2:.2e}"
+          .format(fracDiff_pl2.min(), fracDiff_pl2.mean(), fracDiff_pl2.max()))
+
+    print("PowerLaw6 frac diff(min/mean/max): OnAxis  {0:.2e}/{1:.2e}/{2:.2e}"
+          .format(fracDiff_pl6[:, 0].min(), fracDiff_pl6[:, 0].mean(),
+                  fracDiff_pl6[:, 0].max()))
+    print("                                   OffAxis {0:.2e}/{1:.2e}/{2:.2e}"
+          .format(fracDiff_pl6.min(), fracDiff_pl6.mean(), fracDiff_pl6.max()))
+
+    print("AllModels frac diff(min/mean/max): OnAxis  {0:.2e}/{1:.2e}/{2:.2e}"
+          .format(min(fracDiff_g[:, 0].min(), fracDiff_pl2[:, 0].min(),
+                      fracDiff_pl6[:, 0].min()),
+                  (fracDiff_g[:, 0].mean() + fracDiff_pl2[:, 0].mean()
+                   + fracDiff_pl6[:, 0].mean())/3.0,
+                  max(fracDiff_g[:, 0].max(), fracDiff_pl2[:, 0].max(),
+                      fracDiff_pl6[:, 0].max())))
+    print("                                   OffAxis {0:.2e}/{1:.2e}/{2:.2e}"
+          .format(min(fracDiff_g.min(), fracDiff_pl2.min(),
+                      fracDiff_pl6.min()),
+                  (fracDiff_g.mean() + fracDiff_pl2.mean()
+                   + fracDiff_pl6.mean())/3.0,
+                  max(fracDiff_g.max(), fracDiff_pl2.max(),
+                      fracDiff_pl6.max())))
+
+    # axOffA.legend()
 
     # axOffA.set_xscale('log')
     axOffA.set_yscale('log')
 
     axOffA.set_xlabel(r'$\theta_{\mathrm{obs}}$ (rad)')
-    axOffA.set_ylabel(r'$t_b / t_{\mathrm{N}}$')
+    axOffA.set_ylabel(r'$t_{\mathrm{b}} / t_{\mathrm{NR}}$')
 
     figOffA.tight_layout()
     name = "jetbreak_OffAxis.pdf"

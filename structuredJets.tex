@@ -36,10 +36,13 @@
 \newcommand{\Mej}{\ensuremath{M_{\mathrm{ej}}}}
 \newcommand{\tobs}{\ensuremath{t_{\mathrm{obs}}}}
 \newcommand{\tW}{\ensuremath{t_{\mathrm{w}}}}
+\newcommand{\tNR}{\ensuremath{t_{\mathrm{NR}}}}
 \newcommand{\tb}{\ensuremath{t_{\mathrm{b}}}}
 \newcommand{\tbm}{\ensuremath{t_{\mathrm{b-}}}}
 \newcommand{\tbp}{\ensuremath{t_{\mathrm{b+}}}}
 \newcommand{\tbpm}{\ensuremath{t_{\mathrm{b\pm}}}}
+\newcommand{\tbin}{\ensuremath{t_{\mathrm{b, in}}}}
+\newcommand{\tbout}{\ensuremath{t_{\mathrm{b, out}}}}
 \newcommand{\tdec}{\ensuremath{t_{\mathrm{dec}}}}
 \newcommand{\tumin}{\ensuremath{t_{\mathrm{min}}}}
 \newcommand{\nuobs}{\ensuremath{\nu_{\mathrm{obs}}}}
@@ -453,7 +456,7 @@ The lower right panel of Figure \ref{fig:thVmodel} shows the same models viewed 
 
 It should be noted that the convergence of the light curves near the jet break is due in part to our standardized definition of $\thC$ in Equation \eqref{eq:thCdef}.  Alternative definitions, particularly omitting the factor of $b$ in the denominator of the power law profile expression, lead to larger differences in normalization with fewer shared features between light curves at the same $\thC$.  
 
-\subsection{Structured Phase: Closure Relations and Break Times}\label{subsec:structure}
+\subsection{Structured Phase: Closure Relations}\label{subsec:structure}
 
 Closure relations for the pre-jet break and post-jet break afterglow phases are well known in the literature (e.g. \citet{Granot:2002aa, Rhoads:1999aa}).  The closure relations for the far off axis phase in some spectral regimes first appeared in \citet{Salmonson:2003aa}.  Here we provide novel closure relations for the structured phase, as well as scalings for the jet break time with viewing angle.
 
@@ -502,44 +505,66 @@ These values may be used in Table \ref{tab:slopes} for an approximate power law 
 In the structured phase, the temporal slope depends directly on the ratio $\thobs/\thC$.  Therefore any measurement of the effective power law slope of an afterglow light curve in the structured phase can be used to measure this parameter.
 
 \begin{figure}
-	\includegraphics[width=\columnwidth]{figs/slopesJet.png}
-	\caption{Temporal slopes for the off-axis structured jet as a function of the structure parameter $g$ for the synchrotron spectral regimes D (blue, narrow), E (orange, narrow),  F (green, narrow), G (red, wide), and H (purple, wide).  The width of the G and H bands shows the dependency on $p$, the upper curves for $p=2$ and the lower for $p=3$.  The temporal power law slope of a structured jet afterglow increases with $g$ in all spectral regimes. \label{fig:slopesG}}
+	\includegraphics[width=\columnwidth]{figs/slopesStruct.pdf}
+	\caption{Temporal slopes $\alpha_{\mathrm{struct}}$ (defined as $F_\nu \propto \tobs^{\alpha}$) for the \emph{structured} phase as a function of the structure parameter $g$ for the synchrotron spectral regimes D (blue, narrow), E (orange, narrow),  F (green, narrow), G (red, wide), and H (purple, wide).  The width of the G and H bands shows the dependency on $p$, the upper limit for $p=2$, the lower for $p=3$, and the thick internal line for $p=2.2$. The temporal power law slope of a structured jet afterglow increases with $g$ in all spectral regimes. \label{fig:slopesG}}
 \end{figure}
 
 Figure \ref{fig:slopesG} shows the structured phase power law temporal slope as a function of $g$ for spectral regimes $D$--$H$. In the $G$ and $H$ regimes the spectral slope is a function of $p$, this dependence carries over into the temporal slope as well. The temporal slope is an increasing function of $g$ in all regimes.  At sufficiently large $g$ all regimes exhibit rising light curves, the specific $g$ at which the light curve begins to rise is regime dependent.
 
-A viewer outside the truncation angle, $\thobs > \thW$, may observe a steeply rising far-off-axis phase.  This phase transitions to the structured phase once the near edge of the jet enters the beaming cone: $\gamma^{-1}(\thW) \sim \thobs-\thW$.  This will occur at observer time:
+\subsection{Structured Phase: Break Times}\label{subsec:structureBreak}
+
+The break times, the times when an afterglow light curve transitions from one phase to another, scale with the blast wave parameters in a well-defined way. Firstly, a convenient characteristic time scale is the non-relativistic time $\tNR$, the time at which the core of the jet would become non-relativistic in the absence of spreading:
+\begin{align}
+	\tNR &= (1+z) \left( \frac{9}{16\pi} \frac{E_0}{\rho_0 c^5} \right)^{1/3}  \label{eq:tNRdef} \\
+	&= 882 \ (1+z) E_{53}^{1/3}n_0^{-1/3} \mathrm{ days}\ . \nonumber
+\end{align}
+In Equation \eqref{eq:tNRdef} $E_{53} = E_0 / (10^{53}$ erg) and $n_0$ is the circumburst density measured in cm$^{-3}$.  While the jet is relativistic any time scale will depend on $E_0$ and $n_0$ only through $\tNR$.
+
+For viewers outside the truncation angle, $\thobs > \thW$, the transition from the far-off-axis phase to the structured phase occurs at $\tW$ (see rightmost panel of Figure \ref{fig:phaseSketch}).  The transition marks when the observers enters the beaming cone of the near edge of the jet: $\gamma^{-1}(\thW) \sim \thobs-\thW$.  This will occur at observer time:
+\begin{align}
+	\tW &= \tNR \left(E(\thW) / E_0\right)^{1/3} \left( \thobs-\thW \right)^{8/3}  \label{eq:tw} \\
+	&= 12.1 \ (1+z) E_{53}^{1/3} n_0^{-1/3} \nonumber \\
+	& \qquad \times \left(\frac{E(\thW) }{ E_0}\right)^{1/3} \left( \frac{\thobs-\thW}{0.2\ \mathrm{ rad}} \right)^{8/3}  \mathrm{ days}\ .
+\end{align}
+The factor of $(E(\thW) / E_0)^{1/3}$ in $\tW$ compensates for the lower Lorentz factor (and hence larger beaming cone) in the wings of the jet relative to the core.  It depends only on geometric parameters (e.g. $\thC$, $\thW$, and $b$) and may be much smaller than 1.
+
+The \emph{jet break} $\tb$ is the time at which the effective angular size of the jet ceases to increase: $\som = 0$.  For an on-axis observer of a top hat jet, in the absence of spreading, this is when the jet edges come into view.  More generally, this is the moment when the blast wave has sufficiently decelerated that the viewer is within the beaming cones of its brightest regions.  For \emph{aligned} viewers, $\thobs < \thC$, the jet break marks the transition from pre- to post-jet break phases.  For \emph{misaligned} viewers, $\thobs > \thC$, the jet break marks the transition from structured to post-jet break phases.
+
+To determine the normalization and scaling for the observed jet break time $\tb$ we computed a grid of afterglow light curves for Gaussian, $b=2$ power law, and $b=6$ power law jets, varying $\thC$ and $\thobs$.  We used 11 values each for $\thC$ between 0.04 rad and 0.40 rad and $\thobs$ between 0 rad and 1.0 rad.  The truncation angle $\thW$ was set to $10 \thC$, and all other parameters were fixed.  Each light curve was fit with a smoothly broken power law $F_\nu \propto (\tobs/\tb)^{\alpha_1} [(1+(\tobs/\tb)^s)/2]^{(\alpha_2-\alpha_1)/s}$ in the region surrounding the jet break to identify the precise break time $\tb$.
+
+\begin{figure*}
+	\plottwo{figs/jetbreak_OnAxis.pdf}{figs/jetbreak_OffAxis.pdf}
+	\caption{Jet break time $t_b$ for Gaussian (green solid line), $b=2$ power law (orange dash-dotted line), and $b=6$ power law (red dotted line) jets.  The left panel shows $t_b$ as a function of $\thC$ for on-axis (\thobs=0) observers.  The right panel shows $t_b$ as a function of $\thobs$: the lower, middle, and upper curves correspond to $\thC = $ 0.04 rad, 0.184 rad, and 0.328 rad respectively. The dashed grey line is the analytic approximation Equation \eqref{eq:tb}. Each break time was determined by fitting a smoothly broken power law to an \afterglowpy{} light curve. \label{fig:tb}}
+\end{figure*}
+
+Figure \ref{fig:tb} shows the extracted jet break times from \afterglowpy{} light curves for several jet structure models.  The left panel shows $\tb$ as a function of $\thC$ for on-axis ($\thobs=0$) viewers, while the right panel shows $\tb$ as a function of $\thobs$ for 3 particular values of $\thC$.  The scale for $\tb$ has been normalized by $\tNR$, isolating the variation due to structure geometry and viewing angle.  The different structure models show remarkably tight agreement, particularly as $\thobs \to 0$.  This is primarily due to the shared definition of $\thC$.  As $\thobs \to 1$ rad the power law jets show a slight increase relative to the Gaussian jet, particularly for the larger $\thC$.  
+
+It has been long established that on-axis viewers observe the jet break in their frame at a time $\tb \propto \thC^{8/3}$ (e.g. \citet{Rhoads:1999aa}), while significantly off-axis viewers observe the jet break at $\tb \propto \thobs^{8/3}$ \citep{Rossi:2002aa, Panaitescu:2003aa}.  More generally, for initially top hat jets it has been shown the jet break corresponds to the far jet edge coming into view, that is $\tb \propto (\thC + \thobs)^{8/3}$ \citep{van-Eerten:2010aa}.  We find this latter result to hold approximately true for structured jets as well.  As $\thC$ denotes the angular size of the bright jet core, once this time is reached the jet is essentially entirely in view.  Wings of the jet on the far side from the viewer may still come into view, but remain a subdominant contribution to the bright core within $\thC$.  
+
+We find $\tb(\thC, \thobs)$ to show two modes of behaviour, split roughly by the whether the viewer is aligned ($\thobs < \thC$) or misaligned ($\thobs > \thC$).  Aligned viewing shows $\tb$ to follow $\thC^{8/3}$ quite strongly with very little dependence on $\thobs$.  Misaligned viewing better tracks with $(\thC + \thobs)^{8/3}$, although there are discrepancies for very large viewing angles.
+
+A good fit for $\tb$ to the full grid of models is obtained by taking the maximum of the aligned $\tbin$ and misaligned $\tbout$ relations:
 \begin{equation}
-	\tW = \left(\frac{9}{16\pi} \frac{E(\thW)}{n_0 \Mp c^5}\right)^{1/3} \left( 2 \sin \left(\frac{\thobs-\thW}{2}\right)\right)^{8/3} \ .\label{eq:tw}
+	\tb = \max(\tbin,\  \tbout)\ , \label{eq:tb}
 \end{equation}
+where
+\begin{align}
+	\tbin &= 1.55\ \tNR \thC^{8/3} \label{eq:tbin}\\
+		&= 2.95\ E_{53}^{1/3} n_0^{-1/3} \left(\frac{\thC}{0.1\ \mathrm{rad}}\right)^{8/3}\ \mathrm{days}\ , \nonumber \\
+	\tbout &= 0.184\ \tNR (\thC+\thobs)^{8/3} \label{eq:tbout} \\
+		&= 6.54\ E_{53}^{1/3} n_0^{-1/3} \left(\frac{\thC+\thobs}{0.3\ \mathrm{rad}}\right)^{8/3}\ \mathrm{days}\ . \nonumber 			
+\end{align}
 
-The jet break is the time at which the effective angular size of the jet ceases to increase, $\som = 0$.  For an on-axis observer of a top hat jet, this is when the jet edges come into view.  More generally, this is the moment when the blast wave has sufficiently decelerated that the viewer is within the beaming cones of its brightest regions.  For \emph{aligned} viewers, $\thobs < \thC$, the jet break marks the transition from pre- to post-jet break phases.  For \emph{misaligned} viewers, $\thobs > \thC$, the jet break marks the transition from structured to post-jet break phases.
+Figure \ref{fig:tb} also shows Equation \eqref{eq:tb} compared to the measured jet break times.  The on-axis relation $\tbin$ fits very well over the span of $\thC$ considered, with a mean fractional error of 0.053.  Over the full $\thC$ and $\thobs$ domain the mean fractional error is 0.17, with the largest contributions coming from wide jets (e.g. the upper curve, $\thC = 0.328$ rad, in Figure \ref{fig:tb}) at viewing angles $\thobs > 0.8$ rad.
 
-It is long established that on-axis viewers observe the jet break in their frame at a time $\tb \propto \thC^{8/3}$ (e.g. \citet{Rhoads:1999aa}), while significantly off-axis viewers observe the jet break at $\tb \propto \thobs^{8/3}$ \citep{Rossi:2002aa, Panaitescu:2003aa}.  More generally, for initially top hat jets it has been shown the jet break corresponds to the far jet edge coming into view, that is $\tb \propto (\thC + \thobs)^{8/3}$ \citep{van-Eerten:2010aa}.  We find this latter result to hold true for structured jets as well.  As $\thC$ denotes the angular size of the bright jet core, once this time is reached the jet is essentially entirely in view.  Wings of the jet on the far side from the viewer may still come into view, but remain a subdominant contribution to the bright core within $\thC$.  
-
-In our single shell approximation, then, the jet break occurs near:
-\begin{equation}
-	\tb = \left(\frac{9}{16\pi} \frac{E_0}{n_0 \Mp c^5}\right)^{1/3} \left( 2 \sin \left(\frac{\thobs+\thC}{2}\right)\right)^{8/3} \ .\label{eq:tb}
-\end{equation}
 
 % TODO FIX THE HELL OUT OF THESE FIGURES
 % MAKE MODEL CURVES CONSISTENT WITH MULTI-PANEL
 % DROP OR DEFINE t_N
-\begin{figure}
-	\includegraphics[width=\columnwidth]{figs/jetbreak_OnAxis.pdf}
-	\caption{Jet break time for on-axis ($\thobs=0$) observers for top-hat (blue circles), Gaussian (orange squares), and power law (green triangles) jets as a function of $\thC$. The dashed grey line is the analytic approximation $\tbpm = t_N (2\sin \thC/2)^{8/3}$. These particular light curves use $\thW = 5 \thC$, $E_0 = 10^{52}$erg, $n_0=10^{-3}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, and $\epsB = 10^{-4}$. \label{fig:tbOA}}
-\end{figure}
-
-Figure \ref{fig:tbOA} shows the observed jet break time $\tb$ for on-axis, $\thobs=0$ viewers, as a function of core half-width $\thC$ for several structure models.  The expected scaling with $\thC^{8/3}$ is observed, although as seen in Figure \ref{fig:thVmodel} there is some model-dependent offset due to the particular shape of the wings.
-
-
-\begin{figure}
-	\includegraphics[width=\columnwidth]{figs/jetbreak_OffAxis.pdf}
-	\caption{Jet break time for off-axis ($\thobs\neq0$) observers for top-hat (blue circles), Gaussian (orange squares), and power law (green triangles) jets as a function of $\thC$. The dashed grey line is the analytic approximation $\tbpm = t_N (2\sin \thobs/2)^{8/3}$. These particular light curves use $\thW = 5 \thC$, $E_0 = 10^{52}$erg, $n_0=10^{-3}$cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, and $\epsB = 10^{-4}$. \label{fig:tbG}}
-\end{figure}
-
-Figure \ref{fig:tbG} shows the observed jet break time for generic viewers of various structure models.  At small viewing angles $\tb$ only depends linearly on $\thobs$, but asymptotically approaches $\thobs^{8/3}$ as $\thobs \gg \thC$.
-
+%\begin{figure}
+%	\includegraphics[width=\columnwidth]{figs/jetbreak_OnAxis.pdf}
+%	\caption{Jet break time for on-axis ($\thobs=0$) observers for Gaussian (green solid line),  $b=2$ power law (orange dash-dotted line), and $b=6$ power law (red dotted line) jets as a function of $\thC$. The dashed grey line is the analytic approximation $\tb = 1.55 t_N (\thC/1 rad)^{8/3}$.  \label{fig:tbOA}}
+%\end{figure}
 
 %\subsection{Aligned Evolution: $\thobs \lesssim \thC$} \label{subsec:aligned}
 %

@@ -492,12 +492,12 @@ if __name__ == "__main__":
     findJetBreak(-1, Y, Z, regime, NU, printMode='all', ax=ax)
     """
 
-    # thVs = np.linspace(0.0, 1.0, 11)
-    thVs = [0.0]
-    thVs.extend(np.geomspace(1.0e-2, 1.0, 12))
-    thVs = np.array(thVs)
+    thVs = np.linspace(0.0, 1.0, 11)
+    # thVs = [0.0]
+    # thVs.extend(np.geomspace(1.0e-2, 1.0, 12))
+    # thVs = np.array(thVs)
     thCs = np.linspace(0.04, 0.4, 11)
-    thWs = 10*thCs
+    thWs = 5*thCs
     thWs[thWs > 0.5*np.pi] = 0.5*np.pi
 
     """
