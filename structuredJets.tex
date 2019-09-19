@@ -489,6 +489,13 @@ where
 \end{equation}
 Equation \eqref{eq:structSlope} is the standard pre-jet break afterglow temporal slope, with dependence on $\som$ made explicit and the additional viewing angle dependent $g$ parameter.  The $g$ parameter is positive and to first order completely accounts for the presence of angular structure, a non-trivial $E(\theta)$, in the blast wave.  It is zero when the dominant material is in the line of sight ($\theta_* = \thobs$) or the jet is a top hat ($dE/d\theta = 0$).
 
+\begin{figure}
+	\includegraphics[width=\columnwidth]{figs/slopesStruct.pdf}
+	\caption{Temporal slopes $\alpha_{\mathrm{struct}}$ (defined as $F_\nu \propto \tobs^{\alpha}$) for the \emph{structured} phase as a function of the structure parameter $g$ for the synchrotron spectral regimes D (blue, narrow), E (orange, narrow),  F (green, narrow), G (red, wide), and H (purple, wide).  The width of the G and H bands shows the dependency on $p$, the upper limit for $p=2$, the lower for $p=3$, and the thick internal line for $p=2.2$. The temporal power law slope of a structured jet afterglow increases with $g$ in all spectral regimes. \label{fig:slopesG}}
+\end{figure}
+
+Figure \ref{fig:slopesG} shows the structured phase power law temporal slope $\alpha_{\mathrm{struct}}$ as a function of $g$ for spectral regimes $D$--$H$. In the $G$ and $H$ regimes the spectral slope $\beta$ is a function of $p$, this dependence carries over into the temporal slope as well. The temporal slope $\alpha_{\mathrm{struct}}$ is an increasing function of $g$ in all regimes.  At sufficiently large $g$ all regimes exhibit rising light curves, the specific $g$ at which the light curve begins to rise is regime dependent.
+
 The $g$ parameter evolves with time as $\theta^*$ sweeps from the jet edge to the core.  This produces deviations in the light curve from a pure power law.  However, we find ultimately these deviations are not too large and the average slope is well approximated by $\geff  = g(\theff)$, where $\theff$ is a fiducial angular section which depends on viewing angle and potentially other structure parameters.  For the Gaussian model $\theff$ is simply half the viewing angle, for the power law model a suitable fitting function was found through comparison to a grid of \afterglowpy{} light curves:
 \begin{align}
 	\theff &= \frac{\thobs}{2}&& \text{Gaussian} \\
@@ -500,16 +507,17 @@ In the expressions for $\geff$ it is reasonable to assume $2 \tan((\thobs-\theff
 	\geff &= \frac{\thobs^2}{4\thC^2} && \text{Gaussian}\ , \\
 	\geff &= \frac{2 b (\thobs-\theff)\theff}{b \thC^2+\theff^2} && \text{power law}\ . \label{eq:geff}
 \end{align}
-These values may be used in Table \ref{tab:slopes} for an approximate power law model of a structured jet with an appropriate viewing angle dependent temporal evolution.  These analytic results are in agreement with previous work on structured jets \citep{Rossi:2004aa} and the trans-relativistic numerical model described in Section \ref{sec:numerical}.
+These values may be used in Table \ref{tab:slopes} for an approximate power law model of a structured jet with an appropriate viewing angle dependent temporal evolution.  
 
-In the structured phase, the temporal slope depends directly on the ratio $\thobs/\thC$.  Therefore any measurement of the effective power law slope of an afterglow light curve in the structured phase can be used to measure this parameter.
+\begin{figure*}
+	\includegraphics[width=\textwidth]{figs/lc_closure_multi.pdf}
+	\caption{Optical afterglow light curves in the \emph{structured} phase with corresponding closure relation slopes $\alpha_{\mathrm{struct}}$.  Each panel shows light curves with $\thobs/\thC$ = 2, 4, 6, and 8 (solid lines in red, green, orange, and blue respectively) calculated with \afterglowpy{} and corresponding power law segments $F_\nu \propto \tobs^{\alpha_{\mathrm{struct}}}$ calculated from the closure relations in Table \ref{tab:slopes} and the $\geff$ values from Equation \eqref{eq:geff}.  The left panel shows a Gaussian jet, the middle a $b=2$ power law jet, and the right a $b=6$ power law jet.  The closure relations $\alpha_{\mathrm{struct}}$ capture the approximate power law slope of the numerical light curves, with the agreement improving for larger values of $\thobs/\thC$. The light curves use a fixed $\thobs$ = 0.3 rad, $\thW = 0.25$ rad, and vary $\thC$.  Other parameters are fixed: $E_0 = 10^{53}$ erg, $n_0=10^{-3}$ cm$^{-3}$, $p=2.2$, $\epse = 10^{-1}$, $\epsB = 10^{-3}$, $d_L=10^{28}$ cm and $z=0.5454$. \label{fig:closure}}
+\end{figure*}
 
-\begin{figure}
-	\includegraphics[width=\columnwidth]{figs/slopesStruct.pdf}
-	\caption{Temporal slopes $\alpha_{\mathrm{struct}}$ (defined as $F_\nu \propto \tobs^{\alpha}$) for the \emph{structured} phase as a function of the structure parameter $g$ for the synchrotron spectral regimes D (blue, narrow), E (orange, narrow),  F (green, narrow), G (red, wide), and H (purple, wide).  The width of the G and H bands shows the dependency on $p$, the upper limit for $p=2$, the lower for $p=3$, and the thick internal line for $p=2.2$. The temporal power law slope of a structured jet afterglow increases with $g$ in all spectral regimes. \label{fig:slopesG}}
-\end{figure}
+Figure \ref{fig:closure} shows \afterglowpy{} light curves for Gaussian, $b=2$ power law, and $b=6$ power law jets at various values of $\thobs / \thC$ and the corresponding $\alpha_{\mathrm{struct}}$ slopes calculated using $\geff$.  The analytic closure relations capture the light curve behaviour in the structured phase for all 3 models, with somewhat better agreement at larger values of $\thobs/\thC$.  The Gaussian jet, with its strong energy gradient, is most sensitive to changes in $\thobs/\thC$.  The $b=6$ power law, with its more energetic wings, displays less sensitivity to changes in $\thobs/\thC$.  The $b=2$ power law displays almost no variation at all in the temporal decay rate.  The overall behaviour of the Gaussian and $b=2$ power law jets are in agreement with \citet{Rossi:2004aa} (R04, see for comparison their Figure 12 and 16).  Their $\thobs/\thC = 4$ Gaussian jet showed a mildly decaying slope instead of the rising light curve seen in Figure \ref{fig:closure}, due to the choice of different values of $p$.  If $\thobs/\thC=4$, then a Gaussian jet will have also $\geff = 4$ by Equation \eqref{eq:geff}, and Figure \ref{fig:slopesG} shows $\alpha_{\mathrm{struct}}$ will be negative for $p=2.5$ in the G regime as in R04.
 
-Figure \ref{fig:slopesG} shows the structured phase power law temporal slope as a function of $g$ for spectral regimes $D$--$H$. In the $G$ and $H$ regimes the spectral slope is a function of $p$, this dependence carries over into the temporal slope as well. The temporal slope is an increasing function of $g$ in all regimes.  At sufficiently large $g$ all regimes exhibit rising light curves, the specific $g$ at which the light curve begins to rise is regime dependent.
+In the structured phase, the temporal slope depends directly on $\geff$ in a way independent of the particular jet model.  If a particular structure is assumed, then $\thobs/\thC$ may easily be inferred from $\geff$, and hence from $\alpha_{\mathrm{struct}}$.
+
 
 \subsection{Structured Phase: Break Times}\label{subsec:structureBreak}
 

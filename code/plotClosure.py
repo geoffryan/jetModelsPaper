@@ -595,6 +595,9 @@ def plotSlopes(p, som, varName, name):
     ax.set_xlabel(varName)
     ax.set_ylabel(r'$\alpha_{\mathrm{struct}}$')
 
+    ax.set_xticks(np.arange(0, 21), minor=True)
+    ax.set_xticks(np.arange(0, 21, 5), minor=False)
+
     ax.legend()
     print("Saving " + name)
     fig.savefig(name)
