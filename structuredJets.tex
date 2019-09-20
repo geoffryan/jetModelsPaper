@@ -102,7 +102,7 @@
 
 \section{Introduction}
 
-The binary neutron star merger event \gwbns{}, followed quickly by the short gamma-ray burst \grbbns{}, provided a new view on gamma-ray burst (GRB) afterglows \citep{Abbott:2017ab, Abbott:2017ac}.  Unlike typical afterglows, which begin bright and decay from detection with a ~week timescale, \grbbns{}'s non-thermal emission was undetectable until the first observation of X-rays nine days after the GRB \citep{Troja:2017aa}.  At this point the afterglow began steadily increasing in brightness in at all wavelengths for ~160 days \citep{Haggard:2017aa, Hallinan:2017aa, DAvanzo:2018aa,  Lyman:2018aa, Margutti:2018aa, Mooley:2018aa, Troja:2018aa, Troja:2019ab}.  Very long baseline (VLBI) radio imagery over this period identified a radio core with an apparent superluminal motion, indicating the emitting surface was moving at relativistically at an oblique angle towards the Earth \citep{Mooley:2018ab}. The emission peaked at 160 days and proceeded to sharply decay at a rate $t^{-2.2}$ commensurate with other GRB afterglows \citep{Alexander:2018aa, Fong:2019aa, Lamb:2019aa, Troja:2019ab}.
+The binary neutron star merger event \gwbns{}, followed quickly by the short gamma-ray burst \grbbns{}, provided a new view on gamma-ray burst (GRB) afterglows \citep{Abbott:2017ab, Abbott:2017ac}.  Unlike typical afterglows, which begin bright and decay from detection with a ~week timescale, \grbbns{}'s non-thermal emission was undetectable until the first observation of X-rays nine days after the GRB \citep{Troja:2017aa}.  At this point the afterglow began steadily increasing in brightness in at all wavelengths for ~160 days \citep{Haggard:2017aa, Hallinan:2017aa, DAvanzo:2018aa,  Lyman:2018aa, Margutti:2018aa, Mooley:2018aa, Troja:2018aa, Troja:2019ab}.  Very long baseline (VLBI) radio imagery over this period identified a radio core with an apparent superluminal motion, indicating the emitting surface was moving at relativistically at an oblique angle towards the Earth \citep{Mooley:2018ab}. The emission peaked at 164 days after the burst and proceeded to sharply decay at a rate $t^{-2.2}$ commensurate with other GRB afterglows \citep{Alexander:2018aa, Fong:2019aa, Lamb:2019aa, Troja:2019ab}.
 
 The lack of early emission, slow rising light curve, apparent motion of the radio centroid, and sharp decline post-peak are all consistent with emission from a \emph{structured jet}, a collimated blast wave with a non-trivial angular distribution of energy, viewed a moderate angle away from the jet axis \citep{Lamb:2017aa, Alexander:2018aa, Hotokezaka:2018aa, Wu:2018aa, Xie:2018aa,  Ghirlanda:2019aa, Fong:2019aa, Lamb:2019aa, Troja:2019aa}.  The combined effects of a moderate viewing angle and angular structure in the jet produce a light curve significantly different from the standard on-axis uniform ``top-hat'' jet used extensively in GRB afterglow analysis. Being sources at cosmological distances, GRBs must typically be observed nearly on-axis or at least within the original opening angle of the jet \citep{Ryan:2015aa}. At these small viewing angles lateral structure plays a sub-dominant role and the ubiquitous top hat jet has been a sufficient model for most studies.  Since the gravitational wave signal of a binary neutron star merger is nearly isotropic, it is expected the majority of future GW-GRBs will be viewed at significant inclination and may have similarly peculiar light curves as \grbbns{}.
 
@@ -461,7 +461,7 @@ It should be noted that the convergence of the light curves near the jet break i
 Closure relations for the pre-jet break and post-jet break afterglow phases are well known in the literature (e.g. \citet{Granot:2002aa, Rhoads:1999aa}).  The closure relations for the far off axis phase in some spectral regimes first appeared in \citet{Salmonson:2003aa}.  Here we provide novel closure relations for the structured phase, as well as scalings for the jet break time with viewing angle.
 
 \begin{figure}
-	\includegraphics[width=\columnwidth]{figs/jetDecomp.pdf}
+	\includegraphics[width=\columnwidth]{figs/lc_decomp.pdf}
 	\caption{A Gaussian structured jet, decomposed into emission from different latitudes $\theta$.  The off-axis, structured, and post-jet break phases are all clearly visible.  The structured phase is the result of the brightest point of the blast-wave tracking from the wings $(\theta =\thW$) to the jet core ($\theta=\thC$). \label{fig:decomp}}
 \end{figure}
 
@@ -551,17 +551,24 @@ It has been long established that on-axis viewers observe the jet break in their
 
 We find $\tb(\thC, \thobs)$ to show two modes of behaviour, split roughly by the whether the viewer is aligned ($\thobs < \thC$) or misaligned ($\thobs > \thC$).  Aligned viewing shows $\tb$ to follow $\thC^{8/3}$ quite strongly with very little dependence on $\thobs$.  Misaligned viewing better tracks with $(\thC + \thobs)^{8/3}$, although there are discrepancies for very large viewing angles.
 
-A good fit for $\tb$ to the full grid of models is obtained by taking the maximum of the aligned $\tbin$ and misaligned $\tbout$ relations:
-\begin{equation}
-	\tb = \max(\tbin,\  \tbout)\ , \label{eq:tb}
-\end{equation}
-where
+We refer to the jet break time in the aligned case as $\tbin$.  It is fit by:
 \begin{align}
 	\tbin &= 1.55\ \tNR \thC^{8/3} \label{eq:tbin}\\
-		&= 2.95\ E_{53}^{1/3} n_0^{-1/3} \left(\frac{\thC}{0.1\ \mathrm{rad}}\right)^{8/3}\ \mathrm{days}\ , \nonumber \\
+		&= 2.95\ E_{53}^{1/3} n_0^{-1/3} \left(\frac{\thC}{0.1\ \mathrm{rad}}\right)^{8/3}\ \mathrm{days}\ . \nonumber 
+\end{align}
+The jet break time in the misaligned case is $\tbout$, and fit by:
+\begin{align}
 	\tbout &= 0.184\ \tNR (\thC+\thobs)^{8/3} \label{eq:tbout} \\
 		&= 6.54\ E_{53}^{1/3} n_0^{-1/3} \left(\frac{\thC+\thobs}{0.3\ \mathrm{rad}}\right)^{8/3}\ \mathrm{days}\ . \nonumber 			
 \end{align}
+
+A good fit for $\tb$ to the full grid of models is obtained piecewise by switching from $\tbin$ to $\tbout$ at the transition point $\thobs = 1.22 \thC$ where $\tbin = \tbout$.  That is:
+\begin{equation}
+	\tb = \begin{cases}
+			\tbin & \thobs < 1.22 \thC \\
+			\tbout & \thobs > 1.22 \thC
+		\end{cases} \ . \label{eq:tb}
+\end{equation}
 
 Figure \ref{fig:tb} also shows Equation \eqref{eq:tb} compared to the measured jet break times.  The on-axis relation $\tbin$ fits very well over the span of $\thC$ considered, with a mean fractional error of 0.053.  Over the full $\thC$ and $\thobs$ domain the mean fractional error is 0.17, with the largest contributions coming from wide jets (e.g. the upper curve, $\thC = 0.328$ rad, in Figure \ref{fig:tb}) at viewing angles $\thobs > 0.8$ rad.
 
@@ -731,19 +738,38 @@ Misaligned structured jets do not map as neatly onto energy injection models as 
 
 \section{Application: \gwbns{}}\label{sec:gw170817}
 
-We use the electromagnetic afterglow of \gwbns{} as an example application of both the analytic and numerical structured jet afterglow models, using the dataset from \citet{Troja:2019ab}. No new observations are presented in this paper.
+We use the electromagnetic afterglow of \gwbns{} as an example application of both the analytic and numerical structured jet afterglow models, using the dataset from \citet{Troja:2019ab} with additional \hubble{} observations reported in \citet{Lamb:2019aa}. No new observations are presented in this paper.
 
-Figure \ref{fig:cornerGaussian} (inset) shows the observations in radio, optical, and X-ray bands of the \gwbns{} afterglow.  No afterglow emission was detected until an X-ray detection by the Chandra observatory nine days after the GW trigger \cite{Troja:2017aa}.  Further radio, optical, and X-ray observations showed a steady rising light curve with constant power law slope until a peak near day 160.  At this point the light curve turned over and began a steep decay that continues to the present \citep{Troja:2019ab}.
+\begin{figure*}
+	\includegraphics[width=\textwidth]{figs/lc_170817A_Gaussian_map.pdf}
+	\caption{\label{fig:lc170817A}}
+\end{figure*}
+
+Figure \ref{fig:cornerGaussian} shows the observations in radio, optical, and X-ray bands of the \gwbns{} afterglow.  No afterglow emission was detected until an X-ray detection by the Chandra observatory nine days after the GW trigger \cite{Troja:2017aa}.  Further radio, optical, and X-ray observations showed a steady rising light curve with constant power law slope until a peak near day 164 \citep{Haggard:2017aa, Hallinan:2017aa, DAvanzo:2018aa,  Lyman:2018aa, Margutti:2018aa, Mooley:2018aa, Troja:2018aa, Troja:2019ab}.  At this point the light curve turned over and began a steep decay that continues to the present \citep{Alexander:2018aa, Fong:2019aa, Lamb:2019aa, Troja:2019ab}.
 
 Interpreting the afterglow as arising from a structured jet allows one to quickly draw the following conclusions:
 \begin{enumerate}
-	\item The spectral slope $\beta = 0.585$ (CITE, +uncertainties) throughout the entire evolution, identifying the relevant spectral regime as G: $\nu_m < \nuobs < \nu_c$, and $p = 2.17$.
-	\item The initial rising ($\alpha > 0$) light curve with declining spectrum ($\beta < 0$) identify this as a \emph{misaligned} evolution ($\thobs > \thC$).  Aligned jets may only have a rising light curve when viewed at frequencies below the peak frequency, that is when $\beta < 0$.
-	\item The rising light curve maintains $\alpha  = 0.90 \pm 0.06$ \citep{Troja:2019ab}.  Using the closure relations from Table \ref{tab:slopes} we can identify this as the \emph{structured} phase and determine $\geff = 7.5 \pm 0.4$.  If the light curve underwent an \emph{off-axis} phase, it concluded before the afterglow was detected: $\tW < 9$d.  The peak can be identified as the jet-break: $\tb = 164 \pm 12$ d.
-	\item In the context of a Gaussian jet, the measurement of $\geff$ leads immediately to $\thobs / \thC = 5.5 \pm 0.2$.
-	\item Using the Fong 2015 (CITE Fong 2015) fiducial values of $E_0 \sim 2\times 10^{51}$erg and $n_0 \sim 10^{-2}$cm$^{-3}$ we can use the jet break $\tb$ measurement to determine $\thobs \approx 0.5 \pm 0.2$ rad ($29^\circ \pm 12^\circ$), assuming 1 dex uncertainties on $E_0$ and $n_0$.    This is in agreement with the LIGO measurement $\thobs \approx 28^\circ \pm 15^\circ$ (assuming the SHoES $H_0$).
-	\item The combined measurements of $\thobs$ and $\thobs/\thC$ then imply $\thC \approx 0.09 \pm 0.04$ rad ($5^\circ  \pm 2^\circ$).
+	\item The spectral slope $\beta = 0.585 \pm 0.005$ throughout the entire evolution, identifying the relevant spectral regime as G: $\nu_m < \nuobs < \nu_c$, and $p = 2.17 \pm 0.01$ \citep{Troja:2019ab}.
+	\item The initial rising ($\alpha > 0$) light curve with declining spectrum ($\beta < 0$) immediately identify this as a \emph{misaligned} evolution ($\thobs > \thC$).  Aligned jets may only have a rising light curve when viewed at frequencies below the peak frequency, that is when $\beta < 0$.
+	\item The rising light curve maintains $\alpha  = 0.90 \pm 0.06$ \citep{Troja:2019ab}.  Using the closure relations from Table \ref{tab:slopes} we can identify this as the \emph{structured} phase and determine $\geff = 8.2 \pm 0.5$.  If the light curve underwent an \emph{far-off-axis} phase, it concluded before the afterglow was detected: $\tW < 9$d.  The peak can be identified as the jet-break: $\tb = 164 \pm 12$ d.
+	\item In the context of a Gaussian jet, the measurement of $\geff$ leads immediately to $\thobs / \thC = 5.7 \pm 0.2$ using Equation \eqref{eq:geff}.  A $b=2$ power law jet cannot achieve this $\geff$ for any reasonable value of $\thobs / \thC$.  A $b=6$ power law jet requires $\thobs/\thC = 14 \pm 1$.
 \end{enumerate}
+To go further we first need to assume a value for $E_0 / n_0$. For demonstration we use the \citet{Fong:2015aa} fiducial values of $E_0 \sim 2\times 10^{51}$erg and $n_0 \sim 10^{-2}$cm$^{-3}$, assuming 1 dex uncertainty on both parameters.
+\begin{enumerate}
+	\setcounter{enumi}{4}
+	\item We can use the jet break $\tb$ measurement to determine $\thobs + \thC$ using Equation \eqref{eq:tbout}. Using our assumed values for  $E_0$ and $n_0$ leads to $\thobs + \thC \approx 0.92 \pm 0.38$ rad ($53^\circ \pm 22^\circ$). This does not depend on the jet model.
+	\item For a Gaussian jet the combined measurements of $\thobs +\thC$ and $\thobs/\thC$ then imply $\thC \approx 0.14 \pm 0.06$ rad ($8.0^\circ  \pm 3.4^\circ$) and $\thobs \approx 0.78 \pm 0.32$ rad ($45^\circ \pm 18^\circ$).
+	\item For a $b=6$ power law jet we get $\thC \approx 0.063 \pm 0.026$ rad ($3.6^\circ  \pm 1.5^\circ$) and $\thobs \approx 0.86 \pm 0.35$ rad ($49^\circ \pm 20^\circ$).
+\end{enumerate}
+
+The relative weak dependence of $\tb$ on $E_0/n_0$ allows one to make estimates of $\thobs$ and $\thC$ even if $E_0$ and $n_0$ are only known to an order of magnitude.  
+
+
+%TODO FINISH THIS PARAGRAPH
+Analysis of the \gwbns{} gravitational wave signal produced estimates of the inclination angle $\iota$ between the binary neutron stars' orbital plane and our line of sight.
+
+
+This is in agreement with the LIGO measurement $\thobs \approx 28^\circ \pm 15^\circ$ (assuming the SHoES $H_0$).
 
 For a more detailed analysis we performed Bayesian parameter estimation utilizing \afterglowpy{} and the \emcee{} Markov chain Monte Carlo sampler \citep{Foreman-Mackey:2013aa}.  We used the light curve data reported in \citet{Troja:2019ab} with additional \hubble{} observations reported in \citet{Lamb:2019aa}. Reported measurement uncertainties were assumed to be independent and Gaussian, upper limits were treated as observations of zero flux with a 1-sigma Gaussian uncertainty. 
 
@@ -768,15 +794,6 @@ We fit both the Gaussian and power law structured jet models, fixing $\xi_N = 1$
 	\enddata
 \end{deluxetable*}
 
-\begin{figure*}
-	\includegraphics[width=\textwidth]{figs/cornerGaussian.png}
-	\caption{Views of the posterior parameter distribution for a Gaussian jet fit to the \gwbns{} afterglow.  The diagonal contains one-dimensional marginalized posteriors for each fit parameter, while the off-diagonal plots contain two-dimensional maps of the posterior marginalized over all but the two corresponding parameters. \label{fig:cornerGaussian}}
-\end{figure*}
-
-\begin{figure*}
-	\includegraphics[width=\textwidth]{figs/cornerPowerlaw.png}
-	\caption{Views of the posterior parameter distribution for a power law jet fit to the \gwbns{} afterglow.  The diagonal contains one-dimensional marginalized posteriors for each fit parameter, while the off-diagonal plots contain two-dimensional maps of the posterior marginalized over all but the two corresponding parameters. \label{fig:cornerPowerlaw}}
-\end{figure*}
 
 Figures \ref{fig:cornerGaussian} and \ref{fig:cornerPowerlaw} show the one- and two-dimensional marginalized views of the posterior distribution for the Gaussian. and power law jet model fits, respectively.  Table \ref{tab:MCMC} additionally gives constraints on the total jet energy \Etot{} and the ratio $\thobs/\thC$. The parameters $E_0$, $n_0$, $\epse$, and $\epsB$ are only constrained to within an order of magnitude, due partially to the observed radio, optical, and X-ray data all lying on the same synchrotron power-law segment.  These parameters are shared between jet models, and are broadly consistent between the two fits with the possible exception of $n_0$.  The electron energy index $p$ is extremely well constrained by both models, of course, due precisely to the large range of data laying on the same synchrotron segment.  The total jet energy in both models in constrained to be on the order $10^{51}$erg.
 
@@ -837,7 +854,7 @@ We also constructed a numerical model of the afterglows of structured jets, impl
 
 GR acknowledges the support from the University of Maryland through the Joint Space Science Institute Prize Postdoctoral Fellowship. LP acknowledges partial support from the agreement ASI-INAF n.2017-14-H.0. Analysis was performed on the YORP cluster administered by the Center for Theory and Computation, part of the Department of Astronomy at the University of Maryland.  GR thanks Cato Sandford for many useful discussions.
 
-\newpage
+% \newpage
 
 
 \appendix
@@ -1030,7 +1047,18 @@ Again, although formally $g = g(\psi)$ is time variable, it can often be regarde
 %		&\propto \left(1+z\right) \left(p-1\right)  n_0^{1/2} \epsB^{1/2} E(\theta)  \chi^{-2+\som} 
 %\end{align}
 
-\bibliography{structuredJets_sources}
+\section{GW170817A - Parameter Estimation Posteriors}\label{sec:corners}
 
+\begin{figure*}
+	\includegraphics[width=\textwidth]{figs/cornerGaussian.pdf}
+	\caption{Views of the posterior parameter distribution for a Gaussian jet fit to the \gwbns{} afterglow.  The diagonal contains one-dimensional marginalized posteriors for each fit parameter, while the off-diagonal plots contain two-dimensional maps of the posterior marginalized over all but the two corresponding parameters. \label{fig:cornerGaussian}}
+\end{figure*}
+
+\begin{figure*}
+	\includegraphics[width=\textwidth]{figs/cornerPowerlaw.pdf}
+	\caption{Views of the posterior parameter distribution for a power law jet fit to the \gwbns{} afterglow.  The diagonal contains one-dimensional marginalized posteriors for each fit parameter, while the off-diagonal plots contain two-dimensional maps of the posterior marginalized over all but the two corresponding parameters. \label{fig:cornerPowerlaw}}
+\end{figure*}
+
+\bibliography{structuredJets_sources}
 
 \end{document}

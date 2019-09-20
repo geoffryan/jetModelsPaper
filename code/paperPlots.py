@@ -11,9 +11,9 @@ import afterglowpy as grb
 sec2year = grb.sec2day / 365.25
 year2sec = grb.day2sec * 365.25
 
-labelsize = 12
-ticksize = 8
-legendsize = 12
+posterLabelsize = 12
+posterTicksize = 8
+posterLegendsize = 12
 
 
 def makeThVPlots():
@@ -117,7 +117,7 @@ def makeThVPlots():
     plt.close(fig)
 
 
-def makeCentralPlots(modelPlots=True):
+def makeCentralPlots(modelPlots=True, poster=True):
 
     thC = 0.1
     thW = 0.4
@@ -141,6 +141,15 @@ def makeCentralPlots(modelPlots=True):
     t = grb.day2sec * tday
     nu = 1.0e14 * np.ones(N)
     Flim = (1.0e-6, 1.0e1)
+
+    if poster:
+        labelsize = posterLabelsize
+        ticksize = posterTicksize
+        legendsize = posterLegendsize
+    else:
+        labelsize = None
+        ticksize = None
+        legendsize = None
 
     if modelPlots:
         thV = 0.5 * thC
@@ -256,7 +265,7 @@ def makeCentralPlots(modelPlots=True):
     save(fig, figname)
     plt.close(fig)
 
-    fig = plt.figure(figsize=(4, 3))
+    fig = plt.figure()
     lbuff = 0.16
     bbuff = 0.16
     rbuff = 0.15
@@ -311,7 +320,7 @@ def makeCentralPlots(modelPlots=True):
     ax.plot(tday, FnuG, color='grey', lw=2)
     ax.set_xscale('log')
     ax.set_yscale('log')
-    ax.set_xlim(1.0e-2, 1.0e3)
+    ax.set_xlim(3.0e-2, 1.0e3)
     ax.set_ylim(1.0e-7, 1.0e-2)
     ax.set_xlabel(r'$t$ (days)', fontsize=labelsize)
     ax.set_ylabel(r'$F_\nu$ (mJy)', fontsize=labelsize)
@@ -1595,10 +1604,10 @@ def save(fig, name):
 if __name__ == "__main__":
 
     # makeThVPlots()
-    # makeCentralPlots(modelPlots=True)
+    makeCentralPlots(modelPlots=False, poster=False)
     # makeConvergencePlots()
     # makeRegimePlots()
     # makeNormalizationPlots('E', 4)
     # makeNumAnaCompPlots('E', 4)
     # makeCharEvolPlots()
-    makeAnalyticTestPlots()
+    # makeAnalyticTestPlots()

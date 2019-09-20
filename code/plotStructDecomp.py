@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import grbpy as grb
+import afterglowpy as grb
 
 
 jetType = 0
@@ -40,16 +40,16 @@ for i in range(Nth):
     Y[1] = E
     Y[2] = thin
     Y[3] = thout
-    FnuR[i,:] = grb.fluxDensity(t, nu, -2, 0, *Y)
+    FnuR[i, :] = grb.fluxDensity(t, nu, -2, 0, *Y)
 
-fig, ax =  plt.subplots(1,1)
+fig, ax = plt.subplots(1, 1)
 for i in range(Nth):
     ax.plot(t, FnuR[i])
 ax.plot(t, Fnu, color='k')
 ax.set_xscale('log')
 ax.set_yscale('log')
 ax.set_xlabel(r'$t$ (s)')
-ax.set_ylabel(r'$F_{\nu}$ (erg/cm$^2$s Hz)')
+ax.set_ylabel(r'$F_{\nu}$ (mJy)')
 
 ax.set_ylim(1.0e-12, None)
 

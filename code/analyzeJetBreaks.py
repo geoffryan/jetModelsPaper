@@ -169,6 +169,8 @@ if __name__ == "__main__":
            * np.power(thCs, -8.0/3.0)).mean() / 3.0)
 
     tau_theo = np.power(chi, 8.0/3.0)
+    tb_lim_min = 1.0e-4
+    tb_lim_max = 1.0
 
     figOnA, axOnA = plt.subplots(1, 1)
     axOnA.plot(thCs, tau_theo[:, 0],
@@ -191,16 +193,26 @@ if __name__ == "__main__":
     axOnA.set_xlabel(r'$\theta_{\mathrm{c}}$ (rad)')
     axOnA.set_ylabel(r'$t_{\mathrm{b}} / t_{\mathrm{NR}}$')
 
+    axOnA.set_xticks([0.04, 0.1, 0.4])
+    axOnA.set_xticklabels([r'$4\times 10^{-2}$', r'$10^{-1}$',
+                           r'$4\times 10^{-1}$'])
+
+    axOnA.set_ylim(tb_lim_min, tb_lim_max)
+
     figOnA.tight_layout()
     name = "jetbreak_OnAxis.pdf"
     print("Saving " + name)
     figOnA.savefig(name)
 
+    textProps = {'horizontalalignment': 'left',
+                 'verticalalignment': 'bottom',
+                 'fontsize': 8}
+
     figOffA, axOffA = plt.subplots(1, 1)
     for i in range(len(thCs))[::4]:
         thC = thCs[i]
         print("Off-Axis thetaC = {0:.4f}".format(thC))
-        if i == -1:
+        if i == 0:
             labelA = r'Analytic'
             labelG = r'Gaussian Jet'
             labelPL2 = r'Power Law Jet $b=2$'
@@ -221,11 +233,26 @@ if __name__ == "__main__":
         axOffA.plot(thVs, tau_pl6[i, :], ls=':', color='tab:red',
                     label=labelPL6)
 
-        """
-        axOffA.text(0.0, np.power(chi[i, 0], 8.0/3.0),
+        xloc = -0.04
+        yloc = tau_theo[i, 0]
+
+        if i == 0:
+            # xloc = 0.07
+            yloc /= 1.2
+            textProps['horizontalalignment'] = 'left'
+            textProps['verticalalignment'] = 'top'
+        elif i == 4:
+            yloc /= 1.4
+            textProps['horizontalalignment'] = 'left'
+            textProps['verticalalignment'] = 'top'
+        elif i == 8:
+            yloc *= 1.1
+            textProps['horizontalalignment'] = 'left'
+            textProps['verticalalignment'] = 'bottom'
+
+        axOffA.text(xloc, yloc,
                     r"$\theta_{{\mathrm{{c}}}} = {0:.2f}$ rad".format(thC),
-                    horizontalalignment='left', verticalalignment='bottom')
-        """
+                    **textProps)
 
     fracDiff_g = np.fabs((tau_g - tau_theo) / tau_theo)
     fracDiff_pl2 = np.fabs((tau_pl2 - tau_theo) / tau_theo)
@@ -272,9 +299,11 @@ if __name__ == "__main__":
     axOffA.set_xlabel(r'$\theta_{\mathrm{obs}}$ (rad)')
     axOffA.set_ylabel(r'$t_{\mathrm{b}} / t_{\mathrm{NR}}$')
 
+    axOffA.set_ylim(tb_lim_min, tb_lim_max)
+
     figOffA.tight_layout()
     name = "jetbreak_OffAxis.pdf"
     print("Saving " + name)
     figOffA.savefig(name)
 
-    plt.show()
+    # plt.show()
