@@ -86,6 +86,10 @@ Eon = 20.0/10.0
 # Eon = 30
 elEon = math.sqrt(2) * 1.0
 
+# GW170817 fits
+Eon = math.pow(10.0, 2.6)
+elEon = 1.0
+
 p = 1-2*be
 ep = 2*ebe
 

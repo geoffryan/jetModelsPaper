@@ -274,6 +274,12 @@
 \bibitem[{{Rhoads}(1999)}]{Rhoads:1999aa}
 {Rhoads}, J.~E. 1999, \apj, 525, 737, \dodoi{10.1086/307907}
 
+\bibitem[{{Riess} {et~al.}(2016){Riess}, {Macri}, {Hoffmann}, {Scolnic},
+  {Casertano}, {Filippenko}, {Tucker}, {Reid}, {Jones}, {Silverman},
+  {Chornock}, {Challis}, {Yuan}, {Brown}, \& {Foley}}]{Riess:2016aa}
+{Riess}, A.~G., {Macri}, L.~M., {Hoffmann}, S.~L., {et~al.} 2016, \apj, 826,
+  56, \dodoi{10.3847/0004-637X/826/1/56}
+
 \bibitem[{{Rossi} {et~al.}(2002){Rossi}, {Lazzati}, \& {Rees}}]{Rossi:2002aa}
 {Rossi}, E., {Lazzati}, D., \& {Rees}, M.~J. 2002, \mnras, 332, 945,
   \dodoi{10.1046/j.1365-8711.2002.05363.x}
