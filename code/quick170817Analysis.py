@@ -31,7 +31,7 @@ def th2g_pl(thVoC, b):
 
 
 def tb2thp(tb, Eon):
-    thVpC = 0.3 * np.power(tb/6.54, 0.375) * np.power(Eon, -0.125)
+    thVpC = 0.5 * np.power(tb/24.9, 0.375) * np.power(Eon, -0.125)
     return thVpC
 
 
@@ -46,13 +46,13 @@ def tb2ethp(tb, Eon, etb, elEon):
 
 
 def po2C(thVpC, thVoC):
-    thC = thVpC / (1+thVoC)
+    thC = thVpC / (1.24+thVoC)
     return thC
 
 
 def po2eC(thVpC, thVoC, ethVpC, ethVoC):
-    dCdp = 1.0 / (1+thVoC)
-    dCdo = -thVpC / (1+thVoC)**2
+    dCdp = 1.0 / (1.24+thVoC)
+    dCdo = -thVpC / (1.24+thVoC)**2
 
     ethC = np.sqrt((dCdp*ethVpC)**2 + (dCdo*ethVoC)**2)
 
@@ -60,13 +60,13 @@ def po2eC(thVpC, thVoC, ethVpC, ethVoC):
 
 
 def po2V(thVpC, thVoC):
-    thC = thVpC * thVoC / (1+thVoC)
-    return thC
+    thV = thVpC * thVoC / (1.24+thVoC)
+    return thV
 
 
 def po2eV(thVpC, thVoC, ethVpC, ethVoC):
-    dVdp = thVoC / (1+thVoC)
-    dVdo = thVpC / (1+thVoC)**2
+    dVdp = thVoC / (1.24+thVoC)
+    dVdo = 1.24*thVpC / (1.24+thVoC)**2
 
     ethV = np.sqrt((dVdp*ethVpC)**2 + (dVdo*ethVoC)**2)
 
@@ -83,12 +83,11 @@ tb = 164
 etb = 12
 
 Eon = 20.0/10.0
-# Eon = 30
 elEon = math.sqrt(2) * 1.0
 
 # GW170817 fits
-Eon = math.pow(10.0, 2.6)
-elEon = 1.0
+# Eon = math.pow(10.0, 2.6)
+# elEon = 1.0
 
 p = 1-2*be
 ep = 2*ebe
@@ -145,11 +144,15 @@ for i, b in enumerate(bs):
     print("thV/thC (PL {0:.1f}) = {1:.3f} +/- {2:.3f}".format(b, thVoC_pl[i],
           ethVoC_pl[i]))
 
-print("thV (Gaussian) = {0:.3f} +/- {1:.3f} rad".format(thV_g, ethV_g))
+print("thV (Gaussian) = {0:.3f} +/- {1:.3f} rad ({2:.3f} +/- {3:.3f} deg)".
+      format(thV_g, ethV_g, thV_g*180/np.pi, ethV_g*180/np.pi))
 for i, b in enumerate(bs):
-    print("thV (PL {0:.1f}) = {1:.3f} +/- {2:.3f}".format(b, thV_pl[i],
-          ethV_pl[i]))
-print("thC (Gaussian) = {0:.3f} +/- {1:.3f} rad".format(thC_g, ethC_g))
+    print("thV (PL {0:.1f}) = {1:.3f} +/- {2:.3f} ({3:.3f} +/- {4:.3f} deg)"
+          .format(b, thV_pl[i], ethV_pl[i],
+                  thV_pl[i]*180/np.pi, ethV_pl[i]*180/np.pi))
+print("thC (Gaussian) = {0:.3f} +/- {1:.3f} rad ({2:.3f} +/- {3:.3f} deg)"
+      .format(thC_g, ethC_g, thC_g*180/np.pi, ethC_g*180/np.pi))
 for i, b in enumerate(bs):
-    print("thC (PL {0:.1f}) = {1:.3f} +/- {2:.3f}".format(b, thC_pl[i],
-          ethC_pl[i]))
+    print("thC (PL {0:.1f}) = {1:.3f} +/- {2:.3f} ({3:.3f} +/- {4:.3f} deg)"
+          .format(b, thC_pl[i], ethC_pl[i],
+                  thC_pl[i]*180/np.pi, ethC_pl[i]*180/np.pi))

@@ -1,27 +1,43 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import paperPlots as pp
 
 
 def calc_gG(thV, thC):
 
-    return 0.25*thV*thV/(thC*thC)
-
-
-def calc_gPL(thV, thC, b):
-
-    th = 0.2*thV + 2.0*thC/3.0
-
-    g = (thV-th) * b * th / (thC*thC + th*th)
+    athV = np.atleast_1d(thV)
+    g = np.empty(athV.shape)
+    for i in range(len(g)):
+        Y = np.empty(5)
+        Y[0] = athV[i]
+        Y[2] = thC
+        Y[3] = 20*thC
+        g[i] = pp.calcGEff(0, Y)
 
     return g
 
 
-x = np.linspace(0.0, 10.0, 300)
+def calc_gPL(thV, thC, b):
+
+    athV = np.atleast_1d(thV)
+    g = np.empty(athV.shape)
+    for i in range(len(g)):
+        Y = np.empty(5)
+        Y[0] = athV[i]
+        Y[2] = thC
+        Y[3] = 20*thC
+        Y[4] = b
+        g[i] = pp.calcGEff(4, Y)
+
+    return g
+
+
+x = np.linspace(0.0, 15.0, 300)
 
 gG = calc_gG(x, 1.0)
 gPL2 = calc_gPL(x, 1.0, 2)
-gPL4 = calc_gPL(x, 1.0, 4)
 gPL6 = calc_gPL(x, 1.0, 6)
+gPL9 = calc_gPL(x, 1.0, 9)
 
 p = 2.17
 al = 0.9
@@ -39,18 +55,15 @@ dg = np.fabs(dgda) * dal
 print("al = {0:.3f} +/- {1:.3f}".format(al, dal))
 print("g  = {0:.3f} +/- {1:.3f}".format(g, dg))
 
-lw = 3.0
-fontsize = 24
-ticksize = 18
-legendsize = 18
+lw = 1.5
 """
 fig, ax = plt.subplots(1, 1, figsize=(8, 6))
 """
 fig, ax = plt.subplots(1, 1)
-ax.plot(x, gG, lw=lw, label=r'Gaussian')
-ax.plot(x, gPL2, lw=lw, label=r'Power Law $b=2$')
-ax.plot(x, gPL4, lw=lw, label=r'Power Law $b=4$')
-ax.plot(x, gPL6, lw=lw, label=r'Power Law $b=6$')
+ax.plot(x, gG, lw=lw,   ls='-', color='C2', label=r'Gaussian')
+ax.plot(x, gPL2, lw=lw, ls='-.', color='C1', label=r'PL $b=2$')
+ax.plot(x, gPL6, lw=lw, ls=':', color='C3', label=r'PL $b=6$')
+ax.plot(x, gPL9, lw=lw, ls='--', color='C0', label=r'PL $b=9$')
 
 ax.fill_between(x, g-dg, g+dg, color='lightgrey', label='GW170817')
 
