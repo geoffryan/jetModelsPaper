@@ -4,8 +4,15 @@ structuredJets_sources.bib
 *.synctex.gz
 *.aux
 *.blg
-code/*.pdf
-code/*.png
+code/*
+*.tar.gz
+comments/
+*_backup*
+*.mp
+*.tmp
+*.tui
+toArxiv
+toApj
 
 .DS_Store
 *.swp
