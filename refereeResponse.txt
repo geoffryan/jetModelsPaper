@@ -1,0 +1,126 @@
+We thank the referee for their thoughtful report and comments. They highlighted several areas where the text was not clear, the revised manuscript is much improved.  Our responses to the referee's comments are below, with the associated changes to the text.
+
+
+
+
+1. My main concern is the Lorentz factor profile which is currently modeled. Right now, it is assumed that the fluid elements at higher latitudes would contribute to the observed emission along the line of sight when their Lorentz factor becomes the same as that along the line of sight. This is not necessarily the case in reality. In my mind, different fluid elements along different polar angles may evolve differently, and the observed emission is roughly from a smaller 1/\gamma half cone near the polar region and a larger 1/\gamma half cone from the wing region. I suppose when such a detailed modeling is included, the lightcurves would be different for different \Gamma(\theta) profiles even if the E(\theta) and \theta_{obs} are the same. The authors should emphasize this issue throughout the paper (including in the abstract and conclusions), especially when closure relations are presented, so that future users can keep this caveat in mind when they apply the relations.
+
+--
+
+The referee is correct: fluid elements at different latitudes evolve differently, and the emitting region is asymmetric due to the differing Lorentz factors (as well as time-of-flights for the emitted photons) along the latitudinal direction.  However, these effects are already accounted for in our numerical model (afterglowpy).  Each annular section of the jet evolves independently, with its own Lorentz factor dependent on its initial energy.  We then integrate over all sections, taking into account doppler factors and time-of-flight, to arrive at a final flux.
+
+We do not assume "fluid elements at higher latitudes would contribute to the observed emission along the line of sight when their Lorentz factor becomes the same as that along the line of sight".  In our numerical model we integrate over the entire jet surface, relativistic doppler factors naturally and appropriately reduce the contribution of sections which are beamed away from the observer.  In our analytic modeling, we assume regions whose beaming cone includes the observer contribute to the flux, but the flux is dominated by the brightest of these regions.  The brightest region will be that with the highest Lorentz factor, which will be located closest to the jet core.  This will be the case so long as E(theta) is a decreasing function of theta.
+
+Once each section of the jet begins decelerating, the initial Lorentz factor profile gamma(theta) becomes less important.  An ultra relativistic, adiabatic, decelerating blast wave obeys E \propto R^3 \gamma^2, hence \gamma \propto E^{1/2} R{-3/2}.  Given an initial profile E(\theta), the profile \gamma(\theta) in the deceleration regime is fixed.  This is true for trans-relativistic blast waves too, although the particular form of the relation \gamma ~ E,R relation will change.  The initial \gamma(\theta) plays an important role in the early evolution of the blast wave and its observed light curve, but is forgotten as more of the jet begins deceleration.
+
+We have added remarks clarifying the role of the Lorentz factor profile and its treatment throughout the text.
+
+-- added "decelerating" to the description of the jets under consideration in the abstract.
+
+-- added Section 2.1: To clarify the role of the Lorentz factor profile, and justify our focus on the energy profile) we expanded the last paragraph of section 2 into a new section 2.1.
+
+-- moved start of Section 3.1 two paragraphs down, appended "Top-Hat Case" to the name
+
+-- added new Section 3.2 detailing how top-hat sections are integrated into a structured jet light curve, emphasizing the non-trivial profile of shock radius and velocity (e.g. Lorentz factor)
+
+-- added two sentences in the "Coasting" paragraph of Section 4.1 noting that we do not model the initial Lorentz factor profile and so may miss some phenomenology in the transition to the later phases of evolution.
+
+-- expanded the explanation of the "structured" phase in Section 4.1 to emphasize the role of the Lorentz factor and the asymmetric shape of the emitting region.
+
+-- Amended the captions of Table 1 and Figure 3 to denote these apply only when the jet is decelerating.
+
+-- Added a sentence to the summary emphasizing the results are only appropriate for decelerating jets.
+
+
+
+
+2. I understand that the authors introduced s_\Omega to partially account for the uncertainty of E(\theta) effect and probably \Gamma(\theta) effect as well. However, I do not understand why the typical value is s_\Omega = 1. I understand that the opening angle scales as 1/\gamma_*. However, the solid angle should carry the dimension of (1/\gamma_*)^2, so that s_\Omega should be approximately 2 to me.
+
+--
+
+s_\Omega is certainly equal to 2 in a standard afterglow when the emitting surface has a (mostly) uniform Lorentz factor.  In the structured phase, we can think of the solid angle as being the product of two parts:  \Delta Phi and \Delta \Theta.  In the azimuthal direction (a line of constant theta), the Lorentz factor is uniform and so \Delta \Phi \propto 1 / \gamma_*  as expected.  In the polar direction (a line of constant phi), however, the situation is not as simple.  We consider a point theta_* on the jet which is the centroid of emission.  If dE/d\theta (or equivalently d\gamma/d\theta) is sufficiently large, then material at theta_* - 1/gamma_* (towards the core) will have substantially larger Lorentz factor and be beamed away from the observer.  Material at \theta_* + 1/gamma_* (away from the core) will have substantially lower Lorentz factor and be subdominant to the emission.  Therefore \Delta \theta can not equal 1/\gamma_*.  In this case it is dE/d\theta which controls the visible solid angle in the polar direction, not \gamma_*.  The solid angle depends on the Lorentz factor like 1/gamma_* and s_\Omega = 1.
+
+In detail s_\Omega will smoothly transition between 2 (in the standard afterglow) 1 (during a structured phase) and 0 (after the jet break).  The detailed evolution depends on the particular energy profile and parameters, but in our explorations (as shown in Figs 3 and 7) s_\Omega = 1 is a good approximation for the bulk behaviour during the structured phase.
+
+Our expanded discussion of the structured phase in Section 4.1 goes into more detail about the shape of the emitting region and why s_\Omega can equal 1.
+
+
+
+
+3. When numerical models reach accuracy better than 10^{-4}, one should avoid introducing physical inaccuracy larger than 10^{-4}. I don't know what is the inaccuracy introduced by the crude treatment of synchrotron radiation, but another source of inaccuracy could originate from the equation of state. According to Eqs.(5) and (6), the adiabatic index \hat\gamma is adopted as 3/4. This is the extreme value for a relativistic fluid. The approximation may not be good for large viewing angles at late times (as is the case for modeling GRB 170817A). If one writes \hat\gamma = (4 \bar\gamma _ 1) / 3 \bar\gamma (\bar\gamma is the average Lorentz factor of shocked protons), one can naturally transit from the relativistic regime (4/3) to the non-relativistic regime (5/3). The formulae also appear more elegant. I suggest the authors adopt such a more precise treatment to match the 10^{-4} numerical accuracy. See e.g.
+https://ui.adsabs.harvard.edu/abs/2003ApJ...591.1075K/abstract
+https://ui.adsabs.harvard.edu/abs/2011ApJ...733...86U/abstract
+
+-- 
+
+The referee is mistaken about our equation of state. Equations 5 and 6, as well as all of afterglowpy, are computed using the TM equation of state of Mignone, Plewa, and Bodo 2005 which smoothly interpolates between ultra-relativistic (4/3) and non-relativistic (5/3) adiabatic indices.  This is the same EoS used by the referees ' suggested paper Uhm 2011. 
+
+We note for a structured jet the accuracy of our numerical scheme is closer to 10^{-2} than 10^{-4}, as stated at the end of Section 3.3. We do not claim the overall accuracy of the method is at either of these levels, merely the numerical accuracy of the physics we include.  The comparison to BoxFit in section 3.4 is a better (though still not perfect, given BoxFit's similar synchrotron model) measure of our overall accuracy, which is seen to be nearer ~ few * 10^{-1}.  
+
+We amended the manuscript to make the choice of equation of state, and its reasons for selection, much more clear.
+
+-- Added several sentences to the second paragraph of section 3.1, providing more explicit details about the equation of state, incorporating the latter reference suggested by the referee, and more references found within.
+
+
+
+
+4. I don't understand why the authors introduce a truncated angle \theta_w for Gaussian jets. It is essentially impossible in reality. Also for GRB 170817A, it seems that the typical viewing angle is greater than \theta_w. If this is the case, one should not expect to have relativistic ejecta along the line of sight in the early phase. This is apparently in contradiction with the prompt emission data, which require a relativistic outflow along the line of sight.
+
+--
+
+The truncation angle \theta_w serves two purposes.  Firstly is to do with numerical efficiency: high latitude wings of the jet have a negligible contribution to the flux (except at very early times) compared to the jet core but require a similar amount of computational time.  Excising these parts of the jet allows for quicker evaluations and the possibility of doing MCMC-type analyses which require many light curves be generated.  Secondly there are simulations, like the Aloy 2005 or Xie/Margutti 2018 works, which do show a very steep energy profile at some large angle. Truncating at theta_w is more extreme than what these simulations show, but is a rough approximation for a tightly collimated jet with structured interior.  Ultimately we find no harm in including theta_w as an optional parameter, any particular application may set it sufficiently high as to be ignorable if it wishes.
+
+We do not yet know the precise origin of the prompt emission in GRB 170817A. It need not have originated from material directly in our line of sight. Both Matsumoto+ 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.483.1247M/abstract) and Ioka+ 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.4884I/abstract) consider the prompt emission in a structured jet scenario and find solutions where the prompt emission is emitted several degrees off the line-of-sight from material with a moderate Lorentz factor.  This is analogous to the structured afterglow case where the emission can be dominated by material at intermediate angles between the line of sight and jet axis.
+
+In our fit to the 170817 afterglow we keep theta_w as a free parameter to remain agnostic about its true value.  As seen in Table 3 and Figure 12, the fit really does not constrain theta_w too much. The median value (0.47) is in fact greater than the median viewing angle (0.40), but there are numerous solutions where the hierarchy is reversed. We agree that taking the prompt emission into account would likely require a larger theta_w than the afterglow alone, but this would depend on the details of the prompt emission model and is out of scope for the current work.
+
+
+This is an important point which was not discussed in the original manuscript, we have added discussion about theta_w and the prompt emission to Section 5.
+
+
+-- Added a paragraph concerning theta_w and the choice of permissive prior in light of the prompt emission to Section 5.
+
+
+
+
+5. Why didn't the authors consider synchrotron self-absorption? For GRB 170817A, the current modeling is adequate, but maybe in the future one needs to consider \nu_a when modeling off-axis jets.
+
+--
+
+Synchrotron self-absorption is an important process and certainly due a similar analysis in light of off-axis viewing and jet structure.  A proper treatment of self-absorption is complicated, particularly in off-axis viewing when much of the emitting region is at an oblique angle to the observer and near portions of the jet may shadow distant portions.  This adds significant difficulty to both the numeric and analytic understanding of the afterglow in these regimes.
+
+We saw our development of the theory at frequencies above \nu_a to be sufficient for this particular manuscript. Incorporating frequencies below \nu_a will require more care, which we hope to present in future work.
+
+
+
+
+6. The description of the early history of the structured jet model may be revised: Lipunov et al. was talking about "standard energy" and a three-component jet model. Rossi et al. proposed b=2 power law "universal" model. Zhang & Meszaros proposed "quasi-universal" (jet structures can differ somewhat among bursts) models that include both power laws and Gaussian. Nakar et al's test was strictly for the universal b=2 power law structured jet model. The model does not work even without their test: the observed E_iso - \theta_j relation is not a strict E_iso \propto \theta_j^{-2} relation (and the beaming-corrected energy is not strictly constant). In fact, the quasi-universal models, especially the quasi-universal Gaussian jet model works well for long GRBs and probably for short GRBs as well. See early tests of these models for long GRBs:
+https://ui.adsabs.harvard.edu/abs/2004ApJ...601L.119Z/abstract
+https://ui.adsabs.harvard.edu/abs/2005ApJ...621..875D/abstract
+These facts may be clarified in the introduction.
+
+--
+
+We thank the referee for clearing up the history of the subject, and have amended the introduction as necessary.
+
+-- Expanded discussion and added references concerning history of structured jets in paragraphs 5 and 6 of Section 1.
+
+
+7. Figure 1 presented some structured jet models from numerical simulations. Figure 4 of this paper
+https://ui.adsabs.harvard.edu/abs/2019ApJ...877L..40G/abstract
+provide more structures. In particular, the shape of E(\theta) depends on the waiting time before the jet is launched. For a delayed launch, one has essentially a two-component jet structure (jet + cocoon). For a prompt launch (negligible delay), the jet penetrates through the ejecta quickly and develop a structured jet outside the ejecta. The jet structure is one-component, similar to the Gaussian profile promoted in this paper. This may be discussed in the paper.
+
+
+
+
+-- Added a sentence to the end of the fourth-to-last paragraph of Section 5 explaining the origin of the constraining power on theta_obs and theta_c.
+
+-- Added a paragraph to section 6.1 discussing the role of gravitational wave data in constraining theta_obs and theta_c.
+
+
+
+
+
+
+
+

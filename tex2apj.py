@@ -1,6 +1,7 @@
 import errno
 import os
 import sys
+import subprocess
 
 
 def apjify(inName, outDir):
@@ -12,7 +13,7 @@ def apjify(inName, outDir):
     inDir, name = os.path.split(inName)
 
     if inDir == '':
-        inDir = os.getcwd()
+        inDir = '.'
 
     if os.path.exists(outDir):
         if not os.path.isdir(outDir):
@@ -26,37 +27,103 @@ def apjify(inName, outDir):
             .format(outDir, inName)
         raise RuntimeError(msg)
 
-    outName = os.path.join(outDir, name)
-
     with open(inName, 'r') as f:
-        inTxt = f.readlines()
+        inTxt = f.read()
     f.close()
 
+    filelist = getFigFilenames(inTxt)
+    trans = makeTranslator(filelist)
+
+    process(inTxt, trans, inDir, outDir, name)
+
+
+def process(inTxt, trans, inDir, outDir, texName):
+
+    outName = os.path.join(outDir, texName)
+
+    # Make text with replaced figure names
+    outTxt = inTxt
+    for name in trans:
+        outTxt = outTxt.replace(name, trans[name])
+
+    # Write the new file
     with open(outName, 'w') as f:
-        parseTex(inTxt, f, inDir, outDir)
+        f.write(outTxt)
     f.close()
 
+    # Copy the figure files
+    for name in trans:
+        figpath = os.path.join(inDir, name)
+        newfigpath = os.path.join(outDir, trans[name])
+        print("Copy {0:s} to {1:s}".format(figpath, newfigpath))
+        subprocess.run(["cp", figpath, newfigpath])
 
-def parseTex(src, f, inDir, outDir):
+
+def getFigFilenames(src):
 
     inFig = False
-    inSubFig = False
-    fignum = 0
-    subfignum = 0
 
-    beginFig = '\\begin{figure'
-    endFig = '\\end{figure'
+    beginFig = r'\begin{figure'
+    endFig = r'\end{figure'
+    figDir = 'figs/'
 
-    for line in src:
+    filelist = []
+    filenames = []
 
-        # Deal with comments
+    for i, line in enumerate(src.split('\n')):
+
+        # Trim comments
         lineout = line.split('%')[0]
         if lineout == '':
             continue
-        if lineout[-1] != '\n':
-            lineout += '\n'
 
-        f.write(lineout)
+        # Look for figure filenames
+        if inFig:
+            if endFig in lineout:
+                filelist.append(filenames)
+                inFig = False
+            else:
+                matches = findFilenamesInLine(line, figDir)
+                filenames.extend(matches)
+        else:
+            if beginFig in lineout:
+                filenames = []
+                inFig = True
+
+    return filelist
+
+
+def findFilenamesInLine(line, figDir):
+
+    start = 0
+    matches = []
+    while figDir in line[start:]:
+        a = line.find(figDir, start)
+        b = line.find('}', a)
+        match = ''.join(line[a:b].split())
+        matches.append(match)
+        start = b
+
+    return matches
+
+
+def makeTranslator(fileList):
+
+    trans = {}
+
+    subfiglabel = 'abcdefghijklmnopqrstuvwxyz'
+
+    for i, names in enumerate(fileList):
+        if len(names) == 1:
+            _, ext = os.path.splitext(names[0])
+            trans[names[0]] = "fig{0:d}{1:s}".format(i+1, ext)
+        elif len(names) > 1:
+            for j, name in enumerate(names):
+                _, ext = os.path.splitext(name)
+                trans[name] = "fig{0:d}{1:s}{2:s}".format(i+1, subfiglabel[j],
+                                                          ext)
+
+    return trans
 
 
 if __name__ == "__main__":

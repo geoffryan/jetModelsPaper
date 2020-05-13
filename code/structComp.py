@@ -304,6 +304,22 @@ def aloy2005(theta):
     return g, E
 
 
+def geng2019(theta):
+
+    # data is E_iso
+
+    filenameE = "StructureData/Geng_Etheta_dt0p1.csv"
+    thEp, Ep = np.loadtxt(filenameE, unpack=True, delimiter=',')
+    
+    thEp *= np.pi/180.0
+
+    g = np.zeros(theta.shape)
+    E = np.interp(theta, thEp, Ep, right=0.0)
+
+    return g, E
+
+
+
 if __name__ == "__main__":
 
     print("begin")
@@ -329,6 +345,7 @@ if __name__ == "__main__":
     gM09, EM09 = mizuta2009(theta)
     gL17, EL17 = lazzati2017(theta)
     gA05, EA05 = aloy2005(theta)
+    gG19, EG19 = geng2019(theta)
 
     print("Plotting")
     fig, ax = plt.subplots(2, 1, figsize=(8, 8))
@@ -552,11 +569,13 @@ if __name__ == "__main__":
     #           color=clr[4], ls=ls[0])
     # axEc.plot(theta*deg, EM07p2, label="Morsony 2007 powg2",
     #           color=clr[4], ls=ls[1])
+    axEc.plot(theta*deg, EG19*plNorm/(2*EG19[0]), label="Geng 2019",
+              color=clr[7], ls=ls[0])
 
     axEc.legend(loc='upper right', fontsize=8)
 
     axEc.set_xlabel(r'$\theta$ (degrees)')
-    axEc.set_ylabel(r'$E_{{\rm{iso}}}$ (arbitrary units)')
+    axEc.set_ylabel(r'$E_{{\rm{iso}}}(\theta)$ (arbitrary units)')
     axEc.set_yscale('log')
     axEc.set_ylim(1.0e-3, 1.0e1)
     axEc.set_xlim(0.0, 30.0)

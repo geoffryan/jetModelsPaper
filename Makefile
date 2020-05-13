@@ -7,8 +7,14 @@ BIB = $(DOC)_sources.bib
 FIGDIR = figs
 CLS = aastex62.cls
 
+APJTOOL = python3 tex2apj.py
+TAR = COPYFILE_DISABLE=1 tar
+
 ARXDIR = toArxiv
 ARX = toArxiv.tar.gz
+
+APJDIR = toApj
+APJ = toApj.tar.gz
 
 .PHONY: clean bbl pdf arxiv apj
 
@@ -20,7 +26,10 @@ pdf: $(PDF)
 
 arxiv: $(ARX)
 
+apj: $(APJ)
+
 $(PDF): $(TEX) $(BBL)
+	pdflatex $(TEX)
 	pdflatex $(TEX)
 	pdflatex $(TEX)
 
@@ -37,13 +46,20 @@ $(ARX): $(TEX) $(BBL) $(CLS)
 	cp $(BBL) $(ARXDIR)
 	cp $(CLS) $(ARXDIR)
 	cp -r $(FIGDIR) $(ARXDIR)
-	tar -czvf $(ARX) $(ARXDIR) 
+	$(TAR) -czvf $(ARX) $(ARXDIR) 
 
-apj:
-	grep -E "(?<=figs).*" $(TEX)
+$(APJ): $(TEX) $(BBL) $(CLS) $(PDF)
+	rm -f $(APJ)
+	rm -rf $(APJDIR)
+	$(APJTOOL) $(TEX) $(APJDIR)
+	cp $(PDF) $(APJDIR)
+	cp $(BBL) $(APJDIR)
+	cp $(CLS) $(APJDIR)
+	$(TAR) -czvf $(APJ) $(APJDIR) 
 
 clean:
 	rm -rf $(ARXDIR)
-	rm -f $(PDF) $(BBL) $(ARX)
+	rm -rf $(APJDIR)
+	rm -f $(PDF) $(BBL) $(ARX) $(APJ)
 
 

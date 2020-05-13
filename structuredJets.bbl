@@ -32,6 +32,12 @@
 {Aloy}, M.~A., {Janka}, H.-T., \& {M{\"u}ller}, E. 2005, \aap, 436, 273,
   \dodoi{10.1051/0004-6361:20041865}
 
+\bibitem[{{Beniamini} {et~al.}(2020){Beniamini}, {Granot}, \&
+  {Gill}}]{Beniamini:2020ab}
+{Beniamini}, P., {Granot}, J., \& {Gill}, R. 2020, arXiv e-prints,
+  arXiv:2001.02239.
+\newblock \doarXiv{2001.02239}
+
 \bibitem[{{Blandford} \& {McKee}(1976)}]{Blandford:1976aa}
 {Blandford}, R.~D., \& {McKee}, C.~F. 1976, Physics of Fluids, 19, 1130,
   \dodoi{10.1063/1.861619}
@@ -39,6 +45,9 @@
 \bibitem[{{Corsi} \& {Piro}(2006)}]{Corsi:2006aa}
 {Corsi}, A., \& {Piro}, L. 2006, \aap, 458, 741,
   \dodoi{10.1051/0004-6361:20065280}
+
+\bibitem[{{Dai} \& {Zhang}(2005)}]{Dai:2005aa}
+{Dai}, X., \& {Zhang}, B. 2005, \apj, 621, 875, \dodoi{10.1086/427680}
 
 \bibitem[{{Dalal} {et~al.}(2002){Dalal}, {Griest}, \& {Pruet}}]{Dalal:2002aa}
 {Dalal}, N., {Griest}, K., \& {Pruet}, J. 2002, \apj, 564, 209,
@@ -134,6 +143,9 @@
 \bibitem[{{Ioka} \& {Nakamura}(2001)}]{Ioka:2001aa}
 {Ioka}, K., \& {Nakamura}, T. 2001, \apjl, 554, L163, \dodoi{10.1086/321717}
 
+\bibitem[{{Ioka} \& {Nakamura}(2019)}]{Ioka:2019aa}
+---. 2019, \mnras, 487, 4884, \dodoi{10.1093/mnras/stz1650}
+
 \bibitem[{{Kumar} \& {Granot}(2003)}]{Kumar:2003aa}
 {Kumar}, P., \& {Granot}, J. 2003, \apj, 591, 1075, \dodoi{10.1086/375186}
 
@@ -173,10 +185,22 @@
 {Margutti}, R., {Alexander}, K.~D., {Xie}, X., {et~al.} 2018, \apjl, 856, L18,
   \dodoi{10.3847/2041-8213/aab2ad}
 
+\bibitem[{{Mathews}(1971)}]{Mathews:1971aa}
+{Mathews}, W.~G. 1971, \apj, 165, 147, \dodoi{10.1086/150883}
+
+\bibitem[{{Matsumoto} {et~al.}(2019){Matsumoto}, {Nakar}, \&
+  {Piran}}]{Matsumoto:2019aa}
+{Matsumoto}, T., {Nakar}, E., \& {Piran}, T. 2019, \mnras, 483, 1247,
+  \dodoi{10.1093/mnras/sty3200}
+
 \bibitem[{{M{\'e}sz{\'a}ros} {et~al.}(1998){M{\'e}sz{\'a}ros}, {Rees}, \&
   {Wijers}}]{Meszaros:1998aa}
 {M{\'e}sz{\'a}ros}, P., {Rees}, M.~J., \& {Wijers}, R.~A.~M.~J. 1998, \apj,
   499, 301, \dodoi{10.1086/305635}
+
+\bibitem[{{Mignone} \& {McKinney}(2007)}]{Mignone:2007aa}
+{Mignone}, A., \& {McKinney}, J.~C. 2007, \mnras, 378, 1118,
+  \dodoi{10.1111/j.1365-2966.2007.11849.x}
 
 \bibitem[{{Mignone} {et~al.}(2005){Mignone}, {Plewa}, \&
   {Bodo}}]{Mignone:2005aa}
@@ -354,6 +378,9 @@
   2019{\natexlab{b}}, arXiv e-prints, arXiv:1905.01290.
 \newblock \doarXiv{1905.01290}
 
+\bibitem[{{Uhm}(2011)}]{Uhm:2011aa}
+{Uhm}, Z.~L. 2011, \apj, 733, 86, \dodoi{10.1088/0004-637X/733/2/86}
+
 \bibitem[{{van Eerten}(2013)}]{van-Eerten:2013ab}
 {van Eerten}, H. 2013, arXiv e-prints, arXiv:1309.3869.
 \newblock \doarXiv{1309.3869}
@@ -395,6 +422,11 @@
 \bibitem[{{Yamazaki} {et~al.}(2003){Yamazaki}, {Ioka}, \&
   {Nakamura}}]{Yamazaki:2003aa}
 ---. 2003, \apj, 593, 941, \dodoi{10.1086/376677}
+
+\bibitem[{{Zhang} {et~al.}(2004){Zhang}, {Dai}, {Lloyd-Ronning}, \&
+  {M{\'e}sz{\'a}ros}}]{Zhang:2004aa}
+{Zhang}, B., {Dai}, X., {Lloyd-Ronning}, N.~M., \& {M{\'e}sz{\'a}ros}, P. 2004,
+  \apjl, 601, L119, \dodoi{10.1086/382132}
 
 \bibitem[{{Zhang} {et~al.}(2006){Zhang}, {Fan}, {Dyks}, {Kobayashi},
   {M{\'e}sz{\'a}ros}, {Burrows}, {Nousek}, \& {Gehrels}}]{Zhang:2006aa}
