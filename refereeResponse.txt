@@ -110,13 +110,32 @@ We thank the referee for clearing up the history of the subject, and have amende
 https://ui.adsabs.harvard.edu/abs/2019ApJ...877L..40G/abstract
 provide more structures. In particular, the shape of E(\theta) depends on the waiting time before the jet is launched. For a delayed launch, one has essentially a two-component jet structure (jet + cocoon). For a prompt launch (negligible delay), the jet penetrates through the ejecta quickly and develop a structured jet outside the ejecta. The jet structure is one-component, similar to the Gaussian profile promoted in this paper. This may be discussed in the paper.
 
+-- Added M0.1 model from Geng+ to Figure 1, amended the caption, and added a description to the second paragraph of Section 2.
 
+
+
+
+8. The most complete "closure relations" for GRB afterglow models was presented in a review article
+https://ui.adsabs.harvard.edu/abs/2013NewAR..57..141G/abstract.
+This may be referenced when closure relations are discussed.
+
+-- Added a reference and sentence description of the paper to the first paragraph of Section 4.
+
+
+
+
+Other updates to the text:
 
 
 -- Added a sentence to the end of the fourth-to-last paragraph of Section 5 explaining the origin of the constraining power on theta_obs and theta_c.
 
 -- Added a paragraph to section 6.1 discussing the role of gravitational wave data in constraining theta_obs and theta_c.
 
+-- Added a couple sentences to the 6th paragraph of Section 6.1 referencing using Luminosity functions and rates to constrain jet structure, citing recent Beniamini+ works
+
+-- Added Mooley 2018c to references for 170817 post-jet break slope in Section 1 and 5
+
+-- Added paragraph discussing Hajela+ 2019 analysis to Section 6.2.
 
 
 

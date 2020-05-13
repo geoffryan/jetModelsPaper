@@ -38,6 +38,15 @@
   arXiv:2001.02239.
 \newblock \doarXiv{2001.02239}
 
+\bibitem[{{Beniamini} \& {Nakar}(2019)}]{Beniamini:2019aa}
+{Beniamini}, P., \& {Nakar}, E. 2019, \mnras, 482, 5430,
+  \dodoi{10.1093/mnras/sty3110}
+
+\bibitem[{{Beniamini} {et~al.}(2019){Beniamini}, {Petropoulou}, {Barniol
+  Duran}, \& {Giannios}}]{Beniamini:2019ab}
+{Beniamini}, P., {Petropoulou}, M., {Barniol Duran}, R., \& {Giannios}, D.
+  2019, \mnras, 483, 840, \dodoi{10.1093/mnras/sty3093}
+
 \bibitem[{{Blandford} \& {McKee}(1976)}]{Blandford:1976aa}
 {Blandford}, R.~D., \& {McKee}, C.~F. 1976, Physics of Fluids, 19, 1130,
   \dodoi{10.1063/1.861619}
@@ -92,6 +101,16 @@
 {Foreman-Mackey}, D., {Hogg}, D.~W., {Lang}, D., \& {Goodman}, J. 2013, \pasp,
   125, 306, \dodoi{10.1086/670067}
 
+\bibitem[{{Gao} {et~al.}(2013){Gao}, {Lei}, {Zou}, {Wu}, \&
+  {Zhang}}]{Gao:2013aa}
+{Gao}, H., {Lei}, W.-H., {Zou}, Y.-C., {Wu}, X.-F., \& {Zhang}, B. 2013, \nar,
+  57, 141, \dodoi{10.1016/j.newar.2013.10.001}
+
+\bibitem[{{Geng} {et~al.}(2019){Geng}, {Zhang}, {K{\"o}lligan}, {Kuiper}, \&
+  {Huang}}]{Geng:2019aa}
+{Geng}, J.-J., {Zhang}, B., {K{\"o}lligan}, A., {Kuiper}, R., \& {Huang}, Y.-F.
+  2019, \apjl, 877, L40, \dodoi{10.3847/2041-8213/ab224b}
+
 \bibitem[{{Ghirlanda} {et~al.}(2019){Ghirlanda}, {Salafia}, {Paragi},
   {Giroletti}, {Yang}, {Marcote}, {Blanchard}, {Agudo}, {An}, {Bernardini},
   {Beswick}, {Branchesi}, {Campana}, {Casadio}, {Chassande-Mottin}, {Colpi},
@@ -121,6 +140,15 @@
   {Cenko}, {Evans}, \& {Kennea}}]{Haggard:2017aa}
 {Haggard}, D., {Nynka}, M., {Ruan}, J.~J., {et~al.} 2017, \apjl, 848, L25,
   \dodoi{10.3847/2041-8213/aa8ede}
+
+\bibitem[{{Hajela} {et~al.}(2019){Hajela}, {Margutti}, {Alexander},
+  {Kathirgamaraju}, {Baldeschi}, {Guidorzi}, {Giannios}, {Fong}, {Wu},
+  {MacFadyen}, {Paggi}, {Berger}, {Blanchard}, {Chornock}, {Coppejans},
+  {Cowperthwaite}, {Eftekhari}, {Gomez}, {Hosseinzadeh}, {Laskar}, {Metzger},
+  {Nicholl}, {Paterson}, {Radice}, {Sironi}, {Terreran}, {Villar}, {Williams},
+  {Xie}, \& {Zrake}}]{Hajela:2019aa}
+{Hajela}, A., {Margutti}, R., {Alexander}, K.~D., {et~al.} 2019, \apjl, 886,
+  L17, \dodoi{10.3847/2041-8213/ab5226}
 
 \bibitem[{{Hallinan} {et~al.}(2017){Hallinan}, {Corsi}, {Mooley}, {Hotokezaka},
   {Nakar}, {Kasliwal}, {Kaplan}, {Frail}, {Myers}, {Murphy}, {De}, {Dobie},
@@ -224,6 +252,13 @@
   {Hotokezaka}}]{Mooley:2018ab}
 {Mooley}, K.~P., {Deller}, A.~T., {Gottlieb}, O., {et~al.} 2018{\natexlab{b}},
   \nat, 561, 355, \dodoi{10.1038/s41586-018-0486-3}
+
+\bibitem[{{Mooley} {et~al.}(2018{\natexlab{c}}){Mooley}, {Frail}, {Dobie},
+  {Lenc}, {Corsi}, {De}, {Nayana}, {Makhathini}, {Heywood}, {Murphy}, {Kaplan},
+  {Chandra}, {Smirnov}, {Nakar}, {Hallinan}, {Camilo}, {Fender}, {Goedhart},
+  {Groot}, {Kasliwal}, {Kulkarni}, \& {Woudt}}]{Mooley:2018ac}
+{Mooley}, K.~P., {Frail}, D.~A., {Dobie}, D., {et~al.} 2018{\natexlab{c}},
+  \apjl, 868, L11, \dodoi{10.3847/2041-8213/aaeda7}
 
 \bibitem[{{Nakar} {et~al.}(2018){Nakar}, {Gottlieb}, {Piran}, {Kasliwal}, \&
   {Hallinan}}]{Nakar:2018aa}
